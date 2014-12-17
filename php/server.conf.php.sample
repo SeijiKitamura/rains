@@ -1,0 +1,16 @@
+<?php
+//---------------------------------------------------//
+// DB 接続系定数
+//---------------------------------------------------//
+ define("DBHOST"        ,"localhost");
+ define("DBNAME"        ,"rains"    );
+ define("DBUSER"        ,"dbuser"   );
+ define("DBPASS"        ,"dbpass"   );
+ define("TABLE_PREFIX"  ,"hp_"      );
+ 
+//---------------------------------------------------//
+//GoogleMap API関連
+//---------------------------------------------------//
+$GOOGLEURL="http://maps.googleapis.com/maps/api/js?sensor=false&key=";
+$APIKEY="Google API Key";
+?>

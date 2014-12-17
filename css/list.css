@@ -1,0 +1,98 @@
+/*list.php固有*/
+div.smalllist{
+ float:left;
+ width:23%;
+ margin:5px;
+ padding:3px;
+ border:1px solid #DCDCDC;
+}
+
+div.smallimg{
+ margin:5px;
+ padding:3px;
+ height:240px;
+ border:1px solid #DCDCDC;
+}
+
+div.smallimg a{
+ display:block;
+}
+
+div.smallimg a img{
+ width:100%;
+}
+
+div.smalldetail{
+ margin:5px;
+ padding:3px;
+ border:1px solid #DCDCDC;
+}
+
+dl.smalldl{
+ margin:5px;
+ padding:3px;
+ border:1px solid #DCDCDC;
+}
+
+dl.smalldl dt{
+ clear:both;
+ float:left;
+ width:25%;
+ height:1.2em;
+ font-size:0.8em;
+}
+dl.smalldl dd{
+ font-size:0.8em;
+ height:1.2em;
+ overflow:hidden;
+}
+
+dl.smalldl dd.price{
+ color:red;
+ font-size:2.2em;
+}
+
+div.smalllist2{
+ float:left;
+ width:23%;
+ margin:5px;
+ padding:3px;
+ border:1px solid #DCDCDC;
+}
+div.smallimg2{
+ margin:5px;
+ padding:3px;
+ height:240px;
+ border:1px solid #DCDCDC;
+}
+
+dl.smalldetail2{
+ margin:5px;
+ padding:3px;
+ border:1px solid #DCDCDC;
+}
+
+dl.smalldetail2 dt{
+ clear:both;
+ float:left;
+ width:25%;
+ height:1.2em;
+ font-size:1.0em;
+}
+
+dl.smalldetail2 dd{
+ font-size:1.1em;
+ height:1.2em;
+ overflow:hidden;
+}
+
+dl.smalldetail2 dd.madori{
+ font-size:2.2em;
+}
+
+dl.smalldetail2 dd.price{
+ color:red;
+ font-size:2.2em;
+}
+
+

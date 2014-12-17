@@ -1,0 +1,7 @@
+*.csv
+*.jpg
+*.JPG
+server.conf.php
+test.php
+img/*
+log/*

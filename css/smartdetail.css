@@ -1,0 +1,63 @@
+@media screen and (max-width:640px){
+
+ div.wrapper{
+  width:100%;
+ }
+
+ h1.h1detail{
+  width:100%;
+  text-align:left;
+  font-size:1.4em;
+  margin-top:0em;
+  clear:both;
+ }
+
+ div.eyecatch{
+  clear:both;
+  width:80%;
+ }
+ 
+ div.divimg{
+  width:95%;
+ }
+
+ div.smallimglist{
+  width:95%;
+ }
+
+ div.divdetail{
+  width:95%;
+ }
+
+ dl.bigdl{
+  width:95%;
+ }
+
+ dl.bigdl dt{
+  width:20%;
+  height:2.2em;
+  font-size:0.8em;
+ }
+
+ dl.bigdl dd{
+  height:2.2em;
+  font-size:0.8em;
+ }
+
+ div#map_canvas{
+  width:85%;
+  height:200px;
+ }
+}
+
+@media screen and (min-device-width:768px) 
+and (max-device-width:1024px){
+ div.wrapper{
+  width:90%;
+ }
+
+ h1.h1detail{
+  font-size:2.0em;
+ }
+
+}

@@ -1,0 +1,144 @@
+@media screen and (max-width:640px){
+ div.bigdetail{
+  width:90%;
+  margin:0 4%;
+  border:1px solid yellow;
+ }
+
+ div.divimg{
+  width:90%;
+  border:1px solid red;
+ }
+
+ div.bigimg{
+  width:90%;
+  border:1px solid blue;
+ }
+
+ div.smallimglist{
+  border:1px solid black;
+ }
+
+ div.divdetail{
+  clear:both;
+  width:90%;
+  border:1px solid green;
+ }
+ div#map_canvas{
+  width:90%;
+  height:200px;
+ }
+ div.smalllist{
+  float:left;
+  width:90%;
+  margin:5px;
+  padding:3px;
+  border:1px solid #DCDCDC;
+ }
+ div.smallimg{
+  margin:5px;
+  padding:3px;
+  height:200px;
+  border:1px solid #DCDCDC;
+ }
+
+ div.eyecatch{
+  clear:both;
+  width:80%;
+ }
+
+ h1.h1detail{
+  width:100%;
+  text-align:left;
+  font-size:1.4em;
+  margin-top:0em;
+  clear:both;
+ }
+ dl.bigdetail{
+  width:90%;
+ }
+ dl.bigdetail dt{
+  clear:both;
+  float:left;
+  width:35%;
+  margin:0;
+ }
+ dl.bigdetail dd{
+  float:left;
+  height:3.5em;
+  margin:0;
+ }
+/*
+ dl.smalldetail{
+  margin:5px;
+  padding:3px;
+  border:1px solid #DCDCDC;
+ }
+ 
+ dl.smalldetail dt{
+  clear:both;
+  float:left;
+  width:25%;
+  height:1.2em;
+  font-size:0.8em;
+ }
+ dl.smalldetail dd{
+  font-size:0.8em;
+  height:1.2em;
+  overflow:hidden;
+ }
+ 
+ dl.smalldetail dd.price{
+  color:red;
+  font-size:2.2em;
+ }
+*/ 
+ div.smalllist2{
+  float:left;
+  width:95%;
+  margin:5px;
+  padding:3px;
+  border:1px solid #DCDCDC;
+ }
+ div.smallimg2{
+  margin:5px;
+  padding:3px;
+  height:120px;
+  border:1px solid #DCDCDC;
+ }
+ 
+ dl.smalldetail2{
+  margin:5px;
+  padding:3px;
+  border:1px solid #DCDCDC;
+ }
+ 
+ dl.smalldetail2 dt{
+  clear:both;
+  float:left;
+  width:25%;
+  height:1.2em;
+  font-size:1.0em;
+ }
+ 
+ dl.smalldetail2 dd{
+  font-size:1.1em;
+  height:1.2em;
+  overflow:hidden;
+ }
+ 
+ dl.smalldetail2 dd.madori{
+  font-size:2.2em;
+ }
+ 
+ dl.smalldetail2 dd.price{
+  color:red;
+  font-size:2.2em;
+ }
+ 
+ span.yen{
+  font-size:0.5em;
+ }
+
+}
+

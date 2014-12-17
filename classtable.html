@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Rainsデータ更新</title>
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/all.css">
+  <link rel="stylesheet" type="text/css" href="css/detail.css">
+  <link rel="stylesheet" type="text/css" href="css/smartdetail.css">
+  <link rel="stylesheet" type="text/css" href="css/upload.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="js/bxslider/jquery.bxslider.min.js"></script>
+  <link  href="js/bxslider/jquery.bxslider.css" rel="stylesheet">
+  <style>
+   dl{
+    padding-left:20px;
+   }
+   dt{
+    clear:both;
+    float:left;
+    display:block;
+   }
+  </style>
+ </head>
+ <body>
+  <div id="wrapper">
+   <dl>
+    <dt>ファイル名:</dt>
+    <dd>dset.class.php</dd>
+    <dt>親クラス:</dt>
+    <dd>DB(db.class.php)</dd>
+    <dt>概要:</dt>
+    <dd>各種データを配列へ格納するクラス。主なデータとして、
+    <ul>
+     <li>物件詳細データ</li>
+     <li>位置データ</li>
+     <li>画像ファイル名</li>
+    </ul>
+    などです。
+    </dd>
+    <dt>プロパティ:</dt>
+    <dd>
+     <dl>
+      <dt>$r:</dt>
+      <dd>すべてのデータが格納されている配列
+       <dl>
+        <dt>$r["data"]:</dt>
+        <dd>Rainsデータ</dd>
+        <dt>$r["latlng"]:</dt>
+        <dd>位置データ</dd>
+       </dl>
+       <dt>$flds:</dt>
+       <dd>Rainsサブデータ。このクラスを呼び出すと自動でセットされます。</dd>
+       <dt>$fld000:</dt>
+       <dd>物件番号。個別のデータを呼び出したい時にセットします。</dd>
+      </dd>
+      <dt>メソッド:</dt>
+      <dd>
+       <dl>
+        <dt>__construct():</dt>
+        <dd>親クラス(db.class.php)初期化して、$fldにRainsサブデータをセットします。</dd>
+
+        <dt>dsetRains():</dt>
+        <dd>Rainsテーブルからデータを抽出します。
+         <dl>
+          <dt>引数:</dt>
+          <dd>なし(ただし$this->whereに抽出条件を指定することは可能)</dd>
+          <dt>戻り値：:</dt>
+          <dd>$this->r["data"]が入った配列を返す)</dd>
+          <dt>エラー：:</dt>
+          <dd>throw を投げる</dd>
+          <dt>例1)抽出したい列を指定したい場合:</dt>
+          <dd>$db=new DSET();<br>
+              $db->select="fld000,fld001";<br>
+              $result=$db->dsetRains();<br>
+              print_r($result);
+          </dd>
+          <dt>例2)抽出したい物件を指定したい場合:</dt>
+          <dd>$db=new DSET();<br>
+              $db->where="fld000='".物件番号."'";<br>
+              $result=$db->dsetRains();<br>
+              print_r($result);
+          </dd>
+         </dl>
+        </dd>
+
+        <dt>dsetRainsFld():</dt>
+        <dd>Rainsデータ($this->r["data"])に関連データを反映する。
+            (元データにはコンボボックスの値しか入っていないため、
+            その値を文字に直す)
+         <dl>
+          <dt>引数:</dt>
+          <dd>なし(ただし$this->r["data"]がなければエラーになる）</dd>
+          <dt>戻り値::</dt>
+          <dd>$this->r["data"]が入った配列を返す</dd>
+          <dt>エラー：:</dt>
+          <dd>throw を投げる</dd>
+          <dt>例1)使用例:</dt>
+          <dd>$db=new DSET();<br>
+              $db->dsetRains();<br>
+              $db->dsetRainsFld();<br>
+              $result=$db->dsetRains();<br>
+              print_r($result);
+          </dd>
+         </dl>
+        </dd>
+
+        <dt>dsetGetLatLng():</dt>
+        <dd>DBから$this->r["data"]の１件目のLatLngデータを読み込み配列で返す(DBに登録されていない場合、dsetStart2End()を自動で呼び出す。
+         <dl>
+          <dt>引数:</dt>
+          <dd>$this->r["data"]</dd>
+          <dt>戻り値::</dt>
+          <dd>$this->r["latlng"]データが入った配列を返す</dd>
+          <dt>エラー：:</dt>
+          <dd>throw を投げる</dd>
+          <dt>例1)使用例:</dt>
+          <dd>$db=new DSET();<br>
+              $db->dsetRains();<br>
+              $db->dsetGetLatLng();<br>
+              print_r($result);
+          </dd>
+         </dl>
+        </dd>
+
+        <dt>dsetStart2End():</dt>
+        <dd>DBから$this->r["data"]の１件目の出発地点（駅、バス停）と到着地点（物件住所）を読み込み、GoogleにLatLng情報を聞いて(dsetGoogleLatLng)配列で返す。あわせてlatlngテーブルに情報を登録する。(dsetUpLatLngが呼び出される)
+         <dl>
+          <dt>引数:</dt>
+          <dd>$this->r["data"]</dd>
+          <dt>戻り値::</dt>
+          <dd>なし</dd>
+          <dt>エラー：:</dt>
+          <dd>throw を投げる</dd>
+          <dt>例1)使用例:</dt>
+          <dd>
+           dsetGetLatLng()から自動で呼び出されるため、具体的使用例はありません。　
+          </dd>
+         </dl>
+        </dd>
+
+        <dt>dsetGoogleLatLng($address):</dt>
+        <dd>
+         Googleに位置情報を聞く
+         <dl>
+          <dt>引数:</dt>
+          <dd>$address(位置情報となる地名、キーワード)</dd>
+          <dt>戻り値::</dt>
+          <dd>latlng情報</dd>
+          <dt>エラー：:</dt>
+          <dd>throw を投げる</dd>
+          <dt>例1)使用例:</dt>
+          <dd>
+           $db=new DSET();<br>
+           $address="東京駅";<br>
+           print_r($db->dsetGoogleLatLng($address));<br>
+          </dd>
+         </dl>
+        </dd>
+
+        <dt>dsetGoogleLatLng($address):</dt>
+        <dd>
+         Googleに位置情報を聞く
+         <dl>
+          <dt>引数:</dt>
+          <dd>$address(位置情報となる地名、キーワード)</dd>
+          <dt>戻り値:</dt>
+          <dd>latlng情報</dd>
+          <dt>エラー：</dt>
+          <dd>throw を投げる</dd>
+          <dt>例1)使用例:</dt>
+          <dd>
+           $db=new DSET();<br>
+           $address="東京駅";<br>
+           print_r($db->dsetGoogleLatLng($address));<br>
+          </dd>
+         </dl>
+        </dd>
+
+       </dl>
+      </dd>
+     </dl>
+    </dd>
+   </dl>
+  </div>
+ </body>
+</html>
+
