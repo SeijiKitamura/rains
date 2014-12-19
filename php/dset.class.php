@@ -633,9 +633,7 @@ class DSET extends DB{
   $c="start ".$mname;wLog($c);
 
   $this->select="t.*";
-  $this->from=TABLE_PREFIX.BLACKLIST." as t1 ";
-  $this->from.=" inner join ".TABLE_PREFIX.RAINS." as t on ";
-  $this->from.=" t1.fld000=t.fld000 ";
+  $this->from=TABLE_PREFIX.BLACKLIST." as t";
   $this->order="t.fld000";
   $this->r=array();
   $this->r["data"]=$this->getArray();
@@ -654,7 +652,13 @@ class DSET extends DB{
    }
 
    foreach($this->r["data"] as $key=>$val){
-    $this->updatecol=array("fld000"=>$val["fld000"]);
+    $ary=array();
+    foreach($val as $key1=>$val1){
+     if(!preg_match("/^fld/",$key1)) continue;
+     $ary[$key1]=$val1;
+    }
+
+    $this->updatecol=$ary;
     $this->from=TABLE_PREFIX.BLACKLIST;
     $this->where="fld000='".$val["fld000"]."'";
     $this->update();
@@ -865,6 +869,7 @@ class DSET extends DB{
   $this->order="fldname,fld001,fld002";
   return $this->getArray();
  }
+
 }
 ?>
 

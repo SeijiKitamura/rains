@@ -355,10 +355,9 @@ $TABLES=array(
   ,"bnum"   =>array("type"=>" varchar", "null"=>" not null", "default"=>"''", "local"=>"値" ,"index"=>"4")
   ,"bname"  =>array("type"=>" varchar", "null"=>" not null", "default"=>"''", "local"=>"項目名" ,"index"=>"0")
  )//FLD
- ,BLACKLIST=>array(
- 	"fld000" =>array(	"type"=>" varchar",	"null"=>" not null",	"default"=>"''",	"local"=>"物件番号",	"index"=>"1")
- )//BLACKLIST
 );//$TABLES
+
+$TABLES[BLACKLIST]=$TABLES[RAINS];
 
 
 $TINTAI=array( 

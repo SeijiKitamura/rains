@@ -36,15 +36,15 @@ $(function(){
  $("li#nowdata").on("click",function(e){
   $.removeCookie("fld000");
   whiteBlack("reset");
-  showLeftSide();
   $("div#main").empty()
+  showLeftSide();
  });
 
  $("li#blacklist").on("click",function(){
   $.removeCookie("fld000");
   whiteBlack("black");
-  showLeftSide();
   $("div#main").empty()
+  showLeftSide();
  });
 
  $("li#dataup").on("click",function(){
@@ -61,6 +61,7 @@ $(function(){
 
 function showLeftSide(){
  $("div.imglist").empty();
+ $("div#leftside").empty();
  var d={"black":whiteBlack()};
  console.log(d);
  //レフトサイドメニュー表示
@@ -71,8 +72,7 @@ function showLeftSide(){
   data:d,
   complete:function(){},
   success:function(html){
-   $("div#leftside").empty()
-                    .append(html);
+   $("div#leftside").append(html);
    
    //レフトサイドイベントをセット
    leftSideEvent();

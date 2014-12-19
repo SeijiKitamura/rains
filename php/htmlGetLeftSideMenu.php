@@ -12,4 +12,5 @@ partsNewList($data["count"]);
 partsFldCount($data["fldcount"]);
 partsMadoriCount($data["madori"]);
 partsStationCount($data["station"]);
+
 ?>

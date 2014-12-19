@@ -184,7 +184,7 @@ function viewBlackList($where=null){
   
   //Rainsサブデータを反映
   $db->dsetRainsFld();
-  
+ 
   //位置データをセット(物件データが複数の場合、最初の1件目だけ）
   $db->dsetGetLatLng();
   
@@ -221,7 +221,9 @@ function viewSetBlackList($fld000){
  try{
   $mname="viewSetBlackList(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $data=viewDetail($fld000);
+  //$data=viewDetail($fld000);
+  if($fld000) $where="t.fld000='".$fld000."'";
+  $data=viewRainsData($where);
   $db=new DSET();
   $db->r=$data;
   $db->dsetUpBlackList();
@@ -235,9 +237,8 @@ function viewDelBlackList($fld000=null){
  try{
   $mname="viewDelBlackList(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t1.fld000 is not null";
-  if($fld000) $where.=" and  t.fld000='".$fld000."'";
-  $data=viewRainsData($where);
+  if($fld000) $where="t.fld000='".$fld000."'";
+  $data=viewBlackList($where);
   $db=new DSET();
   $db->r=$data;
   $db->dsetDelBlackList();
