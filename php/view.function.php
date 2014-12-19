@@ -36,9 +36,6 @@ function viewRainsData($where=null,$order=null){
   //画像パスをセット
   $db->dsetImgPathWithEncode();
 
-  //ブラックリスト判定
-//  $db->dsetBlackList();
-
   //データカウント
   $db->dsetDataCount();
   
@@ -55,9 +52,7 @@ function viewRainsData($where=null,$order=null){
   return $db->r;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessage();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
  }
 }
 
@@ -81,9 +76,7 @@ function viewDeleteRains($where=null,$order=null){
   return $db->r;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessage();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessage();wLog($c); echo $c;
  }
 }
 
@@ -113,9 +106,7 @@ function viewArea($which=null,$where=null,$order=null){
 
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessage();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
  }
 }
 
@@ -132,9 +123,7 @@ function viewDetail($fld000){
   return viewRainsData($where);
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
  }
 } 
 
@@ -154,9 +143,7 @@ function viewSetImage($fld000){
   return $db->r;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
  }
 }
 
@@ -168,9 +155,7 @@ function viewSetImageNum($imgid,$imgnum){
   $db->dsetImgNum($imgid,$imgnum);
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
  }
 }
 
@@ -184,9 +169,7 @@ function viewDelImgNum($fld000,$imgid=null){
   $db->dsetDelImg($imgid);
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
  }
 }
 
@@ -230,9 +213,7 @@ function viewBlackList($where=null){
   return $db->r;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
  }
 }
 
@@ -246,9 +227,7 @@ function viewSetBlackList($fld000){
   $db->dsetUpBlackList();
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
  }
 }
 
@@ -264,9 +243,7 @@ function viewDelBlackList($fld000=null){
   $db->dsetDelBlackList();
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
  }
 }
 ?>
