@@ -16,9 +16,7 @@ function partsRainsList($data){
   $html="";
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
@@ -29,8 +27,7 @@ function partsRainsTable($data){
   $html="";
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
   
   $fld="";
@@ -81,9 +78,7 @@ function partsRainsTable($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
@@ -103,9 +98,7 @@ function partsRainsTest($sql){
   partsRainsTable($result["data"]);
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
@@ -116,8 +109,7 @@ function partsArea($data){
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $c=$mname."データ数カウント開始";wLog($c);
@@ -181,9 +173,7 @@ function partsArea($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
@@ -193,8 +183,7 @@ function partsNewList($data){
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
@@ -208,9 +197,7 @@ function partsNewList($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
   
@@ -220,8 +207,7 @@ function partsFldCount($data){
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
@@ -245,9 +231,7 @@ function partsFldCount($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
@@ -257,8 +241,7 @@ function partsMadoriCount($data){
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
@@ -277,9 +260,7 @@ function partsMadoriCount($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
@@ -289,8 +270,7 @@ function partsStationCount($data){
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
@@ -309,9 +289,7 @@ function partsStationCount($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
@@ -321,8 +299,7 @@ function partsIndivi($data){
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
@@ -344,9 +321,7 @@ function partsIndivi($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
@@ -356,8 +331,7 @@ function partsPrice($data){
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
@@ -412,9 +386,7 @@ function partsPrice($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
@@ -424,8 +396,7 @@ function partsRoomType($data){
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
@@ -491,9 +462,7 @@ function partsRoomType($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
@@ -503,8 +472,7 @@ function partsMember($data){
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
@@ -526,9 +494,7 @@ function partsMember($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
@@ -538,8 +504,7 @@ function partsNavi($data,$edit=null){
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
   $html="";
   foreach($data as $key=>$val){
@@ -556,9 +521,7 @@ function partsNavi($data,$edit=null){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
  
 }
@@ -569,8 +532,7 @@ function partsImage($data,$edit=null){
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
   $html="";
   foreach($data as $key=>$val){
@@ -592,9 +554,7 @@ function partsImage($data,$edit=null){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c); echo $c;
  }
 }
 
@@ -652,10 +612,7 @@ function partsSetImg($post,$fld000){
   
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
-
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 ?>
