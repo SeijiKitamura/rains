@@ -128,7 +128,6 @@ class DB{
    if(! $this->updatecol) throw new Exception("データを選択してください");
    if(! $this->from     ) throw new Exception("テーブルを選択してください");
    if(! $this->where    ) throw new Exception("where句がありません");
-   print_r($this->updatecol);
 
    //一旦退避
    $from=$this->from;
