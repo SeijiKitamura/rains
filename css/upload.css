@@ -249,18 +249,27 @@ dd{
 }
 
 div.imglist{
- float:left;
  width:40%;
- height:700px;
+ height:350px;
  overflow:scroll;
  border:1px solid #DCDCDC;
  margin:1%;
+ float:left;
+}
+
+div#map-canvas{
+ width:40%;
+ height:300px;
+ border:1px solid #DCDCDC;
+ margin:1%;
+ float:left;
 }
 
 div.divdetail{
- float:left;
+ float:right;
  width:40%;
- margin:1%;
+ margin:1% 15% 0 0;
+
 }
 
 a.a_upload,

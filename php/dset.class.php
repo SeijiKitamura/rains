@@ -155,7 +155,7 @@ class DSET extends DB{
     if(isset($this->ary) || is_array($this->ary)||count($this->ary)>0){
      $c="notice:".$mname."DBにLatLngデータ有り".$fld000;wLog($c);
 
-     $this->r["data"][$key]["latlng"]=$this->ary;
+     $this->r["data"][$key]["latlng"]=$this->ary[0];
     }
     else{
      $this->dsetStart2End();
@@ -197,7 +197,8 @@ class DSET extends DB{
     //到着地点チェック
     //fld020(所在地３)が空欄はエラー扱い
     if(! $val["fld020"]){
-     throw new exception("物件番号".$val["fld000"]."の所在地が確定しません");
+     $c=$mname."物件番号".$val["fld000"]."の所在地が確定しません";wLog($c);
+     return;
     }
 
     $end=$val["fld017"].$val["fld018"].$val["fld019"].$val["fld020"];

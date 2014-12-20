@@ -57,6 +57,7 @@ $(function(){
    $("ul#ul_menu li ul").hide();
   }
  });
+ $("div#map-canvas").hide();
 });//$(function()
 
 function showLeftSide(){
@@ -123,6 +124,7 @@ function showMain(html){
 
  //Cookieを反映
  showCheck();
+
 }
 
 function selectEvent(elem){
@@ -393,7 +395,6 @@ function showDetail(fld000){
  $.ajax({
   url: 'php/htmlGetDetail.php',
   type: 'get',
-  async:false,
   data:d,
   dataType: 'html',
   complete: function(){},
@@ -435,6 +436,9 @@ function showDetail(fld000){
    $("a.a_back").on("click",function(){
     backPage();
    });
+
+   initialize();
+   calcRoute();
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);
@@ -667,6 +671,41 @@ function resetBlackList(){
   }
  });
 }
+
+ </script>
+ <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+ <script>
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+var map;
+
+function initialize() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  var chicago = new google.maps.LatLng(35.5839676,139.71252230000005);
+  var mapOptions = {
+    zoom:14,
+    center: chicago
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  directionsDisplay.setMap(map);
+}
+
+function calcRoute() {
+  var start =new google.maps.LatLng($("dd#startpoint").attr("data-lat"),$("dd#startpoint").attr("data-lng"));
+  var end =new google.maps.LatLng($("dd#endpoint").attr("data-lat"),$("dd#endpoint").attr("data-lng"));
+  var request = {
+      origin:start,
+      destination:end,
+      travelMode: google.maps.TravelMode.WALKING
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+//google.maps.event.addDomListener(window, 'load', initialize);
  </script>
 </html>
 

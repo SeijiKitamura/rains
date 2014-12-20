@@ -61,12 +61,14 @@ function partsRainsTable($data){
    $html.="</label>";
    $html.="<div class='div_15 detail'>".$val["fld021"].$val["fld022"]."&nbsp;</div>";
    $html.="<div class='div_15 detail'>".$val["fld018"].$val["fld019"].$val["fld020"]."</div>";
+   $html.="<div class='div_5 text-right'>".$val["fld180"].$val["_fld179"]."</div>";
    $html.="<div class='div_5 text-right'>".$val["fld068"].$val["fld088"]."</div>";
    $html.="<div class='div_10 text-right'>".number_format($val["fld054"])."</div>";
 
    $html.="<div class='div_5 text-right'>".number_format($val["fld137"])."</div>";
-   $html.="<div class='div_15 paddingleft'>".$val["fld004"]."</div>";
-   $html.="<div class='div_15'>".$val["fld005"]."</div>";
+   $html.="<div class='div_10 paddingleft'>".$val["fld004"]."</div>";
+   $html.="<div class='div_10'>".$val["fld005"]."</div>";
+   $html.="<div class='div_10 text-right'>".$val["fld011"]."</div>";
    $html.="<div class='clr'></div>";
    $html.="</div>";//div class='datarow'
    $html.="</li>";
@@ -312,9 +314,27 @@ function partsIndivi($data){
    $html.="<dt>物件名</dt>";
    $html.="<dd>:".$val["fld021"]." ".$val["fld022"]."</dd>";
    $html.="<dt>住所</dt>";
-   $html.="<dd>:".$val["fld017"]." ".$val["fld018"].$val["fld019"].$val["fld020"]."</dd>";
+
+   $html.="<dd id='startpoint'";
+   if(is_array($val["latlng"]) ||count($val["latlng"])){
+    $html.=" data-lat='".$val["latlng"]["startlat"]."' ";
+    $html.=" data-lng='".$val["latlng"]["startlng"]."' >";
+   }
+   else{
+    $html.=">";
+   }
+   $html.=":".$val["fld017"]." ".$val["fld018"].$val["fld019"].$val["fld020"]."</dd>";
+
    $html.="<dt>最寄駅</dt>";
-   $html.="<dd>:".$val["fld026"]."駅 (".$val["fld025"].") 徒歩".$val["fld027"]."分</dd>";
+   $html.="<dd id='endpoint'";
+   if(is_array($val["latlng"]) ||count($val["latlng"])){
+    $html.=" data-lat='".$val["latlng"]["endlat"]."' ";
+    $html.=" data-lng='".$val["latlng"]["endlng"]."' >";
+   }
+   else{
+    $html.=">";
+   }
+   $html.=":".$val["fld026"]."駅 (".$val["fld025"].") 徒歩".$val["fld027"]."分</dd>";
 
    $html.="</dl>";
   }
@@ -378,7 +398,24 @@ function partsPrice($data){
    $html.="</dd>";
 
    $html.="<dt>その他</dt>";
-   $html.="<dd>:相談しながら追加していく</dd>";
+   $html.="<dd>";
+   if($val["fld071"] || $val["fld072"] ||$val["fld073"]){
+    $html.=" 権利金:";
+    if($val["fld071"]) $html.=number_format($val["fld071"])."円";
+    if($val["fld072"]) $html.="(消費税".number_format($val["fld072"])."円)";
+    if($val["fld073"]) $html.=$val["fld071"]."ヶ月";
+   }
+   if($val["fld123"]) $html.=" 造作譲渡金:".number_format($val["fld123"])."円";
+   if($val["fld124"]) $html.=" 定借権利金:".number_format($val["fld124"])."円";
+   if($val["fld125"]) $html.=" 定借保証金:".number_format($val["fld125"])."円";
+   if($val["fld126"]) $html.=" 定借敷金:".number_format($val["fld126"])."円";
+   if($val["fld139"]) $html.=" 修繕積立金:".number_format($val["fld139"])."円";
+   if($val["fld140"]) $html.=" 共益費:".number_format($val["fld140"])."円";
+   if($val["fld141"]) $html.=" 共益費(消費税):".number_format($val["fld141"])."円";
+   if($val["fld142"]) $html.=" 雑費:".number_format($val["fld142"])."円";
+   if($val["fld143"]) $html.=" 雑費(消費税):".number_format($val["fld143"])."円";
+
+   $html.="</dd>";
    $html.="</dl>";
 
    $html.="</dl>";
