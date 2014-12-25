@@ -257,6 +257,16 @@ div.imglist{
  float:left;
 }
 
+div.divoutsite{
+ width:50%;
+ height:700px;
+ border:1px solid #DCDCDC;
+ margin:1%;
+ padding:1%;
+ float:right;
+ overflow:scroll;
+}
+
 div#map-canvas{
  width:40%;
  height:300px;
@@ -275,7 +285,10 @@ div.divdetail{
 a.a_upload,
 a.a_delimg,
 a.a_back,
-a.a_outdata
+a.a_outdata,
+a.a_outsite,
+a.a_close,
+a.a_get
 {
  float:left;
  display:block;
@@ -289,6 +302,12 @@ a.a_outdata
  border-radius:10px;
  -webkit-border-radius:10px;
  -moz-border-radius:10px;
+ margin:0.5em;
+}
+
+label.outsitelabel,
+input#outsiteurl{
+ float:left;
  margin:0.5em;
 }
 

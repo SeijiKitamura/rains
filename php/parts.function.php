@@ -8,10 +8,11 @@
 ----------------------------------------------------- */
 
 require_once("view.function.php");
+require_once("simple_html_dom.php");
 
 function partsRainsList($data){
  try{
-  $mname="partsRainsList(view.function.php) ";
+  $mname="partsRainsList(parts.function.php) ";
   $c="start ".$mname;wLog($c);
   $html="";
  }
@@ -22,7 +23,7 @@ function partsRainsList($data){
 
 function partsRainsTable($data){
  try{
-  $mname="partsRainsTable(view.function.php) ";
+  $mname="partsRainsTable(parts.function.php) ";
   $c="start ".$mname;wLog($c);
   $html="";
 
@@ -86,7 +87,7 @@ function partsRainsTable($data){
 
 function partsRainsTest($sql){
  try{
-  $mname="partsRainsTest(view.function.php) ";
+  $mname="partsRainsTest(parts.function.php) ";
   $c="start ".$mname;wLog($c);
   $d=array();
 
@@ -107,7 +108,7 @@ function partsRainsTest($sql){
 //たぶんボツ
 function partsArea($data){
  try{
-  $mname="partsArea(view.function.php) ";
+  $mname="partsArea(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
@@ -181,7 +182,7 @@ function partsArea($data){
 
 function partsNewList($data){
  try{
-  $mname="partsRainsList(view.function.php) ";
+  $mname="partsRainsList(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
@@ -205,7 +206,7 @@ function partsNewList($data){
   
 function partsFldCount($data){
  try{
-  $mname="partsFldCount(view.function.php) ";
+  $mname="partsFldCount(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
@@ -239,7 +240,7 @@ function partsFldCount($data){
 
 function partsMadoriCount($data){
  try{
-  $mname="partsMadoriCount(view.function.php) ";
+  $mname="partsMadoriCount(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
@@ -268,7 +269,7 @@ function partsMadoriCount($data){
 
 function partsStationCount($data){
  try{
-  $mname="partsStationCount(view.function.php) ";
+  $mname="partsStationCount(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
@@ -297,7 +298,7 @@ function partsStationCount($data){
 
 function partsIndivi($data){
  try{
-  $mname="partsIndiv(view.function.php) ";
+  $mname="partsIndiv(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
@@ -347,7 +348,7 @@ function partsIndivi($data){
 
 function partsPrice($data){
  try{
-  $mname="partsPrice(view.function.php) ";
+  $mname="partsPrice(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
@@ -429,7 +430,7 @@ function partsPrice($data){
 
 function partsRoomType($data){
  try{
-  $mname="partsRoomType(view.function.php) ";
+  $mname="partsRoomType(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
@@ -505,7 +506,7 @@ function partsRoomType($data){
 
 function partsMember($data){
  try{
-  $mname="partsMember(view.function.php) ";
+  $mname="partsMember(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
@@ -537,7 +538,7 @@ function partsMember($data){
 
 function partsNavi($data,$edit=null){
  try{
-  $mname="partsNavi(view.function.php) ";
+  $mname="partsNavi(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
@@ -551,6 +552,8 @@ function partsNavi($data,$edit=null){
     $html.="<li><a class='a_upload' href='#'>画像送信</a>";
     $html.="<input name='uploadimg' type='file' value='画像登録' style='display:none;' data-fld000='".$val["fld000"]."' multiple></li>";
     $html.="<li><a class='a_delimg' href='#' data-fld000='".$val["fld000"]."'>画像全削除</a></li>";
+    $html.="<li><a class='a_outsite' href='#'>画像取り込み</a></li>";
+    $html.="<li><input name='outsite' type='text' value='' style='display:none;' data-fld000='".$val["fld000"]."' multiple></li>";
    }
    $html.="</ul>";
    $html.="<div class='clr'></div>";
@@ -565,7 +568,7 @@ function partsNavi($data,$edit=null){
 
 function partsImage($data,$edit=null){
  try{
-  $mname="partsImage(view.function.php) ";
+  $mname="partsImage(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
@@ -604,7 +607,7 @@ function partsLapDetail($data){
 
 function partsSetImg($post,$fld000){
  try{
-  $mname="partsSetImg(view.function.php) ";
+  $mname="partsSetImg(parts.function.php) ";
   $c="start ".$mname;wLog($c);
   
   //アップロードチェック
@@ -646,10 +649,179 @@ function partsSetImg($post,$fld000){
   if(! move_uploaded_file($moto,$filename)){
    throw new exception("ファイルコピーに失敗しました。");
   }
-  
  }
  catch(Exception $e){
   $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
+
+function partsSetImgFromSite($imgurl,$fld000){
+ try{
+  $mname="partsSetImgFromSite(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+
+  $html="";
+
+  //物件番号数字チェック
+  if(!preg_match("/^[0-9]+$/",$fld000)){
+   throw new exception ("物件番号が数字以外です。(".$fld000.")");
+  }
+
+  //物件番号DB存在チェック
+  if(! viewDetail($fld000)){
+   throw new exception ("物件未登録です。(".$fld000.")");
+  }
+
+  //画像ディレクトリセット
+  $imgdir=realpath("..").IMG."/".$fld000;
+  
+  //ディレクトリ存在チェック
+  if(!file_exists($imgdir)){
+   if(! mkdir($imgdir)){
+    throw new exception("フォルダ作成に失敗しました。(".$fld000.")");
+   }
+  }
+
+  //ファイル名ゲット
+  $filename=basename($imgurl);
+  $c="notice:".$mname."画像ファイル名ゲット".$filename;wLog($c);
+  $filename=urldecode($filename);
+  $c="notice:".$mname."画像ファイル名デコード".$filename;wLog($c);
+  $pattern="/[!\"#$%&'()=|`{}+*,<>\/;:]/"; 
+  $filename=preg_replace($pattern,"_",$filename);
+  $c="notice:".$mname."画像ファイル名変換".$filename;wLog($c);
+  
+  //ファイルダウンロード
+  $data=file_get_contents($imgurl);
+  
+  //ファイル保存
+  if(file_put_contents($imgdir."/".$filename,$data)===FALSE){
+   $c="error:".$mname."画像ファイルの保存に失敗(".$imgurl.")";wLog($c);
+   throw new exception($c);
+  }
+  $c="notice:".$mname."画像ファイルを保存しました(".$imgdir."/".$filename.")";wLog($c);
+  
+  //画像ファイルチェック
+  if(!exif_imagetype($imgdir."/".$filename)){
+   unlink($imgdir."/".$filename);
+   $c="error:".$mname."画像ファイルではありません(".$val.")";wLog($c);
+   throw new exception($c);
+  }
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsImgPathFromSite($pageurl){
+ $mname="partsImgPathFromSite(parts.function.php) ";
+ try{
+  $c="start ".$mname;wLog($c);
+
+  if(! $parse=parse_url($pageurl)){
+   throw new exception("URLが認識できません");
+  }
+
+  //ドメイン、ディレクトリをセット
+  $scheme=$parse["scheme"]."://";
+  $domain=$parse["host"];
+  $dir=dirname($pageurl)."/";
+
+  $c="notice:".$mname."ページ取得(".$pageurl.")";wLog($c);
+  $html=file_get_html($pageurl);
+
+  $imgurl=array();
+  //画像タグ抽出
+  foreach($html->find("img") as $element){
+  
+   $url=$element->src;
+
+   if(!$url) continue;
+
+   $c="notice:".$mname."画像パス:".$url;wLog($c);
+   if(preg_match("/^http/",$url)){
+    $c="notice:".$mname."絶対パス:".$url;wLog($c);
+   }
+   else{
+    // パスが「/」から始まる場合
+    if(preg_match("/^\//",$url)){
+     $url=$scheme.$domain.$url;
+    }
+    else{
+     $url=$dir.$url;
+    }
+    $c="notice:".$mname."相対パスから絶対パスに変換:".$url;wLog($c);
+   }
+
+   //以下、各サイト用にカスタマイズを追加していく
+   if(preg_match("/suumo/",$url)){
+    if(! preg_match("/^https:\/\/img/",$url)){
+     $c="notice:".$mname."suumo対象外画像".$url;wLog($c);
+     continue;
+    }
+    $url=preg_replace("/t\.jpg/","o.jpg",$url);
+    $c="notice:".$mname."suumo用に変換".$url;wLog($c);
+   }
+
+   $imgurl[]=$url;
+  }
+
+  $html->clear();
+
+  return $imgurl;
+ }
+ catch(Exception $e){
+  $html->clear();
+  wLog("error:".$mname.$e->getMessage());
+  echo "err:".$e->getMessage();
+ }
+}
+
+function partsImgListFromSite($data){
+ try{
+  $mname="partsImgListFromSite(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+
+  if(! isset($data)||! is_array($data)||! count($data)){
+   throw new exception("画像データがありません");wLog($c);
+  }
+  $html="";
+  $html.="<ul class='ul_image'>";
+  foreach($data as $key=>$val){
+   $html.="<li>";
+   $html.="<input type='button' value='Pick'>";
+   $html.="<img src='".$val."'>";
+   $html.="</li>";
+  }
+  $html.="</ul>";
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsImgListDiv($fld000){
+ try{
+  $mname="partsImgListDiv(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(!preg_match("/^[0-9]+$/",$fld000)){
+   throw new exception("物件番号が正しくありません");wLog($c);
+  }
+
+  $html="";
+  $html.="<div class='divoutsite'data-fld000='".$fld000."'>";
+  $html.="<label class='outsitelabel' for='outsiteurl'>外部URL:</label>";
+  $html.="<input type='text' name='outsiteurl' id='outsiteurl'>";
+  $html.="<a class='a_get' href='#'>Get</a>";
+  $html.="<a class='a_close' href='#'>閉じる</a>";
+  $html.="</div>";
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+
+}
+
 ?>

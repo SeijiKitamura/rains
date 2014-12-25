@@ -15,8 +15,7 @@ echo "<div class='divdetail'>";
 partsLapDetail($data["data"]);
 echo "</div>";
 
-echo "<div id='map-canvas'>";
-echo "</div>";
+echo "<div id='map-canvas'></div>";
 
 echo "<div class='clr'></div>";
 

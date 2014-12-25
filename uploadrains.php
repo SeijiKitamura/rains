@@ -409,7 +409,11 @@ function showDetail(fld000){
     uploadImg(this);
    });
 
-   $("ul.ul_image li input[type=text]").on("change",function(){
+   $("a.a_outsite").on("click",function(){
+    showOutSite(fld000);
+   });
+
+   $("div.imglist ul.ul_image li input[type=text]").on("change",function(){
     console.log($(this));
     var fld000=$(this).attr("data-fld000");
     var imgid=$(this).attr("data-imgid");
@@ -421,7 +425,7 @@ function showDetail(fld000){
     changeImgNum(fld000,imgid,imgnum);
    });
 
-   $("ul.ul_image li input[type=button]").on("click",function(){
+   $("div.imglist ul.ul_image li input[type=button]").on("click",function(){
     var fld000=$(this).attr("data-fld000");
     var imgid=$(this).attr("data-imgid");
     deleteImg(fld000,imgid);
@@ -663,6 +667,105 @@ function resetBlackList(){
   },
   success: function(html) {
    $("div.msgdiv").text("非表示データ初期化完了");
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function listImgPathFromSite(){
+ var outsiteUrl=$("input[name=outsiteurl]").val();
+ var datafld000=$("div.divoutsite").attr("data-fld000");
+
+ var d={"url":outsiteUrl,
+        "fld000":datafld000};
+
+ $.ajax({
+  url:"php/htmlImgListFromSite.php",
+  type:"get",
+  data:d,
+  dataType:"html",
+  success:function(html){
+   $("div.divoutsite ul.ul_image").remove();
+   $("div.divoutsite").append(html);
+
+   $("div.divoutsite ul li input").on("click",function(){
+    pickImg($(this));
+   });
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function pickImg(elem){
+ var imgurl=$(elem).siblings().attr("src");
+ var fld000=$("div.divoutsite").attr("data-fld000");
+ var d={"fld000":fld000,"imgurl":imgurl};
+
+ $.ajax({
+  url:"php/htmlSetImgFileFromSite.php",
+  type:"get",
+  data:d,
+  dataType:"html",
+  success:function(html){
+   $("div.imglist").empty()
+                   .append(html);
+   $("div.imglist ul.ul_image li input[type=text]").on("change",function(){
+    console.log($(this));
+    var fld000=$(this).attr("data-fld000");
+    var imgid=$(this).attr("data-imgid");
+    var imgnum=$(this).val();
+    if(! imgnum.match(/^[0-9]+$/)){
+     alert("数字を入力してください");
+     return false;
+    }
+    changeImgNum(fld000,imgid,imgnum);
+   });
+
+   $("div.imglist ul.ul_image li input[type=button]").on("click",function(){
+    var fld000=$(this).attr("data-fld000");
+    var imgid=$(this).attr("data-imgid");
+    deleteImg(fld000,imgid);
+   });
+
+                     
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function showOutSite(fld000){
+ console.log(fld000);
+ var d={"fld000":fld000};
+ $.ajax({
+  url:"php/htmlImgListDiv.php",
+  type:"get",
+  data:d,
+  dataType:"html",
+  success:function(html){
+   $("div.divoutsite").remove();
+   $("div.imglist").after(html);
+   $("div.divdetail").hide();
+
+   $("a.a_close").on("click",function(){
+    $("div.divoutsite").hide();
+    $("div.divdetail").show();
+   });
+
+   $("a.a_get").on("click",function(){
+    listImgPathFromSite();
+   });
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);
