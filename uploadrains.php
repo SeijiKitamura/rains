@@ -434,7 +434,6 @@ function showDetail(fld000){
    $("a.a_delimg").on("click",function(){
     var fld000=$(this).attr("data-fld000");
     deleteImg(fld000,null);
-
    });
 
    $("a.a_back").on("click",function(){
@@ -443,6 +442,43 @@ function showDetail(fld000){
 
    initialize();
    calcRoute();
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+  }//error
+ });
+}
+
+function showImage(fld000){
+ var d={"fld000":fld000};
+ $.ajax({
+  url: 'php/htmlGetImgList.php',
+  type: 'get',
+  data:d,
+  dataType: 'html',
+  complete: function(){},
+  success: function(html) {
+   $("div.imglist").empty()
+                   .append(html);
+
+   $("div.imglist ul.ul_image li input[type=text]").on("change",function(){
+    console.log($(this));
+    var fld000=$(this).attr("data-fld000");
+    var imgid=$(this).attr("data-imgid");
+    var imgnum=$(this).val();
+    if(! imgnum.match(/^[0-9]+$/)){
+     alert("数字を入力してください");
+     return false;
+    }
+    changeImgNum(fld000,imgid,imgnum);
+   });
+
+   $("div.imglist ul.ul_image li input[type=button]").on("click",function(){
+    var fld000=$(this).attr("data-fld000");
+    var imgid=$(this).attr("data-imgid");
+    deleteImg(fld000,imgid);
+   });
+
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);
@@ -468,7 +504,7 @@ function uploadImg(elem){
     dataType: 'html',
     complete: function(){},
     success: function(html) {
-     showDetail(fld000);
+     showImage(fld000);
     },
     error:function(XMLHttpRequest,textStatus,errorThrown){
      console.log(XMLHttpRequest.responseText);
@@ -487,7 +523,7 @@ function changeImgNum(fld000,imgid,imgnum){
   dataType: 'html',
   complete: function(){},
   success: function(html) {
-   showDetail(fld000);
+   showImage(fld000);
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);
@@ -508,7 +544,7 @@ function deleteImg(fld000,imgid){
   dataType: 'html',
   complete: function(){},
   success: function(html) {
-   showDetail(fld000);
+   showImage(fld000);
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);
@@ -714,28 +750,10 @@ function pickImg(elem){
   type:"get",
   data:d,
   dataType:"html",
+  context:elem,
   success:function(html){
-   $("div.imglist").empty()
-                   .append(html);
-   $("div.imglist ul.ul_image li input[type=text]").on("change",function(){
-    console.log($(this));
-    var fld000=$(this).attr("data-fld000");
-    var imgid=$(this).attr("data-imgid");
-    var imgnum=$(this).val();
-    if(! imgnum.match(/^[0-9]+$/)){
-     alert("数字を入力してください");
-     return false;
-    }
-    changeImgNum(fld000,imgid,imgnum);
-   });
-
-   $("div.imglist ul.ul_image li input[type=button]").on("click",function(){
-    var fld000=$(this).attr("data-fld000");
-    var imgid=$(this).attr("data-imgid");
-    deleteImg(fld000,imgid);
-   });
-
-                     
+   $(elem).parent().hide();
+   showImage(fld000);
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);

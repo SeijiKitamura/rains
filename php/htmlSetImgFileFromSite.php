@@ -14,6 +14,4 @@ if(! preg_match("/^[0-9]+$/",$_GET["fld000"])){
 
 partsSetImgFromSite($_GET["imgurl"],$_GET["fld000"]);
 viewSetImage($_GET["fld000"]);
-$data=viewDetail($_GET["fld000"]);
-partsImage($data["data"],"edit");
 ?>
