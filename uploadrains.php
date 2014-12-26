@@ -113,7 +113,7 @@ function showMain(html){
  });
  
  //詳細表示イベント
- $("div.detail").on("click",function(){
+ $("a.a_detail").on("click",function(){
   var fld000=$(this).parent().attr("data-fld000");
   showDetail(fld000);
  });

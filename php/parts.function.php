@@ -60,6 +60,7 @@ function partsRainsTable($data){
    $html.="<div class='div_5'>".$val["_fld002"]."</div>";
    $html.="<div class='div_5'>".$val["_fld003"]."</div>";
    $html.="</label>";
+   $html.="<a class='a_detail' href='#'>";
    $html.="<div class='div_15 detail'>".$val["fld021"].$val["fld022"]."&nbsp;</div>";
    $html.="<div class='div_15 detail'>".$val["fld018"].$val["fld019"].$val["fld020"]."</div>";
    $html.="<div class='div_5 text-right'>".$val["fld180"].$val["_fld179"]."</div>";
@@ -70,6 +71,7 @@ function partsRainsTable($data){
    $html.="<div class='div_10 paddingleft'>".$val["fld004"]."</div>";
    $html.="<div class='div_10'>".$val["fld005"]."</div>";
    $html.="<div class='div_10 text-right'>".$val["fld011"]."</div>";
+   $html.="</a>";
    $html.="<div class='clr'></div>";
    $html.="</div>";//div class='datarow'
    $html.="</li>";
@@ -191,10 +193,6 @@ function partsNewList($data){
 
   $html="";
   $html.="<ul id=ul_area>";
-  $html.="<li class='allcnt'>すべて(".$data["all"].")</li>";
-  $html.="<li class='newdata'>新規(".$data["newdata"].")</li>";
-  $html.="<li class='noimg'>画像なし(".$data["noimg"].")</li>";
-  $html.="<li class='blacklist'>非表示(".$data["blacklist"].")</li>";
   $html.="</ul>";//ul id=ul_area
   $c="end ".$mname;wLog($c);
   echo $html;
@@ -678,13 +676,17 @@ function partsSetImgFromSite($imgurl,$fld000){
 
   //画像ディレクトリセット
   $imgdir=realpath("..").IMG."/".$fld000;
-  
+
   //ディレクトリ存在チェック
   if(!file_exists($imgdir)){
    if(! mkdir($imgdir)){
     throw new exception("フォルダ作成に失敗しました。(".$fld000.")");
    }
   }
+
+  $c="notice:".$mname." 画像URL(".$imgurl.")";wLog($c);
+  $imgurl=urldecode($imgurl);
+  $c="notice:".$mname." 画像URLデコード(".$imgurl.")";wLog($c);
 
   //ファイル名ゲット
   $filename=basename($imgurl);
@@ -767,6 +769,10 @@ function partsImgPathFromSite($pageurl){
     $c="notice:".$mname."suumo用に変換".$url;wLog($c);
    }
 
+   if(preg_match("/image\.homes\.co\.jp/",$url)){
+    $url=preg_replace("/&amp;/","&",$url);
+    $c="notice:".$mname."homes用に変換".$url;wLog($c);
+   }
    $imgurl[]=$url;
   }
 
