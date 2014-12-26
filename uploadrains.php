@@ -1,3 +1,4 @@
+<?php require_once("php/parts.function.php");?>
 <!DOCTYPE html>
 <html>
  <head>
@@ -13,6 +14,7 @@
  </head>
  <body>
   <div id="wrapper">
+   <a href="index.php"><img src='<?php echo LOGO;?>'></a>
    <h1>Rainsデータ更新画面</h1>
    <ul>
     <li id="nowdata">表示リスト</li>
@@ -113,7 +115,7 @@ function showMain(html){
  });
  
  //詳細表示イベント
- $("div.detail").on("click",function(){
+ $("a.a_detail").on("click",function(){
   var fld000=$(this).parent().attr("data-fld000");
   showDetail(fld000);
  });
