@@ -831,7 +831,98 @@ function partsImgListDiv($fld000){
  catch(Exception $e){
   $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
-
 }
 
+function partsRankEntry(){
+ try{
+  $mname="partsRankEntry(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  $html="";
+  $html.=<<<EOF
+<div class='divrankentry'>
+ <dl class='dl_rank'>
+  <dt>番号    </dt><dd>:<input type='text' name='rank' value=''></dd>
+  <dt>タイトル</dt><dd>:<input type='text' name='rankname' value=''></dd>
+  <dt>コメント</dt><dd>:<input type='text' name='rcomment' value=''></dd>
+  <dt>期間    </dt><dd>:<input type='text' name='startday' value=''>から
+                        <input type='text' name='endday' value=''>まで</dd>
+  <dt>表示    </dt><dd>:<select name='flg'>
+                         <option value='1'>する</option>
+                         <option value='0'>しない</option>
+                        </select></dd>
+  <dt>        </dt><dd><a href='#' class='a_rankdel'>削除</a>
+                       <a href='#' class='a_rankentry'>登録</a></dd>
+ </dl>
+ <div class='clr'></div>
+</div>
+EOF;
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsRankList($data){
+ try{
+  $mname="partsRankList(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="ランクデータがありません";wLog($c);
+   return false;
+  }
+  $html="";
+  $html.="<ul class='ul_rank'>";
+  foreach($data as $key=>$val){
+   $html.="<li><a href='#' data-rank='".$val["rank"]."'>".$val["rank"].":";
+   $html.=$val["rankname"]."</a></li>";
+  }
+  $html.="</ul>";
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsEntry($data){
+ try{
+  $mname="partsEntry(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="エントリーデータがありません";wLog($c);
+   return false;
+  }
+  $html="";
+  $html.="<div class='diventry'>";
+  $html.="<h3>ランキング詳細</h3>";
+  $html.="<a class='a_delall' href='#'>全削除</a>";
+  $html.="<ul class='ul_entry'>";
+  foreach($data as $key=>$val){
+   $html.="<li>";
+   $html.="<span class='spn_3'><input type='text' value='".$val["narabi"]."'";
+   $html.=" data-id='".$val["entryid"]."' name='entry'></span>";
+   $html.="<span class='spn_15 smallfont'>";
+   if($val["fld021"]){
+    $html.=$val["fld021"].$val["fld022"];
+   }
+   else{
+    $html.=$val["fld018"].$val["fld019"].$val["fld020"];
+   }
+   $html.="</span>";
+   $html.="<span class='spn_15'>";
+   $html.="<input type='text' value='".$val["ecomment"]."' data-id='".$val["entryid"]."' name='ecomment'>";
+   $html.="</span>";
+   $html.="<a href='#' class='a_del' data-fld000='".$val["fld000"]."' data-rank='".$val["rank"]."'>削除</a>";
+   $html.="</li>";
+  }
+  $html.="</ul>";
+  $html.="</div>";
+
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
 ?>

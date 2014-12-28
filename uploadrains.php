@@ -17,9 +17,10 @@
    <a href="index.php"><img src='<?php echo LOGO;?>'></a>
    <h1>Rainsデータ更新画面</h1>
    <ul>
-    <li id="nowdata">表示リスト</li>
-    <li id="blacklist">非表示リスト</li>
-    <li id="dataup">データ更新</li>
+    <li id="nowdata">  <a href="#">表示リスト  </a></li>
+    <li id="blacklist"><a href="#">非表示リスト</a></li>
+    <li id="dataup">   <a href="#">データ更新  </a></li>
+    <li id="rankup">   <a href="#">ランキング  </a></li>
    </ul>
    <div class="clr"></div>
    <div id="leftside">
@@ -52,6 +53,11 @@ $(function(){
  $("li#dataup").on("click",function(){
   $.removeCookie("fld000");
   dataUpMenu();
+ });
+
+ $("li#rankup").on("click",function(){
+  $.removeCookie("fld000");
+  showRank();
  });
 
  $("body").on("mouseup",function(){
@@ -795,6 +801,257 @@ function showOutSite(fld000){
  });
 }
 
+function showRank(){
+ $("div#main").empty();
+ showRankList();
+ showRankEntry();
+}
+
+function showRankList(){
+ $.ajax({
+  url:"php/htmlRankList.php",
+  type:"get",
+  dataType:"html",
+  success:function(html){
+   console.log(html);
+   $("div#leftside").empty().append(html);
+   
+   //ランク選択イベント
+   $("ul.ul_rank li a").on("click",function(){
+    getRank($(this).attr("data-rank"));
+    showEntry($(this).attr("data-rank"));
+   });
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function showRankEntry(){
+ $.ajax({
+  url:"php/htmlRankEntry.php",
+  type:"get",
+  dataType:"html",
+  success:function(html){
+   $("div#main").append(html);
+   
+   //ランク変更イベント
+   $("input[name=rank]").on("change",function(){
+    if(!$(this).val()) return false;
+    if(!$(this).val().match(/^[0-9]+$/)) return false;
+    getRank($(this).val());
+    showEntry($(this).val());
+   });
+
+   //登録クリックイベント
+   $("a.a_rankentry").on("click",function(){
+    setRank();
+   });
+   
+   //削除クリックイベント
+   $("a.a_rankdel").on("click",function(){
+    delRank();
+   });
+
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function getRank(ranknum){
+ var d={"rank":ranknum};
+ $.ajax({
+  url:"php/htmlGetRank.php",
+  data:d,
+  dataType:"json",
+  success:function(json){
+   console.log(json);
+   if(!json) return false;
+   $.each(json[0],function(i,e){
+    console.log(i+":"+e);
+    if($("input[name="+i+"]").size()){
+     $("input[name="+i+"]").val(e);
+    }
+    $("select").val(json[0].flg);
+   });
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function setRank(){
+ var d={};
+ var sdate;
+ var edate;
+ var chkflg;
+ chkflg=1;
+ //値チェック
+ $("input[type=text],select").each(function(){
+  if($(this).attr("name")=="rank" || $(this).attr("name")=="flg"){
+   if(! $(this).val().match(/^[0-9]+$/)){
+    console.log("ランク数字以外もしくはフラグ数字以外");
+    chkflg=0;
+   }
+  }
+
+  if($(this).attr("name")=="startday" ||$(this).attr("name")=="endday"){
+   var h=$(this).val().match(/^(20[0-9]{2})\/([0-1]?[0-9]{1})\/([0-3]?[0-9]{1})$/);
+   if(!h){
+    console.log("日付不正");
+    chkflg=0;
+   }
+   else{
+    var newdate=new Date(h[1],h[2]-1,h[3]);
+    if(newdate.getFullYear()!=h[1]||newdate.getMonth()+1!=h[2]||newdate.getDate()!=h[3]){
+    console.log("日付不正");
+    chkflg=0;
+    }
+    else{
+     if($(this).attr("name")=="startday"){
+      sdate=newdate;
+     }
+     if($(this).attr("name")=="endday"){
+      edate=newdate;
+     }
+    }
+   }
+  }
+  d[$(this).attr("name")]=$(this).val();
+ });
+
+ if(sdate>edate){
+  console.log("日付期間不正");
+  chkflg=0;
+ }
+
+ if(! chkflg){
+  alert("入力データに誤りがあります");
+  return false;
+ }
+
+ if(! confirm("登録しますか?")) return false;
+ $.ajax({
+  url:"php/htmlSetRank.php",
+  data:d,
+  dataType:"html",
+  success:function(html){
+   console.log(html);
+   alert("登録しました");
+   showRankList();
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function delRank(){
+ var d={};
+ var chkflg;
+ chkflg=1;
+ //値チェック
+ if(!$("input[name=rank]").val().match(/^[0-9]+$/)){
+  console.log("ランク数字以外");
+  chkflg=0;
+ }
+ d["rank"]=$("input[name=rank]").val();
+
+ if(! chkflg) return false;
+
+ if(! confirm("削除しますか?")) return false;
+ $.ajax({
+  url:"php/htmlDelRank.php",
+  data:d,
+  dataType:"html",
+  success:function(html){
+   console.log(html);
+   alert("削除しました");
+   clrRank();
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function clrRank(){
+ $("input[type=text]").each(function(){
+  $(this).val("");
+ });
+
+ $("select[name=flg]").val("1");
+}
+
+function showEntry(rank){
+ var d={"rank":rank};
+ $.ajax({
+  url:"php/htmlEntry.php",
+  data:d,
+  dataType:"html",
+  success:function(html){
+   $("div.diventry").remove();
+   $("div.divrankentry").after(html);
+
+   //イベント追加(ここから)
+   $("input[name=entry]").on("change",function(){
+    var entry=$(this);
+    var ecomment=$(this).parent().siblings().find("input");
+    console.log(entry +" "+ecomment);
+    setEntry(entry,ecomment);
+   });
+
+   $("input[name=ecomment]").on("change",function(){
+    var entry=$(this).parent().siblings().find("input");
+    var ecomment=$(this);
+    console.log(entry +" "+ecomment);
+    setEntry(entry,ecomment);
+   });
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function setEntry(entry,ecomment){
+ var entryid=entry.attr("data-id");
+ var entrynum=entry.val();
+ var ecmnt=ecomment.val();
+ console.log(entryid +" "+entrynum+" "+ecmnt);
+ var d={"id":entryid,"fld001":entrynum,"ecomment":ecmnt};
+ $.ajax({
+  url:"php/htmlSetEntry.php",
+  data:d,
+  dataType:"html",
+  type:"get",
+  success:function(html){
+   console.log(html);
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+  
+ });
+}
  </script>
  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
  <script>

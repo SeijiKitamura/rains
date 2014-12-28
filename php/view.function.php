@@ -227,6 +227,7 @@ function viewSetBlackList($fld000){
   $db=new DSET();
   $db->r=$data;
   $db->dsetUpBlackList();
+  $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
   $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
@@ -242,6 +243,91 @@ function viewDelBlackList($fld000=null){
   $db=new DSET();
   $db->r=$data;
   $db->dsetDelBlackList();
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+function viewRank($where=null){
+ try{
+  $mname="viewRank(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $db=new DSET();
+  if($where) $db->where=$where;
+  $c="end ".$mname;wLog($c);
+  return $db->dsetRank();
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+function viewSetRank($data){
+ try{
+  $mname="viewSetRank(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $ary=array( "col"=>$data,
+             "from"=>TABLE_PREFIX.RANK,
+             "where"=>"rank=".$data["rank"]
+            );
+  $db=new DSET();
+  $db->r["data"][]=$ary;
+  $db->dsetUpRank();
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+function viewDelRank($data){
+ try{
+  $mname="viewDelRank(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $ary=array("from"=>TABLE_PREFIX.RANK,
+             "where"=>"rank=".$data["rank"]
+            );
+  $db=new DSET();
+  $db->r["data"][]=$ary;
+  $db->dsetDelRank();
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+function viewEntry($rank){
+ try{
+  $mname="viewEntry(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  if(!preg_match("/^[0-9]+$/",$rank)){
+   throw new exception("ランク番号入力エラー(".$rank.")");
+  }
+  $db=new DSET();
+  $db->where="rank=".$rank;
+  $c="end ".$mname;wLog($c);
+  return $db->dsetEntry();
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+function viewSetEntry($data){
+ try{
+  $mname="viewSetEntry(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $ary=array( "col"=>$data,
+             "from"=>TABLE_PREFIX.ENTRY,
+             "where"=>"id=".$data["id"]
+            );
+  $db=new DSET();
+  $db->r["data"][]=$ary;
+  $db->dsetUpEntry();
+  $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
   $c="error:".$e->getMessage().$mname;wLog($c);echo $c;

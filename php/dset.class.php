@@ -871,7 +871,104 @@ class DSET extends DB{
   return $this->getArray();
  }
 
+ public function dsetRank(){
+  try{
+   $mname="dsetRank(DSET class)";
+   $c="start ".$mname;wLog($c);
+   $this->select="*";
+   $this->from=TABLE_PREFIX.RANK;
+   $this->order="rank";
+   return $this->getArray();
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  }
+ }
+
+ public function dsetUpRank(){
+  try{
+   $mname="dsetUpRank(DSET class)";
+   $c="start ".$mname;wLog($c);
+   
+   //データチェック
+   if(! isset($this->r["data"]) || ! is_array($this->r["data"]) || ! count($this->r["data"])){
+    throw new exception("更新データがありません");
+   }
+
+   foreach($this->r["data"] as $key=>$val){
+    $this->updatecol=$val["col"];
+    $this->from=$val["from"];
+    $this->where=$val["where"];
+    $this->update();
+   }
+   $c="end ".$mname;wLog($c);
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  }
+ }
+
+ public function dsetDelRank(){
+  try{
+   $mname="dsetDelRank(DSET class)";
+   $c="start ".$mname;wLog($c);
+   //データチェック
+   if(! isset($this->r["data"]) || ! is_array($this->r["data"]) || ! count($this->r["data"])){
+    throw new exception("削除データがありません");
+   }
+
+   foreach($this->r["data"] as $key=>$val){
+    $this->from=$val["from"];
+    $this->where=$val["where"];
+    $this->delete();
+   }
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  }
+ }
+
+ public function dsetEntry(){
+  try{
+   $mname="dsetDelRank(DSET class)";
+   $c="start ".$mname;wLog($c);
+   $this->select="t.id as entryid,t.rank,t.fld001 as narabi,t.ecomment,t1.*";
+   $this->from =TABLE_PREFIX.ENTRY." as t ";
+   $this->from.="inner join ".TABLE_PREFIX.RAINS." as t1 on ";
+   $this->from.=" t.fld000=t1.fld000 ";
+   $this->order="t.rank,t.fld001,t1.fld000";
+   $c="end ".$mname;wLog($c);
+   return $this->getArray();
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  }
+ }
+
+ public function dsetUpEntry(){
+  try{
+   $mname="dsetUpEntry(DSET class)";
+   $c="start ".$mname;wLog($c);
+   //データチェック
+   if(! isset($this->r["data"]) || ! is_array($this->r["data"]) || ! count($this->r["data"])){
+    throw new exception("更新データがありません");
+   }
+
+   foreach($this->r["data"] as $key=>$val){
+    $this->updatecol=$val["col"];
+    $this->from=$val["from"];
+    $this->where=$val["where"];
+    $this->update();
+   }
+
+   $c="end ".$mname;wLog($c);
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  }
+ }
 }
+
 ?>
 
 

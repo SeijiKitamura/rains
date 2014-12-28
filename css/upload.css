@@ -288,7 +288,9 @@ a.a_back,
 a.a_outdata,
 a.a_outsite,
 a.a_close,
-a.a_get
+a.a_get,
+a.a_rankdel,
+a.a_rankentry
 {
  float:left;
  display:block;
@@ -345,3 +347,67 @@ a.csvbutton{
  float:left;
 }
 
+div.divrankentry{
+ margin:1%;
+ width:40%;
+ float:left;
+}
+
+dl.dl_rank dd input[name=rank],
+dl.dl_rank dd input[name=startday],
+dl.dl_rank dd input[name=endday]
+{
+ width:20%;
+}
+dl.dl_rank dd input[name=rankname],
+dl.dl_rank dd input[name=rcomment]
+{
+ width:70%;
+}
+div.diventry{
+ margin:1%;
+ width:50%;
+ float:left;
+}
+
+span.spn_3{
+ display:block;
+ width:3em;
+ float:left;
+ overflow:hidden;
+ height:1.2em;
+}
+
+span.spn_5{
+ display:block;
+ width:5em;
+ float:left;
+ overflow:hidden;
+ height:1.2em;
+}
+
+span.spn_10{
+ display:block;
+ width:10em;
+ float:left;
+ overflow:hidden;
+ height:1.2em;
+}
+
+span.spn_15{
+ display:block;
+ width:15em;
+ float:left;
+ overflow:hidden;
+ height:1.2em;
+}
+
+input[name=inprank]{
+ width:80%;
+ float:left;
+ height:0.8em;
+}
+
+span.smallfont{
+ font-size:0.8em;
+}

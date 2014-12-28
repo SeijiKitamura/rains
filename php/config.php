@@ -49,6 +49,8 @@ define("IMGLIST","imglist");
 define("FLD","rainsfld");
 define("BLACKLIST","blacklist");
 define("CHECKLIST","checklist");
+define("RANK","rank");
+define("ENTRY","entry");
 //---------------------------------------------------//
 // テーブル列名定数
 //---------------------------------------------------//
@@ -355,6 +357,20 @@ $TABLES=array(
   ,"bnum"   =>array("type"=>" varchar", "null"=>" not null", "default"=>"''", "local"=>"値" ,"index"=>"4")
   ,"bname"  =>array("type"=>" varchar", "null"=>" not null", "default"=>"''", "local"=>"項目名" ,"index"=>"0")
  )//FLD
+ ,RANK=>array(
+   "rank"    =>array("type"=>" int"    , "null"=>" not null", "default"=>"0" , "local"=>"ランク"  ,"index"=>"1")
+  ,"rankname"=>array("type"=>" varchar", "null"=>" not null", "default"=>"''", "local"=>"コメント","index"=>"0")
+  ,"rcomment"=>array("type"=>" varchar", "null"=>" not null", "default"=>"''", "local"=>"コメント","index"=>"0")
+  ,"startday"=>array("type"=>" varchar", "null"=>" not null", "default"=>"''", "local"=>"開始日"  ,"index"=>"2")
+  ,"endday"  =>array("type"=>" varchar", "null"=>" not null", "default"=>"''", "local"=>"終了日"  ,"index"=>"3")
+  ,"flg"     =>array("type"=>" int"    , "null"=>" not null", "default"=>"1" , "local"=>"表示"    ,"index"=>"4")
+  )//RANK
+ ,ENTRY=>array(
+   "rank"    =>array("type"=>" int"    , "null"=>" not null", "default"=>"0" , "local"=>"ランク"  ,"index"=>"1")
+  ,"fld000" =>array("type"=>" varchar" , "null"=>" not null", "default"=>"''", "local"=>"物件番号","index"=>"2")
+  ,"fld001" =>array("type"=>" int"     , "null"=>" not null", "default"=>"0", "local"=>"表示順","index"=>"3")
+  ,"ecomment"=>array("type"=>" varchar", "null"=>" not null", "default"=>"''", "local"=>"コメント","index"=>"4")
+  )//ENTRY
 );//$TABLES
 
 $TABLES[BLACKLIST]=$TABLES[RAINS];
