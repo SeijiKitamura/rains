@@ -967,6 +967,27 @@ class DSET extends DB{
    $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
   }
  }
+
+ public function dsetDelEntry(){
+  try{
+   $mname="dsetDelEntry(DSET class)";
+   $c="start ".$mname;wLog($c);
+   //データチェック
+   if(! isset($this->r["data"]) || ! is_array($this->r["data"]) || ! count($this->r["data"])){
+    throw new exception("削除データがありません");
+   }
+
+   foreach($this->r["data"] as $key=>$val){
+    $this->from=$val["from"];
+    $this->where=$val["where"];
+    $this->delete();
+   }
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  }
+ }
+
 }
 
 ?>

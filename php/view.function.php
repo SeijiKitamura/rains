@@ -333,4 +333,22 @@ function viewSetEntry($data){
   $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
  }
 }
+
+function viewDelEntry($data){
+ try{
+  $mname="viewDelEntry(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $ary=array("from"=>TABLE_PREFIX.ENTRY,
+             "where"=>"id=".$data["id"]
+            );
+  $db=new DSET();
+  $db->r["data"][]=$ary;
+  $db->dsetDelEntry();
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
 ?>

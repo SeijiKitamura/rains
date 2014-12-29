@@ -1007,7 +1007,6 @@ function showEntry(rank){
    $("div.diventry").remove();
    $("div.divrankentry").after(html);
 
-   //イベント追加(ここから)
    $("input[name=entry]").on("change",function(){
     var entry=$(this);
     var ecomment=$(this).parent().siblings().find("input");
@@ -1021,6 +1020,11 @@ function showEntry(rank){
     console.log(entry +" "+ecomment);
     setEntry(entry,ecomment);
    });
+
+   $("a.a_entrydel").on("click",function(){
+    delEntry($(this));
+   });
+
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);
@@ -1049,7 +1053,29 @@ function setEntry(entry,ecomment){
    $("div.msgdiv").text(XMLHttpRequest.responseText);
    return false;
   }
-  
+ });
+}
+
+function delEntry(entry){
+ var entryid=entry.attr("data-id");
+ var d={"id":entryid};
+ console.log(d);
+ $.ajax({
+  url:"php/htmlDelEntry.php",
+  data:d,
+  dataType:"html",
+  type:"get",
+  success:function(html){
+   console.log(html);
+   //ここから
+   var rank=$("input[name=rank]").val();
+   showEntry(rank);
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
  });
 }
  </script>

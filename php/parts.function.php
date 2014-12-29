@@ -913,7 +913,7 @@ function partsEntry($data){
    $html.="<span class='spn_15'>";
    $html.="<input type='text' value='".$val["ecomment"]."' data-id='".$val["entryid"]."' name='ecomment'>";
    $html.="</span>";
-   $html.="<a href='#' class='a_del' data-fld000='".$val["fld000"]."' data-rank='".$val["rank"]."'>削除</a>";
+   $html.="<a href='#' class='a_entrydel' data-id='".$val["entryid"]."'>削除</a>";
    $html.="</li>";
   }
   $html.="</ul>";
