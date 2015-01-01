@@ -8,6 +8,35 @@
 ----------------------------------------------------- */
 require_once("dset.class.php");
 
+function viewShortData($where=null,$order=null){
+ try{
+  $mname="viewRainsData(view.function.php)";
+  $c="start ".$mname;wLog($c);
+
+  $db=new DSET();
+
+  if($where) $db->where=$where;
+  if($order) $db->order=$order;
+  else{
+   $db->order="t.fld001,t.fld002,t.fld003,t.fld017,t.fld018,t.fld019,t.fld025,t.fld026,t.fld027,t.fld068,t.fld088,t.fld054";
+  }
+  
+  //Rainsテーブルからデータ抽出
+  $db->dsetRains();
+  
+  //Rainsサブデータを反映
+  $db->dsetRainsFld();
+  
+  //物件種別カウント
+  $db->dsetFldCount();
+  $c="end ".$mname;wLog($c);
+  return $db->r;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+ }
+}
+
 function viewRainsData($where=null,$order=null){
  try{
   $mname="viewRainsData(view.function.php)";

@@ -840,20 +840,32 @@ function partsRankEntry(){
   $html="";
   $html.=<<<EOF
 <div class='divrankentry'>
- <dl class='dl_rank'>
-  <dt>番号    </dt><dd>:<input type='text' name='rank' value=''></dd>
-  <dt>タイトル</dt><dd>:<input type='text' name='rankname' value=''></dd>
-  <dt>コメント</dt><dd>:<input type='text' name='rcomment' value=''></dd>
-  <dt>期間    </dt><dd>:<input type='text' name='startday' value=''>から
-                        <input type='text' name='endday' value=''>まで</dd>
-  <dt>表示    </dt><dd>:<select name='flg'>
-                         <option value='1'>する</option>
-                         <option value='0'>しない</option>
-                        </select></dd>
-  <dt>        </dt><dd><a href='#' class='a_rankdel'>削除</a>
-                       <a href='#' class='a_rankentry'>登録</a></dd>
- </dl>
- <div class='clr'></div>
+ <ul class='ul_rank'>
+  <li><span class='spn_5 titlecolor'>番号</span>
+      <span class='spn_15 titlecolor'>タイトル</span>
+      <span class='spn_15 titlecolor'>コメント</span>
+      <span class='spn_5 titlecolor'>開始日</span>
+      <span class='spn_5 titlecolor'>終了日</span>
+      <span class='spn_5 titlecolor'>表示</span>
+      <div class='clr'></div>
+  </li>
+
+  <li><span class='spn_5  bodercolor' ><input type='text' name='rank' value=''></span>
+      <span class='spn_15 bodercolor'><input type='text' name='rankname' value=''></span>
+      <span class='spn_15 bodercolor'><input type='text' name='rcomment' value=''></span>
+      <span class='spn_5 bodercolor'><input type='text' name='startday' value=''></span>
+      <span class='spn_5 bodercolor'><input type='text' name='endday'   value=''></span>
+      <span class='spn_5 bodercolor'><select name='flg'>
+                            <option value='1'>する</option>
+                            <option value='0'>しない</option>
+                           </select></span>
+      <div class='clr'></div>
+  </li>
+
+  <li><a class='a_rankdel'   href='#'>削除</a>
+      <a class='a_rankentry' href='#'>登録</a>
+  </li>
+ </ul>
 </div>
 EOF;
   echo $html;
@@ -898,11 +910,21 @@ function partsEntry($data){
   $html.="<h3>ランキング詳細</h3>";
   $html.="<a class='a_delall' href='#'>全削除</a>";
   $html.="<ul class='ul_entry'>";
+  $html.="<li>";
+  $html.="<span class='spn_5  titlecolor'>削除</span>";
+  $html.="<span class='spn_5  titlecolor'>番号</span>";
+  $html.="<span class='spn_15 titlecolor'>物件名</span>";
+  $html.="<span class='spn_5  titlecolor'>広さ</span>";
+  $html.="<span class='spn_5  titlecolor'>価格</span>";
+  $html.="<span class='spn_20 titlecolor'>コメント</span>";
+  $html.="<div class='clr'></div>";
+  $html.="</li>";
   foreach($data as $key=>$val){
    $html.="<li>";
-   $html.="<span class='spn_3'><input type='text' value='".$val["narabi"]."'";
+   $html.="<span class='spn_5 bodercolor'><a href='#' class='a_entrydel' data-id='".$val["entryid"]."'>削除</a></span>";
+   $html.="<span class='spn_5 bodercolor'><input type='text' value='".$val["narabi"]."'";
    $html.=" data-id='".$val["entryid"]."' name='entry'></span>";
-   $html.="<span class='spn_15 smallfont'>";
+   $html.="<span class='spn_15 bodercolor'>";
    if($val["fld021"]){
     $html.=$val["fld021"].$val["fld022"];
    }
@@ -910,10 +932,16 @@ function partsEntry($data){
     $html.=$val["fld018"].$val["fld019"].$val["fld020"];
    }
    $html.="</span>";
-   $html.="<span class='spn_15'>";
+   $html.="<span class='spn_5 bodercolor'>";
+   if($val["fld180"]) $html.=$val["fld180"].$val["_fld179"];
+   else               $html.=$val["fld068"].$val["fld088"];
+   $html.="</span>";
+   $html.="<span class='spn_5 bodercolor'>";
+   $html.=number_format($val["fld054"]);
+   $html.="</span>";
+   $html.="<span class='spn_20 bodercolor'>";
    $html.="<input type='text' value='".$val["ecomment"]."' data-id='".$val["entryid"]."' name='ecomment'>";
    $html.="</span>";
-   $html.="<a href='#' class='a_entrydel' data-id='".$val["entryid"]."'>削除</a>";
    $html.="</li>";
   }
   $html.="</ul>";
@@ -925,4 +953,127 @@ function partsEntry($data){
   $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
+
+//以下ボツ
+function partsSelectBox($data,$clsname,$v=null){
+ try{
+  $mname="partsSelectGroup(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="error:".$mname."物件データがありません";wLog($c);echo $c;
+   return false;
+  }
+
+  $html="";
+  $html.="<div class='divgroup'>";
+  $html.="<select class='select_".$clsname."'>";
+  $html.="<option value='9999'>選択</option>";
+  foreach($data as $key=>$val){
+   $match=preg_split("/_/",$key);
+   $html.="<option value='".$match[0]."' ";
+   if($match[0]==$v) $html.=" selected";
+   $html.=">".$match[1]."</option>";
+  }
+  $html.="</select>";
+  $html.="</div>";
+
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsSelectGroup($data,$fld001=null){
+ try{
+  $mname="partsSelectGroup(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="error:".$mname."物件データがありません";wLog($c);echo $c;
+   return false;
+  }
+
+  $html="";
+  $html.="<div class='divgroup'>";
+  $html.="<select class='select_fld001'>";
+  foreach($data as $key=>$val){
+   $match=preg_split("/_/",$key);
+   $html.="<option value='".$match[0]."' ";
+   if($match[0]==$fld001) $html.=" selected";
+   $html.=">".$match[1];
+   $html.="</option>";
+  }
+  $html.="</select>";
+  $html.="</div>";
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsSelectGroup2($data,$fld001,$fld002=null){
+ try{
+  $mname="partsSelectGroup2(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="エントリーデータがありません";wLog($c);
+   return false;
+  }
+
+  $html="";
+  foreach($data as $key=>$val){
+   $match=preg_split("/_/",$key);
+   if($match[0]!=$fld001) continue;
+   $html.="<div class='divgroup'>";
+   $html.="<select class='select_fld002'>";
+   foreach($val as $key1=>$val1){
+    $match=preg_split("/_/",$key1);
+    $html.="<option value='".$fld001."_".$match[0]."'";
+    if($match[0]==$fld002) $html.=" selected";
+    $html.=">".$match[1]."</option>";
+   }
+   $html.="</select>";
+   $html.="</div>";
+  }
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsSelectGroup3($data,$fld001,$fld002){
+ try{
+  $mname="partsSelectGroup2(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="エントリーデータがありません";wLog($c);
+   return false;
+  }
+  $html="";
+  foreach($data as $key=>$val){
+   $match=preg_split("/_/",$key);
+   if($match[0]!=$fld001) continue;
+   foreach($val as $key1=>$val1){
+    $match=preg_split("/_/",$key1);
+    if($match[0]!=$fld002) continue;
+    $html.="<div class='divgroup'>";
+    $html.="<select class='select_fld003'>";
+    foreach($val1 as $key2=>$val2){
+     $match=preg_split("/_/",$key2);
+     $html.="<option value='".$fld001."_".$fld002."_".$match[0]."'>".$match[1]."</option>";
+    }
+    $html.="</select>";
+    $html.="</div>";
+   }
+  }
+
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
 ?>

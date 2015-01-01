@@ -1067,7 +1067,6 @@ function delEntry(entry){
   type:"get",
   success:function(html){
    console.log(html);
-   //ここから
    var rank=$("input[name=rank]").val();
    showEntry(rank);
   },
@@ -1078,6 +1077,38 @@ function delEntry(entry){
   }
  });
 }
+
+//以下ボツ
+function showSelectGroup(fldname){
+ if(! fldname){
+  var d={};
+ }
+ else if(fldname=="select_fld001"){
+   var flddata=$("select[name=select_fld001]").val();
+   var d={"group":flddata};
+ }
+ else if(fldname=="select_fld002"){
+   var flddata=$("select[name=select_fld001]").val()+"_"+$("select[name=select_fld002]").val();
+   var d={"group":flddata};
+ }
+
+ $.ajax({
+  url:"php/htmlSelectGroup.php",
+  data:d,
+  dataType:"html",
+  type:"get",
+  success:function(html){
+   $("div.divgroup").remove();
+   $("div#main").append(html);
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
  </script>
  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
  <script>
