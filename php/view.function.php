@@ -77,6 +77,10 @@ function viewRainsData($where=null,$order=null){
   //最寄駅カウント
   $db->dsetStationCount();
 
+  //ランキングリスト
+  $db->dsetRank();
+
+
   $c="end ".$mname;wLog($c);
   return $db->r;
  }
@@ -237,7 +241,7 @@ function viewBlackList($where=null){
 
   //最寄駅カウント
   $db->dsetStationCount();
-
+  
   $c="end ".$mname;wLog($c);
   return $db->r;
  }
@@ -373,6 +377,58 @@ function viewDelEntry($data){
   $db=new DSET();
   $db->r["data"][]=$ary;
   $db->dsetDelEntry();
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+function viewBcomment($fld000){
+ try{
+  $mname="viewBcomment(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  if(!preg_match("/^[0-9]+$/",$fld000)){
+   throw new exception("物件番号入力エラー(".$fld000.")");
+  }
+  $db=new DSET();
+  $db->where="fld000='".$fld000."'";
+  $c="end ".$mname;wLog($c);
+  return $db->dsetBcomment();
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+function viewSetBcomment($data){
+ try{
+  $mname="viewSetBcomment(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $ary=array( "col" =>$data,
+             "from" =>TABLE_PREFIX.BCOMMENT,
+             "where"=>"fld000='".$data["fld000"]."'" 
+            );
+  $db=new DSET();
+  $db->r["data"][]=$ary;
+  $db->dsetUpdate();
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+function viewDelBcomment($data){
+ try{
+  $mname="viewDelBcomment(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $ary=array("from"=>TABLE_PREFIX.BCOMMENT,
+             "where"=>"fld000='".$data["fld000"]."'"
+            );
+  $db=new DSET();
+  $db->r["data"][]=$ary;
+  $db->dsetDelete();
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){

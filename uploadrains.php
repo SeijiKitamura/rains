@@ -448,6 +448,14 @@ function showDetail(fld000){
     backPage();
    });
 
+   $("textarea[name=txt_setubi]").on("change",function(){
+    chgSetubi();
+   });
+
+   $("input[name=inp_bcomment]").on("change",function(){
+    chgSetubi();
+   });
+
    initialize();
    calcRoute();
   },
@@ -585,6 +593,32 @@ function backPage(){
  }
  filterData(obj);
 
+}
+
+function chgSetubi(){
+ var fld000=$("textarea[name=txt_setubi]").attr("data-fld000");
+ var fld001=$("textarea[name=txt_setubi]").val();
+ var fld002=$("input[name=inp_bcomment]").val();
+ var d={"fld000":fld000,"fld001":fld001,"fld002":fld002};
+
+ if(! fld000 || ! fld000.match(/^[0-9]+$/)){
+  console.log("物件番号エラー");
+  return false;
+ }
+
+ $.ajax({
+  url:"php/htmlSetBcomment.php",
+  type:"get",
+  dataType:"html",
+  data:d,
+  complete:function(){},
+  success:function(html){
+   console.log(html);
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+  }
+ });
 }
 
 function dataUpMenu(){
@@ -1068,38 +1102,7 @@ function delEntry(entry){
   success:function(html){
    console.log(html);
    var rank=$("input[name=rank]").val();
-   showEntry(rank);
-  },
-  error:function(XMLHttpRequest,textStatus,errorThrown){
-   console.log(XMLHttpRequest.responseText);
-   $("div.msgdiv").text(XMLHttpRequest.responseText);
-   return false;
-  }
- });
-}
-
-//以下ボツ
-function showSelectGroup(fldname){
- if(! fldname){
-  var d={};
- }
- else if(fldname=="select_fld001"){
-   var flddata=$("select[name=select_fld001]").val();
-   var d={"group":flddata};
- }
- else if(fldname=="select_fld002"){
-   var flddata=$("select[name=select_fld001]").val()+"_"+$("select[name=select_fld002]").val();
-   var d={"group":flddata};
- }
-
- $.ajax({
-  url:"php/htmlSelectGroup.php",
-  data:d,
-  dataType:"html",
-  type:"get",
-  success:function(html){
-   $("div.divgroup").remove();
-   $("div#main").append(html);
+   //showEntry(rank);
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);

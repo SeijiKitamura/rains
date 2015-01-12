@@ -35,11 +35,14 @@ class DSET extends DB{
    $this->order="case when t.fld000='物件番号' then 0 else 1 end,t.fld000";
   }
 
-  if(! $this->select) $this->select="t.*,t1.fld000 as blacklist";
+  if(! $this->select) $this->select="t.*,t1.fld000 as blacklist,t2.fld001 as setubi,t2.fld002 as bcomment";
   $this->from =TABLE_PREFIX.RAINS." as t ";
   $this->from.=" left outer join ";
   $this->from.=TABLE_PREFIX.BLACKLIST." as t1 on ";
   $this->from.=" t.fld000=t1.fld000 ";
+  $this->from.=" left outer join ";
+  $this->from.=TABLE_PREFIX.BCOMMENT." as t2 on ";
+  $this->from.=" t.fld000=t2.fld000 ";
   $this->r=array();
   $this->r["data"]=$this->getArray();
 
@@ -875,10 +878,12 @@ class DSET extends DB{
   try{
    $mname="dsetRank(DSET class)";
    $c="start ".$mname;wLog($c);
-   $this->select="*";
+   if(! $this->select)$this->select="*";
    $this->from=TABLE_PREFIX.RANK;
    $this->order="rank";
-   return $this->getArray();
+   $data=$this->getArray();
+   $this->r["ranklist"]=$data;
+   return $data;
   }
   catch(Exception $e){
    $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
@@ -971,6 +976,78 @@ class DSET extends DB{
  public function dsetDelEntry(){
   try{
    $mname="dsetDelEntry(DSET class)";
+   $c="start ".$mname;wLog($c);
+   //データチェック
+   if(! isset($this->r["data"]) || ! is_array($this->r["data"]) || ! count($this->r["data"])){
+    throw new exception("削除データがありません");
+   }
+
+   foreach($this->r["data"] as $key=>$val){
+    $this->from=$val["from"];
+    $this->where=$val["where"];
+    $this->delete();
+   }
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  }
+ }
+
+ public function dsetBcomment(){
+  try{
+   $mname="dsetBcomment(DSET class)";
+   $c="start ".$mname;wLog($c);
+   $this->select="*";
+   $this->from =TABLE_PREFIX.BCOMMENT;
+   $this->order="fld000";
+   $c="end ".$mname;wLog($c);
+   return $this->getArray();
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  }
+ }
+
+ //$this->r["data"]に以下の配列が格納されていることが前提
+ //$this->r["data"][n]["col"]  =array("列名"=>"値");
+ //$this->r["data"][n]["from"] ="テーブル名";
+ //$this->r["data"][n]["where"]="where句";
+ //
+ // 動作テスト後、以下のメソッドを統合する
+ // dsetUpRank()
+ // dsetUpEntry()
+ public function dsetUpdate(){
+  try{
+   $mname="dsetUpdate(DSET class)";
+   $c="start ".$mname;wLog($c);
+   //データチェック
+   if(! isset($this->r["data"]) || ! is_array($this->r["data"]) || ! count($this->r["data"])){
+    throw new exception("更新データがありません");
+   }
+
+   foreach($this->r["data"] as $key=>$val){
+    $this->updatecol=$val["col"];
+    $this->from=$val["from"];
+    $this->where=$val["where"];
+    $this->update();
+   }
+   $c="end ".$mname;wLog($c);
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  }
+ }
+
+ //$this->r["data"]に以下の配列が格納されていることが前提
+ //$this->r["data"][n]["from"] ="テーブル名";
+ //$this->r["data"][n]["where"]="where句";
+ //
+ // 動作テスト後、以下のメソッドを統合する
+ // dsetDelRank()
+ // dsetDelEntry()
+ public function dsetDelete(){
+  try{
+   $mname="dsetDelete(DSET class)";
    $c="start ".$mname;wLog($c);
    //データチェック
    if(! isset($this->r["data"]) || ! is_array($this->r["data"]) || ! count($this->r["data"])){

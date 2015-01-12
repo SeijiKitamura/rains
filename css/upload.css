@@ -276,9 +276,9 @@ div#map-canvas{
 }
 
 div.divdetail{
- float:right;
- width:40%;
- margin:1% 15% 0 0;
+ float:left;
+ width:100%;
+ margin:1% 0 0 0;
 
 }
 
@@ -431,4 +431,35 @@ input[name=inprank]{
 
 span.smallfont{
  font-size:0.8em;
+}
+
+dl.dl_indivi,
+dl.dl_room,
+dl.dl_member, 
+dl.dl_price 
+{
+ width:100%;
+ margin:0 1em;
+}
+
+div.divdetail{
+ width:40%;
+ float:left;
+}
+
+div.divcomment{
+ width:40%;
+ float:left;
+ margin:1%;
+ padding:0 2%;
+}
+
+textarea[name=txt_setubi]{
+ resize:none;
+ min-width:90%;
+ min-height:10em;
+}
+
+input[name=inp_bcomment]{
+ width:90%;
 }

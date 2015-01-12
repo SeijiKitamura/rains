@@ -8,7 +8,7 @@
 ----------------------------------------------------- */
 
 require_once("view.function.php");
-require_once("simple_html_dom.php");
+//require_once("simple_html_dom.php");
 
 function partsRainsList($data){
  try{
@@ -441,7 +441,7 @@ function partsRoomType($data){
 
   $html="";
   foreach($data as $key=>$val){
-   $html.="<dl class='dl_roomt' data-fld000='".$val["fld000"]."'>";
+   $html.="<dl class='dl_room' data-fld000='".$val["fld000"]."'>";
    $html.="<dt>間取り</dt>";
    $html.="<dd>:".$val["fld180"].$val["_fld179"]."</dd>";
 
@@ -724,64 +724,111 @@ function partsImgPathFromSite($pageurl){
  try{
   $c="start ".$mname;wLog($c);
 
-  if(! $parse=parse_url($pageurl)){
-   throw new exception("URLが認識できません");
+  $blacklist="/www\.townhousing\.co\.jp|suumo\.jp|www\.homes\.co\.jp/";
+
+  if(! $purl=parse_url($pageurl)){
+   throw new exception("URLが認識できません(".$pageurl.")");
   }
 
-  //ドメイン、ディレクトリをセット
-  $scheme=$parse["scheme"]."://";
-  $domain=$parse["host"];
-  $dir=dirname($pageurl)."/";
-
-  $c="notice:".$mname."ページ取得(".$pageurl.")";wLog($c);
-  $html=file_get_html($pageurl);
-
-  $imgurl=array();
-  //画像タグ抽出
-  foreach($html->find("img") as $element){
+  $html=@file_get_contents($pageurl);
+  if($html ===FALSE){
+   $c="error:".$mname." ページが取得できません(".$pageurl.")";wLog($c);
+   throw new exception ($c);
+  }
   
-   $url=$element->src;
-
-   if(!$url) continue;
-
-   $c="notice:".$mname."画像パス:".$url;wLog($c);
-   if(preg_match("/^http/",$url)){
-    $c="notice:".$mname."絶対パス:".$url;wLog($c);
+  //まずはimgタグだけ抜き出す
+  $pattern="/<img.*?>/s";
+  preg_match_all($pattern,$html,$match);
+  
+  $url=array();
+  foreach($match[0] as $key=>$val){
+   //imgタグを除く
+   $data=preg_replace("/^<img|\/?>$/","",$val);
+   
+   //'"を削除
+   $data=preg_replace("/\'|\"/","",$data);
+   
+  //属性と値に分割
+   $pattern="/([a-zA-Z]+)\s*=\s*[\'\"]?(.+?)[\'\"]?\s+/";
+   preg_match_all($pattern,$val,$attr);
+  
+  //配列へ格納
+   $col=array();
+   foreach($data as $key1=>$val1){
+    if(! $val1) continue;
+    preg_match("/^([a-zA-Z]+)=(.+)/",$val1,$m);
+    if(! $m[1]) continue;
+    $col[$m[1]]=$m[2];
    }
-   else{
-    // パスが「/」から始まる場合
-    if(preg_match("/^\//",$url)){
-     $url=$scheme.$domain.$url;
+   
+  //src属性なければスキップ
+   if(!$col["src"]){
+    $c="notice:".$mname." src属性がありません。処理をスキップします(".$val.")";wLog($c);
+    continue;
+   }
+   
+  //src属性をバックアップ
+   $col["_src"]=$col["src"];
+  
+  //画像ファイルパスチェック
+   if(! preg_match("/^http/",$col["src"])){
+    // 「//」から始まっている
+    if(preg_match("/^\/\//",$col["src"])){
+     $c="notice:".$mname." 画像パスが//で始まっている".$col["src"];wLog($c);
+     $col["src"]=$purl["scheme"]."://".$col["src"];
     }
-    else{
-     $url=$dir.$url;
+    // 「/」から始まっている
+    elseif(preg_match("/^\//",$col["src"])){
+     $c="notice:".$mname." 画像パスが/で始まっている".$col["src"];wLog($c);
+     $col["src"]=$purl["scheme"]."://".$purl["host"].$col["src"];
     }
-    $c="notice:".$mname."相対パスから絶対パスに変換:".$url;wLog($c);
+    
+    // 「/」から始まっていない
+    elseif(preg_match("/^[^\/]/",$col["src"])){
+     $c="notice:".$mname." 画像パスが相対パス".$col["src"];wLog($c);
+     $col["src"]=$pageurl.$col["src"];
+    }
+   }
+  
+  //タウンハウジング用カスタマイズ(name属性有効でhttpから始まる場合)
+   if($col["name"] && preg_match("/^http/",$col["name"])){
+    $c="notice:".$mname." タウンハウジング用パス変換".$col["src"];wLog($c);
+    $col["src"]=$col["name"];
+   }
+  
+  //suumo用カスタマイズ(w=452へ)
+   if(preg_match("/img01\.suumo\.com/",$col["src"])){
+    $c="notice:".$mname."suumo用パス変換".$col["src"];wLog($c);
+    $col["src"]=preg_replace("/w=[0-9]+/","w=452",$col["src"]);
+   }
+  
+  //suumo用カスタマイズ(h=339へ)
+   if(preg_match("/img01\.suumo\.com/",$col["src"])){
+    $c="notice:".$mname."suumo用パス変換".$col["src"];wLog($c);
+    $col["src"]=preg_replace("/h=[0-9]+/","h=339",$col["src"]);
+   }
+   
+  //homes用カスタマイズ(サイズ指定部分を削除)
+   if(preg_match("/image\.homes\.co\.jp/",$col["src"])){
+    $col["src"]=preg_replace("/&amp;.*$/","",$col["src"]);
+   }
+   
+  //ブラックリスト除外
+   if( preg_match($blacklist,$col["src"])){
+    $c="notice:".$mname."ブラックリスト該当".$col["src"];wLog($c);
+    continue;
    }
 
-   //以下、各サイト用にカスタマイズを追加していく
-   if(preg_match("/suumo/",$url)){
-    if(! preg_match("/^https:\/\/img/",$url)){
-     $c="notice:".$mname."suumo対象外画像".$url;wLog($c);
-     continue;
-    }
-    $url=preg_replace("/t\.jpg/","o.jpg",$url);
-    $c="notice:".$mname."suumo用に変換".$url;wLog($c);
-   }
-
-   if(preg_match("/image\.homes\.co\.jp/",$url)){
-    $url=preg_replace("/&amp;/","&",$url);
-    $c="notice:".$mname."homes用に変換".$url;wLog($c);
-   }
-   $imgurl[]=$url;
+   $c="notice:".$mname."画像パス登録";wLog($c);
+   $url[]=$col;
   }
-
-  $html->clear();
-
-  return $imgurl;
+  
+  unset($html);
+  $c="end:".$mname;wLog($c);
+  return $url;
  }
  catch(Exception $e){
-  $html->clear();
+  //$html->clear();
   wLog("error:".$mname.$e->getMessage());
   echo "err:".$e->getMessage();
  }
@@ -800,7 +847,7 @@ function partsImgListFromSite($data){
   foreach($data as $key=>$val){
    $html.="<li>";
    $html.="<input type='button' value='Pick'>";
-   $html.="<img src='".$val."'>";
+   $html.="<img src='".$val["src"]."'>";
    $html.="</li>";
   }
   $html.="</ul>";
@@ -954,87 +1001,29 @@ function partsEntry($data){
  }
 }
 
-//以下ボツ
-function partsSelectBox($data,$clsname,$v=null){
+function partsComment($data){
  try{
-  $mname="partsSelectGroup(parts.function.php) ";
+  $mname="partsRankList(parts.function.php) ";
   $c="start ".$mname;wLog($c);
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".$mname."物件データがありません";wLog($c);echo $c;
+   $c="物件データがありません";wLog($c);
    return false;
   }
-
   $html="";
-  $html.="<div class='divgroup'>";
-  $html.="<select class='select_".$clsname."'>";
-  $html.="<option value='9999'>選択</option>";
-  foreach($data as $key=>$val){
-   $match=preg_split("/_/",$key);
-   $html.="<option value='".$match[0]."' ";
-   if($match[0]==$v) $html.=" selected";
-   $html.=">".$match[1]."</option>";
-  }
-  $html.="</select>";
-  $html.="</div>";
+  foreach($data["data"] as $key=>$val){
+   $html.="<h4>その他設備</h4>";
+   $html.="<textarea name='txt_setubi' data-fld000='".$val["fld000"]."'>".$val["setubi"]."</textarea>";
+   $html.="<h4>コメント</h4>";
+   $html.="<input name='inp_bcomment' type='text' value='".$val["bcomment"]."' data-fld000='".$val["fld000"]."'>";
 
-  echo $html;
- }
- catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
- }
-}
-
-function partsSelectGroup($data,$fld001=null){
- try{
-  $mname="partsSelectGroup(parts.function.php) ";
-  $c="start ".$mname;wLog($c);
-  if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".$mname."物件データがありません";wLog($c);echo $c;
-   return false;
-  }
-
-  $html="";
-  $html.="<div class='divgroup'>";
-  $html.="<select class='select_fld001'>";
-  foreach($data as $key=>$val){
-   $match=preg_split("/_/",$key);
-   $html.="<option value='".$match[0]."' ";
-   if($match[0]==$fld001) $html.=" selected";
-   $html.=">".$match[1];
-   $html.="</option>";
-  }
-  $html.="</select>";
-  $html.="</div>";
-  echo $html;
- }
- catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
- }
-}
-
-function partsSelectGroup2($data,$fld001,$fld002=null){
- try{
-  $mname="partsSelectGroup2(parts.function.php) ";
-  $c="start ".$mname;wLog($c);
-  if(! isset($data)||! is_array($data)||! count($data)){
-   $c="エントリーデータがありません";wLog($c);
-   return false;
-  }
-
-  $html="";
-  foreach($data as $key=>$val){
-   $match=preg_split("/_/",$key);
-   if($match[0]!=$fld001) continue;
-   $html.="<div class='divgroup'>";
-   $html.="<select class='select_fld002'>";
-   foreach($val as $key1=>$val1){
-    $match=preg_split("/_/",$key1);
-    $html.="<option value='".$fld001."_".$match[0]."'";
-    if($match[0]==$fld002) $html.=" selected";
-    $html.=">".$match[1]."</option>";
+   $html.="<h4>リスト登録</h4>";
+   $html.="<select name='select_rank'>";
+   foreach($data["ranklist"] as $key1=>$val1){
+    $html.="<option value='".$val1["rank"]."'>";
+    $html.=$val1["rankname"];
+    $html.="</option>";
    }
    $html.="</select>";
-   $html.="</div>";
   }
   echo $html;
  }
@@ -1042,38 +1031,4 @@ function partsSelectGroup2($data,$fld001,$fld002=null){
   $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
-
-function partsSelectGroup3($data,$fld001,$fld002){
- try{
-  $mname="partsSelectGroup2(parts.function.php) ";
-  $c="start ".$mname;wLog($c);
-  if(! isset($data)||! is_array($data)||! count($data)){
-   $c="エントリーデータがありません";wLog($c);
-   return false;
-  }
-  $html="";
-  foreach($data as $key=>$val){
-   $match=preg_split("/_/",$key);
-   if($match[0]!=$fld001) continue;
-   foreach($val as $key1=>$val1){
-    $match=preg_split("/_/",$key1);
-    if($match[0]!=$fld002) continue;
-    $html.="<div class='divgroup'>";
-    $html.="<select class='select_fld003'>";
-    foreach($val1 as $key2=>$val2){
-     $match=preg_split("/_/",$key2);
-     $html.="<option value='".$fld001."_".$fld002."_".$match[0]."'>".$match[1]."</option>";
-    }
-    $html.="</select>";
-    $html.="</div>";
-   }
-  }
-
-  echo $html;
- }
- catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
- }
-}
-
 ?>
