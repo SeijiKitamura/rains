@@ -21,6 +21,11 @@ echo "<div class='divcomment'>";
 partsComment($data);
 echo "</div>";
 
+echo "<div class='diventrylist'>";
+$elist=viewEntryList($_GET["fld000"]);
+partsEntryList($elist);
+echo "</div>";
+
 echo "<div class='clr'></div>";
 
 ?>

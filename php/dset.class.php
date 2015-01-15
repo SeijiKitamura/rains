@@ -43,6 +43,7 @@ class DSET extends DB{
   $this->from.=" left outer join ";
   $this->from.=TABLE_PREFIX.BCOMMENT." as t2 on ";
   $this->from.=" t.fld000=t2.fld000 ";
+
   $this->r=array();
   $this->r["data"]=$this->getArray();
 
@@ -935,13 +936,15 @@ class DSET extends DB{
 
  public function dsetEntry(){
   try{
-   $mname="dsetDelRank(DSET class)";
+   $mname="dsetEntry(DSET class)";
    $c="start ".$mname;wLog($c);
-   $this->select="t.id as entryid,t.rank,t.fld001 as narabi,t.ecomment,t1.*";
-   $this->from =TABLE_PREFIX.ENTRY." as t ";
-   $this->from.="inner join ".TABLE_PREFIX.RAINS." as t1 on ";
-   $this->from.=" t.fld000=t1.fld000 ";
-   $this->order="t.rank,t.fld001,t1.fld000";
+   $this->select="t.id as entryid,t.fld000,t.fld001 as entry,t.ecomment,t.rank,t1.rankname,t1.rcomment,t1.startday,t1.endday,t2.*";
+   $this->from =TABLE_PREFIX.ENTRY. " as t";
+   $this->from.=" inner join ".TABLE_PREFIX.RANK." as t1 on";
+   $this->from.=" t.rank=t1.rank";
+   $this->from.=" inner join ".TABLE_PREFIX.RAINS." as t2 on";
+   $this->from.=" t.fld000=t2.fld000";
+   $this->order="t.rank,t.fld001,t.fld000";
    $c="end ".$mname;wLog($c);
    return $this->getArray();
   }

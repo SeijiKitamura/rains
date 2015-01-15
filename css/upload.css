@@ -422,7 +422,9 @@ span.spn_20{
  text-align:center;
 }
 
-
+span.boxborder{
+ border:solid 1px #DCDCDC;
+}
 input[name=inprank]{
  width:80%;
  float:left;
@@ -454,6 +456,12 @@ div.divcomment{
  padding:0 2%;
 }
 
+div.diventrylist{
+ width:40%;
+ float:left;
+ margin:1%;
+ padding:0 2%;
+}
 textarea[name=txt_setubi]{
  resize:none;
  min-width:90%;

@@ -887,7 +887,7 @@ function partsRankEntry(){
   $html="";
   $html.=<<<EOF
 <div class='divrankentry'>
- <ul class='ul_rank'>
+ <ul class='ul_rankentry'>
   <li><span class='spn_5 titlecolor'>番号</span>
       <span class='spn_15 titlecolor'>タイトル</span>
       <span class='spn_15 titlecolor'>コメント</span>
@@ -902,10 +902,13 @@ function partsRankEntry(){
       <span class='spn_15 bodercolor'><input type='text' name='rcomment' value=''></span>
       <span class='spn_5 bodercolor'><input type='text' name='startday' value=''></span>
       <span class='spn_5 bodercolor'><input type='text' name='endday'   value=''></span>
-      <span class='spn_5 bodercolor'><select name='flg'>
-                            <option value='1'>する</option>
-                            <option value='0'>しない</option>
-                           </select></span>
+      <span class='spn_5 bodercolor'>
+       <select name='flg'>
+        <option value='1'>する</option>
+        <option value='0'>しない</option>
+       </select>
+      </span>
+    
       <div class='clr'></div>
   </li>
 
@@ -926,17 +929,111 @@ function partsRankList($data){
  try{
   $mname="partsRankList(parts.function.php) ";
   $c="start ".$mname;wLog($c);
+
+  $html="";
+  $html.="<div class='divrankentry'>";
+  $html.="<ul class='ul_rank'>";
+  $html.="<li><span class='spn_5 titlecolor'>番号</span>";
+  $html.="<span class='spn_15 titlecolor'>タイトル</span>";
+  $html.="<span class='spn_15 titlecolor'>コメント</span>";
+  $html.="<span class='spn_5 titlecolor'>開始日</span>";
+  $html.="<span class='spn_5 titlecolor'>終了日</span>";
+  $html.="<span class='spn_5 titlecolor'>表示</span>";
+  $html.="<div class='clr'></div>";
+  $html.="</li>";
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="ランクデータがありません";wLog($c);
+   $c="notice:".$mname."ランクデータがありません";wLog($c);
    return false;
   }
-  $html="";
-  $html.="<ul class='ul_rank'>";
   foreach($data as $key=>$val){
-   $html.="<li><a href='#' data-rank='".$val["rank"]."'>".$val["rank"].":";
-   $html.=$val["rankname"]."</a></li>";
+   $html.="<li>";
+   $html.="<span class='spn_5 boxborder'>".$val["rank"]."</span>";
+   $html.="<span class='spn_15 boxborder'>".$val["rankname"]."</span>";
+   $html.="<span class='spn_15 boxborder'>".$val["rcomment"]."</span>";
+   $html.="<span class='spn_5 boxborder'>".$val["startday"]."</span>";
+   $html.="<span class='spn_5 boxborder'>".$val["endday"]."</span>";
+   $html.="<span class='spn_5 boxborder'>";
+   if($val["flg"]==1) $html.="する";
+   elseif($val["flg"]==0) $html.="しない";
+   $html.="</span>";
+   $html.="<div class='clr'></div>";
+   $html.="</li>";
+  }
+  $html.="</ul></div>";
+
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsRankListShort($data){
+ try{
+  $mname="partsRankListShort(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+
+  $html="";
+  $html.="<div class='divshortrank'>";
+  $html.="<ul class='ul_shortrank'>";
+  $html.="<li><span class='spn_5 titlecolor'>番号</span>";
+  $html.="<span class='spn_15 titlecolor'>タイトル</span>";
+  $html.="<span class='spn_5 titlecolor'>開始日</span>";
+  $html.="<span class='spn_5 titlecolor'>終了日</span>";
+  $html.="<div class='clr'></div>";
+  $html.="</li>";
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="notice:".$mname."ランクデータがありません";wLog($c);
+   return false;
+  }
+  foreach($data as $key=>$val){
+   $html.="<li>";
+   $html.="<span class='spn_5 boxborder'>".$val["rank"]."</span>";
+   $html.="<span class='spn_15 boxborder'>".$val["rankname"]."</span>";
+   $html.="<span class='spn_5 boxborder'>".$val["startday"]."</span>";
+   $html.="<span class='spn_5 boxborder'>".$val["endday"]."</span>";
+   $html.="<div class='clr'></div>";
+   $html.="</li>";
+  }
+  $html.="</ul></div>";
+
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsEntryList($data){
+ try{
+  $mname="partsEntryList(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="エントリーデータがありません";wLog($c);
+   return false;
+  }
+
+  $html="";
+  $html.="<h4>ランキング</h4>";
+  $html.="<ul>";
+  $html.="<li><span class='spn_5 titlecolor'>番号</span>";
+  $html.="<span class='spn_15 titlecolor'>タイトル</span>";
+  //$html.="<span class='spn_5 titlecolor'>開始日</span>";
+  //$html.="<span class='spn_5 titlecolor'>終了日</span>";
+  $html.="<div class='clr'></div>";
+  $html.="</li>";
+  
+  foreach($data as $key=>$val){
+   $html.="<li>";
+   $html.="<span class='spn_5 boxborder'>".$val["rank"]."</span>";
+   $html.="<span class='spn_15 boxborder'>".$val["rankname"]."</span>";
+  // $html.="<span class='spn_5 boxborder'>".$val["startday"]."</span>";
+  // $html.="<span class='spn_5 boxborder'>".$val["endday"]."</span>";
+   $html.="<div class='clr'></div>";
+   $html.="</li>";
   }
   $html.="</ul>";
+
   echo $html;
  }
  catch(Exception $e){
@@ -953,23 +1050,21 @@ function partsEntry($data){
    return false;
   }
   $html="";
-  $html.="<div class='diventry'>";
   $html.="<h3>ランキング詳細</h3>";
   $html.="<a class='a_delall' href='#'>全削除</a>";
   $html.="<ul class='ul_entry'>";
   $html.="<li>";
   $html.="<span class='spn_5  titlecolor'>削除</span>";
-  $html.="<span class='spn_5  titlecolor'>番号</span>";
+  $html.="<span class='spn_5  titlecolor'>順位</span>";
   $html.="<span class='spn_15 titlecolor'>物件名</span>";
-  $html.="<span class='spn_5  titlecolor'>広さ</span>";
   $html.="<span class='spn_5  titlecolor'>価格</span>";
   $html.="<span class='spn_20 titlecolor'>コメント</span>";
   $html.="<div class='clr'></div>";
   $html.="</li>";
   foreach($data as $key=>$val){
    $html.="<li>";
-   $html.="<span class='spn_5 bodercolor'><a href='#' class='a_entrydel' data-id='".$val["entryid"]."'>削除</a></span>";
-   $html.="<span class='spn_5 bodercolor'><input type='text' value='".$val["narabi"]."'";
+   $html.="<span class='spn_5 bodercolor'><a href='#' class='a_entrydel' data-id='".$val["entryid"]."' data-rank='".$val["rank"]."'>削除</a></span>";
+   $html.="<span class='spn_5 bodercolor'><input type='text' value='".$val["entry"]."'";
    $html.=" data-id='".$val["entryid"]."' name='entry'></span>";
    $html.="<span class='spn_15 bodercolor'>";
    if($val["fld021"]){
@@ -980,19 +1075,15 @@ function partsEntry($data){
    }
    $html.="</span>";
    $html.="<span class='spn_5 bodercolor'>";
-   if($val["fld180"]) $html.=$val["fld180"].$val["_fld179"];
-   else               $html.=$val["fld068"].$val["fld088"];
-   $html.="</span>";
-   $html.="<span class='spn_5 bodercolor'>";
    $html.=number_format($val["fld054"]);
    $html.="</span>";
    $html.="<span class='spn_20 bodercolor'>";
    $html.="<input type='text' value='".$val["ecomment"]."' data-id='".$val["entryid"]."' name='ecomment'>";
    $html.="</span>";
+   $html.="<div class='clr'></div>";
    $html.="</li>";
   }
   $html.="</ul>";
-  $html.="</div>";
 
   echo $html;
  }
@@ -1016,10 +1107,13 @@ function partsComment($data){
    $html.="<h4>コメント</h4>";
    $html.="<input name='inp_bcomment' type='text' value='".$val["bcomment"]."' data-fld000='".$val["fld000"]."'>";
 
-   $html.="<h4>リスト登録</h4>";
-   $html.="<select name='select_rank'>";
+   $html.="<h4>ランキング登録</h4>";
+   $html.="<select name='select_rank' data-fld000='".$val["fld000"]."'>";
+   $html.="<option value=0>選択してください</option>";
    foreach($data["ranklist"] as $key1=>$val1){
-    $html.="<option value='".$val1["rank"]."'>";
+    $html.="<option value='".$val1["rank"]."'";
+    if($val1["rank"]==$val["rank"]) $html.=" selected ";
+    $html.=">";
     $html.=$val1["rankname"];
     $html.="</option>";
    }
