@@ -8,7 +8,7 @@
 ----------------------------------------------------- */
 
 require_once("view.function.php");
-require_once("simple_html_dom.php");
+//require_once("simple_html_dom.php");
 
 function partsRainsList($data){
  try{
@@ -441,7 +441,7 @@ function partsRoomType($data){
 
   $html="";
   foreach($data as $key=>$val){
-   $html.="<dl class='dl_roomt' data-fld000='".$val["fld000"]."'>";
+   $html.="<dl class='dl_room' data-fld000='".$val["fld000"]."'>";
    $html.="<dt>間取り</dt>";
    $html.="<dd>:".$val["fld180"].$val["_fld179"]."</dd>";
 
@@ -724,64 +724,111 @@ function partsImgPathFromSite($pageurl){
  try{
   $c="start ".$mname;wLog($c);
 
-  if(! $parse=parse_url($pageurl)){
-   throw new exception("URLが認識できません");
+  $blacklist="/www\.townhousing\.co\.jp|suumo\.jp|www\.homes\.co\.jp/";
+
+  if(! $purl=parse_url($pageurl)){
+   throw new exception("URLが認識できません(".$pageurl.")");
   }
 
-  //ドメイン、ディレクトリをセット
-  $scheme=$parse["scheme"]."://";
-  $domain=$parse["host"];
-  $dir=dirname($pageurl)."/";
-
-  $c="notice:".$mname."ページ取得(".$pageurl.")";wLog($c);
-  $html=file_get_html($pageurl);
-
-  $imgurl=array();
-  //画像タグ抽出
-  foreach($html->find("img") as $element){
+  $html=@file_get_contents($pageurl);
+  if($html ===FALSE){
+   $c="error:".$mname." ページが取得できません(".$pageurl.")";wLog($c);
+   throw new exception ($c);
+  }
   
-   $url=$element->src;
-
-   if(!$url) continue;
-
-   $c="notice:".$mname."画像パス:".$url;wLog($c);
-   if(preg_match("/^http/",$url)){
-    $c="notice:".$mname."絶対パス:".$url;wLog($c);
+  //まずはimgタグだけ抜き出す
+  $pattern="/<img.*?>/s";
+  preg_match_all($pattern,$html,$match);
+  
+  $url=array();
+  foreach($match[0] as $key=>$val){
+   //imgタグを除く
+   $data=preg_replace("/^<img|\/?>$/","",$val);
+   
+   //'"を削除
+   $data=preg_replace("/\'|\"/","",$data);
+   
+  //属性と値に分割
+   $pattern="/([a-zA-Z]+)\s*=\s*[\'\"]?(.+?)[\'\"]?\s+/";
+   preg_match_all($pattern,$val,$attr);
+  
+  //配列へ格納
+   $col=array();
+   foreach($data as $key1=>$val1){
+    if(! $val1) continue;
+    preg_match("/^([a-zA-Z]+)=(.+)/",$val1,$m);
+    if(! $m[1]) continue;
+    $col[$m[1]]=$m[2];
    }
-   else{
-    // パスが「/」から始まる場合
-    if(preg_match("/^\//",$url)){
-     $url=$scheme.$domain.$url;
+   
+  //src属性なければスキップ
+   if(!$col["src"]){
+    $c="notice:".$mname." src属性がありません。処理をスキップします(".$val.")";wLog($c);
+    continue;
+   }
+   
+  //src属性をバックアップ
+   $col["_src"]=$col["src"];
+  
+  //画像ファイルパスチェック
+   if(! preg_match("/^http/",$col["src"])){
+    // 「//」から始まっている
+    if(preg_match("/^\/\//",$col["src"])){
+     $c="notice:".$mname." 画像パスが//で始まっている".$col["src"];wLog($c);
+     $col["src"]=$purl["scheme"]."://".$col["src"];
     }
-    else{
-     $url=$dir.$url;
+    // 「/」から始まっている
+    elseif(preg_match("/^\//",$col["src"])){
+     $c="notice:".$mname." 画像パスが/で始まっている".$col["src"];wLog($c);
+     $col["src"]=$purl["scheme"]."://".$purl["host"].$col["src"];
     }
-    $c="notice:".$mname."相対パスから絶対パスに変換:".$url;wLog($c);
+    
+    // 「/」から始まっていない
+    elseif(preg_match("/^[^\/]/",$col["src"])){
+     $c="notice:".$mname." 画像パスが相対パス".$col["src"];wLog($c);
+     $col["src"]=$pageurl.$col["src"];
+    }
+   }
+  
+  //タウンハウジング用カスタマイズ(name属性有効でhttpから始まる場合)
+   if($col["name"] && preg_match("/^http/",$col["name"])){
+    $c="notice:".$mname." タウンハウジング用パス変換".$col["src"];wLog($c);
+    $col["src"]=$col["name"];
+   }
+  
+  //suumo用カスタマイズ(w=452へ)
+   if(preg_match("/img01\.suumo\.com/",$col["src"])){
+    $c="notice:".$mname."suumo用パス変換".$col["src"];wLog($c);
+    $col["src"]=preg_replace("/w=[0-9]+/","w=452",$col["src"]);
+   }
+  
+  //suumo用カスタマイズ(h=339へ)
+   if(preg_match("/img01\.suumo\.com/",$col["src"])){
+    $c="notice:".$mname."suumo用パス変換".$col["src"];wLog($c);
+    $col["src"]=preg_replace("/h=[0-9]+/","h=339",$col["src"]);
+   }
+   
+  //homes用カスタマイズ(サイズ指定部分を削除)
+   if(preg_match("/image\.homes\.co\.jp/",$col["src"])){
+    $col["src"]=preg_replace("/&amp;.*$/","",$col["src"]);
+   }
+   
+  //ブラックリスト除外
+   if( preg_match($blacklist,$col["src"])){
+    $c="notice:".$mname."ブラックリスト該当".$col["src"];wLog($c);
+    continue;
    }
 
-   //以下、各サイト用にカスタマイズを追加していく
-   if(preg_match("/suumo/",$url)){
-    if(! preg_match("/^https:\/\/img/",$url)){
-     $c="notice:".$mname."suumo対象外画像".$url;wLog($c);
-     continue;
-    }
-    $url=preg_replace("/t\.jpg/","o.jpg",$url);
-    $c="notice:".$mname."suumo用に変換".$url;wLog($c);
-   }
-
-   if(preg_match("/image\.homes\.co\.jp/",$url)){
-    $url=preg_replace("/&amp;/","&",$url);
-    $c="notice:".$mname."homes用に変換".$url;wLog($c);
-   }
-   $imgurl[]=$url;
+   $c="notice:".$mname."画像パス登録";wLog($c);
+   $url[]=$col;
   }
-
-  $html->clear();
-
-  return $imgurl;
+  
+  unset($html);
+  $c="end:".$mname;wLog($c);
+  return $url;
  }
  catch(Exception $e){
-  $html->clear();
+  //$html->clear();
   wLog("error:".$mname.$e->getMessage());
   echo "err:".$e->getMessage();
  }
@@ -800,7 +847,7 @@ function partsImgListFromSite($data){
   foreach($data as $key=>$val){
    $html.="<li>";
    $html.="<input type='button' value='Pick'>";
-   $html.="<img src='".$val."'>";
+   $html.="<img src='".$val["src"]."'>";
    $html.="</li>";
   }
   $html.="</ul>";
@@ -840,20 +887,35 @@ function partsRankEntry(){
   $html="";
   $html.=<<<EOF
 <div class='divrankentry'>
- <dl class='dl_rank'>
-  <dt>番号    </dt><dd>:<input type='text' name='rank' value=''></dd>
-  <dt>タイトル</dt><dd>:<input type='text' name='rankname' value=''></dd>
-  <dt>コメント</dt><dd>:<input type='text' name='rcomment' value=''></dd>
-  <dt>期間    </dt><dd>:<input type='text' name='startday' value=''>から
-                        <input type='text' name='endday' value=''>まで</dd>
-  <dt>表示    </dt><dd>:<select name='flg'>
-                         <option value='1'>する</option>
-                         <option value='0'>しない</option>
-                        </select></dd>
-  <dt>        </dt><dd><a href='#' class='a_rankdel'>削除</a>
-                       <a href='#' class='a_rankentry'>登録</a></dd>
- </dl>
- <div class='clr'></div>
+ <ul class='ul_rankentry'>
+  <li><span class='spn_5 titlecolor'>番号</span>
+      <span class='spn_15 titlecolor'>タイトル</span>
+      <span class='spn_15 titlecolor'>コメント</span>
+      <span class='spn_5 titlecolor'>開始日</span>
+      <span class='spn_5 titlecolor'>終了日</span>
+      <span class='spn_5 titlecolor'>表示</span>
+      <div class='clr'></div>
+  </li>
+
+  <li><span class='spn_5  bodercolor' ><input type='text' name='rank' value=''></span>
+      <span class='spn_15 bodercolor'><input type='text' name='rankname' value=''></span>
+      <span class='spn_15 bodercolor'><input type='text' name='rcomment' value=''></span>
+      <span class='spn_5 bodercolor'><input type='text' name='startday' value=''></span>
+      <span class='spn_5 bodercolor'><input type='text' name='endday'   value=''></span>
+      <span class='spn_5 bodercolor'>
+       <select name='flg'>
+        <option value='1'>する</option>
+        <option value='0'>しない</option>
+       </select>
+      </span>
+    
+      <div class='clr'></div>
+  </li>
+
+  <li><a class='a_rankdel'   href='#'>削除</a>
+      <a class='a_rankentry' href='#'>登録</a>
+  </li>
+ </ul>
 </div>
 EOF;
   echo $html;
@@ -867,17 +929,111 @@ function partsRankList($data){
  try{
   $mname="partsRankList(parts.function.php) ";
   $c="start ".$mname;wLog($c);
+
+  $html="";
+  $html.="<div class='divrankentry'>";
+  $html.="<ul class='ul_rank'>";
+  $html.="<li><span class='spn_5 titlecolor'>番号</span>";
+  $html.="<span class='spn_15 titlecolor'>タイトル</span>";
+  $html.="<span class='spn_15 titlecolor'>コメント</span>";
+  $html.="<span class='spn_5 titlecolor'>開始日</span>";
+  $html.="<span class='spn_5 titlecolor'>終了日</span>";
+  $html.="<span class='spn_5 titlecolor'>表示</span>";
+  $html.="<div class='clr'></div>";
+  $html.="</li>";
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="ランクデータがありません";wLog($c);
+   $c="notice:".$mname."ランクデータがありません";wLog($c);
    return false;
   }
-  $html="";
-  $html.="<ul class='ul_rank'>";
   foreach($data as $key=>$val){
-   $html.="<li><a href='#' data-rank='".$val["rank"]."'>".$val["rank"].":";
-   $html.=$val["rankname"]."</a></li>";
+   $html.="<li>";
+   $html.="<span class='spn_5 boxborder'>".$val["rank"]."</span>";
+   $html.="<span class='spn_15 boxborder'>".$val["rankname"]."</span>";
+   $html.="<span class='spn_15 boxborder'>".$val["rcomment"]."</span>";
+   $html.="<span class='spn_5 boxborder'>".$val["startday"]."</span>";
+   $html.="<span class='spn_5 boxborder'>".$val["endday"]."</span>";
+   $html.="<span class='spn_5 boxborder'>";
+   if($val["flg"]==1) $html.="する";
+   elseif($val["flg"]==0) $html.="しない";
+   $html.="</span>";
+   $html.="<div class='clr'></div>";
+   $html.="</li>";
+  }
+  $html.="</ul></div>";
+
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsRankListShort($data){
+ try{
+  $mname="partsRankListShort(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+
+  $html="";
+  $html.="<div class='divshortrank'>";
+  $html.="<ul class='ul_shortrank'>";
+  $html.="<li><span class='spn_5 titlecolor'>番号</span>";
+  $html.="<span class='spn_15 titlecolor'>タイトル</span>";
+  $html.="<span class='spn_5 titlecolor'>開始日</span>";
+  $html.="<span class='spn_5 titlecolor'>終了日</span>";
+  $html.="<div class='clr'></div>";
+  $html.="</li>";
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="notice:".$mname."ランクデータがありません";wLog($c);
+   return false;
+  }
+  foreach($data as $key=>$val){
+   $html.="<li>";
+   $html.="<span class='spn_5 boxborder'>".$val["rank"]."</span>";
+   $html.="<span class='spn_15 boxborder'>".$val["rankname"]."</span>";
+   $html.="<span class='spn_5 boxborder'>".$val["startday"]."</span>";
+   $html.="<span class='spn_5 boxborder'>".$val["endday"]."</span>";
+   $html.="<div class='clr'></div>";
+   $html.="</li>";
+  }
+  $html.="</ul></div>";
+
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsEntryList($data){
+ try{
+  $mname="partsEntryList(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="エントリーデータがありません";wLog($c);
+   return false;
+  }
+
+  $html="";
+  $html.="<h4>ランキング</h4>";
+  $html.="<ul>";
+  $html.="<li><span class='spn_5 titlecolor'>番号</span>";
+  $html.="<span class='spn_15 titlecolor'>タイトル</span>";
+  //$html.="<span class='spn_5 titlecolor'>開始日</span>";
+  //$html.="<span class='spn_5 titlecolor'>終了日</span>";
+  $html.="<div class='clr'></div>";
+  $html.="</li>";
+  
+  foreach($data as $key=>$val){
+   $html.="<li>";
+   $html.="<span class='spn_5 boxborder'>".$val["rank"]."</span>";
+   $html.="<span class='spn_15 boxborder'>".$val["rankname"]."</span>";
+  // $html.="<span class='spn_5 boxborder'>".$val["startday"]."</span>";
+  // $html.="<span class='spn_5 boxborder'>".$val["endday"]."</span>";
+   $html.="<div class='clr'></div>";
+   $html.="</li>";
   }
   $html.="</ul>";
+
   echo $html;
  }
  catch(Exception $e){
@@ -894,15 +1050,23 @@ function partsEntry($data){
    return false;
   }
   $html="";
-  $html.="<div class='diventry'>";
   $html.="<h3>ランキング詳細</h3>";
   $html.="<a class='a_delall' href='#'>全削除</a>";
   $html.="<ul class='ul_entry'>";
+  $html.="<li>";
+  $html.="<span class='spn_5  titlecolor'>削除</span>";
+  $html.="<span class='spn_5  titlecolor'>順位</span>";
+  $html.="<span class='spn_15 titlecolor'>物件名</span>";
+  $html.="<span class='spn_5  titlecolor'>価格</span>";
+  $html.="<span class='spn_20 titlecolor'>コメント</span>";
+  $html.="<div class='clr'></div>";
+  $html.="</li>";
   foreach($data as $key=>$val){
    $html.="<li>";
-   $html.="<span class='spn_3'><input type='text' value='".$val["narabi"]."'";
+   $html.="<span class='spn_5 bodercolor'><a href='#' class='a_entrydel' data-id='".$val["entryid"]."' data-rank='".$val["rank"]."'>削除</a></span>";
+   $html.="<span class='spn_5 bodercolor'><input type='text' value='".$val["entry"]."'";
    $html.=" data-id='".$val["entryid"]."' name='entry'></span>";
-   $html.="<span class='spn_15 smallfont'>";
+   $html.="<span class='spn_15 bodercolor'>";
    if($val["fld021"]){
     $html.=$val["fld021"].$val["fld022"];
    }
@@ -910,15 +1074,51 @@ function partsEntry($data){
     $html.=$val["fld018"].$val["fld019"].$val["fld020"];
    }
    $html.="</span>";
-   $html.="<span class='spn_15'>";
+   $html.="<span class='spn_5 bodercolor'>";
+   $html.=number_format($val["fld054"]);
+   $html.="</span>";
+   $html.="<span class='spn_20 bodercolor'>";
    $html.="<input type='text' value='".$val["ecomment"]."' data-id='".$val["entryid"]."' name='ecomment'>";
    $html.="</span>";
-   $html.="<a href='#' class='a_del' data-fld000='".$val["fld000"]."' data-rank='".$val["rank"]."'>削除</a>";
+   $html.="<div class='clr'></div>";
    $html.="</li>";
   }
   $html.="</ul>";
-  $html.="</div>";
 
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsComment($data){
+ try{
+  $mname="partsRankList(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="物件データがありません";wLog($c);
+   return false;
+  }
+  $html="";
+  foreach($data["data"] as $key=>$val){
+   $html.="<h4>その他設備</h4>";
+   $html.="<textarea name='txt_setubi' data-fld000='".$val["fld000"]."'>".$val["setubi"]."</textarea>";
+   $html.="<h4>コメント</h4>";
+   $html.="<input name='inp_bcomment' type='text' value='".$val["bcomment"]."' data-fld000='".$val["fld000"]."'>";
+
+   $html.="<h4>ランキング登録</h4>";
+   $html.="<select name='select_rank' data-fld000='".$val["fld000"]."'>";
+   $html.="<option value=0>選択してください</option>";
+   foreach($data["ranklist"] as $key1=>$val1){
+    $html.="<option value='".$val1["rank"]."'";
+    if($val1["rank"]==$val["rank"]) $html.=" selected ";
+    $html.=">";
+    $html.=$val1["rankname"];
+    $html.="</option>";
+   }
+   $html.="</select>";
+  }
   echo $html;
  }
  catch(Exception $e){

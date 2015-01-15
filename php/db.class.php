@@ -370,8 +370,9 @@ class DB{
  }//public function __QUERY(){
 
  // -------------------------------------------- //
- //廃止予定
+ //ここまで（削除予定)
  // -------------------------------------------- //
+
  public function updatearray($data){
   try{
    $mname="updatearray(db.class.php) ";
@@ -412,6 +413,48 @@ class DB{
     }// foreach($ary["where"] as $fld=>$val){
 
     $this->update();
+   }//foreach
+   $c="end:".$mname;wLog($c);
+  }//try
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);
+   echo $c;wLog($c);
+  }
+ }//public function 
+
+ public function deletearray($data){
+  try{
+   $mname="deletearray(db.class.php) ";
+   $c="start:".$mname;wLog($c);
+   
+   //データ存在確認
+   if(!isset($data)||!is_array($data)||!count($data)) throw new exception("SQLがありません");
+   
+   //データを更新と挿入に分類
+   foreach($data as $key=>$ary){
+
+    if(!$ary["from"]){
+     throw new exception("From句がありません");
+    }
+
+    if(!isset($ary["where"])||!is_array($ary["where"])||!count($ary["where"])){
+     throw new exception("Where句がありません");
+    }
+     
+    //SQLリセット
+    $this->SQLRESET();
+
+    //FROM句をセット
+    $this->from=$ary["from"];
+
+    //WHERE句をセット
+    foreach($ary["where"] as $fld=>$val){
+     //WHERE句をセット
+     if($this->where) $this->where.=" and ";
+     $this->where.=$fld."='".$val."'";
+    }// foreach($ary["where"] as $fld=>$val){
+
+    $this->delete();
    }//foreach
    $c="end:".$mname;wLog($c);
   }//try

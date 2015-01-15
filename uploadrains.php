@@ -21,6 +21,7 @@
     <li id="blacklist"><a href="#">非表示リスト</a></li>
     <li id="dataup">   <a href="#">データ更新  </a></li>
     <li id="rankup">   <a href="#">ランキング  </a></li>
+    <li id="entryup">   <a href="#">エントリー  </a></li>
    </ul>
    <div class="clr"></div>
    <div id="leftside">
@@ -32,32 +33,29 @@
  <script>
 
 $(function(){
- //Cookieリセット
- $.removeCookie("fld000");
- 
  //現在データ表示
  $("li#nowdata").on("click",function(e){
-  $.removeCookie("fld000");
   whiteBlack("reset");
   $("div#main").empty()
   showLeftSide();
  });
 
  $("li#blacklist").on("click",function(){
-  $.removeCookie("fld000");
   whiteBlack("black");
   $("div#main").empty()
   showLeftSide();
  });
 
  $("li#dataup").on("click",function(){
-  $.removeCookie("fld000");
   dataUpMenu();
  });
 
  $("li#rankup").on("click",function(){
-  $.removeCookie("fld000");
   showRank();
+ });
+
+ $("li#entryup").on("click",function(){
+  showEntry();
  });
 
  $("body").on("mouseup",function(){
@@ -448,6 +446,18 @@ function showDetail(fld000){
     backPage();
    });
 
+   $("textarea[name=txt_setubi]").on("change",function(){
+    chgSetubi();
+   });
+
+   $("input[name=inp_bcomment]").on("change",function(){
+    chgSetubi();
+   });
+
+   $("select[name=select_rank]").on("change",function(){
+    setRankList($(this).val(),$(this).attr("data-fld000"));
+   });
+
    initialize();
    calcRoute();
   },
@@ -585,6 +595,32 @@ function backPage(){
  }
  filterData(obj);
 
+}
+
+function chgSetubi(){
+ var fld000=$("textarea[name=txt_setubi]").attr("data-fld000");
+ var fld001=$("textarea[name=txt_setubi]").val();
+ var fld002=$("input[name=inp_bcomment]").val();
+ var d={"fld000":fld000,"fld001":fld001,"fld002":fld002};
+
+ if(! fld000 || ! fld000.match(/^[0-9]+$/)){
+  console.log("物件番号エラー");
+  return false;
+ }
+
+ $.ajax({
+  url:"php/htmlSetBcomment.php",
+  type:"get",
+  dataType:"html",
+  data:d,
+  complete:function(){},
+  success:function(html){
+   console.log(html);
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+  }
+ });
 }
 
 function dataUpMenu(){
@@ -802,9 +838,7 @@ function showOutSite(fld000){
 }
 
 function showRank(){
- $("div#main").empty();
  showRankList();
- showRankEntry();
 }
 
 function showRankList(){
@@ -813,45 +847,19 @@ function showRankList(){
   type:"get",
   dataType:"html",
   success:function(html){
-   console.log(html);
-   $("div#leftside").empty().append(html);
-   
-   //ランク選択イベント
-   $("ul.ul_rank li a").on("click",function(){
-    getRank($(this).attr("data-rank"));
-    showEntry($(this).attr("data-rank"));
-   });
-  },
-  error:function(XMLHttpRequest,textStatus,errorThrown){
-   console.log(XMLHttpRequest.responseText);
-   $("div.msgdiv").text(XMLHttpRequest.responseText);
-   return false;
-  }
- });
-}
+   $("div#main").empty().append(html);
 
-function showRankEntry(){
- $.ajax({
-  url:"php/htmlRankEntry.php",
-  type:"get",
-  dataType:"html",
-  success:function(html){
-   $("div#main").append(html);
-   
-   //ランク変更イベント
-   $("input[name=rank]").on("change",function(){
-    if(!$(this).val()) return false;
-    if(!$(this).val().match(/^[0-9]+$/)) return false;
-    getRank($(this).val());
-    showEntry($(this).val());
+   //ランクイベント
+   $("ul.ul_rank li span").on("click",function(){
+    getRank($(this));
    });
 
-   //登録クリックイベント
+   //登録イベント
    $("a.a_rankentry").on("click",function(){
     setRank();
    });
    
-   //削除クリックイベント
+   //削除イベント
    $("a.a_rankdel").on("click",function(){
     delRank();
    });
@@ -865,21 +873,23 @@ function showRankEntry(){
  });
 }
 
-function getRank(ranknum){
- var d={"rank":ranknum};
+function getRank(elem){
+ var rank=elem.siblings().eq(0).text();
+ var d={"rank":rank};
  $.ajax({
   url:"php/htmlGetRank.php",
+  type:"get",
   data:d,
   dataType:"json",
+  context:elem,
   success:function(json){
-   console.log(json);
-   if(!json) return false;
-   $.each(json[0],function(i,e){
-    console.log(i+":"+e);
-    if($("input[name="+i+"]").size()){
-     $("input[name="+i+"]").val(e);
+   $.each(json,function(key,val){
+    if(key!="id" && key!="flg" && key!="idate" && key!="cdate"){
+     $("input[name="+key+"]").val(val);
     }
-    $("select").val(json[0].flg);
+    if(key=="flg"){
+     $("select[name=flg]").val(val);
+    }
    });
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -896,49 +906,51 @@ function setRank(){
  var edate;
  var chkflg;
  chkflg=1;
- //値チェック
- $("input[type=text],select").each(function(){
-  if($(this).attr("name")=="rank" || $(this).attr("name")=="flg"){
-   if(! $(this).val().match(/^[0-9]+$/)){
-    console.log("ランク数字以外もしくはフラグ数字以外");
-    chkflg=0;
-   }
-  }
-
-  if($(this).attr("name")=="startday" ||$(this).attr("name")=="endday"){
-   var h=$(this).val().match(/^(20[0-9]{2})\/([0-1]?[0-9]{1})\/([0-3]?[0-9]{1})$/);
-   if(!h){
-    console.log("日付不正");
-    chkflg=0;
-   }
-   else{
-    var newdate=new Date(h[1],h[2]-1,h[3]);
-    if(newdate.getFullYear()!=h[1]||newdate.getMonth()+1!=h[2]||newdate.getDate()!=h[3]){
-    console.log("日付不正");
-    chkflg=0;
-    }
-    else{
-     if($(this).attr("name")=="startday"){
-      sdate=newdate;
-     }
-     if($(this).attr("name")=="endday"){
-      edate=newdate;
-     }
-    }
-   }
-  }
-  d[$(this).attr("name")]=$(this).val();
- });
-
- if(sdate>edate){
-  console.log("日付期間不正");
+ 
+ //ランク値チェック
+ d["rank"]=$("input[name=rank]").val();
+ if(! d["rank"].match(/^[0-9]+$/)){
+  consle.log("ランク数字以外");
   chkflg=0;
  }
 
+ //タイトル空欄チェック
+ d["rankname"]=$("input[name=rankname]").val();
+ if(! d["rankname"].match(/^.+$/)){
+  console.log("タイトル空欄");
+  chkflg=0;
+ }
+
+ d["rcomment"]=$("input[name=rcomment]").val();
+ 
+ //開始日チェック
+ d["startday"]=$("input[name=startday]").val();
+ if(! chkdate(d["startday"])){
+  chkflg=0;
+ }
+ 
+ //終了日チェック
+ d["endday"]=$("input[name=endday]").val();
+ if(! chkdate(d["endday"])){
+  chkflg=0;
+ }
+
+ //日付比較
+ var sday=Date.parse(d["startday"]);
+ var eday=Date.parse(d["endday"]);
+
+ if(sday>eday){
+  console.log("開始日、終了日比較エラー");
+  chkflg=0;
+ }
+
+ d["flg"]=$("select[name=flg]").val();
+
  if(! chkflg){
-  alert("入力データに誤りがあります");
+  alert("入力エラーがあります");
   return false;
  }
+ console.log(d);
 
  if(! confirm("登録しますか?")) return false;
  $.ajax({
@@ -956,6 +968,7 @@ function setRank(){
    return false;
   }
  });
+
 }
 
 function delRank(){
@@ -979,7 +992,7 @@ function delRank(){
   success:function(html){
    console.log(html);
    alert("削除しました");
-   clrRank();
+   showRankList();
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);
@@ -989,38 +1002,59 @@ function delRank(){
  });
 }
 
-function clrRank(){
- $("input[type=text]").each(function(){
-  $(this).val("");
- });
+function showEntry(){
+ //ランキング一覧表示
+ $.ajax({
+  url:"php/htmlGetEntryList.php",
+  dataType:"html",
+  success:function(html){
+   $("div#main").empty().append(html);
 
- $("select[name=flg]").val("1");
+   $("ul.ul_shortrank li span").on("click",function(){
+    var rank=$(this).parent().children().first().text();
+    showEntryList(rank);
+   });
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
 }
 
-function showEntry(rank){
+function showEntryList(rank){
+ console.log(rank);
  var d={"rank":rank};
  $.ajax({
   url:"php/htmlEntry.php",
   data:d,
   dataType:"html",
   success:function(html){
-   $("div.diventry").remove();
-   $("div.divrankentry").after(html);
+   $("div.diventry").empty().append(html);
 
-   //イベント追加(ここから)
    $("input[name=entry]").on("change",function(){
-    var entry=$(this);
-    var ecomment=$(this).parent().siblings().find("input");
-    console.log(entry +" "+ecomment);
-    setEntry(entry,ecomment);
+    var entryid=$(this).attr("data-id");
+    var entry=$(this).val();
+    var ecomment=$(this).parent().siblings().find("input").val();
+    console.log(entryid+" "+entry +" "+ecomment);
+    setEntry(entryid,entry,ecomment);
    });
 
    $("input[name=ecomment]").on("change",function(){
-    var entry=$(this).parent().siblings().find("input");
-    var ecomment=$(this);
-    console.log(entry +" "+ecomment);
-    setEntry(entry,ecomment);
+    var entryid=$(this).attr("data-id");
+    var entry=$(this).parent().siblings().find("input").val();
+    var ecomment=$(this).val();
+    console.log(entryid+" "+entry +" "+ecomment);
+    setEntry(entryid,entry,ecomment);
    });
+
+   $("a.a_entrydel").on("click",function(){
+    var rank=$(this).attr("data-rank");
+    var id=$(this).attr("data-id");
+    delEntry(rank,id);
+   });
+
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);
@@ -1030,17 +1064,13 @@ function showEntry(rank){
  });
 }
 
-function setEntry(entry,ecomment){
- var entryid=entry.attr("data-id");
- var entrynum=entry.val();
- var ecmnt=ecomment.val();
- console.log(entryid +" "+entrynum+" "+ecmnt);
- var d={"id":entryid,"fld001":entrynum,"ecomment":ecmnt};
+function setEntry(entryid,entry,ecomment){
+ var d={"id":entryid,"fld001":entry,"ecomment":ecomment};
+ console.log(d);
  $.ajax({
   url:"php/htmlSetEntry.php",
   data:d,
   dataType:"html",
-  type:"get",
   success:function(html){
    console.log(html);
   },
@@ -1049,9 +1079,75 @@ function setEntry(entry,ecomment){
    $("div.msgdiv").text(XMLHttpRequest.responseText);
    return false;
   }
-  
  });
 }
+
+function delEntry(rank,entryid){
+ if(! confirm("削除しますか?")) return false;
+ var d={"rank":rank,"id":entryid};
+ console.log(d);
+ $.ajax({
+  url:"php/htmlDelEntry.php",
+  data:d,
+  dataType:"html",
+  success:function(html){
+   console.log(html);
+   console.log(d);
+   showEntryList(rank);
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+
+}
+
+function setRankList(rank,fld000){
+ if(rank==0){
+  console.log("Rankが0");
+  return false;
+ }
+
+ if(! fld000.match(/^[0-9]+$/)){
+  console.log("物件番号数字以外");
+  return false;
+ }
+
+ var d={"rank":rank,"fld000":fld000};
+ $.ajax({
+  url: "php/htmlSetRankList.php",
+  type: 'get',
+  data:d,
+  dataType: 'html',
+  complete: function(){},
+  success: function(html) {
+   $("div.diventrylist").empty()
+                        .append(html);
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+  }//error
+ });
+}
+
+function chkdate(hiduke){
+ var h=hiduke.match(/^(20[0-9]{2})[\/-]?([0-1]?[0-9]{1})[\/-]?([0-3]?[0-9]{1})$/);
+ if(!h){
+  console.log("日付不正");
+  return false;
+ }
+ else{
+  var newdate=new Date(h[1],h[2]-1,h[3]);
+  if(newdate.getFullYear()!=h[1]||newdate.getMonth()+1!=h[2]||newdate.getDate()!=h[3]){
+  console.log("日付不正");
+  return false;
+  }
+ }
+ return true;
+}
+
  </script>
  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
  <script>

@@ -51,6 +51,7 @@ define("BLACKLIST","blacklist");
 define("CHECKLIST","checklist");
 define("RANK","rank");
 define("ENTRY","entry");
+define("BCOMMENT","bcomment");
 //---------------------------------------------------//
 // テーブル列名定数
 //---------------------------------------------------//
@@ -371,6 +372,14 @@ $TABLES=array(
   ,"fld001" =>array("type"=>" int"     , "null"=>" not null", "default"=>"0", "local"=>"表示順","index"=>"3")
   ,"ecomment"=>array("type"=>" varchar", "null"=>" not null", "default"=>"''", "local"=>"コメント","index"=>"4")
   )//ENTRY
+ ,BCOMMENT=>array(
+   "fld000" =>array(	"type"=>" varchar",	"null"=>" not null",	"default"=>"''",	"local"=>"物件番号",	"index"=>"1")
+  ,"fld001" =>array(	"type"=>" varchar",	"null"=>" not null",	"default"=>"''",	"local"=>"その他設備",	"index"=>"0")
+  ,"fld002" =>array(	"type"=>" varchar",	"null"=>" not null",	"default"=>"''",	"local"=>"物件コメント",	"index"=>"0")
+  ,"fld003" =>array(	"type"=>" varchar",	"null"=>" not null",	"default"=>"''",	"local"=>"コメント3",	"index"=>"0")
+  ,"fld004" =>array(	"type"=>" varchar",	"null"=>" not null",	"default"=>"''",	"local"=>"コメント4",	"index"=>"0")
+  ,"fld005" =>array(	"type"=>" varchar",	"null"=>" not null",	"default"=>"''",	"local"=>"コメント5",	"index"=>"0")
+ )
 );//$TABLES
 
 $TABLES[BLACKLIST]=$TABLES[RAINS];

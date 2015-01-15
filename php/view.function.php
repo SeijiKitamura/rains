@@ -8,6 +8,35 @@
 ----------------------------------------------------- */
 require_once("dset.class.php");
 
+function viewShortData($where=null,$order=null){
+ try{
+  $mname="viewShortData(view.function.php)";
+  $c="start ".$mname;wLog($c);
+
+  $db=new DSET();
+
+  if($where) $db->where=$where;
+  if($order) $db->order=$order;
+  else{
+   $db->order="t.fld001,t.fld002,t.fld003,t.fld017,t.fld018,t.fld019,t.fld025,t.fld026,t.fld027,t.fld068,t.fld088,t.fld054";
+  }
+  
+  //Rainsテーブルからデータ抽出
+  $db->dsetRains();
+  
+  //Rainsサブデータを反映
+  $db->dsetRainsFld();
+  
+  //物件種別カウント
+  $db->dsetFldCount();
+  $c="end ".$mname;wLog($c);
+  return $db->r;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+ }
+}
+
 function viewRainsData($where=null,$order=null){
  try{
   $mname="viewRainsData(view.function.php)";
@@ -47,6 +76,10 @@ function viewRainsData($where=null,$order=null){
 
   //最寄駅カウント
   $db->dsetStationCount();
+
+  //ランキングリスト
+  $db->dsetRank();
+
 
   $c="end ".$mname;wLog($c);
   return $db->r;
@@ -208,7 +241,7 @@ function viewBlackList($where=null){
 
   //最寄駅カウント
   $db->dsetStationCount();
-
+  
   $c="end ".$mname;wLog($c);
   return $db->r;
  }
@@ -299,6 +332,23 @@ function viewDelRank($data){
  }
 }
 
+function viewEntryList($fld000){
+ try{
+  $mname="viewEntryList(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  if(!preg_match("/^[0-9]+$/",$fld000)){
+   throw new exception("物件番号入力エラー(".$fld000.")");
+  }
+  $db=new DSET();
+  $db->where="t.fld000='".$fld000."'";
+  $c="end ".$mname;wLog($c);
+  return $db->dsetEntry();
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
 function viewEntry($rank){
  try{
   $mname="viewEntry(view.function.php)";
@@ -307,7 +357,7 @@ function viewEntry($rank){
    throw new exception("ランク番号入力エラー(".$rank.")");
   }
   $db=new DSET();
-  $db->where="rank=".$rank;
+  $db->where="t.rank=".$rank;
   $c="end ".$mname;wLog($c);
   return $db->dsetEntry();
  }
@@ -320,10 +370,19 @@ function viewSetEntry($data){
  try{
   $mname="viewSetEntry(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $ary=array( "col"=>$data,
-             "from"=>TABLE_PREFIX.ENTRY,
-             "where"=>"id=".$data["id"]
-            );
+  //ここをfld000とrankにする
+  if($data["id"]){
+   $ary=array( "col"=>$data,
+              "from"=>TABLE_PREFIX.ENTRY,
+              "where"=>"id=".$data["id"]
+             );
+  }
+  else{
+   $ary=array( "col"=>$data,
+              "from"=>TABLE_PREFIX.ENTRY,
+              "where"=>"fld000='".$data["fld000"]."' and rank=".$data["rank"]
+             );
+  }
   $db=new DSET();
   $db->r["data"][]=$ary;
   $db->dsetUpEntry();
@@ -333,4 +392,74 @@ function viewSetEntry($data){
   $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
  }
 }
+
+function viewDelEntry($data){
+ try{
+  $mname="viewDelEntry(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $ary=array("from"=>TABLE_PREFIX.ENTRY,
+             "where"=>"id=".$data["id"]
+            );
+  $db=new DSET();
+  $db->r["data"][]=$ary;
+  $db->dsetDelEntry();
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+function viewBcomment($fld000){
+ try{
+  $mname="viewBcomment(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  if(!preg_match("/^[0-9]+$/",$fld000)){
+   throw new exception("物件番号入力エラー(".$fld000.")");
+  }
+  $db=new DSET();
+  $db->where="fld000='".$fld000."'";
+  $c="end ".$mname;wLog($c);
+  return $db->dsetBcomment();
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+function viewSetBcomment($data){
+ try{
+  $mname="viewSetBcomment(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $ary=array( "col" =>$data,
+             "from" =>TABLE_PREFIX.BCOMMENT,
+             "where"=>"fld000='".$data["fld000"]."'" 
+            );
+  $db=new DSET();
+  $db->r["data"][]=$ary;
+  $db->dsetUpdate();
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+function viewDelBcomment($data){
+ try{
+  $mname="viewDelBcomment(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $ary=array("from"=>TABLE_PREFIX.BCOMMENT,
+             "where"=>"fld000='".$data["fld000"]."'"
+            );
+  $db=new DSET();
+  $db->r["data"][]=$ary;
+  $db->dsetDelete();
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
 ?>

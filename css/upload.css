@@ -276,9 +276,9 @@ div#map-canvas{
 }
 
 div.divdetail{
- float:right;
- width:40%;
- margin:1% 15% 0 0;
+ float:left;
+ width:100%;
+ margin:1% 0 0 0;
 
 }
 
@@ -349,24 +349,32 @@ a.csvbutton{
 
 div.divrankentry{
  margin:1%;
- width:40%;
+ width:90%;
  float:left;
 }
 
-dl.dl_rank dd input[name=rank],
-dl.dl_rank dd input[name=startday],
-dl.dl_rank dd input[name=endday]
-{
- width:20%;
+ul.ul_rank li{
+  width:100%;
 }
-dl.dl_rank dd input[name=rankname],
-dl.dl_rank dd input[name=rcomment]
+
+ul.ul_rank li span input,
+ul.ul_entry li span input 
 {
- width:70%;
+  width:90%;
+  height:0.9em;
+}
+
+span.titlecolor{
+  color:#FFFFFF;
+  background-color:#66CDAA;
+  border:1px solid #006400;
+}
+span.bodercolor{
+  border:1px solid #DCDCDC;
 }
 div.diventry{
  margin:1%;
- width:50%;
+ width:90%;
  float:left;
 }
 
@@ -384,6 +392,7 @@ span.spn_5{
  float:left;
  overflow:hidden;
  height:1.2em;
+ text-align:center;
 }
 
 span.spn_10{
@@ -392,6 +401,7 @@ span.spn_10{
  float:left;
  overflow:hidden;
  height:1.2em;
+ text-align:center;
 }
 
 span.spn_15{
@@ -400,8 +410,21 @@ span.spn_15{
  float:left;
  overflow:hidden;
  height:1.2em;
+ text-align:center;
 }
 
+span.spn_20{
+ display:block;
+ width:20em;
+ float:left;
+ overflow:hidden;
+ height:1.2em;
+ text-align:center;
+}
+
+span.boxborder{
+ border:solid 1px #DCDCDC;
+}
 input[name=inprank]{
  width:80%;
  float:left;
@@ -410,4 +433,41 @@ input[name=inprank]{
 
 span.smallfont{
  font-size:0.8em;
+}
+
+dl.dl_indivi,
+dl.dl_room,
+dl.dl_member, 
+dl.dl_price 
+{
+ width:100%;
+ margin:0 1em;
+}
+
+div.divdetail{
+ width:40%;
+ float:left;
+}
+
+div.divcomment{
+ width:40%;
+ float:left;
+ margin:1%;
+ padding:0 2%;
+}
+
+div.diventrylist{
+ width:40%;
+ float:left;
+ margin:1%;
+ padding:0 2%;
+}
+textarea[name=txt_setubi]{
+ resize:none;
+ min-width:90%;
+ min-height:10em;
+}
+
+input[name=inp_bcomment]{
+ width:90%;
 }
