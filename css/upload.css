@@ -249,24 +249,48 @@ dd{
 }
 
 div.imglist{
- float:left;
  width:40%;
- height:700px;
+ height:350px;
  overflow:scroll;
  border:1px solid #DCDCDC;
  margin:1%;
+ float:left;
+}
+
+div.divoutsite{
+ width:50%;
+ height:700px;
+ border:1px solid #DCDCDC;
+ margin:1%;
+ padding:1%;
+ float:right;
+ overflow:scroll;
+}
+
+div#map-canvas{
+ width:40%;
+ height:300px;
+ border:1px solid #DCDCDC;
+ margin:1%;
+ float:left;
 }
 
 div.divdetail{
  float:left;
- width:40%;
- margin:1%;
+ width:100%;
+ margin:1% 0 0 0;
+
 }
 
 a.a_upload,
 a.a_delimg,
 a.a_back,
-a.a_outdata
+a.a_outdata,
+a.a_outsite,
+a.a_close,
+a.a_get,
+a.a_rankdel,
+a.a_rankentry
 {
  float:left;
  display:block;
@@ -280,6 +304,12 @@ a.a_outdata
  border-radius:10px;
  -webkit-border-radius:10px;
  -moz-border-radius:10px;
+ margin:0.5em;
+}
+
+label.outsitelabel,
+input#outsiteurl{
+ float:left;
  margin:0.5em;
 }
 
@@ -317,3 +347,127 @@ a.csvbutton{
  float:left;
 }
 
+div.divrankentry{
+ margin:1%;
+ width:90%;
+ float:left;
+}
+
+ul.ul_rank li{
+  width:100%;
+}
+
+ul.ul_rank li span input,
+ul.ul_entry li span input 
+{
+  width:90%;
+  height:0.9em;
+}
+
+span.titlecolor{
+  color:#FFFFFF;
+  background-color:#66CDAA;
+  border:1px solid #006400;
+}
+span.bodercolor{
+  border:1px solid #DCDCDC;
+}
+div.diventry{
+ margin:1%;
+ width:90%;
+ float:left;
+}
+
+span.spn_3{
+ display:block;
+ width:3em;
+ float:left;
+ overflow:hidden;
+ height:1.2em;
+}
+
+span.spn_5{
+ display:block;
+ width:5em;
+ float:left;
+ overflow:hidden;
+ height:1.2em;
+ text-align:center;
+}
+
+span.spn_10{
+ display:block;
+ width:10em;
+ float:left;
+ overflow:hidden;
+ height:1.2em;
+ text-align:center;
+}
+
+span.spn_15{
+ display:block;
+ width:15em;
+ float:left;
+ overflow:hidden;
+ height:1.2em;
+ text-align:center;
+}
+
+span.spn_20{
+ display:block;
+ width:20em;
+ float:left;
+ overflow:hidden;
+ height:1.2em;
+ text-align:center;
+}
+
+span.boxborder{
+ border:solid 1px #DCDCDC;
+}
+input[name=inprank]{
+ width:80%;
+ float:left;
+ height:0.8em;
+}
+
+span.smallfont{
+ font-size:0.8em;
+}
+
+dl.dl_indivi,
+dl.dl_room,
+dl.dl_member, 
+dl.dl_price 
+{
+ width:100%;
+ margin:0 1em;
+}
+
+div.divdetail{
+ width:40%;
+ float:left;
+}
+
+div.divcomment{
+ width:40%;
+ float:left;
+ margin:1%;
+ padding:0 2%;
+}
+
+div.diventrylist{
+ width:40%;
+ float:left;
+ margin:1%;
+ padding:0 2%;
+}
+textarea[name=txt_setubi]{
+ resize:none;
+ min-width:90%;
+ min-height:10em;
+}
+
+input[name=inp_bcomment]{
+ width:90%;
+}

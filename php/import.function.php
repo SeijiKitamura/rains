@@ -311,7 +311,6 @@ function impImg2Dir($files,$post){
   $c="error:".$mname.$e->getMessage();wLog($c);
   echo $c;
  }
-
 }
 
 function csv2HTMLTable($csvarray){

@@ -8,29 +8,27 @@
 ----------------------------------------------------- */
 
 require_once("view.function.php");
+//require_once("simple_html_dom.php");
 
 function partsRainsList($data){
  try{
-  $mname="partsRainsList(view.function.php) ";
+  $mname="partsRainsList(parts.function.php) ";
   $c="start ".$mname;wLog($c);
   $html="";
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
 function partsRainsTable($data){
  try{
-  $mname="partsRainsTable(view.function.php) ";
+  $mname="partsRainsTable(parts.function.php) ";
   $c="start ".$mname;wLog($c);
   $html="";
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
   
   $fld="";
@@ -62,14 +60,18 @@ function partsRainsTable($data){
    $html.="<div class='div_5'>".$val["_fld002"]."</div>";
    $html.="<div class='div_5'>".$val["_fld003"]."</div>";
    $html.="</label>";
+   $html.="<a class='a_detail' href='#'>";
    $html.="<div class='div_15 detail'>".$val["fld021"].$val["fld022"]."&nbsp;</div>";
    $html.="<div class='div_15 detail'>".$val["fld018"].$val["fld019"].$val["fld020"]."</div>";
+   $html.="<div class='div_5 text-right'>".$val["fld180"].$val["_fld179"]."</div>";
    $html.="<div class='div_5 text-right'>".$val["fld068"].$val["fld088"]."</div>";
    $html.="<div class='div_10 text-right'>".number_format($val["fld054"])."</div>";
 
    $html.="<div class='div_5 text-right'>".number_format($val["fld137"])."</div>";
-   $html.="<div class='div_15 paddingleft'>".$val["fld004"]."</div>";
-   $html.="<div class='div_15'>".$val["fld005"]."</div>";
+   $html.="<div class='div_10 paddingleft'>".$val["fld004"]."</div>";
+   $html.="<div class='div_10'>".$val["fld005"]."</div>";
+   $html.="<div class='div_10 text-right'>".$val["fld011"]."</div>";
+   $html.="</a>";
    $html.="<div class='clr'></div>";
    $html.="</div>";//div class='datarow'
    $html.="</li>";
@@ -81,15 +83,13 @@ function partsRainsTable($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
 function partsRainsTest($sql){
  try{
-  $mname="partsRainsTest(view.function.php) ";
+  $mname="partsRainsTest(parts.function.php) ";
   $c="start ".$mname;wLog($c);
   $d=array();
 
@@ -103,21 +103,18 @@ function partsRainsTest($sql){
   partsRainsTable($result["data"]);
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
 //たぶんボツ
 function partsArea($data){
  try{
-  $mname="partsArea(view.function.php) ";
+  $mname="partsArea(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $c=$mname."データ数カウント開始";wLog($c);
@@ -181,47 +178,37 @@ function partsArea($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
 function partsNewList($data){
  try{
-  $mname="partsRainsList(view.function.php) ";
+  $mname="partsRainsList(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
   $html.="<ul id=ul_area>";
-  $html.="<li class='allcnt'>すべて(".$data["all"].")</li>";
-  $html.="<li class='newdata'>新規(".$data["newdata"].")</li>";
-  $html.="<li class='noimg'>画像なし(".$data["noimg"].")</li>";
-  $html.="<li class='blacklist'>非表示(".$data["blacklist"].")</li>";
   $html.="</ul>";//ul id=ul_area
   $c="end ".$mname;wLog($c);
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
   
 function partsFldCount($data){
  try{
-  $mname="partsFldCount(view.function.php) ";
+  $mname="partsFldCount(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
@@ -245,20 +232,17 @@ function partsFldCount($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
 function partsMadoriCount($data){
  try{
-  $mname="partsMadoriCount(view.function.php) ";
+  $mname="partsMadoriCount(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
@@ -277,20 +261,17 @@ function partsMadoriCount($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
 function partsStationCount($data){
  try{
-  $mname="partsStationCount(view.function.php) ";
+  $mname="partsStationCount(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
@@ -309,20 +290,17 @@ function partsStationCount($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
 function partsIndivi($data){
  try{
-  $mname="partsIndiv(view.function.php) ";
+  $mname="partsIndiv(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
@@ -333,31 +311,50 @@ function partsIndivi($data){
    $html.="<dt>物件番号</dt>";
    $html.="<dd>:".$val["fld000"]."</dd>";
    $html.="<dt>物件名</dt>";
-   $html.="<dd>:".$val["fld021"]." ".$val["fld022"]."</dd>";
+   $html.="<dd>:".$val["fld021"]." ".$val["fld022"];
+   if($val["fld021"]){
+    $html.="<a href='https://www.google.co.jp/search?hl=ja&source=hp&q=".urlencode($val["fld021"])."' target='_blank'>【検索】</a>";
+   }
+   $html.="</dd>";
    $html.="<dt>住所</dt>";
-   $html.="<dd>:".$val["fld017"]." ".$val["fld018"].$val["fld019"].$val["fld020"]."</dd>";
+
+   $html.="<dd id='startpoint'";
+   if(is_array($val["latlng"]) ||count($val["latlng"])){
+    $html.=" data-lat='".$val["latlng"]["startlat"]."' ";
+    $html.=" data-lng='".$val["latlng"]["startlng"]."' >";
+   }
+   else{
+    $html.=">";
+   }
+   $html.=":".$val["fld017"]." ".$val["fld018"].$val["fld019"].$val["fld020"]."</dd>";
+
    $html.="<dt>最寄駅</dt>";
-   $html.="<dd>:".$val["fld026"]."駅 (".$val["fld025"].") 徒歩".$val["fld027"]."分</dd>";
+   $html.="<dd id='endpoint'";
+   if(is_array($val["latlng"]) ||count($val["latlng"])){
+    $html.=" data-lat='".$val["latlng"]["endlat"]."' ";
+    $html.=" data-lng='".$val["latlng"]["endlng"]."' >";
+   }
+   else{
+    $html.=">";
+   }
+   $html.=":".$val["fld026"]."駅 (".$val["fld025"].") 徒歩".$val["fld027"]."分</dd>";
 
    $html.="</dl>";
   }
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
 function partsPrice($data){
  try{
-  $mname="partsPrice(view.function.php) ";
+  $mname="partsPrice(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
@@ -404,7 +401,24 @@ function partsPrice($data){
    $html.="</dd>";
 
    $html.="<dt>その他</dt>";
-   $html.="<dd>:相談しながら追加していく</dd>";
+   $html.="<dd>";
+   if($val["fld071"] || $val["fld072"] ||$val["fld073"]){
+    $html.=" 権利金:";
+    if($val["fld071"]) $html.=number_format($val["fld071"])."円";
+    if($val["fld072"]) $html.="(消費税".number_format($val["fld072"])."円)";
+    if($val["fld073"]) $html.=$val["fld071"]."ヶ月";
+   }
+   if($val["fld123"]) $html.=" 造作譲渡金:".number_format($val["fld123"])."円";
+   if($val["fld124"]) $html.=" 定借権利金:".number_format($val["fld124"])."円";
+   if($val["fld125"]) $html.=" 定借保証金:".number_format($val["fld125"])."円";
+   if($val["fld126"]) $html.=" 定借敷金:".number_format($val["fld126"])."円";
+   if($val["fld139"]) $html.=" 修繕積立金:".number_format($val["fld139"])."円";
+   if($val["fld140"]) $html.=" 共益費:".number_format($val["fld140"])."円";
+   if($val["fld141"]) $html.=" 共益費(消費税):".number_format($val["fld141"])."円";
+   if($val["fld142"]) $html.=" 雑費:".number_format($val["fld142"])."円";
+   if($val["fld143"]) $html.=" 雑費(消費税):".number_format($val["fld143"])."円";
+
+   $html.="</dd>";
    $html.="</dl>";
 
    $html.="</dl>";
@@ -412,25 +426,22 @@ function partsPrice($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
 function partsRoomType($data){
  try{
-  $mname="partsRoomType(view.function.php) ";
+  $mname="partsRoomType(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
   foreach($data as $key=>$val){
-   $html.="<dl class='dl_roomt' data-fld000='".$val["fld000"]."'>";
+   $html.="<dl class='dl_room' data-fld000='".$val["fld000"]."'>";
    $html.="<dt>間取り</dt>";
    $html.="<dd>:".$val["fld180"].$val["_fld179"]."</dd>";
 
@@ -491,20 +502,17 @@ function partsRoomType($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
 function partsMember($data){
  try{
-  $mname="partsMember(view.function.php) ";
+  $mname="partsMember(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
 
   $html="";
@@ -526,20 +534,17 @@ function partsMember($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 
 function partsNavi($data,$edit=null){
  try{
-  $mname="partsNavi(view.function.php) ";
+  $mname="partsNavi(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
   $html="";
   foreach($data as $key=>$val){
@@ -549,6 +554,8 @@ function partsNavi($data,$edit=null){
     $html.="<li><a class='a_upload' href='#'>画像送信</a>";
     $html.="<input name='uploadimg' type='file' value='画像登録' style='display:none;' data-fld000='".$val["fld000"]."' multiple></li>";
     $html.="<li><a class='a_delimg' href='#' data-fld000='".$val["fld000"]."'>画像全削除</a></li>";
+    $html.="<li><a class='a_outsite' href='#'>画像取り込み</a></li>";
+    $html.="<li><input name='outsite' type='text' value='' style='display:none;' data-fld000='".$val["fld000"]."' multiple></li>";
    }
    $html.="</ul>";
    $html.="<div class='clr'></div>";
@@ -556,21 +563,18 @@ function partsNavi($data,$edit=null){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
  
 }
 
 function partsImage($data,$edit=null){
  try{
-  $mname="partsImage(view.function.php) ";
+  $mname="partsImage(parts.function.php) ";
   $c="start ".$mname;wLog($c);
 
   if(! isset($data)||! is_array($data)||! count($data)){
-   $c="error:".mname."データがありません";wLog($c);
-   throw new exception($c);
+   throw new exception("データがありません");wLog($c);
   }
   $html="";
   foreach($data as $key=>$val){
@@ -592,9 +596,7 @@ function partsImage($data,$edit=null){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c); echo $c;
  }
 }
 
@@ -607,7 +609,7 @@ function partsLapDetail($data){
 
 function partsSetImg($post,$fld000){
  try{
-  $mname="partsSetImg(view.function.php) ";
+  $mname="partsSetImg(parts.function.php) ";
   $c="start ".$mname;wLog($c);
   
   //アップロードチェック
@@ -649,13 +651,478 @@ function partsSetImg($post,$fld000){
   if(! move_uploaded_file($moto,$filename)){
    throw new exception("ファイルコピーに失敗しました。");
   }
-  
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);
-  echo $c;
-  throw $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
 
+function partsSetImgFromSite($imgurl,$fld000){
+ try{
+  $mname="partsSetImgFromSite(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+
+  $html="";
+
+  //物件番号数字チェック
+  if(!preg_match("/^[0-9]+$/",$fld000)){
+   throw new exception ("物件番号が数字以外です。(".$fld000.")");
+  }
+
+  //物件番号DB存在チェック
+  if(! viewDetail($fld000)){
+   throw new exception ("物件未登録です。(".$fld000.")");
+  }
+
+  //画像ディレクトリセット
+  $imgdir=realpath("..").IMG."/".$fld000;
+
+  //ディレクトリ存在チェック
+  if(!file_exists($imgdir)){
+   if(! mkdir($imgdir)){
+    throw new exception("フォルダ作成に失敗しました。(".$fld000.")");
+   }
+  }
+
+  $c="notice:".$mname." 画像URL(".$imgurl.")";wLog($c);
+  $imgurl=urldecode($imgurl);
+  $c="notice:".$mname." 画像URLデコード(".$imgurl.")";wLog($c);
+
+  //ファイル名ゲット
+  $filename=basename($imgurl);
+  $c="notice:".$mname."画像ファイル名ゲット".$filename;wLog($c);
+  $filename=urldecode($filename);
+  $c="notice:".$mname."画像ファイル名デコード".$filename;wLog($c);
+  $pattern="/[!\"#$%&'()=|`{}+*,<>\/;:]/"; 
+  $filename=preg_replace($pattern,"_",$filename);
+  $c="notice:".$mname."画像ファイル名変換".$filename;wLog($c);
+  
+  //ファイルダウンロード
+  $data=file_get_contents($imgurl);
+  
+  //ファイル保存
+  if(file_put_contents($imgdir."/".$filename,$data)===FALSE){
+   $c="error:".$mname."画像ファイルの保存に失敗(".$imgurl.")";wLog($c);
+   throw new exception($c);
+  }
+  $c="notice:".$mname."画像ファイルを保存しました(".$imgdir."/".$filename.")";wLog($c);
+  
+  //画像ファイルチェック
+  if(!exif_imagetype($imgdir."/".$filename)){
+   unlink($imgdir."/".$filename);
+   $c="error:".$mname."画像ファイルではありません(".$val.")";wLog($c);
+   throw new exception($c);
+  }
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsImgPathFromSite($pageurl){
+ $mname="partsImgPathFromSite(parts.function.php) ";
+ try{
+  $c="start ".$mname;wLog($c);
+
+  $blacklist="/www\.townhousing\.co\.jp|suumo\.jp|www\.homes\.co\.jp/";
+
+  if(! $purl=parse_url($pageurl)){
+   throw new exception("URLが認識できません(".$pageurl.")");
+  }
+
+  $html=@file_get_contents($pageurl);
+  if($html ===FALSE){
+   $c="error:".$mname." ページが取得できません(".$pageurl.")";wLog($c);
+   throw new exception ($c);
+  }
+  
+  //まずはimgタグだけ抜き出す
+  $pattern="/<img.*?>/s";
+  preg_match_all($pattern,$html,$match);
+  
+  $url=array();
+  foreach($match[0] as $key=>$val){
+   //imgタグを除く
+   $data=preg_replace("/^<img|\/?>$/","",$val);
+   
+   //'"を削除
+   $data=preg_replace("/\'|\"/","",$data);
+   
+  //属性と値に分割
+   $pattern="/([a-zA-Z]+)\s*=\s*[\'\"]?(.+?)[\'\"]?\s+/";
+   preg_match_all($pattern,$val,$attr);
+  
+  //配列へ格納
+   $col=array();
+   foreach($data as $key1=>$val1){
+    if(! $val1) continue;
+    preg_match("/^([a-zA-Z]+)=(.+)/",$val1,$m);
+    if(! $m[1]) continue;
+    $col[$m[1]]=$m[2];
+   }
+   
+  //src属性なければスキップ
+   if(!$col["src"]){
+    $c="notice:".$mname." src属性がありません。処理をスキップします(".$val.")";wLog($c);
+    continue;
+   }
+   
+  //src属性をバックアップ
+   $col["_src"]=$col["src"];
+  
+  //画像ファイルパスチェック
+   if(! preg_match("/^http/",$col["src"])){
+    // 「//」から始まっている
+    if(preg_match("/^\/\//",$col["src"])){
+     $c="notice:".$mname." 画像パスが//で始まっている".$col["src"];wLog($c);
+     $col["src"]=$purl["scheme"]."://".$col["src"];
+    }
+    // 「/」から始まっている
+    elseif(preg_match("/^\//",$col["src"])){
+     $c="notice:".$mname." 画像パスが/で始まっている".$col["src"];wLog($c);
+     $col["src"]=$purl["scheme"]."://".$purl["host"].$col["src"];
+    }
+    
+    // 「/」から始まっていない
+    elseif(preg_match("/^[^\/]/",$col["src"])){
+     $c="notice:".$mname." 画像パスが相対パス".$col["src"];wLog($c);
+     $col["src"]=$pageurl.$col["src"];
+    }
+   }
+  
+  //タウンハウジング用カスタマイズ(name属性有効でhttpから始まる場合)
+   if($col["name"] && preg_match("/^http/",$col["name"])){
+    $c="notice:".$mname." タウンハウジング用パス変換".$col["src"];wLog($c);
+    $col["src"]=$col["name"];
+   }
+  
+  //suumo用カスタマイズ(w=452へ)
+   if(preg_match("/img01\.suumo\.com/",$col["src"])){
+    $c="notice:".$mname."suumo用パス変換".$col["src"];wLog($c);
+    $col["src"]=preg_replace("/w=[0-9]+/","w=452",$col["src"]);
+   }
+  
+  //suumo用カスタマイズ(h=339へ)
+   if(preg_match("/img01\.suumo\.com/",$col["src"])){
+    $c="notice:".$mname."suumo用パス変換".$col["src"];wLog($c);
+    $col["src"]=preg_replace("/h=[0-9]+/","h=339",$col["src"]);
+   }
+   
+  //homes用カスタマイズ(サイズ指定部分を削除)
+   if(preg_match("/image\.homes\.co\.jp/",$col["src"])){
+    $col["src"]=preg_replace("/&amp;.*$/","",$col["src"]);
+   }
+   
+  //ブラックリスト除外
+   if( preg_match($blacklist,$col["src"])){
+    $c="notice:".$mname."ブラックリスト該当".$col["src"];wLog($c);
+    continue;
+   }
+
+   $c="notice:".$mname."画像パス登録";wLog($c);
+   $url[]=$col;
+  }
+  
+  unset($html);
+  $c="end:".$mname;wLog($c);
+  return $url;
+ }
+ catch(Exception $e){
+  //$html->clear();
+  wLog("error:".$mname.$e->getMessage());
+  echo "err:".$e->getMessage();
+ }
+}
+
+function partsImgListFromSite($data){
+ try{
+  $mname="partsImgListFromSite(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+
+  if(! isset($data)||! is_array($data)||! count($data)){
+   throw new exception("画像データがありません");wLog($c);
+  }
+  $html="";
+  $html.="<ul class='ul_image'>";
+  foreach($data as $key=>$val){
+   $html.="<li>";
+   $html.="<input type='button' value='Pick'>";
+   $html.="<img src='".$val["src"]."'>";
+   $html.="</li>";
+  }
+  $html.="</ul>";
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsImgListDiv($fld000){
+ try{
+  $mname="partsImgListDiv(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(!preg_match("/^[0-9]+$/",$fld000)){
+   throw new exception("物件番号が正しくありません");wLog($c);
+  }
+
+  $html="";
+  $html.="<div class='divoutsite'data-fld000='".$fld000."'>";
+  $html.="<label class='outsitelabel' for='outsiteurl'>外部URL:</label>";
+  $html.="<input type='text' name='outsiteurl' id='outsiteurl'>";
+  $html.="<a class='a_get' href='#'>Get</a>";
+  $html.="<a class='a_close' href='#'>閉じる</a>";
+  $html.="</div>";
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsRankEntry(){
+ try{
+  $mname="partsRankEntry(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  $html="";
+  $html.=<<<EOF
+<div class='divrankentry'>
+ <ul class='ul_rankentry'>
+  <li><span class='spn_5 titlecolor'>番号</span>
+      <span class='spn_15 titlecolor'>タイトル</span>
+      <span class='spn_15 titlecolor'>コメント</span>
+      <span class='spn_5 titlecolor'>開始日</span>
+      <span class='spn_5 titlecolor'>終了日</span>
+      <span class='spn_5 titlecolor'>表示</span>
+      <div class='clr'></div>
+  </li>
+
+  <li><span class='spn_5  bodercolor' ><input type='text' name='rank' value=''></span>
+      <span class='spn_15 bodercolor'><input type='text' name='rankname' value=''></span>
+      <span class='spn_15 bodercolor'><input type='text' name='rcomment' value=''></span>
+      <span class='spn_5 bodercolor'><input type='text' name='startday' value=''></span>
+      <span class='spn_5 bodercolor'><input type='text' name='endday'   value=''></span>
+      <span class='spn_5 bodercolor'>
+       <select name='flg'>
+        <option value='1'>する</option>
+        <option value='0'>しない</option>
+       </select>
+      </span>
+    
+      <div class='clr'></div>
+  </li>
+
+  <li><a class='a_rankdel'   href='#'>削除</a>
+      <a class='a_rankentry' href='#'>登録</a>
+  </li>
+ </ul>
+</div>
+EOF;
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsRankList($data){
+ try{
+  $mname="partsRankList(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+
+  $html="";
+  $html.="<div class='divrankentry'>";
+  $html.="<ul class='ul_rank'>";
+  $html.="<li><span class='spn_5 titlecolor'>番号</span>";
+  $html.="<span class='spn_15 titlecolor'>タイトル</span>";
+  $html.="<span class='spn_15 titlecolor'>コメント</span>";
+  $html.="<span class='spn_5 titlecolor'>開始日</span>";
+  $html.="<span class='spn_5 titlecolor'>終了日</span>";
+  $html.="<span class='spn_5 titlecolor'>表示</span>";
+  $html.="<div class='clr'></div>";
+  $html.="</li>";
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="notice:".$mname."ランクデータがありません";wLog($c);
+   return false;
+  }
+  foreach($data as $key=>$val){
+   $html.="<li>";
+   $html.="<span class='spn_5 boxborder'>".$val["rank"]."</span>";
+   $html.="<span class='spn_15 boxborder'>".$val["rankname"]."</span>";
+   $html.="<span class='spn_15 boxborder'>".$val["rcomment"]."</span>";
+   $html.="<span class='spn_5 boxborder'>".$val["startday"]."</span>";
+   $html.="<span class='spn_5 boxborder'>".$val["endday"]."</span>";
+   $html.="<span class='spn_5 boxborder'>";
+   if($val["flg"]==1) $html.="する";
+   elseif($val["flg"]==0) $html.="しない";
+   $html.="</span>";
+   $html.="<div class='clr'></div>";
+   $html.="</li>";
+  }
+  $html.="</ul></div>";
+
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsRankListShort($data){
+ try{
+  $mname="partsRankListShort(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+
+  $html="";
+  $html.="<div class='divshortrank'>";
+  $html.="<ul class='ul_shortrank'>";
+  $html.="<li><span class='spn_5 titlecolor'>番号</span>";
+  $html.="<span class='spn_15 titlecolor'>タイトル</span>";
+  $html.="<span class='spn_5 titlecolor'>開始日</span>";
+  $html.="<span class='spn_5 titlecolor'>終了日</span>";
+  $html.="<div class='clr'></div>";
+  $html.="</li>";
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="notice:".$mname."ランクデータがありません";wLog($c);
+   return false;
+  }
+  foreach($data as $key=>$val){
+   $html.="<li>";
+   $html.="<span class='spn_5 boxborder'>".$val["rank"]."</span>";
+   $html.="<span class='spn_15 boxborder'>".$val["rankname"]."</span>";
+   $html.="<span class='spn_5 boxborder'>".$val["startday"]."</span>";
+   $html.="<span class='spn_5 boxborder'>".$val["endday"]."</span>";
+   $html.="<div class='clr'></div>";
+   $html.="</li>";
+  }
+  $html.="</ul></div>";
+
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsEntryList($data){
+ try{
+  $mname="partsEntryList(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="エントリーデータがありません";wLog($c);
+   return false;
+  }
+
+  $html="";
+  $html.="<h4>ランキング</h4>";
+  $html.="<ul>";
+  $html.="<li><span class='spn_5 titlecolor'>番号</span>";
+  $html.="<span class='spn_15 titlecolor'>タイトル</span>";
+  //$html.="<span class='spn_5 titlecolor'>開始日</span>";
+  //$html.="<span class='spn_5 titlecolor'>終了日</span>";
+  $html.="<div class='clr'></div>";
+  $html.="</li>";
+  
+  foreach($data as $key=>$val){
+   $html.="<li>";
+   $html.="<span class='spn_5 boxborder'>".$val["rank"]."</span>";
+   $html.="<span class='spn_15 boxborder'>".$val["rankname"]."</span>";
+  // $html.="<span class='spn_5 boxborder'>".$val["startday"]."</span>";
+  // $html.="<span class='spn_5 boxborder'>".$val["endday"]."</span>";
+   $html.="<div class='clr'></div>";
+   $html.="</li>";
+  }
+  $html.="</ul>";
+
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsEntry($data){
+ try{
+  $mname="partsEntry(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="エントリーデータがありません";wLog($c);
+   return false;
+  }
+  $html="";
+  $html.="<h3>ランキング詳細</h3>";
+  $html.="<a class='a_delall' href='#'>全削除</a>";
+  $html.="<ul class='ul_entry'>";
+  $html.="<li>";
+  $html.="<span class='spn_5  titlecolor'>削除</span>";
+  $html.="<span class='spn_5  titlecolor'>順位</span>";
+  $html.="<span class='spn_15 titlecolor'>物件名</span>";
+  $html.="<span class='spn_5  titlecolor'>価格</span>";
+  $html.="<span class='spn_20 titlecolor'>コメント</span>";
+  $html.="<div class='clr'></div>";
+  $html.="</li>";
+  foreach($data as $key=>$val){
+   $html.="<li>";
+   $html.="<span class='spn_5 bodercolor'><a href='#' class='a_entrydel' data-id='".$val["entryid"]."' data-rank='".$val["rank"]."'>削除</a></span>";
+   $html.="<span class='spn_5 bodercolor'><input type='text' value='".$val["entry"]."'";
+   $html.=" data-id='".$val["entryid"]."' name='entry'></span>";
+   $html.="<span class='spn_15 bodercolor'>";
+   if($val["fld021"]){
+    $html.=$val["fld021"].$val["fld022"];
+   }
+   else{
+    $html.=$val["fld018"].$val["fld019"].$val["fld020"];
+   }
+   $html.="</span>";
+   $html.="<span class='spn_5 bodercolor'>";
+   $html.=number_format($val["fld054"]);
+   $html.="</span>";
+   $html.="<span class='spn_20 bodercolor'>";
+   $html.="<input type='text' value='".$val["ecomment"]."' data-id='".$val["entryid"]."' name='ecomment'>";
+   $html.="</span>";
+   $html.="<div class='clr'></div>";
+   $html.="</li>";
+  }
+  $html.="</ul>";
+
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function partsComment($data){
+ try{
+  $mname="partsRankList(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="物件データがありません";wLog($c);
+   return false;
+  }
+  $html="";
+  foreach($data["data"] as $key=>$val){
+   $html.="<h4>その他設備</h4>";
+   $html.="<textarea name='txt_setubi' data-fld000='".$val["fld000"]."'>".$val["setubi"]."</textarea>";
+   $html.="<h4>コメント</h4>";
+   $html.="<input name='inp_bcomment' type='text' value='".$val["bcomment"]."' data-fld000='".$val["fld000"]."'>";
+
+   $html.="<h4>ランキング登録</h4>";
+   $html.="<select name='select_rank' data-fld000='".$val["fld000"]."'>";
+   $html.="<option value=0>選択してください</option>";
+   foreach($data["ranklist"] as $key1=>$val1){
+    $html.="<option value='".$val1["rank"]."'";
+    if($val1["rank"]==$val["rank"]) $html.=" selected ";
+    $html.=">";
+    $html.=$val1["rankname"];
+    $html.="</option>";
+   }
+   $html.="</select>";
+  }
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
 ?>

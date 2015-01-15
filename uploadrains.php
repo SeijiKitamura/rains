@@ -1,3 +1,4 @@
+<?php require_once("php/parts.function.php");?>
 <!DOCTYPE html>
 <html>
  <head>
@@ -13,11 +14,14 @@
  </head>
  <body>
   <div id="wrapper">
+   <a href="index.php"><img src='<?php echo LOGO;?>'></a>
    <h1>Rainsデータ更新画面</h1>
    <ul>
-    <li id="nowdata">表示リスト</li>
-    <li id="blacklist">非表示リスト</li>
-    <li id="dataup">データ更新</li>
+    <li id="nowdata">  <a href="#">表示リスト  </a></li>
+    <li id="blacklist"><a href="#">非表示リスト</a></li>
+    <li id="dataup">   <a href="#">データ更新  </a></li>
+    <li id="rankup">   <a href="#">ランキング  </a></li>
+    <li id="entryup">   <a href="#">エントリー  </a></li>
    </ul>
    <div class="clr"></div>
    <div id="leftside">
@@ -29,27 +33,29 @@
  <script>
 
 $(function(){
- //Cookieリセット
- $.removeCookie("fld000");
- 
  //現在データ表示
  $("li#nowdata").on("click",function(e){
-  $.removeCookie("fld000");
   whiteBlack("reset");
-  showLeftSide();
   $("div#main").empty()
+  showLeftSide();
  });
 
  $("li#blacklist").on("click",function(){
-  $.removeCookie("fld000");
   whiteBlack("black");
-  showLeftSide();
   $("div#main").empty()
+  showLeftSide();
  });
 
  $("li#dataup").on("click",function(){
-  $.removeCookie("fld000");
   dataUpMenu();
+ });
+
+ $("li#rankup").on("click",function(){
+  showRank();
+ });
+
+ $("li#entryup").on("click",function(){
+  showEntry();
  });
 
  $("body").on("mouseup",function(){
@@ -57,10 +63,12 @@ $(function(){
    $("ul#ul_menu li ul").hide();
   }
  });
+ $("div#map-canvas").hide();
 });//$(function()
 
 function showLeftSide(){
  $("div.imglist").empty();
+ $("div#leftside").empty();
  var d={"black":whiteBlack()};
  console.log(d);
  //レフトサイドメニュー表示
@@ -71,8 +79,7 @@ function showLeftSide(){
   data:d,
   complete:function(){},
   success:function(html){
-   $("div#leftside").empty()
-                    .append(html);
+   $("div#leftside").append(html);
    
    //レフトサイドイベントをセット
    leftSideEvent();
@@ -112,7 +119,7 @@ function showMain(html){
  });
  
  //詳細表示イベント
- $("div.detail").on("click",function(){
+ $("a.a_detail").on("click",function(){
   var fld000=$(this).parent().attr("data-fld000");
   showDetail(fld000);
  });
@@ -123,6 +130,7 @@ function showMain(html){
 
  //Cookieを反映
  showCheck();
+
 }
 
 function selectEvent(elem){
@@ -393,7 +401,6 @@ function showDetail(fld000){
  $.ajax({
   url: 'php/htmlGetDetail.php',
   type: 'get',
-  async:false,
   data:d,
   dataType: 'html',
   complete: function(){},
@@ -408,7 +415,11 @@ function showDetail(fld000){
     uploadImg(this);
    });
 
-   $("ul.ul_image li input[type=text]").on("change",function(){
+   $("a.a_outsite").on("click",function(){
+    showOutSite(fld000);
+   });
+
+   $("div.imglist ul.ul_image li input[type=text]").on("change",function(){
     console.log($(this));
     var fld000=$(this).attr("data-fld000");
     var imgid=$(this).attr("data-imgid");
@@ -420,7 +431,7 @@ function showDetail(fld000){
     changeImgNum(fld000,imgid,imgnum);
    });
 
-   $("ul.ul_image li input[type=button]").on("click",function(){
+   $("div.imglist ul.ul_image li input[type=button]").on("click",function(){
     var fld000=$(this).attr("data-fld000");
     var imgid=$(this).attr("data-imgid");
     deleteImg(fld000,imgid);
@@ -429,12 +440,63 @@ function showDetail(fld000){
    $("a.a_delimg").on("click",function(){
     var fld000=$(this).attr("data-fld000");
     deleteImg(fld000,null);
-
    });
 
    $("a.a_back").on("click",function(){
     backPage();
    });
+
+   $("textarea[name=txt_setubi]").on("change",function(){
+    chgSetubi();
+   });
+
+   $("input[name=inp_bcomment]").on("change",function(){
+    chgSetubi();
+   });
+
+   $("select[name=select_rank]").on("change",function(){
+    setRankList($(this).val(),$(this).attr("data-fld000"));
+   });
+
+   initialize();
+   calcRoute();
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+  }//error
+ });
+}
+
+function showImage(fld000){
+ var d={"fld000":fld000};
+ $.ajax({
+  url: 'php/htmlGetImgList.php',
+  type: 'get',
+  data:d,
+  dataType: 'html',
+  complete: function(){},
+  success: function(html) {
+   $("div.imglist").empty()
+                   .append(html);
+
+   $("div.imglist ul.ul_image li input[type=text]").on("change",function(){
+    console.log($(this));
+    var fld000=$(this).attr("data-fld000");
+    var imgid=$(this).attr("data-imgid");
+    var imgnum=$(this).val();
+    if(! imgnum.match(/^[0-9]+$/)){
+     alert("数字を入力してください");
+     return false;
+    }
+    changeImgNum(fld000,imgid,imgnum);
+   });
+
+   $("div.imglist ul.ul_image li input[type=button]").on("click",function(){
+    var fld000=$(this).attr("data-fld000");
+    var imgid=$(this).attr("data-imgid");
+    deleteImg(fld000,imgid);
+   });
+
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);
@@ -460,7 +522,7 @@ function uploadImg(elem){
     dataType: 'html',
     complete: function(){},
     success: function(html) {
-     showDetail(fld000);
+     showImage(fld000);
     },
     error:function(XMLHttpRequest,textStatus,errorThrown){
      console.log(XMLHttpRequest.responseText);
@@ -479,7 +541,7 @@ function changeImgNum(fld000,imgid,imgnum){
   dataType: 'html',
   complete: function(){},
   success: function(html) {
-   showDetail(fld000);
+   showImage(fld000);
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);
@@ -500,7 +562,7 @@ function deleteImg(fld000,imgid){
   dataType: 'html',
   complete: function(){},
   success: function(html) {
-   showDetail(fld000);
+   showImage(fld000);
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);
@@ -533,6 +595,32 @@ function backPage(){
  }
  filterData(obj);
 
+}
+
+function chgSetubi(){
+ var fld000=$("textarea[name=txt_setubi]").attr("data-fld000");
+ var fld001=$("textarea[name=txt_setubi]").val();
+ var fld002=$("input[name=inp_bcomment]").val();
+ var d={"fld000":fld000,"fld001":fld001,"fld002":fld002};
+
+ if(! fld000 || ! fld000.match(/^[0-9]+$/)){
+  console.log("物件番号エラー");
+  return false;
+ }
+
+ $.ajax({
+  url:"php/htmlSetBcomment.php",
+  type:"get",
+  dataType:"html",
+  data:d,
+  complete:function(){},
+  success:function(html){
+   console.log(html);
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+  }
+ });
 }
 
 function dataUpMenu(){
@@ -667,6 +755,433 @@ function resetBlackList(){
   }
  });
 }
+
+function listImgPathFromSite(){
+ var outsiteUrl=$("input[name=outsiteurl]").val();
+ var datafld000=$("div.divoutsite").attr("data-fld000");
+
+ var d={"url":outsiteUrl,
+        "fld000":datafld000};
+
+ $.ajax({
+  url:"php/htmlImgListFromSite.php",
+  type:"get",
+  data:d,
+  dataType:"html",
+  success:function(html){
+   $("div.divoutsite ul.ul_image").remove();
+   $("div.divoutsite").append(html);
+
+   $("div.divoutsite ul li input").on("click",function(){
+    pickImg($(this));
+   });
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function pickImg(elem){
+ var imgurl=$(elem).siblings().attr("src");
+ var fld000=$("div.divoutsite").attr("data-fld000");
+ var d={"fld000":fld000,"imgurl":imgurl};
+
+ $.ajax({
+  url:"php/htmlSetImgFileFromSite.php",
+  type:"get",
+  data:d,
+  dataType:"html",
+  context:elem,
+  success:function(html){
+   $(elem).parent().hide();
+   showImage(fld000);
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function showOutSite(fld000){
+ console.log(fld000);
+ var d={"fld000":fld000};
+ $.ajax({
+  url:"php/htmlImgListDiv.php",
+  type:"get",
+  data:d,
+  dataType:"html",
+  success:function(html){
+   $("div.divoutsite").remove();
+   $("div.imglist").after(html);
+   $("div.divdetail").hide();
+
+   $("a.a_close").on("click",function(){
+    $("div.divoutsite").hide();
+    $("div.divdetail").show();
+   });
+
+   $("a.a_get").on("click",function(){
+    listImgPathFromSite();
+   });
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function showRank(){
+ showRankList();
+}
+
+function showRankList(){
+ $.ajax({
+  url:"php/htmlRankList.php",
+  type:"get",
+  dataType:"html",
+  success:function(html){
+   $("div#main").empty().append(html);
+
+   //ランクイベント
+   $("ul.ul_rank li span").on("click",function(){
+    getRank($(this));
+   });
+
+   //登録イベント
+   $("a.a_rankentry").on("click",function(){
+    setRank();
+   });
+   
+   //削除イベント
+   $("a.a_rankdel").on("click",function(){
+    delRank();
+   });
+
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function getRank(elem){
+ var rank=elem.siblings().eq(0).text();
+ var d={"rank":rank};
+ $.ajax({
+  url:"php/htmlGetRank.php",
+  type:"get",
+  data:d,
+  dataType:"json",
+  context:elem,
+  success:function(json){
+   $.each(json,function(key,val){
+    if(key!="id" && key!="flg" && key!="idate" && key!="cdate"){
+     $("input[name="+key+"]").val(val);
+    }
+    if(key=="flg"){
+     $("select[name=flg]").val(val);
+    }
+   });
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function setRank(){
+ var d={};
+ var sdate;
+ var edate;
+ var chkflg;
+ chkflg=1;
+ 
+ //ランク値チェック
+ d["rank"]=$("input[name=rank]").val();
+ if(! d["rank"].match(/^[0-9]+$/)){
+  consle.log("ランク数字以外");
+  chkflg=0;
+ }
+
+ //タイトル空欄チェック
+ d["rankname"]=$("input[name=rankname]").val();
+ if(! d["rankname"].match(/^.+$/)){
+  console.log("タイトル空欄");
+  chkflg=0;
+ }
+
+ d["rcomment"]=$("input[name=rcomment]").val();
+ 
+ //開始日チェック
+ d["startday"]=$("input[name=startday]").val();
+ if(! chkdate(d["startday"])){
+  chkflg=0;
+ }
+ 
+ //終了日チェック
+ d["endday"]=$("input[name=endday]").val();
+ if(! chkdate(d["endday"])){
+  chkflg=0;
+ }
+
+ //日付比較
+ var sday=Date.parse(d["startday"]);
+ var eday=Date.parse(d["endday"]);
+
+ if(sday>eday){
+  console.log("開始日、終了日比較エラー");
+  chkflg=0;
+ }
+
+ d["flg"]=$("select[name=flg]").val();
+
+ if(! chkflg){
+  alert("入力エラーがあります");
+  return false;
+ }
+ console.log(d);
+
+ if(! confirm("登録しますか?")) return false;
+ $.ajax({
+  url:"php/htmlSetRank.php",
+  data:d,
+  dataType:"html",
+  success:function(html){
+   console.log(html);
+   alert("登録しました");
+   showRankList();
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+
+}
+
+function delRank(){
+ var d={};
+ var chkflg;
+ chkflg=1;
+ //値チェック
+ if(!$("input[name=rank]").val().match(/^[0-9]+$/)){
+  console.log("ランク数字以外");
+  chkflg=0;
+ }
+ d["rank"]=$("input[name=rank]").val();
+
+ if(! chkflg) return false;
+
+ if(! confirm("削除しますか?")) return false;
+ $.ajax({
+  url:"php/htmlDelRank.php",
+  data:d,
+  dataType:"html",
+  success:function(html){
+   console.log(html);
+   alert("削除しました");
+   showRankList();
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function showEntry(){
+ //ランキング一覧表示
+ $.ajax({
+  url:"php/htmlGetEntryList.php",
+  dataType:"html",
+  success:function(html){
+   $("div#main").empty().append(html);
+
+   $("ul.ul_shortrank li span").on("click",function(){
+    var rank=$(this).parent().children().first().text();
+    showEntryList(rank);
+   });
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function showEntryList(rank){
+ console.log(rank);
+ var d={"rank":rank};
+ $.ajax({
+  url:"php/htmlEntry.php",
+  data:d,
+  dataType:"html",
+  success:function(html){
+   $("div.diventry").empty().append(html);
+
+   $("input[name=entry]").on("change",function(){
+    var entryid=$(this).attr("data-id");
+    var entry=$(this).val();
+    var ecomment=$(this).parent().siblings().find("input").val();
+    console.log(entryid+" "+entry +" "+ecomment);
+    setEntry(entryid,entry,ecomment);
+   });
+
+   $("input[name=ecomment]").on("change",function(){
+    var entryid=$(this).attr("data-id");
+    var entry=$(this).parent().siblings().find("input").val();
+    var ecomment=$(this).val();
+    console.log(entryid+" "+entry +" "+ecomment);
+    setEntry(entryid,entry,ecomment);
+   });
+
+   $("a.a_entrydel").on("click",function(){
+    var rank=$(this).attr("data-rank");
+    var id=$(this).attr("data-id");
+    delEntry(rank,id);
+   });
+
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function setEntry(entryid,entry,ecomment){
+ var d={"id":entryid,"fld001":entry,"ecomment":ecomment};
+ console.log(d);
+ $.ajax({
+  url:"php/htmlSetEntry.php",
+  data:d,
+  dataType:"html",
+  success:function(html){
+   console.log(html);
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function delEntry(rank,entryid){
+ if(! confirm("削除しますか?")) return false;
+ var d={"rank":rank,"id":entryid};
+ console.log(d);
+ $.ajax({
+  url:"php/htmlDelEntry.php",
+  data:d,
+  dataType:"html",
+  success:function(html){
+   console.log(html);
+   console.log(d);
+   showEntryList(rank);
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   $("div.msgdiv").text(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+
+}
+
+function setRankList(rank,fld000){
+ if(rank==0){
+  console.log("Rankが0");
+  return false;
+ }
+
+ if(! fld000.match(/^[0-9]+$/)){
+  console.log("物件番号数字以外");
+  return false;
+ }
+
+ var d={"rank":rank,"fld000":fld000};
+ $.ajax({
+  url: "php/htmlSetRankList.php",
+  type: 'get',
+  data:d,
+  dataType: 'html',
+  complete: function(){},
+  success: function(html) {
+   $("div.diventrylist").empty()
+                        .append(html);
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+  }//error
+ });
+}
+
+function chkdate(hiduke){
+ var h=hiduke.match(/^(20[0-9]{2})[\/-]?([0-1]?[0-9]{1})[\/-]?([0-3]?[0-9]{1})$/);
+ if(!h){
+  console.log("日付不正");
+  return false;
+ }
+ else{
+  var newdate=new Date(h[1],h[2]-1,h[3]);
+  if(newdate.getFullYear()!=h[1]||newdate.getMonth()+1!=h[2]||newdate.getDate()!=h[3]){
+  console.log("日付不正");
+  return false;
+  }
+ }
+ return true;
+}
+
+ </script>
+ <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+ <script>
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+var map;
+
+function initialize() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  var chicago = new google.maps.LatLng(35.5839676,139.71252230000005);
+  var mapOptions = {
+    zoom:14,
+    center: chicago
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  directionsDisplay.setMap(map);
+}
+
+function calcRoute() {
+  var start =new google.maps.LatLng($("dd#startpoint").attr("data-lat"),$("dd#startpoint").attr("data-lng"));
+  var end =new google.maps.LatLng($("dd#endpoint").attr("data-lat"),$("dd#endpoint").attr("data-lng"));
+  var request = {
+      origin:start,
+      destination:end,
+      travelMode: google.maps.TravelMode.WALKING
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+//google.maps.event.addDomListener(window, 'load', initialize);
  </script>
 </html>
 
