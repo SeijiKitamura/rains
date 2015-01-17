@@ -133,7 +133,7 @@ function impCsv2SQL($tablename,$csv){
   foreach($csv as $rows=>$row){
    $col=array();
    //1列目が数字以外はスキップ
-   if(! preg_match("/^[0-9]+$/",$row[0])){
+   if($tablename!=FLD && ! preg_match("/^[0-9]+$/",$row[0])){
     $c=$mname."1列目(".$row[0].")が数字以外なのでスキップ";wLog($c);
     continue;
    }
@@ -223,7 +223,7 @@ function impCsv2DB($postfile,$tablename){
   $csv=impCsv2Ary($postfile);
   
   //CSV値チェック
-  if(! impChkCsv($csv)){
+  if($tablename!==FLD && ! impChkCsv($csv)){
    throw new exception("CSVにエラーがあります");
   }
 
@@ -389,6 +389,39 @@ function getCSV($filename){
 
 //CSV読み込み順に配列へ格納
   return $csv;
+ }
+ catch(Exception $e){
+  echo "err:".$e->getMessage();
+ }
+}
+
+function exportData($tablename){
+ try{
+  $db=new DB();
+  $db->select="*";
+  $db->from=TABLE_PREFIX.$tablename;
+  $db->order="id";
+  $data=$db->getArray();
+  if(! isset($data)||! is_array($data) || ! count($data)){
+   throw new exception("データがありません");
+  }
+
+  $filename=dirname(__FILE__)."/..".LOG."/".$tablename.".csv";
+  unlink($filename);
+  foreach($data as $key=>$val){
+   $row="";
+   foreach($val as $key1=>$val1){
+    if($key1=="id") continue;
+    if($key1==IDATE) continue;
+    if($key1==CDATE) continue;
+    if($row) $row.=",";
+    $row.=$val1;
+   }
+   $row.="\n";
+   file_put_contents($filename,$row,FILE_APPEND | LOCK_EX);
+  }
+  echo $filename."にファイルを保存しました";
+  return $filename;
  }
  catch(Exception $e){
   echo "err:".$e->getMessage();
