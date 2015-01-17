@@ -744,23 +744,27 @@ function partsImgPathFromSite($pageurl){
   foreach($match[0] as $key=>$val){
    //imgタグを除く
    $data=preg_replace("/^<img|\/?>$/","",$val);
+   $c="notice:".$mname."imgタグ除外".$data;wLog($c);
    
    //'"を削除
    $data=preg_replace("/\'|\"/","",$data);
+   $c="notice:".$mname."'を除外".$data;wLog($c);
    
-  //属性と値に分割
-   $pattern="/([a-zA-Z]+)\s*=\s*[\'\"]?(.+?)[\'\"]?\s+/";
-   preg_match_all($pattern,$val,$attr);
-  
-  //配列へ格納
+   //空欄ごとに区切る
+   $data=preg_split("/[\s]+/",$data);
+   
+  //属性と値を配列に格納
    $col=array();
    foreach($data as $key1=>$val1){
-    if(! $val1) continue;
-    preg_match("/^([a-zA-Z]+)=(.+)/",$val1,$m);
-    if(! $m[1]) continue;
+    if(! $val1){
+     $c="notice:".$mname."値空欄のためスキップ";wLog($c);
+     continue;
+    }
+    preg_match("/(.*?)={1}(.*)/",$val1,$m);
+    $c="notice:".$mname."配列へ格納".$m[1]."=>".$m[2];wLog($c);
     $col[$m[1]]=$m[2];
    }
-   
+
   //src属性なければスキップ
    if(!$col["src"]){
     $c="notice:".$mname." src属性がありません。処理をスキップします(".$val.")";wLog($c);
@@ -810,9 +814,15 @@ function partsImgPathFromSite($pageurl){
    
   //homes用カスタマイズ(サイズ指定部分を削除)
    if(preg_match("/image\.homes\.co\.jp/",$col["src"])){
+    $c="notice:".$mname."homes用パス変換".$col["src"];wLog($c);
     $col["src"]=preg_replace("/&amp;.*$/","",$col["src"]);
    }
    
+  //athome用カスタマイズ(拡張子後のオプションを削除)
+   if(preg_match("/athome\.co\.jp/",$col["src"])){
+    $c="notice:".$mname."athome用パス変換".$col["src"];wLog($c);
+    $col["src"]=preg_replace("\?.*$/","",$col["src"]);
+   }
   //ブラックリスト除外
    if( preg_match($blacklist,$col["src"])){
     $c="notice:".$mname."ブラックリスト該当".$col["src"];wLog($c);

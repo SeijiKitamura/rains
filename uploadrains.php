@@ -662,6 +662,24 @@ function dataUpMenu(){
           })
          .appendTo("div#main");
 
+ $("<a>").attr("href","#")
+         .text("関連データアップロード")
+         .addClass("csvbutton")
+         .on("click",function(){
+          $("input[name=flddata]").click();
+          })
+         .appendTo("div#main");
+
+ $("<input>").attr({name:"flddata",
+                    type:"file",
+                    multiple:"multiple"
+              })
+             .hide()
+             .change(function(){
+               fldUpload(this);
+              })
+             .appendTo("div#main");
+
  $("<div>").addClass("clr")
            .appendTo("div#main");
 
@@ -680,6 +698,40 @@ function csvUpload(elem){
   //ファイル送信
   $.ajax({
     url: 'php/csvupload.php',
+    type: 'post',
+//    async:false,
+    beforeSend:function(){
+     $("div.msgdiv").text("データ送信中・・・").slideDown();
+    },
+    data: formData,
+    processData: false,
+    contentType: false,
+    dataType: 'html',
+    complete: function(){
+    },
+    success: function(html) {
+     $("div.datadiv").append(html);
+     $("ul#ul_menu").hide();
+     $("div.msgdiv").text("データ送信完了").slideUp(1000);
+     $("input[type=file]").val("");
+    },
+    error:function(XMLHttpRequest,textStatus,errorThrown){
+     console.log(XMLHttpRequest.responseText);
+     $("div.msgdiv").text(XMLHttpRequest.responseText);
+     return false;
+    }
+  });
+ });
+}
+
+function fldUpload(elem){
+ $("div.datadiv").empty();
+ $.each(elem.files,function(i,file){
+  var formData=new FormData();
+  formData.append("csvfile",file);
+  //ファイル送信
+  $.ajax({
+    url: 'php/csvuploadfield.php',
     type: 'post',
 //    async:false,
     beforeSend:function(){
