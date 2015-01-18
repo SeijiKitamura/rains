@@ -1,4 +1,5 @@
 *.csv
+!rainsfld.csv
 *.jpg
 *.JPG
 *.png
