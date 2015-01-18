@@ -8,36 +8,6 @@
 ----------------------------------------------------- */
 require_once("db.class.php");
 
-//UTF-8変換済みCSVを配列に格納して返す
-function impLoadCsv($filename){
- $mname="impLoadCsv(import.function.php) ";
- try{
-  $fp=fopen($filename,"rb");
-  $c=$mname."行ごとに配列へ格納";wLog($c);
-  while($row=fgetcsv($fp)){
-   //空行はスキップｗ!
-   if($row===array(null)){
-    $c=$mname."空行のため、処理をスキップ";wLog($c);
-    continue;
-   }
-   $csv[]=$row;
-  }
-
-  //読み込み終了後エンドポイントになっていなければエラー
-  if(!feof($fp)){
-   $c=$mname."読み込み終了後エンドポイントになっていない";wLog($c);
-   throw new Exception("CSV変換エラー");
-  }
-  fclose($fp);
-  $c="end ".$mname;wLog($c);
-  return $csv;
- }
- catch(Exception $e){
-  wLog("error:".$mname.$e->getMessage());
-  echo "err:".$e->getMessage();
- }
-}
-
 //POSTされたファイルを配列へ格納する
 function impCsv2Ary($postfile){
  $mname="impCsv2Ary(import.function.php) ";
