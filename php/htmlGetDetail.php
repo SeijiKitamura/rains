@@ -11,7 +11,6 @@ partsImage($data["data"],"edit");
 echo "</div>";
 
 echo "<div id='map-canvas'></div>";
-echo "<div class='clr'></div>";
 
 echo "<div class='divdetail'>";
 partsLapDetail($data["data"]);
@@ -25,6 +24,8 @@ echo "<div class='diventrylist'>";
 $elist=viewEntryList($_GET["fld000"]);
 partsEntryList($elist);
 echo "</div>";
+
+echo "<div class='clr'></div>";
 
 echo "<div class='clr'></div>";
 
