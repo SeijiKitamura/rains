@@ -313,7 +313,7 @@ function partsIndivi($data){
    $html.="<dt>物件名</dt>";
    $html.="<dd>:".$val["fld021"]." ".$val["fld022"];
    if($val["fld021"]){
-    $html.="<a href='https://www.google.co.jp/search?hl=ja&source=hp&q=".urlencode($val["fld021"])."' target='_blank'>【検索】</a>";
+    $html.="<a href='https://www.google.co.jp/search?hl=ja&source=hp&q=".urlencode($val["fld021"])."' target='_blank' class='googlesearch'>【検索】</a>";
    }
    $html.="</dd>";
    $html.="<dt>住所</dt>";
