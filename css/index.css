@@ -1,0 +1,77 @@
+div#header{
+ border :1px solid #DCDCDC;
+ width  :95%;
+ height :8em;
+ margin :1em;
+ padding:0.5em;
+}
+
+div.logoSpace{
+ border :1px solid #DCDCDC;
+ width  :20%;
+ height :3em;
+ margin :0 0 0 0;
+ padding:0.5em;
+ float  :left;
+}
+
+div.logoSpace img{
+ width:90%;
+}
+
+div.eventSpace{
+ border :1px solid #DCDCDC;
+ width  :40%;
+ height :3em;
+ margin :0 0 0 3em;
+ padding:0.5em;
+ float  :left;
+}
+
+div.storeInfo{
+ border :1px solid #DCDCDC;
+ width  :25%;
+ height :3em;
+ margin :0 0 0 3em;
+ padding:0.5em;
+ float  :left;
+}
+
+div.storeInfo ul{
+ list-style:none;
+}
+
+div.storeInfo ul li{
+ font-size:small;
+}
+
+div.naviBar{
+ border :1px solid #DCDCDC;
+ width  :100%;
+ height :3em;
+ margin :1em 0 0 0;
+}
+
+div.naviBar ul{
+ list-style:none;
+}
+
+div.naviBar ul li{
+ width  :10%;
+ float  :left;
+}
+
+div.naviBar ul li a{
+ border    :1px solid #DCDCDC;
+ width     :100%;
+ padding   :1em 0 1em 0;
+ text-align:center;
+ display   :block;
+}
+
+div#main{
+ border :1px solid #DCDCDC;
+ width  :95%;
+ margin :1em;
+ padding:0.5em;
+}
