@@ -358,8 +358,15 @@ function viewEntry($rank){
   }
   $db=new DSET();
   $db->where="t.rank=".$rank;
+  $data=$db->dsetEntry();
+
+  $d=array();
+  foreach($data as $key=>$val){
+   $rains=viewRainsData("t.fld000='".$val["fld000"]."'",null);
+   $d[]=$rains["data"][0];
+  }
   $c="end ".$mname;wLog($c);
-  return $db->dsetEntry();
+  return $d;
  }
  catch(Exception $e){
   $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
