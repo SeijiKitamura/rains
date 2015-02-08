@@ -83,6 +83,19 @@ div.naviBar ul li a{
  color     :white;
 }
 
+div.naviBar ul li a.nowpage{
+ background:white;
+ color     :black;
+}
+
+div#topImage{
+/* border :1px solid #DCDCDC;*/
+ width  :95%;
+/* height :8em;*/
+ margin :0 1em;
+ padding:0.5em;
+}
+
 div.imageSpace{
  border    :1px solid #DCDCDC;
  width     :30%;
@@ -129,7 +142,6 @@ div.bigNavi ul li a{
  margin    :0 0.1em;
  border-radius:10px;
 }
-
 
 div#main{
  border :1px solid #DCDCDC;
