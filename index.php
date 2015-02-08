@@ -84,9 +84,31 @@
    <div id="main">
 <?php
 $data=viewEntry(1);
-partsEstateList($data);
-partsEstateList($data);
+if(is_array($data)){
+ partsEstateList($data);
+}
 
+
+//$data=viewEntry(2);
+//if(is_array($data)){
+// partsEstateList($data);
+//}
+//
+//$data=viewEntry(3);
+//if(is_array($data)){
+// partsEstateList($data);
+//}
+//
+//$data=viewEntry(4);
+//if(is_array($data)){
+// partsEstateList($data);
+//}
+//
+//
+//$data=viewEntry(5);
+//if(is_array($data)){
+// partsEstateList($data);
+//}
 echo "<pre>";
 print_r($data);
 echo "</pre>";
