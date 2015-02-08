@@ -1135,4 +1135,68 @@ function partsComment($data){
   $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
+
+function partsEstateList($data){
+ try{
+  $mname="partsRankList(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="物件データがありません";wLog($c);
+   return false;
+  }
+
+  $html="";
+  $rank=0;
+  foreach($data as $key=>$val){
+
+   if($key>RANKLIMIT) break;
+
+   if($rank!==$val["rank"]){
+    $html.="<h2>".$val["rankname"]."</h2>";
+    $html.="<p>".$val["rcomment"]."</p>";
+    $rank=$val["rank"];
+   } 
+   $html.="<div class='estatebox'>";
+   $html.="<div class='imagebox'>";
+   foreach($val["imgfilepath"] as $key1=>$val1){
+    $html.="<img src='".$val1."'>";
+    break;
+   }
+   $html.="</div>";// class='imagebox'>";
+   $html.="<div class='detailbox'>";
+   $html.="<ul>";
+   
+   //価格
+   $html.="<li><span class='price'>".number_format($val["fld054"]);
+   $html.="<span class='yen'>円</span></span></li>";
+   
+   //間取り・広さ
+   $html.="<li>".$val["fld180"].$val["_fld179"];
+   if($val["fld180"]) $html.="(".$val["fld068"]."m&sup2;)";
+   else $html.=$val["fld068"]."m&sup2;";
+   $html.="</li>";
+
+   //物件名
+   $html.="<li>";
+   if($val["fld021"]) $html.=$val["fld021"]; 
+   else $html.=$val["fld019"]; 
+   $html.="</li>";
+
+
+   //最寄駅
+   $html.="<li>".$val["fld026"]."駅 ";
+   $html.="徒歩".$val["fld027"]."分";
+   $html.="</li>";
+
+   $html.="</ul>";
+   $html.="</div>";// class='detailbox'>";
+   $html.="</div>";// class='estatebox'>"
+  }
+  $html.="<div class='clr'></div>";
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
 ?>
