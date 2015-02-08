@@ -160,6 +160,7 @@ div.imagebox{
  height :10em;
  padding:0.5em;
  margin :0 0 0.5em 0;
+ overflow:hidden;
 }
 
 div.imagebox img{
