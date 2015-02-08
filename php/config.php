@@ -15,12 +15,12 @@ define("DBENGIN","postgres");
 //---------------------------------------------------//
 // ディレクトリ名定数
 //---------------------------------------------------//
- define("IMG"    ,"/img"     ); //777
- define("JS"     ,"/js"      ); //705
- define("CSS"    ,"/css"     ); //705 
- define("DATA"   ,"/data"    ); //700 
- define("LOG"    ,"/log"     ); //700 
-
+ define("IMG"     ,"/img"     ); //777
+ define("JS"      ,"/js"      ); //705
+ define("CSS"     ,"/css"     ); //705 
+ define("DATA"    ,"/data"    ); //700 
+ define("LOG"     ,"/log"     ); //700 
+ define("SKELETON","/skeleton"); //700 
 
 //---------------------------------------------------//
 // ファイル定数
@@ -28,7 +28,7 @@ define("DBENGIN","postgres");
  define("LOGO"    ,".".IMG."/logo.gif"   );
  define("FAV"     ,".".IMG."/favicon.ico");
  define("JQNAME"  ,".".JS."/jquery.js"   );
-
+define("TOPIMAGE" ,".".IMG."/topimage.jpg");
 
 //---------------------------------------------------//
 // テーブル名定数
@@ -64,6 +64,57 @@ define("BCOMMENT","bcomment");
 //---------------------------------------------------//
 define("NEWLIST","-3days") ;
 define("RANKLIMIT",5);
+
+//---------------------------------------------------//
+// ページ情報
+//---------------------------------------------------//
+
+$NAVIARY=array( "index.php"
+                              =>array( "title"=>"ホーム"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"index.css"
+                                      ,"description"=>CORPNAME."は".CORPADDRESS."にある不動産屋です。この街の不動産なら当店にお任せ。おすすめ物件はもちろん当店独自のランキングも掲載中です。賃貸アパート、賃貸マンション、一軒家などなんでもご相談ください。")
+               ,"tintai.php"  
+                              =>array( "title"=>"賃貸"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"index.css"
+                                      ,"description"=>"")
+               ,"baibai.php"  
+                              =>array( "title"=>"売買"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"index.css"
+                                      ,"description"=>"")
+               ,"jigyou.php"  
+                              =>array( "title"=>"事業用"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"index.css"
+                                      ,"description"=>"")
+               ,"q_and_a.php" 
+                              =>array( "title"=>"Q&A"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"index.css"
+                                      ,"description"=>"")
+               ,"yanusi.php" 
+                              =>array( "title"=>"家主様"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"index.css"
+                                      ,"description"=>"")
+               ,"annai.php"  
+                              =>array( "title"=>"会社案内"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"index.css"
+                                      ,"description"=>"")
+               ,"toiawase.php"
+                              =>array( "title"=>"お問い合せ"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"index.css"
+                                      ,"description"=>"")
+              );
+
+$BIGNAVI=array( "tintai.php"  =>"賃貸"
+               ,"baibai.php"  =>"売買"
+               ,"jigyou.php"  =>"事業用"
+              );
 
 //------------------------------------------------------------//
 // テーブル情報(テーブル作成時に「id」列などが自動で付加される
