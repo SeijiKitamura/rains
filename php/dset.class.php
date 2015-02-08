@@ -946,7 +946,8 @@ class DSET extends DB{
    $this->from.=" t.fld000=t2.fld000";
    $this->order="t.rank,t.fld001,t.fld000";
    $c="end ".$mname;wLog($c);
-   return $this->getArray();
+   $this->r["data"]=$this->getArray();
+   return $this->r["data"];
   }
   catch(Exception $e){
    $c="error:".$mname.$e->getMessage();wLog($c);echo $c;

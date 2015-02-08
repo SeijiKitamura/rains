@@ -358,15 +358,11 @@ function viewEntry($rank){
   }
   $db=new DSET();
   $db->where="t.rank=".$rank;
-  $data=$db->dsetEntry();
-
-  $d=array();
-  foreach($data as $key=>$val){
-   $rains=viewRainsData("t.fld000='".$val["fld000"]."'",null);
-   $d[]=$rains["data"][0];
-  }
-  $c="end ".$mname;wLog($c);
-  return $d;
+  $db->dsetEntry();
+  $db->dsetRainsFld();
+  $db->dsetGetImgList();
+  $db->dsetImgPathWithEncode();
+  return $db->r["data"];
  }
  catch(Exception $e){
   $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
