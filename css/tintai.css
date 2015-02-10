@@ -1,0 +1,63 @@
+div#leftside{
+ border :1px solid #DCDCDC;
+ width  :15%;
+ margin :1em;
+ padding:0.5em;
+ float  :left;
+}
+
+div#leftside ul{
+ list-style:none;
+}
+
+div#main{
+ border :1px solid #DCDCDC;
+ width  :75%;
+ margin :1em;
+ padding:0.5em;
+ float  :left;
+}
+
+div.estatebox{
+ border :1px solid #DCDCDC;
+ width  :20%;
+ margin :0.5em;
+ padding:0.5em;
+ float  :left;
+ border-radius:10px;
+}
+
+div.imagebox{
+ border :1px solid #DCDCDC;
+ width  :90%;
+ height :10em;
+ padding:0.5em;
+ margin :0 0 0.5em 0;
+ overflow:hidden;
+}
+
+div.imagebox img{
+ width  :90%;
+}
+
+div.detailbox{
+ border :1px solid #DCDCDC;
+ width  :90%;
+ height :5em;
+ padding:0.5em;
+}
+
+div.detailbox ul{
+ list-style:none;
+}
+
+span.price{
+ display:block;
+ text-align:right;
+ color:red;
+ font-size:1.5em;
+}
+span.yen{
+ color:red;
+}
+

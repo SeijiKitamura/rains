@@ -297,6 +297,23 @@ function viewRank($where=null){
  }
 }
 
+function viewNowRank($where=null){
+ try{
+  $mname="viewRank(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $db=new DSET();
+  $db->where =" to_date(startday,'YYYY/MM/DD')<='".date("Y-m-d")."' ";
+  $db->where.=" and to_date(endday,'YYYY/MM/DD')>='".date("Y-m-d")."'";
+  $db->where.=" and flg=1 ";
+  if($where) $db->where.=" and ".$where;
+  $c="end ".$mname;wLog($c);
+  return $db->dsetRank();
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
 function viewSetRank($data){
  try{
   $mname="viewSetRank(view.function.php)";
