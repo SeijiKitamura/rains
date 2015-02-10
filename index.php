@@ -9,9 +9,10 @@ htmlTopImage();
    
    <div id="main">
 <?php
-$data=viewEntry(1);
-if(is_array($data)){
- partsEstateList($data);
+$rank=viewNowRank();
+foreach($rank as $key=>$val){
+ $data=viewEntry($val["rank"]);
+ partsNowRankList($data);
 }
 ?>
    </div><!-- div id="main" -->
