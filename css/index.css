@@ -1,93 +1,3 @@
-div#header{
-/* border :1px solid #DCDCDC;*/
- width  :95%;
-/* height :8em;*/
- margin :1em;
- padding:0.5em;
-}
-
-hr{
- display   :block;
- height    :1px;
- border-top:5px solid blue;
- margin    :0.5em 0;
-}
-
-div.logoSpace{
- border :1px solid #DCDCDC;
- width  :20%;
- height :3em;
- margin :0 0 0 0;
- padding:0.5em;
- float  :left;
-}
-
-div.logoSpace img{
- width:90%;
-}
-
-div.eventSpace{
- border :1px solid #DCDCDC;
- width  :40%;
- height :3em;
- margin :0 0 0 3em;
- padding:0.5em;
- float  :left;
-}
-
-div.storeInfo{
- border :1px solid #DCDCDC;
- width  :25%;
- height :3em;
- margin :0 0 0 3em;
- padding:0.5em;
- float  :left;
-}
-
-div.storeInfo ul{
- list-style:none;
-}
-
-div.storeInfo ul li{
- font-size:small;
-}
-
-span.tel{
- font-size:1.5em;
- color:red;
-}
-
-div.naviBar{
-/* border :1px solid #DCDCDC;*/
- width  :100%;
- height :3em;
- margin :1em 0 0 0;
-}
-
-div.naviBar ul{
- list-style:none;
-}
-
-div.naviBar ul li{
- width  :10%;
- float  :left;
-}
-
-div.naviBar ul li a{
- border    :1px solid #DCDCDC;
- width     :100%;
- padding   :1em 0 1em 0;
- text-align:center;
- display   :block;
- background:blue;
- color     :white;
-}
-
-div.naviBar ul li a.nowpage{
- background:white;
- color     :black;
-}
-
 div#topImage{
 /* border :1px solid #DCDCDC;*/
  width  :95%;
@@ -100,8 +10,8 @@ div.imageSpace{
  border    :1px solid #DCDCDC;
  width     :30%;
 /* height    :5em;*/
- margin :1em 0 0 0;
- float    :left;
+ margin    :1em 0 0 0;
+ float     :left;
 }
 
 div.imageSpace img{
@@ -111,8 +21,8 @@ div.imageSpace img{
 div.commentSpace{
 /* border    :1px solid #DCDCDC;*/
  width     :60%;
- margin :1em 0 0 0;
- padding:1em;
+ margin    :1em 0 0 0;
+ padding   :1em;
  float     :left;
 }
 
