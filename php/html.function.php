@@ -41,6 +41,8 @@ function htmlHeader($title=null){
   $html=preg_replace("/<!--css1-->/",$css,$html);
   $css=".".CSS."/".$NAVIARY[$nowpage]["css2"];
   $html=preg_replace("/<!--css2-->/",$css,$html);
+  $css=".".CSS."/".$NAVIARY[$nowpage]["css3"];
+  $html=preg_replace("/<!--css3-->/",$css,$html);
   
   //Description 
   $description=$NAVIARY[$nowpage]["description"];
