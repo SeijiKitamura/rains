@@ -222,7 +222,7 @@ function partsFldCount($data){
     $fld002=mb_split("_",$key1);
     foreach($val1 as $key2=>$val2){
      $fld003=mb_split("_",$key2);
-     $html.="<li class='fld003' data-fld001='".$fld001[0]."' data-fld002='".$fld002[0]."' data-fld003='".$fld003[0]."'>".$fld003[1]."(".$val2.")</li>";
+     $html.="<li class='fld003' data-fld001='".$fld001[0]."' data-fld002='".$fld002[0]."' data-fld003='".$fld003[0]."'><a href='#'>".$fld003[1]."(".$val2.")</a></li>";
     }
    }
    $html.="</ul></li>";
@@ -1136,9 +1136,9 @@ function partsComment($data){
  }
 }
 
-function partsEstateList($data){
+function partsNowRankList($data){
  try{
-  $mname="partsRankList(parts.function.php) ";
+  $mname="partsNowRankList(parts.function.php) ";
   $c="start ".$mname;wLog($c);
   if(! isset($data)||! is_array($data)||! count($data)){
    $c="物件データがありません";wLog($c);
@@ -1199,4 +1199,60 @@ function partsEstateList($data){
   $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
+
+function partsEstateList($data){
+ try{
+  $mname="partsNowRankList(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="物件データがありません";wLog($c);
+   return false;
+  }
+
+  $html="";
+  foreach($data as $key=>$val){
+   $html.="<div class='estatebox'>";
+   $html.="<div class='imagebox'>";
+   foreach($val["imgfilepath"] as $key1=>$val1){
+    $html.="<img src='".$val1."'>";
+    break;
+   }
+   $html.="</div>";// class='imagebox'>";
+   $html.="<div class='detailbox'>";
+   $html.="<ul>";
+   
+   //価格
+   $html.="<li><span class='price'>".number_format($val["fld054"]);
+   $html.="<span class='yen'>円</span></span></li>";
+   
+   //間取り・広さ
+   $html.="<li>".$val["fld180"].$val["_fld179"];
+   if($val["fld180"]) $html.="(".$val["fld068"]."m&sup2;)";
+   else $html.=$val["fld068"]."m&sup2;";
+   $html.="</li>";
+
+   //物件名
+   $html.="<li>";
+   if($val["fld021"]) $html.=$val["fld021"]; 
+   else $html.=$val["fld019"]; 
+   $html.="</li>";
+
+
+   //最寄駅
+   $html.="<li>".$val["fld026"]."駅 ";
+   $html.="徒歩".$val["fld027"]."分";
+   $html.="</li>";
+
+   $html.="</ul>";
+   $html.="</div>";// class='detailbox'>";
+   $html.="</div>";// class='estatebox'>"
+  }
+  $html.="<div class='clr'></div>";
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
 ?>
