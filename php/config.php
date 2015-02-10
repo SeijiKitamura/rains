@@ -72,42 +72,50 @@ define("RANKLIMIT",5);
 $NAVIARY=array( "index.php"
                               =>array( "title"=>"ホーム"
                                       ,"css1" =>"all.css"
-                                      ,"css2" =>"index.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"index.css"
                                       ,"description"=>CORPNAME."は".CORPADDRESS."にある不動産屋です。この街の不動産なら当店にお任せ。おすすめ物件はもちろん当店独自のランキングも掲載中です。賃貸アパート、賃貸マンション、一軒家などなんでもご相談ください。")
                ,"tintai.php"  
                               =>array( "title"=>"賃貸"
                                       ,"css1" =>"all.css"
-                                      ,"css2" =>"index.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"tintai.css"
                                       ,"description"=>"")
                ,"baibai.php"  
                               =>array( "title"=>"売買"
                                       ,"css1" =>"all.css"
-                                      ,"css2" =>"index.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>""
                                       ,"description"=>"")
                ,"jigyou.php"  
                               =>array( "title"=>"事業用"
                                       ,"css1" =>"all.css"
-                                      ,"css2" =>"index.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>""
                                       ,"description"=>"")
                ,"q_and_a.php" 
                               =>array( "title"=>"Q&A"
                                       ,"css1" =>"all.css"
-                                      ,"css2" =>"index.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>""
                                       ,"description"=>"")
                ,"yanusi.php" 
                               =>array( "title"=>"家主様"
                                       ,"css1" =>"all.css"
-                                      ,"css2" =>"index.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>""
                                       ,"description"=>"")
                ,"annai.php"  
                               =>array( "title"=>"会社案内"
                                       ,"css1" =>"all.css"
-                                      ,"css2" =>"index.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>""
                                       ,"description"=>"")
                ,"toiawase.php"
                               =>array( "title"=>"お問い合せ"
                                       ,"css1" =>"all.css"
-                                      ,"css2" =>"index.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>""
                                       ,"description"=>"")
               );
 
