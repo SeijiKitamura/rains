@@ -72,6 +72,9 @@ function htmlHeader($title=null){
   //ナビゲーション
   $navibar="";
   foreach($NAVIARY as $key=>$val){
+   //除外ページ(新しくページを追加した時はここをチェック)
+   if($key=="estate.php") continue;
+
    $navibar.="<li><a href='".$key."'";
    if($nowpage==$key){
     $navibar.=" class='nowpage'";

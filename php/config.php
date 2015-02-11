@@ -117,6 +117,12 @@ $NAVIARY=array( "index.php"
                                       ,"css2" =>"header.css"
                                       ,"css3" =>""
                                       ,"description"=>"")
+               ,"estate.php"
+                              =>array( "title"=>""
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"estate.css"
+                                      ,"description"=>"")
               );
 
 $BIGNAVI=array( "tintai.php"  =>"賃貸"

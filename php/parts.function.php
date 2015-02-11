@@ -403,20 +403,20 @@ function partsPrice($data){
    $html.="<dt>その他</dt>";
    $html.="<dd>";
    if($val["fld071"] || $val["fld072"] ||$val["fld073"]){
-    $html.=" 権利金:";
+    $html.=": 権利金:";
     if($val["fld071"]) $html.=number_format($val["fld071"])."円";
     if($val["fld072"]) $html.="(消費税".number_format($val["fld072"])."円)";
     if($val["fld073"]) $html.=$val["fld071"]."ヶ月";
    }
-   if($val["fld123"]) $html.=" 造作譲渡金:".number_format($val["fld123"])."円";
-   if($val["fld124"]) $html.=" 定借権利金:".number_format($val["fld124"])."円";
-   if($val["fld125"]) $html.=" 定借保証金:".number_format($val["fld125"])."円";
-   if($val["fld126"]) $html.=" 定借敷金:".number_format($val["fld126"])."円";
-   if($val["fld139"]) $html.=" 修繕積立金:".number_format($val["fld139"])."円";
-   if($val["fld140"]) $html.=" 共益費:".number_format($val["fld140"])."円";
-   if($val["fld141"]) $html.=" 共益費(消費税):".number_format($val["fld141"])."円";
-   if($val["fld142"]) $html.=" 雑費:".number_format($val["fld142"])."円";
-   if($val["fld143"]) $html.=" 雑費(消費税):".number_format($val["fld143"])."円";
+   if($val["fld123"]) $html.=": 造作譲渡金:".number_format($val["fld123"])."円";
+   if($val["fld124"]) $html.=": 定借権利金:".number_format($val["fld124"])."円";
+   if($val["fld125"]) $html.=": 定借保証金:".number_format($val["fld125"])."円";
+   if($val["fld126"]) $html.=": 定借敷金:".number_format($val["fld126"])."円";
+   if($val["fld139"]) $html.=": 修繕積立金:".number_format($val["fld139"])."円";
+   if($val["fld140"]) $html.=": 共益費:".number_format($val["fld140"])."円";
+   if($val["fld141"]) $html.=": 共益費(消費税):".number_format($val["fld141"])."円";
+   if($val["fld142"]) $html.=": 雑費:".number_format($val["fld142"])."円";
+   if($val["fld143"]) $html.=": 雑費(消費税):".number_format($val["fld143"])."円";
 
    $html.="</dd>";
    $html.="</dl>";
@@ -1255,4 +1255,44 @@ function partsEstateList($data){
  }
 }
 
+function partsEstateImage($data){
+ try{
+  $mname="partsEstateImage(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="物件データがありません";wLog($c);
+   return false;
+  }
+
+  $html="";
+  $html.="<div class='imageSpace'>";
+  $html.="<div class='bigImage'>";
+  $html.="<ul>";
+  foreach($data as $key=>$val){
+   foreach($val["imgfilepath"] as $key1=>$val1){
+    if($key>1) break;
+    $html.="<li><img src='".$val1."'></li>";
+   }
+   $html.="</ul>";
+   $html.="<div class='clr'></div>";
+   $html.="</div>";//bigImage
+   
+   $html.="<div class='smallImage'>";
+   $html.="<ul>";
+   foreach($val["imgfilepath"] as $key1=>$val1){
+    $html.="<li><img src='".$val1."'></li>";
+   }
+   $html.="</ul>";
+   $html.="<div class='clr'></div>";
+   $html.="</div>";
+   $html.="</div>";//imageSpace
+  }
+  
+  $html.="<div class='clr'></div>";
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
 ?>
