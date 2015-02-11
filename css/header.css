@@ -1,46 +1,75 @@
 div#header{
 /* border :1px solid #DCDCDC;*/
- width  :95%;
+ width  :100%;
 /* height :8em;*/
- margin :1em;
- padding:0.5em;
+/* margin :1em;*/
+/* padding:0.5em;*/
+ border-top:2px solid #FFC400;
 }
 
-hr{
- display   :block;
- height    :1px;
- border-top:5px solid blue;
- margin    :0.5em 0;
+div#titleSpace{
+ width :1000px;
+ margin:0 auto;
+}
+
+div#titleSpace h1{
+ font-size :10px;
+ float     :left;
+ width     :820px;
+ text-align:left;
+ color     :#3C3C3C;
+ margin    :0.2em 0 0 0 ;
+}
+
+div#header_inner{
+ width :1000px;
+ margin:0 auto;
 }
 
 div.logoSpace{
- border :1px solid #DCDCDC;
- width  :20%;
- height :3em;
+/* border :1px solid #DCDCDC;*/
+ width  :196px;
+ height :2em;
  margin :0 0 0 0;
- padding:0.5em;
+ padding:0em;
  float  :left;
 }
 
 div.logoSpace img{
- width:90%;
+ width:100%;
 }
 
 div.eventSpace{
- border :1px solid #DCDCDC;
- width  :40%;
- height :3em;
+/* border :1px solid #DCDCDC;*/
+ width  :360px;
+ height :24px;
  margin :0 0 0 3em;
  padding:0.5em;
  float  :left;
 }
 
+div.eventSpace ul{
+ list-style:none;
+}
+
+div.eventSpace ul li{
+ float:left;
+}
+
+div.eventSpace ul li a{
+ display:block;
+ border:1px solid #DCDCDC;
+ width :120px;
+ padding:4px 0 4px 0;
+ text-align:center;
+ font-size:0.9em;
+}
+
 div.storeInfo{
- border :1px solid #DCDCDC;
- width  :25%;
- height :3em;
- margin :0 0 0 3em;
- padding:0.5em;
+/*border :1px solid #DCDCDC;*/
+ width  :360px;
+ margin :0 0 0 0em;
+ padding:0em;
  float  :left;
 }
 
@@ -59,28 +88,30 @@ span.tel{
 
 div.naviBar{
 /* border :1px solid #DCDCDC;*/
- width  :100%;
- height :3em;
- margin :1em 0 0 0;
+ width  :1000px;
+ margin :3px auto;
 }
 
 div.naviBar ul{
+ width     :1000px;
+ overflow  :hidden;
+ text-align:center;
  list-style:none;
 }
 
 div.naviBar ul li{
- width  :10%;
+ height :27px;
  float  :left;
 }
 
 div.naviBar ul li a{
- border    :1px solid #DCDCDC;
- width     :100%;
- padding   :1em 0 1em 0;
+ border-right    :1px solid #DCDCDC;
+ width     :120px;
+ height    :27px;
  text-align:center;
  display   :block;
- background:blue;
- color     :white;
+ padding   :4px 0 0 0 ;
+ font-size :0.8em;
 }
 
 div.naviBar ul li a.nowpage{

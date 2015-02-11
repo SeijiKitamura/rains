@@ -69,7 +69,7 @@ define("RANKLIMIT",5);
 // ページ情報
 //---------------------------------------------------//
 
-$NAVIARY=array( "index.php"
+$PAGEARY=array( "index.php"
                               =>array( "title"=>"ホーム"
                                       ,"css1" =>"all.css"
                                       ,"css2" =>"header.css"
@@ -124,6 +124,20 @@ $NAVIARY=array( "index.php"
                                       ,"css3" =>"estate.css"
                                       ,"description"=>"")
               );
+
+$NAVI  =array(
+                "tintai.php?station=all"=>"駅名で検索!"  
+               ,"tinati.php?address=all"=>"住所で検索!"
+               ,"tinati.php?madori=all" =>"間取で検索!"
+               ,"jigyou.php"            =>"店舗・倉庫!"
+               ,"tinatai.php?car=all"   =>"駐車場検索!"
+               ,"baibai.php"            =>"売買で検索!"
+              );
+
+$MININAVI=array(
+                "q_and_a.php" =>"Q&A"
+                ,"yanusi.php" =>"オーナー様"
+               );
 
 $BIGNAVI=array( "tintai.php"  =>"賃貸"
                ,"baibai.php"  =>"売買"

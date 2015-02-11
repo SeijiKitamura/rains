@@ -21,7 +21,9 @@ require_once("parts.function.php");
 //-------------------------------------------------------//
 
 function htmlHeader($title=null){
- global $NAVIARY;
+ global $PAGEARY;
+ global $NAVI;
+ global $MININAVI;
  try{
   $mname="htmlHeader(html.function.php) ";
   $c="start ".$mname;wLog($c);
@@ -37,15 +39,15 @@ function htmlHeader($title=null){
   $html=preg_replace("/<!--title-->/",$title,$html);
   
   //CSS
-  $css=".".CSS."/".$NAVIARY[$nowpage]["css1"];
+  $css=".".CSS."/".$PAGEARY[$nowpage]["css1"];
   $html=preg_replace("/<!--css1-->/",$css,$html);
-  $css=".".CSS."/".$NAVIARY[$nowpage]["css2"];
+  $css=".".CSS."/".$PAGEARY[$nowpage]["css2"];
   $html=preg_replace("/<!--css2-->/",$css,$html);
-  $css=".".CSS."/".$NAVIARY[$nowpage]["css3"];
+  $css=".".CSS."/".$PAGEARY[$nowpage]["css3"];
   $html=preg_replace("/<!--css3-->/",$css,$html);
   
   //Description 
-  $description=$NAVIARY[$nowpage]["description"];
+  $description=$PAGEARY[$nowpage]["description"];
   $html=preg_replace("/<!--description-->/",$description,$html);
   
   //キャッチワード
@@ -69,19 +71,22 @@ function htmlHeader($title=null){
   //FAX
   $html=preg_replace("/<!--corpfax-->/",CORPFAX,$html);
 
+  //イベントバー
+  $eventbar="";
+  foreach($MININAVI as $key=>$val){
+   $eventbar.="<li><a href='".$key."'";
+   $eventbar.=">".$val."</a></li>";
+  }
+  $html=preg_replace("/<!--eventBar-->/",$eventbar,$html);
+  
   //ナビゲーション
   $navibar="";
-  foreach($NAVIARY as $key=>$val){
-   //除外ページ(新しくページを追加した時はここをチェック)
-   if($key=="estate.php") continue;
-
+  foreach($NAVI as $key=>$val){
    $navibar.="<li><a href='".$key."'";
-   if($nowpage==$key){
-    $navibar.=" class='nowpage'";
-   }
-   $navibar.=">".$val["title"]."</a></li>";
+   $navibar.=">".$val."</a></li>";
   }
   $html=preg_replace("/<!--navibar-->/",$navibar,$html);
+
   echo $html;
   $c="end ".$mname;wLog($c);
  }

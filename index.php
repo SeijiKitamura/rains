@@ -1,6 +1,6 @@
 <?php require_once("php/html.function.php");?>
 <?php
-htmlHeader($NAVIARY["index.php"]["title"]);
+htmlHeader(CATCHWORD."-");
 htmlTopImage();
 ?>
 
