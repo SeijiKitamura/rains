@@ -482,4 +482,50 @@ function viewDelBcomment($data){
  }
 }
 
+//Rainsデータを以下の条件、並び順で抽出する
+//whiteList,登録日降順
+function viewNewRains($where=null){
+ try{
+  $mname="viewNewRains(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $order="t.fld011 desc";
+  $w="t1.fld000 is null ";
+  if($where) $where=$w." and ".$where;
+  else $where=$w;
+
+  $c="end ".$mname;wLog($c);
+  return viewRainsData($where,$order);
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//新着物件とランキングデータを配列で返す
+function viewNewAndRank(){
+ try{
+  $mname="viewNewAndRank(view.function.php)";
+  $c="start ".$mname;wLog($c);
+
+  $new=viewNewRains();
+  foreach($new["data"] as $key=>$val){
+   if($key>RANKLIMIT) break;
+   $data["new"][]=$val;
+  }
+
+  $rank=viewNowRank();
+  foreach($rank as $key=>$val){
+   if($key>RANKLIMIT) break;
+   $entry=array();
+   $entry=viewEntry($val["rank"]);
+   $data["rank".$val["rank"]]=$entry;
+  }
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+
+}
 ?>

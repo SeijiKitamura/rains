@@ -1295,4 +1295,151 @@ function partsEstateImage($data){
   $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
+
+//viewNewAndRankで取得したデータを使用してul-liを作成
+function partsRankTab($data){
+ try{
+  $mname="partsRankTab(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="物件データがありません";wLog($c);
+   return false;
+  }
+
+  $html="";
+  $html.="<ul id='tab_link'>";
+  foreach($data as $key=>$val){
+   $html.="<li id='".$key."'>";
+
+   if($key=="new"){
+    $html.="<a href='#' class='current'>新着物件</a>";
+   }
+   else{
+    foreach($val as $key1=>$val1){
+    $html.="<a href='#'>".$val1["rankname"]."</a>";
+     break;
+    }
+   }
+   $html.="</li>";
+  }
+  $html.="</ul>";
+  $html.="<div class='clr'></div>";
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+//viewNewAndRankで取得したデータを使用してdivを作成
+function partsRankDiv($data){
+ try{
+  $mname="partsRankDiv(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="物件データがありません";wLog($c);
+   return false;
+  }
+  //スケルトンファイル読み込み(ここから)
+  $skeletonpath=dirname(__FILE__)."/..".SKELETON."/recomendbox.html";
+  $skeleton=file_get_contents($skeletonpath);
+  
+  //ループ部分抽出($match[2]にhtml格納)
+  preg_match("/(<!--loop-->)(.*)(<!--loopend-->)/s",$skeleton,$match);
+
+  $html="";
+  foreach($data as $key=>$val){
+   $s=$skeleton;
+
+   $s=preg_replace("/<!--id-->/",$key,$s);
+
+   if($key=="new") $display="";
+   else $display="none;";
+   $s=preg_replace("/<!--display-->/",$display,$s);
+
+   if($key=="new") $rankname="新着物件";
+   else{
+    foreach($val as $key1=>$val1){
+     $rankname=$val1["rankname"];
+     break;
+    }
+   }
+   $s=preg_replace("/<!--rankname-->/",$rankname,$s);
+
+   if($key=="new") $rcomment="新着物件のご案内です。";
+   else{
+    foreach($val as $key1=>$val1){
+     $rcomment=$val1["rcomment"];
+     break;
+    }
+   }
+   $s=preg_replace("/<!--rcomment-->/",$rcomment,$s);
+
+   $loop="";
+   foreach($val as $key1=>$val1){
+    $itembox=$match[2];
+    //個別ページ（未対応）
+
+    if(!isset($val1["imgfilepath"]) ||! is_array($val1["imgfilepath"])||! count($val1["imgfilepath"])){
+     //画像なし
+     $img='<img src="<!--imgfilepath-->" alt="<!--imgalt-->" class="lazyload">';
+     $itembox=preg_replace("/".$img."/","",$itembox);
+    }
+
+    //画像あり
+    foreach($val1["imgfilepath"] as $key2=>$val2){
+     $itembox=preg_replace("/<!--imgfilepath-->/",$val2,$itembox);
+     break;
+    }
+
+    //物件名
+    if($val1["fld021"]) $estatename=$val1["fld021"];
+    else $estatename=$val1["fld018"];
+    $itembox=preg_replace("/<!--estatename-->/",$estatename,$itembox);
+
+    //住所
+    $estateaddress=$val1["fld018"].$val1["fld019"].$val1["fld020"];
+    $itembox=preg_replace("/<!--estateaddress-->/",$estateaddress,$itembox);
+
+    //路線
+    $rail=$val1["fld025"];
+    $itembox=preg_replace("/<!--rail-->/",$rail,$itembox);
+
+    //駅名
+    $station=$val1["fld026"]."駅";
+    $itembox=preg_replace("/<!--station-->/",$station,$itembox);
+
+    //徒歩
+    $toho=$val1["fld027"];
+    $itembox=preg_replace("/<!--toho-->/",$toho,$itembox);
+
+    //建設年月日
+    if($val1["fld225"]){
+     $build=substr($val1["fld225"],0,4)."年".substr($val1["fld225"],5,2)."月";
+    }
+    else $build="";
+    $itembox=preg_replace("/<!--build-->/",$build,$itembox);
+
+    //総階数
+    if($val1["fld222"]) $floors="/".$val1["fld222"]."階建";
+    else $floors="";
+    $itembox=preg_replace("/<!--floors-->/",$floors,$itembox);
+
+    //地下階
+    if($val1["fld223"]) $underground="(地下".$val1["fld223"]."階)";
+    else $underground="";
+    $itembox=preg_replace("/<!--underground-->/",$underground,$itembox);
+
+    $loop.=$itembox;
+   }
+
+   $s=preg_replace("/<!--loop-->.*<!--loopend-->/s",$loop,$s);
+   $html.=$s;
+  }//foreach
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
 ?>

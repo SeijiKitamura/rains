@@ -85,6 +85,9 @@ function htmlHeader($title=null){
    $navibar.="<li><a href='".$key."'";
    $navibar.=">".$val."</a></li>";
   }
+  //検索バー追加
+  $navibar.="<li><input type='text' value='キーワード' name='serchword'>";
+  $navibar.="<input type='image' src='.".IMG."/search.png'></li>";
   $html=preg_replace("/<!--navibar-->/",$navibar,$html);
 
   echo $html;
@@ -126,14 +129,6 @@ function htmlTopImage(){
   $topimage="<img src='".TOPIMAGE."'>";
   $html=preg_replace("/<!--topimage-->/",$topimage,$html);
   
-  //ナビゲーション
-  $bignavi="";
-  foreach($BIGNAVI as $key=>$val){
-   $bignavi.="<li><a href='".$key."'";
-   $bignavi.=">".$val."</a></li>";
-  }
-  $html=preg_replace("/<!--bignavi-->/",$bignavi,$html);
-
   echo $html;
   $c="end ".$mname;wLog($c);
  }

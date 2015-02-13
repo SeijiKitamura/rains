@@ -100,7 +100,7 @@ div.naviBar ul{
 }
 
 div.naviBar ul li{
- height :27px;
+ height :29px;
  float  :left;
 }
 
@@ -110,8 +110,12 @@ div.naviBar ul li a{
  height    :27px;
  text-align:center;
  display   :block;
- padding   :4px 0 0 0 ;
+ padding   :8px 0 0 0 ;
  font-size :0.8em;
+}
+
+div.naviBar ul li input{
+ margin:0 2px 0 0;
 }
 
 div.naviBar ul li a.nowpage{
