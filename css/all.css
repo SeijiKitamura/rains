@@ -21,3 +21,12 @@ span.yen{
  font-size:0.5em;
 }
 
+body{
+ color:black;
+ min-width:1000px;
+ background:#FFF6E5;
+ }
+
+*{
+ font-family: "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","メイリオ","Meiryo","ＭＳ Ｐゴシック","sans-seriff";
+}

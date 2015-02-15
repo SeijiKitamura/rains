@@ -65,11 +65,14 @@ define("BCOMMENT","bcomment");
 define("NEWLIST","-3days") ;
 define("RANKLIMIT",5);
 
+define("SITEHELP","周辺のマンション、アパート、一軒家、駐車場などのおすすめ情報をご案内中。詳細事項はもちろん、建物・室内の写真も掲載しております。");
+
+define("SITEABOUT","地域周辺の・賃貸・売買・不動産を探すなら".CORPNAME."。お客様にご満足いただけるように確かな情報をお届けすることを心がけております。アパート・マンションを探すならぜひ".CORPNAME."にお任せください。");
 //---------------------------------------------------//
 // ページ情報
 //---------------------------------------------------//
 
-$NAVIARY=array( "index.php"
+$PAGEARY=array( "index.php"
                               =>array( "title"=>"ホーム"
                                       ,"css1" =>"all.css"
                                       ,"css2" =>"header.css"
@@ -123,8 +126,66 @@ $NAVIARY=array( "index.php"
                                       ,"css2" =>"header.css"
                                       ,"css3" =>"estate.css"
                                       ,"description"=>"")
+               ,"conpany.php"
+                              =>array( "title"=>"会社概要"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>".css"
+                                      ,"description"=>"")
+               ,"storeinfo.php"
+                              =>array( "title"=>"店舗情報"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>".css"
+                                      ,"description"=>"")
+               ,"privacy.php"
+                              =>array( "title"=>"プライバシーポリシー"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>".css"
+                                      ,"description"=>"")
+               ,"sitemap.php"
+                              =>array( "title"=>"サイトマップ"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>".css"
+                                      ,"description"=>"")
+               ,"newitem.php"
+                              =>array( "title"=>"最新情報"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>".css"
+                                      ,"description"=>"")
               );
 
+$NAVI  =array(
+                "tintai.php?station=all"=>"駅名で検索!"  
+               ,"tinati.php?address=all"=>"住所で検索!"
+               ,"tinati.php?madori=all" =>"間取で検索!"
+               ,"jigyou.php"            =>"店舗・倉庫!"
+               ,"tinatai.php?car=all"   =>"駐車場検索!"
+               ,"baibai.php"            =>"売買で検索!"
+              );
+
+$MININAVI=array(
+                "q_and_a.php" =>"Q&A"
+                ,"yanusi.php" =>"オーナー様"
+               );
+
+$INFO=array    (
+                 "conpany.php"=>"会社概要"
+                ,"storeinfo.php"=>"店舗情報"
+                ,"privacy.php"=>"プライバシーポリシー"
+                ,"sitemap.php"=>"サイトマップ"
+                ,"toiawase.php"=>"お問い合せ"
+               );
+
+$SITECONTENTS=array(
+                     "q_and_a.php"=>"Q&A"
+                    ,"yanusi.php"=>"オーナー様"
+                    ,"newitem.php"=>"最新情報"
+                   );
+//未使用
 $BIGNAVI=array( "tintai.php"  =>"賃貸"
                ,"baibai.php"  =>"売買"
                ,"jigyou.php"  =>"事業用"

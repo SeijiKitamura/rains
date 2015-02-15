@@ -482,4 +482,151 @@ function viewDelBcomment($data){
  }
 }
 
+//Rainsデータを以下の条件、並び順で抽出する
+//whiteList,登録日降順
+function viewNewRains($where=null){
+ try{
+  $mname="viewNewRains(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $order="t.fld011 desc";
+  $w="t1.fld000 is null ";
+  if($where) $where=$w." and ".$where;
+  else $where=$w;
+
+  $c="end ".$mname;wLog($c);
+  return viewRainsData($where,$order);
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//新着物件とランキングデータを配列で返す
+function viewNewAndRank(){
+ try{
+  $mname="viewNewAndRank(view.function.php)";
+  $c="start ".$mname;wLog($c);
+
+  $new=viewNewRains();
+  foreach($new["data"] as $key=>$val){
+   if($key>RANKLIMIT) break;
+   $data["new"][]=$val;
+  }
+
+  $rank=viewNowRank();
+  foreach($rank as $key=>$val){
+   if($key>RANKLIMIT) break;
+   $entry=array();
+   $entry=viewEntry($val["rank"]);
+   $data["rank".$val["rank"]]=$entry;
+  }
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+
+}
+
+//住所一覧を返す
+function viewAddressList($where=null){
+ try{
+  $mname="viewAddressList(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $db=new DSET();
+  $db->where=" t1.fld000 is null";
+  if($where) $db->where.=" and ".$where;
+  $db->dsetAreaCount();
+  return $db->r;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//住所一覧を返す(賃貸)
+function viewRentAddress(){
+ try{
+  $mname="viewRentAddress(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='03'";
+  $data=viewAddressList($where);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//住所一覧を返す(売買)
+function viewSaleAddress(){
+ try{
+  $mname="viewSaleAddress(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='01'";
+  $data=viewAddressList($where);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//間取り一覧
+function viewMadoriList($where=null){
+ try{
+  $mname="viewMadoriList(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $db=new DSET();
+  if($where) $db->where=$where;
+  $db->dsetMadoriCount2();
+  return $db->r;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//間取り一覧(賃貸マンション)
+function viewRentMadoriM(){
+ try{
+  $mname="viewRentMadoriM(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='03' and t.fld002='03' and t.fld003='01'";
+  $data=viewMadoriList($where);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//間取り一覧(賃貸アパート)
+function viewRentMadoriA(){
+ try{
+  $mname="viewRentMadoriA(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='03' and t.fld002='03' and t.fld003='02'";
+  $data=viewMadoriList($where);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//間取り一覧(売買)
+function viewSaleMadori(){
+ try{
+  $mname="viewSaleMadori(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='01'";
+  $data=viewMadoriList($where);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
 ?>

@@ -14,7 +14,7 @@
 define("MAILADDRESS","xxxxxx@xxxxxxxxxxx.xxx");
 define("CORPNAME","会社名");
 define("CORPADDRESS","会社住所");
-define("CATCHWORD","コメント");
+//define("CATCHWORD","コメント");
 define("CORPTEL","00-0000-0000");
 define("CORPFAX","00-0000-0000");
  

@@ -831,6 +831,38 @@ class DSET extends DB{
    $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
   }
  }
+ 
+//間取りごとにカウント
+//where句は予めセットしておく
+ public function dsetMadoriCount2(){
+  try{
+   $mname="dsetStationCount2(DSET class)";
+   $c="start ".$mname;wLog($c);
+   $this->select="t.fld001,t.fld002,t.fld179,t.fld180,count(t.fld179) as cnt";
+   $this->group ="t.fld001,t.fld002,t.fld180,t.fld179";
+   $this->order =$this->group;
+   if($this->where) $this->where.=" and ";
+   $this->where.=" t1.fld000 is null";
+   $this->dsetRains();
+   foreach($this->r["data"] as $key=>$val){
+    foreach($this->flds as $key1=>$val1){
+     if($val1["fldname"]=="fld179"      &&
+        $val["fld001"]==$val1["fld001"] && 
+        $val["fld002"]==$val1["fld002"] &&
+        $val["fld179"]==$val1["bnum"])
+     {
+      $val["_fld179"]=$val1["bname"];
+      $this->r["data"][$key]["_fld179"]=$val1["bname"];
+     }
+    }
+   }
+   $c="end ".$mname;wLog($c);
+   return $this->r;
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  }
+ }
 
  //最寄駅ごとにカウント
  public function dsetStationCount(){
