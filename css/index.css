@@ -187,6 +187,8 @@ div.recomendItemBoxMiddle{
 
 div.recomendItemBoxMiddle p{
  max-width:90%;
+ max-height:90%;
+ overflow :hidden;
 }
 
 div.recomendItemBoxMiddle p img{
