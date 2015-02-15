@@ -136,4 +136,101 @@ function htmlTopImage(){
   $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
 }
+
+function htmlFooter(){
+ global $NAVI;
+ global $SITECONTENTS;
+ global $INFO;
+ try{
+  $mname="htmlFooter(html.function.php) ";
+  $c="start ".$mname;wLog($c);
+  
+  //現在ページ取得
+  $nowpage=basename($_SERVER["PHP_SELF"]);
+  
+  //スケルトン読み込み
+  $path=realpath("./").SKELETON."/footer.html";
+  $html=file_get_contents($path);
+
+  //ページ説明
+  $sitehelp="このページは".CORPNAME."の";
+  if($nowpage=="index.php"){
+   $sitehelp.="トップページです。";
+  }
+  $sitehelp.=SITEHELP;
+  $html=preg_replace("/<!--sitehelp-->/",$sitehelp,$html);
+
+  //サイト説明
+  $siteabout=SITEABOUT;
+  $html=preg_replace("/<!--siteabout-->/",$siteabout,$html);
+
+  //サイトコンテンツ($SITECONTENTS)
+  $navibar="";
+  foreach($SITECONTENTS as $key=>$val){
+   $navibar.="<li><a href='".$key."'";
+   $navibar.=">".$val."</a></li>";
+  }
+  $html=preg_replace("/<!--link01-->/",$navibar,$html);
+  
+  //ナビゲーション
+  $navibar="";
+  foreach($NAVI as $key=>$val){
+   $navibar.="<li><a href='".$key."'";
+   $navibar.=">".$val."</a></li>";
+  }
+  $html=preg_replace("/<!--link02-->/",$navibar,$html);
+
+  //インフォメーション($INFO)
+  $navibar="";
+  foreach($INFO as $key=>$val){
+   $navibar.="<li><a href='".$key."'";
+   $navibar.=">".$val."</a></li>";
+  }
+  $html=preg_replace("/<!--link03-->/",$navibar,$html);
+
+  //住所検索(<!--addresslist-->
+  $navibar="";
+  $data=viewRentAddress();
+  foreach($data["data"] as $key=>$val){
+   $navibar.="<li><a href='#'>".$val["fld019"]."(".$val["count"].")"."</a></li>";
+  }
+  $html=preg_replace("/<!--addresslist-->/",$navibar,$html);
+
+  //間取り一覧(賃貸マンション)
+  $navibar="";
+  $data=viewRentMadoriM();
+  foreach($data["data"] as $key=>$val){
+   $navibar.="<li><a href='#'>".$val["fld180"].$val["_fld179"]."(".$val["cnt"].")"."</a></li>";
+  }
+  $html=preg_replace("/<!--madorilistM-->/",$navibar,$html);
+  
+  //間取り一覧(賃貸アパート)
+  $navibar="";
+  $data=viewRentMadoriA();
+  foreach($data["data"] as $key=>$val){
+   $navibar.="<li><a href='#'>".$val["fld180"].$val["_fld179"]."(".$val["cnt"].")"."</a></li>";
+  }
+  $html=preg_replace("/<!--madorilistA-->/",$navibar,$html);
+
+  //コピーライト
+  $replace="COPYRIGHT ".CORPNAME." ALL RIGHTS RESERVED";
+  $html=preg_replace("/<!--copyright-->/",$replace,$html);
+
+  //画面追従型ナビゲーション
+  $navibar="";
+  $navibar.="<li><a href='index.php'><img src='".LOGO."'></a></li>";
+  foreach($NAVI as $key=>$val){
+   $navibar.="<li><a href='".$key."'";
+   $navibar.=">".$val."</a></li>";
+  }
+  $html=preg_replace("/<!--shortnavi-->/",$navibar,$html);
+
+  echo $html;
+
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
 ?>

@@ -123,4 +123,191 @@ div.naviBar ul li a.nowpage{
  color     :black;
 }
 
+div#footer{
+ background:url("../img/bg_footer.jpg") repeat;
+ color:#CECECE;
+ font-size:10px;
+}
+
+div#footerHead{
+ padding:45px 0 15px 0; 
+ height :100%;
+}
+
+div.footerBox{
+ width:960px;
+ margin:0 auto;
+ padding:0 8px 20px 8px;
+ height:100%;
+ border-bottom:1px solid #58554E;
+}
+
+div.footerBox h3{
+ padding-bottom:10px;
+ color:#CCC;
+ font-size:14px;
+}
+
+div.footerBox a{
+ color:#CCC;
+ font-size:12px;
+}
+div#siteHelp{
+ width:435px;
+ float:left;
+ text-align:left;
+ margin:0;
+}
+
+div#siteHelp p{
+ font-size:11px;
+ line-height:1.6em;
+}
+
+div.footerContactItem{
+ width:482px;
+ float:right;
+}
+
+div.footerContactLeft{
+ width:179px;
+ float:left;
+ padding-right:20px;
+}
+
+div.footerContactLeft p{
+ padding-top:11px;
+}
+
+div.footerContactRight{
+ width:241px;
+ float:right;
+}
+
+div#siteAbout{
+ width:358px;
+ float:left;
+ padding-right:15px;
+ margin-right:63px;
+ height:100%;
+}
+
+div#siteAbout p{
+ color:#CCC;
+ font-size:12px;
+ line-height:1.6em;
+}
+
+div#footerLinks{
+ float:left;
+ width:524px;
+}
+
+div.link01,
+div.link02,
+div.link03{
+ float:left;
+}
+
+div.link01,
+div.link02{
+ padding-right:60px;
+}
+
+div#footerLinks div ul li{
+ padding-left :15px;
+ margin-bottom:5px;
+}
+
+div.areaBox{
+ margin-top:5px;
+/* height:50px;*/
+ width:95px;
+ float:left;
+}
+
+div.areaBoxList{
+ width:865px;
+ float:right;
+ margin-top:14px;
+}
+
+
+div.areaBoxList ul{
+ margin-top:2px;
+}
+
+div.areaBoxList ul li{
+ float:left;
+ margin:0 24px 8px 0;
+ width:120px;
+}
+
+div#footerFoot{
+ color:#FFFFFF;
+ background:url("../img/bg_footer.jpg") repeat;
+}
+
+div#copyright{
+ width:960px;
+ margin:0 auto;
+ text-align:left;
+ font-size:1.2em;
+}
+
+div#copyright p{
+ text-align:center;
+ padding:30px;
+}
+
+div#shortNavi{
+ text-align:center;
+ position:fixed;
+ left:0;
+ top:0;
+ width:100%;
+ height:50px;
+ background-color:#FFF6E5;
+ z-index:9999;
+ color:#FFFFFF;
+ font-size:24px;
+ border-bottom:2px solid #FFC400;
+}
+
+div#shortNaviInner{
+ margin:0 auto;
+ text-align:left;
+ width:1000px;
+ height:50px;
+ position:relative;
+}
+
+ul#sh_navi{
+ width:1000px;
+ float:left;
+ margin:0 auto;
+ overflow:hidden;
+ text-align:center;
+}
+
+ul#sh_navi li{
+ float:left;
+ height:30px;
+ display:block;
+ padding:10px 0;
+}
+
+ul#sh_navi li a{
+ display:block;
+ overflow:hidden;
+ width:130px;
+ height:30px;
+ font-size:12px;
+ border-right:1px solid #DCDCDC;
+ padding:10px 0;
+}
+
+ul#sh_navi li a img{
+ width:100%;
+}
 

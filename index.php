@@ -21,6 +21,9 @@ partsRankDiv($data);
    </div><!-- div id="rightside" -->
 
    <div id="footer">
+<?php
+htmlFooter()
+?>
    </div><!-- div id="footer" -->
    
   </div><!-- div id="wrap" -->
@@ -30,6 +33,19 @@ partsRankDiv($data);
 $(function(){
  $("ul#tab_link li a").on("click",function(){
   showTab(this);
+ });
+
+ var topnavi=$("div.naviBar").offset()["top"];
+ $(window).scroll(function(){
+  if($(window).scrollTop()>topnavi){
+   console.log("臨界点突破");
+   console.log($(window).scrollTop());
+   console.log(topnavi);
+   $("div#shortNavi").slideDown();
+  }
+  else{
+   $("div#shortNavi").slideUp();
+  }
  });
 }); 
 
@@ -52,7 +68,9 @@ function showTab(elem){
    $("div#"+id).hide();
   }
  });
+}
 
+function showNavi(){
 }
  </script>
 </html>
