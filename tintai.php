@@ -1,128 +1,104 @@
 <?php
 require_once("php/html.function.php");
-htmlHeader($NAVIARY["tintai.php"]["title"]);
+$flg=1;
 
-$where="t1.fld001 is null and t.fld001='03'";
-$data=viewRainsData($where);
-?>
-   <div id="leftside">
-<?php
-partsFldCount($data["fldcount"]);
-//partsMadoriCount($data["madori"]);
-//partsStationCount($data["station"]);
-?>
-   </div><!--div id="leftside" -->
-   
-   <div id="main">
-    <p>左の物件種類からご希望の物件をクリックしてください</p>
-<?php
-//新着データ表示
-$newdata=array();
-foreach($data["data"] as $key=>$val){
- if($key>RANKLIMIT) break;
- if(strtotime($val["idate"])>strtotime(NEWLIST)){
-  $val["rank"]=1;
-  $val["rankname"]="新着情報";
-  $newdata[]=$val;
+//引数チェック
+if(! $_GET["fld000"] ||! preg_match("/^[0-9]+$/",$_GET["fld000"])){
+ $flg=0;
+}
+
+//物件存在チェック
+if($flg==1){
+ $where="t.fld000='".$_GET["fld000"]."' and t1.fld000 is null ";
+ $data=viewRainsData($where);
+ 
+ if(! count($data["data"])){
+  $flg=0;
  }
 }
 
-if(isset($newdata) && is_array($newdata) && count($newdata)>0){
- partsNowRankList($newdata);
+//タイトルセット
+$title="";
+if($flg==0){
+ $title="お探しの物件は現在ご紹介できません";
 }
+else{
+ foreach($data["data"] as $key=>$val){
+  if($val["fld021"]) $title =$val["fld021"];
+  if($val["fld022"]) $title.=$val["fld022"]."号室";
+  if(!$title) $title=$val["fld019"];
+ }
+}
+htmlHeader($title);
 ?>
-   </div><!-- div id="main" -->
-   
-   <div id="rightside">
-   </div><!-- div id="rightside" -->
 
-   <div id="footer">
-   </div><!-- div id="footer" -->
-   
-  </div><!-- div id="wrap" -->
+  <div id="main">
+<?php
+htmlContents($data["data"]);
+?>
+  </div>
+
+  <div id="footer">
+<?php
+htmlFooter();
+echo "<pre>";
+print_r($data["data"]);
+echo "</pre>";
+?>
+  </div><!--div id="footer"-->
  </body>
+
  <script>
 $(function(){
- $("li.fld003").on("click",function(){
-  fld001($(this).attr("data-fld001"));
-  fld002($(this).attr("data-fld002"));
-  fld003($(this).attr("data-fld003"));
-  fld179("reset");
-  fld180("reset");
-  showEstateList($(this));
-  showMadori($(this));
- });
-});
-
-var fld001=setField();
-var fld002=setField();
-var fld003=setField();
-var fld179=setField();
-var fld180=setField();
-  
-function showEstateList(){
- var d={"fld001":fld001(),"fld002":fld002(),"fld003":fld003(),"fld179":fld179(),"fld180":fld180()};
- $("div#main").empty();
-
- $.ajax({
-  url:"php/htmlGetEstateList.php",
-  type:"get",
-  dataType:"html",
-  data:d,
-  complete:function(){},
-  success:function(html){
-   $("div#main").append(html);
-  },
-  error:function(XMLHttpRequest,textStatus,errorThrown){
-   console.log(XMLHttpRequest.responseText);
-  }
- });
-}
-
-function showMadori(elem){
- console.log(elem);
- fld001(elem.attr("data-fld001"));
- fld002(elem.attr("data-fld002"));
- fld003(elem.attr("data-fld003"));
- var d={"fld001":fld001(),"fld002":fld002(),"fld003":fld003()};
-
- $.ajax({
-  url:"php/htmlGetMadoriMenu.php",
-  type:"get",
-  data:d,
-  dataType:"html",
-  success:function(html){
-   $("h4").each(function(){
-    if($(this).text()=="間取り"){
-     $(this).remove();
-    }
-   });
-   $("ul#ul_madori").remove();
-   $("div#leftside").append(html);
-   
-   //間取りイベント
-   $("li.fld180").on("click",function(){
-    fld179($(this).attr("data-fld179"));  
-    fld180($(this).attr("data-fld180"));  
-    showEstateList();
-   });
-  },
-  error:function(XMLHttpRequest,textStatus,errorThrown){
-   console.log(XMLHttpRequest.responseText);
-  }
- });
-}
-
-function setField(){
- var val1;
- return function(fldval){
-  if(fldval){
-   if(fldval=="reset") val1="";
-   else val1=fldval;
-  }
-  return val1;
+ //画像がなければ非表示
+ if(! $("div.bigphoto a img").attr("src")){
+  $("div#roomPhotoAlbum").hide();
  }
-}
- </script>
-</html>
 
+ //位置情報がなければ非表示
+ if(! $("span#startpoint").attr("data-lat")|| !$("span#startpoint").attr("data-lng")){
+  $("h3#instMap").hide();
+  $("div#map-canvas").hide();
+ }
+ else{
+  initialize();
+  calcRoute();
+ }
+});
+ </script>
+
+ <script>
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+var map;
+
+function initialize() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  var chicago = new google.maps.LatLng(35.5839676,139.71252230000005);
+  var mapOptions = {
+    zoom:14,
+    center: chicago
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  directionsDisplay.setMap(map);
+}
+
+function calcRoute() {
+  var start =new google.maps.LatLng($("span#startpoint").attr("data-lat"),$("span#startpoint").attr("data-lng"));
+  var end =new google.maps.LatLng($("span#endpoint").attr("data-lat"),$("span#endpoint").attr("data-lng"));
+  var request = {
+      origin:start,
+      destination:end,
+      travelMode: google.maps.TravelMode.WALKING
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+//google.maps.event.addDomListener(window, 'load', initialize);
+ </script>
+
+</html>
