@@ -1,63 +1,317 @@
-div#leftside{
- border :1px solid #DCDCDC;
- width  :15%;
- margin :1em;
- padding:0.5em;
- float  :left;
+div#contents{
+ width     :1000px;
+ margin    :0 auto;
+ text-align:left;
 }
 
-div#leftside ul{
+div#contentsHeader{
+ width     :1000px;
+ margin    :0 auto;
+ text-align:left;
+ padding   :0 0 10px 0;
+}
+
+ul#topicPath{
+ float:left;
+ width:1000px;
+ padding:5px 0 0 0 ;
+}
+
+ul#topicPath li{
+ margin:0 0 0 5px;
+ float :left;
+ line-height:2;
+}
+
+div#viewHead{
+ margin:0 0 10px 0;
+}
+
+div#viewHead{
+ margin:0 0 10px 0;
+}
+
+div#viewHeadRight{
+ width:770px;
+ float:left;
+}
+
+div#h1Wrapper{
+ background-color:#1A1A1A;
+ padding:12px 15px;
+ line-height:1.4;
+ font-size:15px;
+ font-weight:bold;
+ margin:0 0 10px 0;
+ color:white;
+}
+
+h2#itemName{ 
+ line-height:1.4;
+ display:block;
+ font-size:26px;
+}
+
+span.itemDisc{
+ line-height: 0.6;
+ font-size: 12px;
+ display: block;
+ width: 600px;
+ padding: 5px 0;
+ font-weight: normal;
+}
+
+div.photoFl{
+ width:290px;
+ float:left;
+}
+p.mb_10{
+ margin:0 0 10px 0;
+}
+
+div.tableFr{
+ width:465px;
+ float:right;
+}
+
+div.tableFr table{
+ font-size:12px;
+}
+
+div.tableFr table th{
+ background-color:#EDE4D3;
+ border:1px solid #DCDCDC;
+ padding:8px 3px;
+}
+
+div.tableFr table td{
+ background-color:white;
+ border:1px solid #DCDCDC;
+ padding:5px 3px;
+}
+
+div#viewHeadLeft{
+ width:220px;
+ height:397px;
+ float:right;
+}
+
+div#article{
+ width:770px;
+ float:left;
+}
+
+div#article div.section{
+ margin:0 0 30px 0;
+}
+
+div#roomPhotoAlbum{
+ padding:10px 0;
+ border-top:1px dotted #999;
+ border-bottom:1px dotted #999;
+}
+
+div.bigphoto{
+ float:left;
+ width:480px;
+ height:360px;
+}
+
+div.bigphoto a{
+ display:block;
+ width:100%;
+}
+
+div.bigphoto a img{
+ max-width:100%;
+ max-height:100%;
+}
+
+div.shortphoto{
+ float:right;
+ width:290px;
+}
+
+div.shortphoto ul li{
+ display:block;
+ float:left;
+ padding:0 0 10px 10px;
+ width:96px;
+ height:74px;
+}
+
+div.shortphoto ul li a{
+ display:block;
+ width:100%;
+ height:100%;
+}
+
+div.shortphoto ul li a img{
+ max-width:100%;
+ max-height:100%;
+}
+
+h3#itemInfo,
+h3#instMap ,
+div#contactItemForm h3
+{
+ background-color:#1A1A1A;
+ padding:7px 7px;
+ line-height:1.4;
+ font-size:15px;
+ font-weight:bold;
+ margin-bottom:10px;
+ color:white;
+}
+
+div#itemDetail{
+ margin-bottom:20px;
+ border-bottom:1px dotted #999;
+}
+
+table.itemTable{
+ margin:0 0 20px 0;
+}
+
+table.itemTable th{
+ font-weight:normal;
+ text-align:left;
+ padding:5px;
+ border:1px solid #DCDCDC;
+ line-height:1.4;
+ color:#000;
+ background-color:#EDE4D3;
+}
+
+table.itemTable td{
+ font-weight:normal;
+ text-align:left;
+ background:white;
+ padding:5px;
+ border:1px solid #DCDCDC;
+ line-height:1.4;
+ color:#000;
+}
+
+div#map-canvas{
+ border-bottom:1px dotted #999;
+ width:750px;
+ height:500px;
+}
+
+div#contactItemForm table{
+ font-size:0.8em;
+}
+
+div#contactItemForm table th{
+ border:1px solid #999999;
+ background-color:#EDE4D3;
+ color:black;
+ padding:0.8em;
+ font-weight:normal;
+}
+
+div#contactItemForm table th span {
+ float:right;
+}
+
+div#contactItemForm table td{
+ border-top   :1px solid #999999;
+ border-right :1px solid #999999;
+ border-bottom:1px solid #999999;
+ background   :white;
+ font-weight  :normal;
+ text-align   :left;
+ padding      :0.8em;
+}
+
+
+div#contactItemForm table td input[type=text]{
+ width:292px;
+ padding:4px;
+ border:1px solid #bbb;
+}
+
+ul.ulradio{
  list-style:none;
 }
 
-div#main{
- border :1px solid #DCDCDC;
- width  :75%;
- margin :1em;
- padding:0.5em;
- float  :left;
+ul.ulradio li{
+ float:left;
+ margin:0 0 0 15px;
 }
 
-div.estatebox{
- border :1px solid #DCDCDC;
- width  :20%;
- margin :0.5em;
- padding:0.5em;
- float  :left;
- border-radius:10px;
+ul.ulradio li input{
+ cursor:pointer;
 }
 
-div.imagebox{
- border :1px solid #DCDCDC;
- width  :90%;
- height :10em;
- padding:0.5em;
- margin :0 0 0.5em 0;
- overflow:hidden;
+p.tac{
+ margin:1em 0 1em 0;
+ text-align:center;
 }
 
-div.imagebox img{
- width  :90%;
+div#contactItemBox{
+ padding:15px;
+ background-color:white;
+ border:1px solid #FFB11E;
+ margin-bottom:5px;
+ width:740px;
 }
 
-div.detailbox{
- border :1px solid #DCDCDC;
- width  :90%;
- height :5em;
- padding:0.5em;
+div#contactItemBox h4{
+ border-bottom:1px solid #C5C5C5;
+ font-size:1.4em;
+ padding:0 0 5px 0;
+ margin :0 0 15px 0;
 }
 
-div.detailbox ul{
- list-style:none;
+p#contactItemBoxMsg{
+ margin:10px 0 30px 0;
+ color:#666;
+ font-size:10px;
+ line-height:1.6;
+}
+
+div#aside{
+ width:220px;
+ float:right;
+}
+div.moduleHeadItem{
+ padding:5px;
+ color  :#F39800;
+ background:#1A1A1A;
+}
+
+div.moduleHeadItem h4{
+ color:white;
+}
+
+div.moduleBodyItem{
+ padding:10px 0 0 0;
+}
+
+div.likeItem{
+ border-bottom:1px solid dotted #999;
+ margin       :0 0 10px 0;
+ font-size    :12px;
+}
+
+div.likeItem img{
+ width:220px;
+ height:165px;
+ margin:0 0 5px 0;
 }
 
 span.price{
- display:block;
- text-align:right;
- color:red;
- font-size:1.5em;
+ color:#FF6000;
 }
-span.yen{
- color:red;
+
+p.pAddress{
+ font-size:0.833em;
+}
+
+p.pStation{
+ font-size:0.833em;
+ margin   :0 0 5px 0:
 }
 

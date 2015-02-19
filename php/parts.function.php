@@ -1340,7 +1340,7 @@ function partsRankDiv($data){
    $c="物件データがありません";wLog($c);
    return false;
   }
-  //スケルトンファイル読み込み(ここから)
+  //スケルトンファイル読み込み
   $skeletonpath=dirname(__FILE__)."/..".SKELETON."/recomendbox.html";
   $skeleton=file_get_contents($skeletonpath);
   
@@ -1379,7 +1379,9 @@ function partsRankDiv($data){
    foreach($val as $key1=>$val1){
     $itembox=$match[2];
     //個別ページ（未対応）
-
+    $path="tintai.php?fld000=";
+    $itembox=preg_replace("/<!--estatepath-->/",$path.$val1["fld000"],$itembox);
+    
     if(!isset($val1["imgfilepath"]) ||! is_array($val1["imgfilepath"])||! count($val1["imgfilepath"])){
      //画像なし
      $img='<img src="<!--imgfilepath-->" alt="<!--imgalt-->" class="lazyload">';

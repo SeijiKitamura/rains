@@ -629,4 +629,42 @@ function viewSaleMadori(){
   $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
  }
 }
+
+//似た物件を表示(引数で指定した物件と同じ分類、間取りで検索して価格順に表示)
+function viewBrother($fld000){
+ try{
+  $mname="viewBrother(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  //引数チェック
+  if(!preg_match("/^[0-9]+$/",$fld000)){
+   throw new exception("物件番号を確認してください");
+  }
+
+  $db=new DSET();
+  $db->where="t.fld000='".$fld000."' and t1.fld000 is null";
+  $moto=$db->dsetRains();
+  if(! count($moto)){
+   $c="notice:".$mname." 該当データなし。物件番号(".$fld000.")";wLog($c);
+   return false;
+  }
+
+  $where="";
+  foreach($moto["data"] as $key=>$val){
+   $where.="     t.fld001='".$val["fld001"]."'";
+   $where.=" and t.fld002='".$val["fld002"]."'";
+   $where.=" and t.fld003='".$val["fld003"]."'";
+   $where.=" and t.fld179='".$val["fld179"]."'";
+   $where.=" and t.fld180='".$val["fld180"]."'";
+   break;
+  }
+  $where.=" and t1.fld000 is null";
+  $order =" t.fld054";
+  $data=viewRainsData($where,$order);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
 ?>
