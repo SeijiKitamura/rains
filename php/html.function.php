@@ -245,7 +245,7 @@ function htmlContents($data){
   $path=realpath("./").SKELETON."/contents.html";
   $html=file_get_contents($path);
 
-  foreach($data as $key=>$val){
+  foreach($data["data"] as $key=>$val){
    //物件名確定
    $replace="";
    if($val["fld021"]) $replace.=$val["fld021"]." ";
@@ -484,7 +484,71 @@ function htmlContents($data){
    $html=preg_replace("/<!--bikou-->/",$replace,$html);
 
    break;
-  }//foreach($data as $key=>$val){
+  }//foreach($data["data"] as $key=>$val){
+
+  $replace="";
+  foreach($data["brother"]["data"] as $key=>$val){
+   if($key>RANKLIMIT) continue;
+
+   //画像リンク
+   $imgfilepath="";
+   foreach($val["imgfilepath"] as $key1=>$val1){
+    if($key1==1){
+     $imgfilepath=$val1;
+     break;
+    }
+   }
+   
+   //物件名
+   $bname="";
+   if($val["fld021"]) $bname.=$val["fld021"]." ";
+   if($val["fld022"]) $bname.=$val["fld022"]."号室";
+   if(!$bname)        $bname =$val["fld019"];
+
+   //賃料
+   $price="";
+   $price =($val["fld054"]/10000)."万円";
+
+   //間取り
+   $madori="";
+   $madori=$val["fld180"].$val["_fld179"];
+
+   //面積
+   $menseki="";
+   $menseki=$val["fld068"]."m&sup2;";
+   
+   //住所
+   $address="";
+   if($val["fld017"]) $address =$val["fld017"];
+   if($val["fld018"]) $address.=$val["fld018"];
+   if($val["fld019"]) $address.=$val["fld019"];
+   if($val["fld020"]) $address.=$val["fld020"];
+
+   //駅
+   $station="";
+   if($val["fld025"]) $station =$val["fld025"]." ";
+   if($val["fld026"]) $station =$val["fld026"]."駅 ";
+   if($val["fld027"]) $station.="徒歩".$val["fld027"]."分";
+
+   $replace.="<div class='likeItem'>";
+   $replace.="<p class='thumb'>";
+   $replace.="<a href='#'>";
+   $replace.="<img src='".$imgfilepath."'>";
+   $replace.="</a>";
+   $replace.="</p>";
+   $replace.="<p>";
+   $replace.=$bname;
+   $replace.="</p>";
+   $replace.="<p>";
+   $replace.="<span class='price'><strong>".$price."</strong>";
+   $replace.="/".$madori."/".$menseki;
+   $replace.="</p>";
+   $replace.="<p class='pAddress'>".$address."</p>";
+   $replace.="<p class='pStation'>".$station."</p>";
+   $replace.="</div>";
+  }
+  $html=preg_replace("/<!--loopBrother-->.*<!--loopBrotherEnd-->/s",$replace,$html);
+
   echo $html;
   $c="end ".$mname;wLog($c);
  }

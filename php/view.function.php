@@ -659,7 +659,7 @@ function viewBrother($fld000){
   }
   $where.=" and t1.fld000 is null";
   $order =" t.fld054";
-  $data=viewShortData($where,$order);
+  $data=viewRainsData($where,$order);
   $c="end ".$mname;wLog($c);
   return $data;
  }

@@ -11,7 +11,6 @@ if(! $_GET["fld000"] ||! preg_match("/^[0-9]+$/",$_GET["fld000"])){
 if($flg==1){
  $where="t.fld000='".$_GET["fld000"]."' and t1.fld000 is null ";
  $data=viewRainsData($where);
- 
  if(! count($data["data"])){
   $flg=0;
  }
@@ -28,13 +27,14 @@ else{
   if($val["fld022"]) $title.=$val["fld022"]."号室";
   if(!$title) $title=$val["fld019"];
  }
+ $data["brother"]=viewBrother($_GET["fld000"]);
 }
 htmlHeader($title);
 ?>
 
   <div id="main">
 <?php
-htmlContents($data["data"]);
+htmlContents($data);
 ?>
   </div>
 
@@ -42,7 +42,7 @@ htmlContents($data["data"]);
 <?php
 htmlFooter();
 echo "<pre>";
-print_r($data["data"]);
+print_r($data);
 echo "</pre>";
 ?>
   </div><!--div id="footer"-->

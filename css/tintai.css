@@ -271,3 +271,47 @@ p#contactItemBoxMsg{
  font-size:10px;
  line-height:1.6;
 }
+
+div#aside{
+ width:220px;
+ float:right;
+}
+div.moduleHeadItem{
+ padding:5px;
+ color  :#F39800;
+ background:#1A1A1A;
+}
+
+div.moduleHeadItem h4{
+ color:white;
+}
+
+div.moduleBodyItem{
+ padding:10px 0 0 0;
+}
+
+div.likeItem{
+ border-bottom:1px solid dotted #999;
+ margin       :0 0 10px 0;
+ font-size    :12px;
+}
+
+div.likeItem img{
+ width:220px;
+ height:165px;
+ margin:0 0 5px 0;
+}
+
+span.price{
+ color:#FF6000;
+}
+
+p.pAddress{
+ font-size:0.833em;
+}
+
+p.pStation{
+ font-size:0.833em;
+ margin   :0 0 5px 0:
+}
+
