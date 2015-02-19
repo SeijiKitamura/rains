@@ -110,14 +110,15 @@ class DSET extends DB{
       // $this->r["data"][$key][$val1["fldname"]]=$val1["bname"]; 
       $this->r["data"][$key]["_".$val1["fldname"]]=$val1["bname"]; 
 
-      $c="notice:".$mname."物件番号".$val["fld000"]."に_".$val1["fldname"]."列を「".$val1["bname"]."」に追加しました。";wLog($c);
+      $c="notice:".$mname."物件番号".$val["fld000"]."に_".$val1["fldname"]."列を「".$val1["bname"]."」に追加しました。aaa";wLog($c);
+      continue;
      }
 
      if(! $val1["fld001"] && !$val1["fld002"] && $val[$val1["fldname"]]==$val1["bnum"]){
 
       $this->r["data"][$key]["_".$val1["fldname"]]=$val1["bname"];
 
-      $c="notice:".$mname."物件番号".$val["fld000"]."に_".$val1["fldname"]."列を「".$val1["bname"]."」に追加しました。";wLog($c);
+      $c="notice:".$mname."物件番号".$val["fld000"]."に_".$val1["fldname"]."列を「".$val1["bname"]."」に追加しました。bbb";wLog($c);
      }
     }
    }

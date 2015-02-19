@@ -291,13 +291,13 @@ function htmlContents($data){
    
    //敷金を表示
    $replace="";
-   if($val["fld078"]) $replace.=$val["fld078"]."ヶ月";
+   if($val["fld078"]) $replace.=($val["fld078"]*1)."ヶ";
    if($val["fld077"] && ! $val["fld078"]) $replace.=$val["fld077"]."円";
    $html=preg_replace("/<!--sikikin-->/",$replace,$html);
 
    //礼金を表示
    $replace="";
-   if($val["fld076"]) $replace.=$val["fld076"]."ヶ月";
+   if($val["fld076"]) $replace.=($val["fld076"]*1)."ヶ月";
    if($val["fld074"] && ! $val["fld076"]) $replace.=$val["fld074"]."円";
    $html=preg_replace("/<!--reikin-->/",$replace,$html);
 
@@ -435,7 +435,7 @@ function htmlContents($data){
    //更新料
    $replace="";
    if($val["fld147"]) $replace.=$val["fld147"]."円";
-   if(! $val["fld147"] && $val["fld148"]) $replace.=$val["fld148"]."ヶ月";
+   if(! $val["fld147"] && $val["fld148"]) $replace.=($val["fld148"]*1)."ヶ月";
    $html=preg_replace("/<!--kousin-->/",$replace,$html);
 
    //現況
