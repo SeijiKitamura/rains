@@ -64,7 +64,7 @@ define("BCOMMENT","bcomment");
 //---------------------------------------------------//
 define("NEWLIST","-3days") ;
 define("RANKLIMIT",5);
-
+define("BROTHERLIMIT",4);
 define("SITEHELP","周辺のマンション、アパート、一軒家、駐車場などのおすすめ情報をご案内中。詳細事項はもちろん、建物・室内の写真も掲載しております。");
 
 define("SITEABOUT","地域周辺の・賃貸・売買・不動産を探すなら".CORPNAME."。お客様にご満足いただけるように確かな情報をお届けすることを心がけております。アパート・マンションを探すならぜひ".CORPNAME."にお任せください。");
@@ -78,7 +78,7 @@ $PAGEARY=array( "index.php"
                                       ,"css2" =>"header.css"
                                       ,"css3" =>"index.css"
                                       ,"description"=>CORPNAME."は".CORPADDRESS."にある不動産屋です。この街の不動産なら当店にお任せ。おすすめ物件はもちろん当店独自のランキングも掲載中です。賃貸アパート、賃貸マンション、一軒家などなんでもご相談ください。")
-               ,"tintai.php"  
+               ,"room.php"  
                               =>array( "title"=>"賃貸"
                                       ,"css1" =>"all.css"
                                       ,"css2" =>"header.css"

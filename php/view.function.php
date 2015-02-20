@@ -658,7 +658,8 @@ function viewBrother($fld000){
    break;
   }
   $where.=" and t1.fld000 is null";
-  $order =" t.fld054";
+  $where.=" and t.fld000<>'".$fld000."'";
+  $order =" cast(t.fld054 as integer)";
   $data=viewRainsData($where,$order);
   $c="end ".$mname;wLog($c);
   return $data;

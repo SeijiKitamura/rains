@@ -213,53 +213,6 @@
        </div><!--div class="section"-->
        <div id="contactItemForm">
         <h3><!--bname-->のお問い合わせ</h3>
-        <form><!--あとでここを修正--> 
-         <div style="display:none;">
-          <input type="hidden" name="fld000" value="<!--fld000-->">
-         </div><!--div style="display:none;"-->
-         <table width="100%" summary="資料請求・お問い合せ">
-          <tbody>
-           <tr>
-            <th width="30%">
-             お名前
-             <span><img src="<!--hissu-->" alt="必須"></span>
-            </th>
-            <td>
-             <input name="data[Member][FullName]" type="text" placeholder="お名前をフルネームで">
-            </td>
-           </tr>
-           <tr>
-            <th width="30%">
-             メールアドレス
-             <span><img src="<!--hissu-->" alt="必須"></span>
-            </th>
-            <td>
-             <input name="data[Member][Mail]" type="text" placeholder="xxxx@xxx.com">
-            </td>
-           </tr>
-           <tr>
-            <th width="30%">
-             お問い合わせ内容
-             <span><img src="<!--hissu-->" alt="必須"></span>
-            </th>
-            <td width="70%">
-             <ul class="ulradio">
-              <li><input type="checkbox" name="data[Member][Request1]" value=1 id="MemberRequest1">
-               <label for="MemberRequest1">内見希望</label>
-              </li>
-              <li><input type="checkbox" name="data[Member][Request2]" value=1 id="MemberRequest2">
-               <label for="MemberRequest2">詳細確認</label>
-              </li>
-              <li><input type="checkbox" name="data[Member][Request3]" value=1 id="MemberRequest3">
-               <label for="MemberRequest3">その他</label>
-              </li>
-             </ul>
-            </td>
-           </tr>
-          </tbody>
-         </table>
-         <p class="tac"><input type="image" src=""></p>
-        </form>
        </div><!--div id="contactItemForm"-->
       </div><!--div id="article"-->
       <div id="aside">
@@ -292,7 +245,7 @@
       <h4><!--bname-->のお問い合せは下記までにご連絡くださいませ。</h4>
       <p>
        <img src="img/tel.png">
-       <img src="img/mailto.png">
+       <a href="mailto:<!--mailto-->"><img src="img/mailto.png"></a>
       </p>
      </div><!--div id="contactItemBox"-->
      <div class="clr"></div>

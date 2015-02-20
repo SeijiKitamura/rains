@@ -41,9 +41,6 @@ htmlContents($data);
   <div id="footer">
 <?php
 htmlFooter();
-echo "<pre>";
-print_r($data);
-echo "</pre>";
 ?>
   </div><!--div id="footer"-->
  </body>
@@ -64,7 +61,21 @@ $(function(){
   initialize();
   calcRoute();
  }
+
+ var topnavi=$("div.naviBar").offset()["top"];
+ $(window).scroll(function(){
+  if($(window).scrollTop()>topnavi){
+   console.log("臨界点突破");
+   console.log($(window).scrollTop());
+   console.log(topnavi);
+   $("div#shortNavi").slideDown();
+  }
+  else{
+   $("div#shortNavi").slideUp();
+  }
+ });
 });
+
  </script>
 
  <script>

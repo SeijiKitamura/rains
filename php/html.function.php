@@ -70,6 +70,9 @@ function htmlHeader($title=null){
   
   //FAX
   $html=preg_replace("/<!--corpfax-->/",CORPFAX,$html);
+  
+  //メールリンク
+  $html=preg_replace("/<!--mailto-->/",MAILADDRESS,$html);
 
   //イベントバー
   $eventbar="";
@@ -152,6 +155,9 @@ function htmlFooter(){
   $path=realpath("./").SKELETON."/footer.html";
   $html=file_get_contents($path);
 
+  //メールアドレス
+  $html=preg_replace("/<!--mailto-->/",MAILADDRESS,$html);
+  
   //ページ説明
   $sitehelp="このページは".CORPNAME."の";
   if($nowpage=="index.php"){
@@ -253,6 +259,10 @@ function htmlContents($data){
    if(!$replace)      $replace =$val["fld019"];
    $html=preg_replace("/<!--bname-->/",$replace,$html);
 
+   //メールリンク
+   $replace=MAILADDRESS."?subject=".$replace."(物件番号".$val["fld000"].")の問い合せについて";
+   $html=preg_replace("/<!--mailto-->/",$replace,$html);
+  
    //駅名、徒歩を表示
    $replace="";
    if($val["fld026"]) $replace.=$val["fld026"]."駅";
@@ -329,36 +339,43 @@ function htmlContents($data){
    if($val["fld184"]) $replace.=$val["_fld184"];
    if($val["fld185"]) $replace.="(".$val["fld185"]."帖)";
    if($val["fld186"] && $val["fld186"]>1) $replace.="x".$val["fld186"];
+   if($val["fld184"]) $replace.="/";
 
    if($val["fld187"] && $val["fld183"]!=$val["fld187"]) $replace.=$val["fld187"]."階";
    if($val["fld188"]) $replace.=$val["_fld188"];
    if($val["fld189"]) $replace.="(".$val["fld189"]."帖)";
    if($val["fld190"] && $val["fld190"]>1) $replace.="x".$val["fld190"];
+   if($val["fld188"]) $replace.="/";
 
    if($val["fld191"] && $val["fld187"]!=$val["fld191"]) $replace.=$val["fld191"]."階";
    if($val["fld192"]) $replace.=$val["_fld192"];
    if($val["fld193"]) $replace.="(".$val["fld193"]."帖)";
    if($val["fld194"] && $val["fld194"]>1) $replace.="x".$val["fld194"];
+   if($val["fld192"]) $replace.="/";
 
    if($val["fld195"] && $val["fld191"]!=$val["fld195"]) $replace.=$val["fld195"]."階";
    if($val["fld196"]) $replace.=$val["_fld196"];
    if($val["fld197"]) $replace.="(".$val["fld197"]."帖)";
    if($val["fld198"] && $val["fld198"]>1) $replace.="x".$val["fld198"];
+   if($val["fld196"]) $replace.="/";
 
    if($val["fld199"] && $val["fld195"]!=$val["fld199"]) $replace.=$val["fld199"]."階";
    if($val["fld200"]) $replace.=$val["_fld200"];
    if($val["fld201"]) $replace.="(".$val["fld201"]."帖)";
    if($val["fld202"] && $val["fld202"]>1) $replace.="x".$val["fld202"];
+   if($val["fld200"]) $replace.="/";
 
    if($val["fld203"] && $val["fld199"]!=$val["fld203"]) $replace.=$val["fld203"]."階";
    if($val["fld204"]) $replace.=$val["_fld204"];
    if($val["fld205"]) $replace.="(".$val["fld205"]."帖)";
    if($val["fld206"] && $val["fld206"]>1) $replace.="x".$val["fld206"];
+   if($val["fld204"]) $replace.="/";
 
    if($val["fld207"] && $val["fld203"]!=$val["fld207"]) $replace.=$val["fld207"]."階";
    if($val["fld208"]) $replace.=$val["_fld208"];
    if($val["fld209"]) $replace.="(".$val["fld209"]."帖)";
    if($val["fld210"] && $val["fld210"]>1) $replace.="x".$val["fld210"];
+   if($val["fld208"]) $replace.="/";
 
    $html=preg_replace("/<!--utiwake-->/",$replace,$html);
 
@@ -488,7 +505,7 @@ function htmlContents($data){
 
   $replace="";
   foreach($data["brother"]["data"] as $key=>$val){
-   if($key>RANKLIMIT) continue;
+   if($key>BROTHERLIMIT) continue;
 
    //画像リンク
    $imgfilepath="";
@@ -548,6 +565,7 @@ function htmlContents($data){
    $replace.="</div>";
   }
   $html=preg_replace("/<!--loopBrother-->.*<!--loopBrotherEnd-->/s",$replace,$html);
+
 
   echo $html;
   $c="end ".$mname;wLog($c);

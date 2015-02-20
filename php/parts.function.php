@@ -1378,8 +1378,8 @@ function partsRankDiv($data){
    $loop="";
    foreach($val as $key1=>$val1){
     $itembox=$match[2];
-    //個別ページ（未対応）
-    $path="tintai.php?fld000=";
+    //個別ページ
+    $path="room.php?fld000=";
     $itembox=preg_replace("/<!--estatepath-->/",$path.$val1["fld000"],$itembox);
     
     if(!isset($val1["imgfilepath"]) ||! is_array($val1["imgfilepath"])||! count($val1["imgfilepath"])){
