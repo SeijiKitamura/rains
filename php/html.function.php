@@ -573,6 +573,138 @@ function htmlContents($data){
  catch(Exception $e){
   $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
  }
+}
 
+function htmlStationList($data,$comment=null){
+ try{
+  $mname="htmlStationList(html.function.php) ";
+  $c="start ".$mname;wLog($c);
+  //現在ページ取得
+  $nowpage=basename($_SERVER["PHP_SELF"]);
+
+  //スケルトン読み込み
+  $path=realpath("./").SKELETON."/searchStation.html";
+  $html=file_get_contents($path);
+
+  //タイトル
+  $replace="";
+  $replace="駅名で検索(".$comment.")";
+  $html=preg_replace("/<!--searchtitle-->/",$replace,$html);
+
+  $replace="";
+  $line="";
+  foreach($data["station"] as $key=>$val){
+   //路線が変わったら
+   if($line!=$val["fld025"]){
+    $line=$val["fld025"];
+    if($key) $replace.="</ul></div>";
+    $replace.="<div class='clr'></div>";
+    $replace.="<p>".$val["fld025"]."</p>";
+    $replace.="<div class='listBox'>";
+    $replace.="<ul class='searchList'>";
+   }
+
+   //ループ部分
+   $replace.="<li><a href='#'>";
+   $replace.=$val["fld026"]."(".$val["cnt"].")";
+   $replace.="</a></li>";
+  }
+  //$replace.="</ul></div>";
+  $replace.="</ul></div><div class='clr'></div>";
+
+  $html=preg_replace("/<!--loop-->.*<!--loopend-->/s",$replace,$html);
+  echo $html;
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function htmlAddressList($data,$comment=null){
+ try{
+  $mname="htmlAddressList(html.function.php) ";
+  $c="start ".$mname;wLog($c);
+  //現在ページ取得
+  $nowpage=basename($_SERVER["PHP_SELF"]);
+
+  //スケルトン読み込み
+  $path=realpath("./").SKELETON."/searchStation.html";
+  $html=file_get_contents($path);
+  
+  //タイトル
+  $replace="";
+  $replace="住所で検索(".$comment.")";
+  $html=preg_replace("/<!--searchtitle-->/",$replace,$html);
+  $replace="";
+  $line="";
+  foreach($data["data"] as $key=>$val){
+   //市町村が変わったら
+   if($line!=$val["fld018"]){
+    $line=$val["fld018"];
+    if($key) $replace.="</ul></div>";
+    $replace.="<div class='clr'></div>";
+    $replace.="<p>".$val["fld018"]."</p>";
+    $replace.="<div class='listBox'>";
+    $replace.="<ul class='searchList'>";
+   }
+
+   //ループ部分
+   $replace.="<li><a href='#'>";
+   $replace.=$val["fld019"]."(".$val["cnt"].")";
+   $replace.="</a></li>";
+  }
+  //$replace.="</ul></div>";
+  $replace.="</ul></div><div class='clr'></div>";
+  $html=preg_replace("/<!--loop-->.*<!--loopend-->/s",$replace,$html);
+  echo $html;
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+function htmlMadoriList($data,$comment=null){
+ try{
+  $mname="htmlMadoriList(html.function.php) ";
+  $c="start ".$mname;wLog($c);
+  //現在ページ取得
+  $nowpage=basename($_SERVER["PHP_SELF"]);
+
+  //スケルトン読み込み
+  $path=realpath("./").SKELETON."/searchStation.html";
+  $html=file_get_contents($path);
+  
+  //タイトル
+  $replace="";
+  $replace="間取りで検索(".$comment.")";
+  $html=preg_replace("/<!--searchtitle-->/",$replace,$html);
+  $replace="";
+  $line="";
+  foreach($data["data"] as $key=>$val){
+   //市町村が変わったら
+   if($line!=$val["fld001"]){
+    $line=$val["fld001"];
+    if($key) $replace.="</ul></div>";
+    $replace.="<div class='clr'></div>";
+    $replace.="<p></p>";
+    $replace.="<div class='listBox'>";
+    $replace.="<ul class='searchList'>";
+   }
+
+   //ループ部分
+   $replace.="<li><a href='#'>";
+   $replace.=$val["fld180"].$val["_fld179"]."(".$val["cnt"].")";
+   $replace.="</a></li>";
+  }
+  $replace.="</ul></div><div class='clr'></div>";
+  $html=preg_replace("/<!--loop-->.*<!--loopend-->/s",$replace,$html);
+  echo $html;
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
 }
 ?>

@@ -709,7 +709,7 @@ class DSET extends DB{
   $mname="dsetAreaCount(DSET class)";
   $c="start ".$mname;wLog($c);
   $this->r=array();
-  $this->select="t.fld017,t.fld018,t.fld019,t1.fld000,count(t.fld000)";
+  $this->select="t.fld017,t.fld018,t.fld019,t1.fld000,count(t.fld000) as cnt";
   $this->from=TABLE_PREFIX.RAINS." as t ";
   $this->from.=" left outer join ".TABLE_PREFIX.BLACKLIST." as t1 on ";
   $this->from.=" t.fld000=t1.fld000 ";
@@ -717,6 +717,33 @@ class DSET extends DB{
   if(! $this->order){
    $this->order=$this->group;
   }
+  $this->r["data"]=$this->getArray();
+  $c="end ".$mname;wLog($c);
+  return $this->r;
+ }
+
+ //DBからエリア集計をする
+ //where句は予めセットしておく
+ //order句は特に指定がなければfld017,fld018,fld019の昇順となる
+ //正規表現がマニュアルと違う。マニュアル通りなら
+ //regexp_replace(t.fld019,'(^.*)([０-９]+)(.*$)','\\1')
+ public function dsetAreaCount2(){
+  $mname="dsetAreaCount2(DSET class)";
+  $c="start ".$mname;wLog($c);
+  $this->select ="t.fld017,t.fld018";
+  //$this->select.=",regexp_replace(t.fld019,'([０-９]+)(.*)','\\1') as fld019";
+  $this->select.=",regexp_replace(t.fld019,'([０-９]+)(.*)','') as fld019";
+  $this->select.=",count(t.fld000) as cnt";
+  $this->from =TABLE_PREFIX.RAINS." as t";
+  $this->from.=" left outer join ".TABLE_PREFIX.BLACKLIST." as t1 on";
+  $this->from.=" t.fld000=t1.fld000 ";
+  $this->group ="t.fld017,t.fld018";
+  //$this->group.=",regexp_replace(t.fld019,'([０-９]+)(.*)','\\1')";
+  $this->group.=",regexp_replace(t.fld019,'([０-９]+)(.*)','')";
+  if(! $this->order){
+   $this->order=$this->group;
+  }
+  $this->r=array();
   $this->r["data"]=$this->getArray();
   $c="end ".$mname;wLog($c);
   return $this->r;
@@ -893,6 +920,26 @@ class DSET extends DB{
    //配列並べ替え
    ksort($this->r["station"]);
 
+   $c="end ".$mname;wLog($c);
+   return $this->r;
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  }
+ }
+
+ public function dsetStationCount2(){
+  try{
+   $mname="dsetStationCount2(DSET class)";
+   $c="start ".$mname;wLog($c);
+   $this->select="t.fld025,t.fld026,count(t.fld025) as cnt";
+   $this->from =TABLE_PREFIX.RAINS." as t";
+   $this->from.=" left outer join ";
+   $this->from.=TABLE_PREFIX.BLACKLIST." as t1 on";
+   $this->from.=" t.fld000=t1.fld000";
+   $this->group="t.fld025,t.fld026";
+   $this->order="t.fld025,t.fld026";
+   $this->r["station"]=$this->getArray();
    $c="end ".$mname;wLog($c);
    return $this->r;
   }

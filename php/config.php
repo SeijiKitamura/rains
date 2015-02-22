@@ -156,15 +156,21 @@ $PAGEARY=array( "index.php"
                                       ,"css2" =>"header.css"
                                       ,"css3" =>".css"
                                       ,"description"=>"")
+               ,"search.php"
+                              =>array( "title"=>"物件検索"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"search.css"
+                                      ,"description"=>"")
               );
 
 $NAVI  =array(
-                "tintai.php?station=all"=>"駅名で検索!"  
-               ,"tinati.php?address=all"=>"住所で検索!"
-               ,"tinati.php?madori=all" =>"間取で検索!"
-               ,"jigyou.php"            =>"店舗・倉庫!"
-               ,"tinatai.php?car=all"   =>"駐車場検索!"
-               ,"baibai.php"            =>"売買で検索!"
+                "search.php?station=all"=>"駅名で検索!"  
+               ,"search.php?address=all"=>"住所で検索!"
+               ,"search.php?madori=all" =>"間取で検索!"
+               ,"search.php?sale=all"   =>"売買で検索!"
+               ,"q_and_a.php"           =>"Q&A"
+               ,"yanusi.php"            =>"オーナー様"
               );
 
 $MININAVI=array(

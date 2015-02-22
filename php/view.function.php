@@ -526,7 +526,53 @@ function viewNewAndRank(){
  catch(Exception $e){
   $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
  }
+}
 
+//駅カウントを返す
+function viewStationList($where=null){
+ try{
+  $mname="viewStationList(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $db=new DSET();
+  $db->where=" t1.fld000 is null";
+  if($where) $db->where.=" and ".$where;
+  $db->dsetStationCount2();
+  $c="end ".$mname;wLog($c);
+  return $db->r;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//駅カウントを返す("賃貸")
+function viewRentStation(){
+ try{
+  $mname="viewRentStation(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='03'";
+  $data=viewStationList($where);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//駅カウントを返す("売買")
+function viewSaleStation(){
+ try{
+  $mname="viewSaleStation(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='01'";
+  $data=viewStationList($where);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
 }
 
 //住所一覧を返す
@@ -537,7 +583,7 @@ function viewAddressList($where=null){
   $db=new DSET();
   $db->where=" t1.fld000 is null";
   if($where) $db->where.=" and ".$where;
-  $db->dsetAreaCount();
+  $db->dsetAreaCount2();
   return $db->r;
  }
  catch(Exception $e){
@@ -668,4 +714,193 @@ function viewBrother($fld000){
   $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
  }
 }
+
+//住所から物件一覧を返す
+function viewSearchAddress($address,$where=null){
+ try{
+  $mname="viewSearchAddress(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $w ="t.fld019 like '".$address."%' and t1.fld000 is null";
+  if($where) $w.=" and ".$where;
+  $order="t.fld019,t.fld020,t.fld021,t.fld022,t.fld054";
+  $data=viewRainsData($w,$order);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//住所から物件一覧を返す(賃貸マンション)
+function viewSearchAddressM($address){
+ try{
+  $mname="viewSearchAddressM(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='03' and t.fld002='03' and t.fld003='01'";
+  $data=viewSearchAddress($address,$where);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//住所から物件一覧を返す(賃貸アパート)
+function viewSearchAddressA($address){
+ try{
+  $mname="viewSearchAddressA(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='03' and t.fld002='03' and t.fld003='02'";
+  $data=viewSearchAddress($address,$where);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//住所から物件一覧を返す(売買)
+function viewSearchAddressS($address){
+ try{
+  $mname="viewSearchAddressA(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='01'";
+  $data=viewSearchAddress($address,$where);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//駅名から物件一覧を返す
+function viewSearchStation($station,$where=null){
+ try{
+  $mname="viewSearchStation(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $w ="t.fld026 like '".$station."%' and t1.fld000 is null";
+  if($where) $w.=" and ".$where;
+  $order="cast(t.fld027 as integer),t.fld019,t.fld020,t.fld021,t.fld022,t.fld054";
+  $data=viewRainsData($w,$order);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//駅名から物件一覧を返す(賃貸マンション)
+function viewSearchStationM($station){
+ try{
+  $mname="viewSearchStationM(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='03' and t.fld002='03' and t.fld003='01'";
+  $data=viewSearchStation($station,$where);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//駅名から物件一覧を返す(賃貸アパート)
+function viewSearchStationA($station){
+ try{
+  $mname="viewSearchStationA(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='03' and t.fld002='03' and t.fld003='02'";
+  $data=viewSearchStation($station,$where);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//駅名から物件一覧を返す(売買)
+function viewSearchStationS($station){
+ try{
+  $mname="viewSearchStationS(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='01'";
+  $data=viewSearchStation($station,$where);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//間取りから物件一覧を返す
+function viewSearchMadori($heya,$type,$where=null){
+ try{
+  $mname="viewSearchMaodir(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $w ="t.fld180='".$heya."' and t.fld179='".$type."'";
+  $w.=" and t1.fld000 is null";
+  if($where) $w.=" and ".$where;
+  $order ="t.fld180,t.fld179";
+  $order.=",t.fld019,t.fld020,t.fld021,t.fld022,t.fld054";
+  $data=viewRainsData($w,$order);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//間取りから物件一覧を返す(賃貸マンション)
+function viewSearchMadoriM($heya,$type){
+ try{
+  $mname="viewSearchMadoriM(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='03' and t.fld002='03' and t.fld003='01'";
+  $data=viewSearchMadori($heya,$type,$where);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//間取りから物件一覧を返す(賃貸アパート)
+function viewSearchMadoriA($heya,$type){
+ try{
+  $mname="viewSearchMadoriA(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='03' and t.fld002='03' and t.fld003='02'";
+  $data=viewSearchMadori($heya,$type,$where);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//間取りから物件一覧を返す(売買)
+function viewSearchMadoriS($heya,$type){
+ try{
+  $mname="viewSearchMadoriS(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='01'";
+  $data=viewSearchMadori($heya,$type,$where);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
 ?>
