@@ -866,13 +866,25 @@ class DSET extends DB{
   try{
    $mname="dsetMadoriCount2(DSET class)";
    $c="start ".$mname;wLog($c);
-   $this->select="t.fld001,t.fld002,t.fld003,t.fld179,t.fld180,count(t.fld179) as cnt";
-   $this->group ="t.fld001,t.fld002,t.fld003,t.fld180,t.fld179";
+   $this->select="t.fld001,t.fld002,t.fld179,t.fld180,count(t.fld179) as cnt";
+   $this->group ="t.fld001,t.fld002,t.fld180,t.fld179";
    $this->order =$this->group;
    if($this->where) $this->where.=" and ";
    $this->where.=" t1.fld000 is null";
    $this->dsetRains();
    $this->dsetRainsFld();
+//   foreach($this->r["data"] as $key=>$val){
+//    foreach($this->flds as $key1=>$val1){
+//     if($val1["fldname"]=="fld179"      &&
+//        $val["fld001"]==$val1["fld001"] && 
+//        $val["fld002"]==$val1["fld002"] &&
+//        $val["fld179"]==$val1["bnum"])
+//     {
+//      $val["_fld179"]=$val1["bname"];
+//      $this->r["data"][$key]["_fld179"]=$val1["bname"];
+//     }
+//    }
+//   }
    $c="end ".$mname;wLog($c);
    return $this->r;
   }
@@ -984,34 +996,34 @@ class DSET extends DB{
    $mname="dsetPriceCount(DSET class)";
    $c="start ".$mname;wLog($c);
    $this->select =" case ";
-   $this->select.="  when cast(t.fld054 as integer)<50000 then 50000 ";
-   $this->select.="  when cast(t.fld054 as integer)>=50000  and cast(t.fld054 as integer)<100000 then 100000"; 
-   $this->select.="  when cast(t.fld054 as integer)>=100000 and cast(t.fld054 as integer)<150000 then 150000";  
-   $this->select.="  when cast(t.fld054 as integer)>=150000 and cast(t.fld054 as integer)<200000 then 200000";  
-   $this->select.="  else 200001";
-   $this->select.=" end as price";
+   $this->select.="  when t.fld027 is null or t.fld027='' then 21";  
+   $this->select.="  when cast(t.fld027 as integer)<5 then 5 ";
+   $this->select.="  when cast(t.fld027 as integer)>=5  and cast(t.fld027 as integer)<10 then 10"; 
+   $this->select.="  when cast(t.fld027 as integer)>=10 and cast(t.fld027 as integer)<15 then 15";  
+   $this->select.="  when cast(t.fld027 as integer)>=15 and cast(t.fld027 as integer)<20 then 20";  
+   $this->select.="  else 21";
+   $this->select.=" end as walk";
    $this->select.=",count(t.fld000) as cnt";
    $this->from =TABLE_PREFIX.RAINS." as t";
    $this->from.=" left outer join ";
    $this->from.=TABLE_PREFIX.BLACKLIST." as t1 on";
    $this->from.=" t.fld000=t1.fld000";
-
    $this->group =" case ";
-   $this->group.="  when cast(t.fld054 as integer)<50000 then 50000 ";
-   $this->group.="  when cast(t.fld054 as integer)>=50000  and cast(t.fld054 as integer)<100000 then 100000"; 
-   $this->group.="  when cast(t.fld054 as integer)>=100000 and cast(t.fld054 as integer)<150000 then 150000";  
-   $this->group.="  when cast(t.fld054 as integer)>=150000 and cast(t.fld054 as integer)<200000 then 200000";  
-   $this->group.="  else 200001";
+   $this->group.="  when t.fld027 is null or t.fld027='' then 21";  
+   $this->group.="  when cast(t.fld027 as integer)<5 then 5 ";
+   $this->group.="  when cast(t.fld027 as integer)>=5  and cast(t.fld027 as integer)<10 then 10"; 
+   $this->group.="  when cast(t.fld027 as integer)>=10 and cast(t.fld027 as integer)<15 then 15";  
+   $this->group.="  when cast(t.fld027 as integer)>=15 and cast(t.fld027 as integer)<20 then 20";  
+   $this->group.="  else 21";
    $this->group.=" end";
-
    $this->order =" case ";
-   $this->order.="  when cast(t.fld054 as integer)<50000 then 50000 ";
-   $this->order.="  when cast(t.fld054 as integer)>=50000  and cast(t.fld054 as integer)<100000 then 100000"; 
-   $this->order.="  when cast(t.fld054 as integer)>=100000 and cast(t.fld054 as integer)<150000 then 150000";  
-   $this->order.="  when cast(t.fld054 as integer)>=150000 and cast(t.fld054 as integer)<200000 then 200000";  
-   $this->order.="  else 200001";
+   $this->order.="  when t.fld027 is null or t.fld027='' then 21";  
+   $this->order.="  when cast(t.fld027 as integer)<5 then 5 ";
+   $this->order.="  when cast(t.fld027 as integer)>=5  and cast(t.fld027 as integer)<10 then 10"; 
+   $this->order.="  when cast(t.fld027 as integer)>=10 and cast(t.fld027 as integer)<15 then 15";  
+   $this->order.="  when cast(t.fld027 as integer)>=15 and cast(t.fld027 as integer)<20 then 20";  
+   $this->order.="  else 21";
    $this->order.=" end";
-
    $this->r["price"]=$this->getArray();
    $c="end ".$mname;wLog($c);
    return $this->r;

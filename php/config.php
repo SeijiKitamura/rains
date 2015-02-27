@@ -162,6 +162,12 @@ $PAGEARY=array( "index.php"
                                       ,"css2" =>"header.css"
                                       ,"css3" =>"search.css"
                                       ,"description"=>"")
+               ,"list.php"
+                              =>array( "title"=>"物件一覧"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"list.css"
+                                      ,"description"=>"")
               );
 
 $NAVI  =array(

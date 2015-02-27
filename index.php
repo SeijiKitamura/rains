@@ -1,6 +1,6 @@
 <?php require_once("php/html.function.php");?>
 <?php
-htmlHeader(CATCHWORD."-");
+htmlHeader(CATCHWORD);
 htmlTopImage();
 ?>
    <div id="contentsWrap">

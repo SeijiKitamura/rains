@@ -782,10 +782,26 @@ function viewSearchStation($station,$where=null){
  try{
   $mname="viewSearchStation(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $w ="t.fld026 like '".$station."%' and t1.fld000 is null";
+  $w ="t.fld026='".$station."' and t1.fld000 is null";
   if($where) $w.=" and ".$where;
   $order="cast(t.fld027 as integer),t.fld019,t.fld020,t.fld021,t.fld022,t.fld054";
+  echo $w;
   $data=viewRainsData($w,$order);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//駅名から物件一覧を返す(賃貸)
+function viewSearchStationR($station){
+ try{
+  $mname="viewSearchStationR(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $where="t.fld001='03' and t.fld002='03'";
+  $data=viewSearchStation($station,$where);
   $c="end ".$mname;wLog($c);
   return $data;
  }
@@ -903,4 +919,73 @@ function viewSearchMadoriS($heya,$type){
  }
 }
 
+//物件種別を返す
+function viewGroupFld($where=null){
+ try{
+  $mname="viewGroupFld(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $db=new DSET();
+  $db->select="t.fld001,t.fld002,t.fld003,count(t.fld001) as cnt";
+  $db->group ="t.fld001,t.fld002,t.fld003";
+  $db->order ="t.fld001,t.fld002,t.fld003";
+  $db->where ="t1.fld000 is null";
+  if($where) $db->where.=" and ".$where;
+  $db->dsetRains();
+  $db->dsetRainsFld();
+  $c="end ".$mname;wLog($c);
+  return $db->r;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//物件種別を返す(賃貸)
+function viewGroupFldR($where=null){
+ try{
+  $mname="viewGroupFldR(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $w="t.fld001='03' ";
+  if($where) $w.=" and ".$where;
+  $data=viewGroupFld($w);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//物件種別を返す(売買)
+function viewGroupFldS($where=null){
+ try{
+  $mname="viewGroupFldS(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $w="t.fld001='01' ";
+  if($where) $w.=" and ".$where;
+  $data=viewGroupFld($w);
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
+//徒歩を返す
+function viewWalkGroup($where=null){
+ try{
+  $mname="viewGroupFldS(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $db=new DSET();
+  if($where) $db->where=$where;
+  $data=$db->dsetWalkCount();
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+
+}
 ?>
