@@ -528,6 +528,45 @@ function viewNewAndRank(){
  }
 }
 
+function viewTopData(){
+ try{
+  $mname="viewTopData(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  
+  //新着データ
+  $new=viewNewRains();
+  foreach($new["data"] as $key=>$val){
+   if($key>RANKLIMIT) break;
+   $data["new"][]=$val;
+  }
+
+  //ランキングデータ
+  $rank=viewNowRank();
+  foreach($rank as $key=>$val){
+   $entry=array();
+   $entry=viewEntry($val["rank"]);
+   $data["rank".$val["rank"]]=$entry;
+  }
+
+  //売買物件
+  $where="t.fld001='01' and t1.fld000 is null";
+  $order="t.fld001,t.fld002,t.fld003,t.fld017,t.fld018,t.fld019,t.fld020,t.fld054";
+  $d=viewRainsData($where,$order);
+  $data["baibai"]=$d["data"];
+
+  //賃貸物件
+  $where="t.fld001='03' and t1.fld000 is null";
+  $order="t.fld001,t.fld002,t.fld003,t.fld017,t.fld018,t.fld019,t.fld020,t.fld054";
+  $d=viewRainsData($where,$order);
+  $data["tintai"]=$d["data"];
+  $c="end ".$mname;wLog($c);
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+ }
+}
+
 //駅カウントを返す
 function viewStationList($where=null){
  try{

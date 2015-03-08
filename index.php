@@ -8,9 +8,15 @@ htmlTopImage();
      <div id="contents">
       <div id="article">
 <?php
-$data=viewNewAndRank();
-partsRankTab($data);
+//タブ表示用
+//$data=viewNewAndRank();
+//partsRankTab($data);
+//partsRankDiv($data);
+
+//一覧表示
+$data=viewTopData();
 partsRankDiv($data);
+
 ?>
       </div><!--div id="article"-->
      </div><!--div id="contents"-->

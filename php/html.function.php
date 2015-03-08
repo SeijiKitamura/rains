@@ -88,9 +88,11 @@ function htmlHeader($title=null){
    $navibar.="<li><a href='".$key."'";
    $navibar.=">".$val."</a></li>";
   }
-  //検索バー追加
-  $navibar.="<li><input type='text' value='キーワード' name='serchword'>";
-  $navibar.="<input type='image' src='.".IMG."/search.png'></li>";
+  
+  //検索バー追加(未対応)
+//  $navibar.="<li><input type='text' value='キーワード' name='serchword'>";
+//  $navibar.="<input type='image' src='.".IMG."/search.png'></li>";
+
   $html=preg_replace("/<!--navibar-->/",$navibar,$html);
 
   echo $html;
@@ -198,7 +200,7 @@ function htmlFooter(){
   $navibar="";
   $data=viewRentAddress();
   foreach($data["data"] as $key=>$val){
-   $navibar.="<li><a href='#'>".$val["fld019"]."(".$val["count"].")"."</a></li>";
+//   $navibar.="<li><a href='#'>".$val["fld019"]."(".$val["count"].")"."</a></li>";
   }
   $html=preg_replace("/<!--addresslist-->/",$navibar,$html);
 
@@ -206,7 +208,7 @@ function htmlFooter(){
   $navibar="";
   $data=viewRentMadoriM();
   foreach($data["data"] as $key=>$val){
-   $navibar.="<li><a href='#'>".$val["fld180"].$val["_fld179"]."(".$val["cnt"].")"."</a></li>";
+//   $navibar.="<li><a href='#'>".$val["fld180"].$val["_fld179"]."(".$val["cnt"].")"."</a></li>";
   }
   $html=preg_replace("/<!--madorilistM-->/",$navibar,$html);
   
@@ -214,7 +216,7 @@ function htmlFooter(){
   $navibar="";
   $data=viewRentMadoriA();
   foreach($data["data"] as $key=>$val){
-   $navibar.="<li><a href='#'>".$val["fld180"].$val["_fld179"]."(".$val["cnt"].")"."</a></li>";
+//   $navibar.="<li><a href='#'>".$val["fld180"].$val["_fld179"]."(".$val["cnt"].")"."</a></li>";
   }
   $html=preg_replace("/<!--madorilistA-->/",$navibar,$html);
 
@@ -549,7 +551,7 @@ function htmlContents($data){
 
    $replace.="<div class='likeItem'>";
    $replace.="<p class='thumb'>";
-   $replace.="<a href='#'>";
+   $replace.="<a href='room.php?fld000=".$val["fld000"]."'>";
    $replace.="<img src='".$imgfilepath."'>";
    $replace.="</a>";
    $replace.="</p>";
