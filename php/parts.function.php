@@ -1353,11 +1353,13 @@ function partsRankDiv($data){
 
    $s=preg_replace("/<!--id-->/",$key,$s);
 
-   if($key=="new") $display="";
-   else $display="none;";
+//   if($key=="new") $display="";
+//   else $display="none;";
    $s=preg_replace("/<!--display-->/",$display,$s);
 
    if($key=="new") $rankname="新着物件";
+   elseif($key=="baibai") $rankname="売買物件";
+   elseif($key=="tintai") $rankname="賃貸物件";
    else{
     foreach($val as $key1=>$val1){
      $rankname=$val1["rankname"];
@@ -1367,6 +1369,8 @@ function partsRankDiv($data){
    $s=preg_replace("/<!--rankname-->/",$rankname,$s);
 
    if($key=="new") $rcomment="新着物件のご案内です。";
+   elseif($key=="baibai") $rcomment="売買物件のご案内です。";
+   elseif($key=="tintai") $rcomment="賃貸物件のご案内です。";
    else{
     foreach($val as $key1=>$val1){
      $rcomment=$val1["rcomment"];

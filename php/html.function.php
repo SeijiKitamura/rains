@@ -88,9 +88,11 @@ function htmlHeader($title=null){
    $navibar.="<li><a href='".$key."'";
    $navibar.=">".$val."</a></li>";
   }
-  //検索バー追加
-  $navibar.="<li><input type='text' value='キーワード' name='serchword'>";
-  $navibar.="<input type='image' src='.".IMG."/search.png'></li>";
+  
+  //検索バー追加(未対応)
+//  $navibar.="<li><input type='text' value='キーワード' name='serchword'>";
+//  $navibar.="<input type='image' src='.".IMG."/search.png'></li>";
+
   $html=preg_replace("/<!--navibar-->/",$navibar,$html);
 
   echo $html;
@@ -198,7 +200,7 @@ function htmlFooter(){
   $navibar="";
   $data=viewRentAddress();
   foreach($data["data"] as $key=>$val){
-   $navibar.="<li><a href='#'>".$val["fld019"]."(".$val["count"].")"."</a></li>";
+//   $navibar.="<li><a href='#'>".$val["fld019"]."(".$val["count"].")"."</a></li>";
   }
   $html=preg_replace("/<!--addresslist-->/",$navibar,$html);
 
@@ -206,7 +208,7 @@ function htmlFooter(){
   $navibar="";
   $data=viewRentMadoriM();
   foreach($data["data"] as $key=>$val){
-   $navibar.="<li><a href='#'>".$val["fld180"].$val["_fld179"]."(".$val["cnt"].")"."</a></li>";
+//   $navibar.="<li><a href='#'>".$val["fld180"].$val["_fld179"]."(".$val["cnt"].")"."</a></li>";
   }
   $html=preg_replace("/<!--madorilistM-->/",$navibar,$html);
   
@@ -214,7 +216,7 @@ function htmlFooter(){
   $navibar="";
   $data=viewRentMadoriA();
   foreach($data["data"] as $key=>$val){
-   $navibar.="<li><a href='#'>".$val["fld180"].$val["_fld179"]."(".$val["cnt"].")"."</a></li>";
+//   $navibar.="<li><a href='#'>".$val["fld180"].$val["_fld179"]."(".$val["cnt"].")"."</a></li>";
   }
   $html=preg_replace("/<!--madorilistA-->/",$navibar,$html);
 
@@ -549,7 +551,7 @@ function htmlContents($data){
 
    $replace.="<div class='likeItem'>";
    $replace.="<p class='thumb'>";
-   $replace.="<a href='#'>";
+   $replace.="<a href='room.php?fld000=".$val["fld000"]."'>";
    $replace.="<img src='".$imgfilepath."'>";
    $replace.="</a>";
    $replace.="</p>";
@@ -604,8 +606,9 @@ function htmlStationList($data,$comment=null){
     $replace.="<ul class='searchList'>";
    }
 
-   //ループ部分
-   $replace.="<li><a href='#'>";
+   //ループ部分(ここから typeの引数を日本語でセット)
+   $replace.="<li><a href='list.php?station=".$val["fld026"];
+   $replace.="&type=".$comment."'>";
    $replace.=$val["fld026"]."(".$val["cnt"].")";
    $replace.="</a></li>";
   }
@@ -699,6 +702,70 @@ function htmlMadoriList($data,$comment=null){
    $replace.="</a></li>";
   }
   $replace.="</ul></div><div class='clr'></div>";
+  $html=preg_replace("/<!--loop-->.*<!--loopend-->/s",$replace,$html);
+  echo $html;
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+//物件種別一覧を表示
+function htmlKindsListStation($data,$station){
+ try{
+  $mname="htmlKindsListStation(html.function.php) ";
+  $c="start ".$mname;wLog($c);
+  //現在ページ取得
+  $nowpage=basename($_SERVER["PHP_SELF"]);
+
+  //スケルトン読み込み
+  $path=realpath("./").SKELETON."/kindslist.html";
+  $html=file_get_contents($path);
+
+  //タイトルセット
+  $replace="物件種別";
+  $html=preg_replace("/<!--title-->/",$replace,$html);
+
+  $replace="";
+  foreach($data["data"] as $key=>$val){
+   $link ="list.php?keyval=fld001-".$val["fld001"]."|fld002-".$val["fld002"];
+   $link.="|fld003-".$val["fld003"];
+   $replace.="<li><a href='".$link."'>";
+   $replace.=$val["_fld003"]."(".$val["cnt"].")</a></li>";
+  }
+  $html=preg_replace("/<!--loop-->.*<!--loopend-->/s",$replace,$html);
+  echo $html;
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+ }
+}
+
+//間取り一覧を表示
+function htmlMadoriList2($data,$link){
+ try{
+  $mname="htmlMadoriList(html.function.php) ";
+  $c="start ".$mname;wLog($c);
+  //現在ページ取得
+  $nowpage=basename($_SERVER["PHP_SELF"]);
+
+  //スケルトン読み込み
+  $path=realpath("./").SKELETON."/kindslist.html";
+  $html=file_get_contents($path);
+
+  //タイトルセット
+  $replace="間取り一覧";
+  $html=preg_replace("/<!--title-->/",$replace,$html);
+
+  $replace="";
+  foreach($data["data"] as $key=>$val){
+//   $l ="list.php?keyval=fld001-".$val["fld001"]."|";
+//   $l.="fld002-|".$val["fld002"]."|fld003-".$val["fld003"];
+   $replace.="<li><a href='".$l."'>";
+   $replace.=$val["fld180"].$val["_fld179"]."(".$val["cnt"].")</a></li>";
+  }
   $html=preg_replace("/<!--loop-->.*<!--loopend-->/s",$replace,$html);
   echo $html;
   $c="end ".$mname;wLog($c);

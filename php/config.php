@@ -162,20 +162,22 @@ $PAGEARY=array( "index.php"
                                       ,"css2" =>"header.css"
                                       ,"css3" =>"search.css"
                                       ,"description"=>"")
+               ,"list.php"
+                              =>array( "title"=>"物件一覧"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"list.css"
+                                      ,"description"=>"")
               );
 
 $NAVI  =array(
-                "search.php?station=all"=>"駅名で検索!"  
-               ,"search.php?address=all"=>"住所で検索!"
-               ,"search.php?madori=all" =>"間取で検索!"
-               ,"search.php?sale=all"   =>"売買で検索!"
-               ,"q_and_a.php"           =>"Q&A"
+                "q_and_a.php"           =>"Q&A"
                ,"yanusi.php"            =>"オーナー様"
               );
 
 $MININAVI=array(
-                "q_and_a.php" =>"Q&A"
-                ,"yanusi.php" =>"オーナー様"
+//                "q_and_a.php" =>"Q&A"
+//                ,"yanusi.php" =>"オーナー様"
                );
 
 $INFO=array    (
