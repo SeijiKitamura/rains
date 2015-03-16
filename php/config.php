@@ -106,7 +106,7 @@ $PAGEARY=array( "index.php"
                               =>array( "title"=>"家主様"
                                       ,"css1" =>"all.css"
                                       ,"css2" =>"header.css"
-                                      ,"css3" =>""
+                                      ,"css3" =>"yanusi.css"
                                       ,"description"=>"")
                ,"annai.php"  
                               =>array( "title"=>"会社案内"
@@ -142,7 +142,7 @@ $PAGEARY=array( "index.php"
                               =>array( "title"=>"プライバシーポリシー"
                                       ,"css1" =>"all.css"
                                       ,"css2" =>"header.css"
-                                      ,"css3" =>".css"
+                                      ,"css3" =>"privacy.css"
                                       ,"description"=>"")
                ,"sitemap.php"
                               =>array( "title"=>"サイトマップ"
@@ -167,6 +167,12 @@ $PAGEARY=array( "index.php"
                                       ,"css1" =>"all.css"
                                       ,"css2" =>"header.css"
                                       ,"css3" =>"list.css"
+                                      ,"description"=>"")
+               ,"login.php"
+                              =>array( "title"=>"ログイン"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>""
                                       ,"description"=>"")
               );
 
