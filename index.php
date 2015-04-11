@@ -8,6 +8,16 @@ htmlTopImage();
      <div id="contents">
       <div id="article">
 <?php
+//ログインチェック
+session_start();
+if(isset($_SESSION["USERID"]) || $_SESSION["USERID"] || $_SESSION["USERID"]==md5(USERID)){
+ $loginflg=1;
+}
+else{
+ $loginflg=0;
+}
+
+
 //タブ表示用
 //$data=viewNewAndRank();
 //partsRankTab($data);
@@ -15,7 +25,7 @@ htmlTopImage();
 
 //一覧表示
 $data=viewTopData();
-partsRankDiv($data);
+partsRankDiv($data,$loginflg);
 
 ?>
       </div><!--div id="article"-->
@@ -37,10 +47,8 @@ htmlFooter()
 
  <script>
 $(function(){
- $("ul#tab_link li a").on("click",function(){
-  showTab(this);
- });
 
+ //ナビゲーション追従
  var topnavi=$("div.naviBar").offset()["top"];
  $(window).scroll(function(){
   if($(window).scrollTop()>topnavi){
@@ -53,8 +61,12 @@ $(function(){
    $("div#shortNavi").slideUp();
   }
  });
+
+ //非表示ボタン
+ $("button").click(function(){ delItem($(this));});
 }); 
 
+//未使用
 function showTab(elem){
  //aクリックイベントキャンセル
  event.preventDefault();
@@ -76,7 +88,46 @@ function showTab(elem){
  });
 }
 
-function showNavi(){
+//非表示登録
+function delItem(elem){
+ var php="php/htmlSetBlackList.php";
+ var fld000=elem.attr("data-fld000");
+ var d={"fld000":fld000,"black":""};
+
+ //物件番号チェック
+ if(! fld000.match(/^[0-9]+$/)){
+  alert("物件番号が数字ではありません");
+  return false;
+ }
+
+ console.log(d);
+ if(! confirm("非表示にしますか?")) return false;
+
+ $.ajax({
+  url:"php/htmlSetBlackList.php",
+  type:"post",
+  dataType:"html",
+  data:d,
+  async:false,
+  complete:function(){},
+  success:function(html){
+   console.log(html);
+   hideItem(elem);
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+  }
+ });
+}
+
+//非表示アクション
+function hideItem(elem){
+ var fld000=elem.attr("data-fld000");
+ $("div.recomendItemList").each(function(){
+  if($(this).attr("data-fld000")==fld000){
+   $(this).slideUp();
+  }
+ });
 }
  </script>
 </html>

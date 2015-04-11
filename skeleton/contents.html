@@ -87,8 +87,8 @@
        <div class="section">
         <div id="roomPhotoAlbum">
          <div class="bigphoto">
-          <a href="#">
-           <img src="<!--bigphoto-->">
+          <a>
+           <img id="bigimg" src="<!--bigphoto-->" data-zoom-image="<!--bigphoto-->">
           </a>
          </div><!--div class="bigphoto"-->
          <div class="shortphoto">
@@ -101,6 +101,26 @@
          </div><!--div class="shortphoto"-->
          <div class="clr"></div>
         </div><!--div id="roomPhotoAlbum"-->
+        <!--login-->
+        <div class="loginpart" data-fld000="<!--fld000-->">
+         <div class="buttonpart">
+          <ul class="ulbutton">
+           <li><button id="delitem">非表示</button></li>
+           <li><button id="addphoto">画像追加</button></li>
+           <li><button id="delAll">画像全削除</button></li>
+           <li><input type="text" name="outsiteurl"><button id="outsideImage">外部画像</button></li>
+           <li><button><a href="https://google.co.jp/search?hl=ja&source=hp&q=<!--bname--> <!--menseki--> <!--address-->" target="_blank">検索</a></button></li>
+           <li><input type="file" name="uploadimg" multiple="multiple" data-fld000="<!--fld000-->"></li>
+          </ul><!--ul class="ulbutton"-->
+          <div class="clr"></div>
+         </div><!--div class="buttonpart"-->
+         <div class="msgpart">
+         </div><!--div class="msgpart"-->
+         <div class="imgpart">
+         </div><!--div class="imgpart"-->
+         <div class="clr"></div>
+        </div><!--div class="loginpart"-->
+        <!--loginend-->
        </div><!--div class="section"-->
        <h3 id="itemInfo"><!--bname-->の物件情報</h3>
        <div id="itemDetail">

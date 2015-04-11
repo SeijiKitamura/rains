@@ -74,6 +74,8 @@ function htmlHeader($title=null){
   //メールリンク
   $html=preg_replace("/<!--mailto-->/",MAILADDRESS,$html);
 
+  //ログアウト
+    
   //イベントバー
   $eventbar="";
   foreach($MININAVI as $key=>$val){
@@ -87,6 +89,16 @@ function htmlHeader($title=null){
   foreach($NAVI as $key=>$val){
    $navibar.="<li><a href='".$key."'";
    $navibar.=">".$val."</a></li>";
+  }
+
+  session_start();
+  if(isset($_SESSION["USERID"]) || $_SESSION["USERID"] || $_SESSION["USERID"]==md5(USERID)){
+   $navibar.="<form id='loginForm' name='loginForm' action='login.php' method='POST'>";
+   $navibar.="<li>";
+   $navibar.="<input type='hidden' id='logout' name='logout' value='ログアウト'>";
+   $navibar.="<a id='a_logout' href='#' onclick='document.forms.loginForm.submit();return false;'>ログアウト</a>";
+   $navibar.="</li>";
+   $navibar.="</form>";
   }
   
   //検索バー追加(未対応)
@@ -381,25 +393,22 @@ function htmlContents($data){
 
    $html=preg_replace("/<!--utiwake-->/",$replace,$html);
 
-   //画像が1枚以下の場合、表示しない
-   if(! count($val["imgfilepath"])||count($val["imgfilepath"])==1){
+   //画像が0枚の場合、表示しない
+   if(! count($val["imgfilepath"])){
     $replace="";
     $html=preg_replace("/<!--bigphoto-->/",$replace,$html);
     $html=preg_replace("/<!--loop-->.*<!--loopend-->/s",$replace,$html);
    }
 
-   //画像が2枚以上の場合、表示する
+   //画像が1枚以上の場合、表示する
    foreach($val["imgfilepath"] as $key1=>$val1){
-    if(!$key1) continue;
-    if($key1==1){
+    if(!$key1){
      $replace="";
      $replace=$val1;
      $html=preg_replace("/<!--bigphoto-->/",$replace,$html);
      $replace="";
     }
-    else{
-     $replace.="<li><a href='#'><img src='".$val1."'></a></li>";
-    }
+    $replace.="<li><a href='#'><img src='".$val1."'></a></li>";
    }
    $html=preg_replace("/<!--loop-->(.*)<!--loopend-->/s",$replace,$html);
    
@@ -567,7 +576,6 @@ function htmlContents($data){
    $replace.="</div>";
   }
   $html=preg_replace("/<!--loopBrother-->.*<!--loopBrotherEnd-->/s",$replace,$html);
-
 
   echo $html;
   $c="end ".$mname;wLog($c);

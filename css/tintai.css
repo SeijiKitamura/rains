@@ -62,13 +62,20 @@ span.itemDisc{
 }
 
 div.photoFl{
- width:290px;
+ width:240px;
  float:left;
 }
 p.mb_10{
+ width:100%;
+ height:100%;
  margin:0 0 10px 0;
+ overflow:hidden;
 }
 
+p.mb_10 img{
+ max-width:100%;
+ height:auto;
+}
 div.tableFr{
  width:465px;
  float:right;
@@ -123,13 +130,15 @@ div.bigphoto a{
 }
 
 div.bigphoto a img{
- max-width:100%;
- max-height:100%;
+ width:auto;
+ max-height:360px;
 }
 
 div.shortphoto{
  float:right;
  width:290px;
+ height:360px;
+ overflow:auto;
 }
 
 div.shortphoto ul li{
@@ -315,3 +324,53 @@ p.pStation{
  margin   :0 0 5px 0:
 }
 
+div.loginpart{
+ width:100%;
+ margin:20px 0;
+}
+
+div.buttonpart{
+ width:100%;
+}
+
+ul.ulbutton{
+ list-style:none;
+}
+
+ul.ulbutton li{
+ float:left;
+ margin:0 10px;
+}
+
+ul.ulbutton li button{
+ width:100px;
+}
+
+ul.ulbutton li input[type=file]{
+ display:none;
+}
+
+div.imgpart{
+ width:100%;
+ margin:20px 0;
+}
+
+ul.ul_image{
+ list-style:none;
+}
+
+ul.ul_image li{
+ display:block;
+ width:200px;
+ height:200px;
+ float:left;
+ margin:10px;
+ border:1px solid #DCDCDC;
+ overflow:hidden;
+}
+
+ul.ul_image li img{
+ max-width:90%;
+ max-height:90%;
+ margin:3%;
+}

@@ -753,7 +753,7 @@ function partsImgPathFromSite($pageurl){
    //空欄ごとに区切る
    $data=preg_split("/[\s]+/",$data);
    
-  //属性と値を配列に格納
+   //属性と値を配列に格納
    $col=array();
    foreach($data as $key1=>$val1){
     if(! $val1){
@@ -762,7 +762,12 @@ function partsImgPathFromSite($pageurl){
     }
     preg_match("/(.*?)={1}(.*)/",$val1,$m);
     $c="notice:".$mname."配列へ格納".$m[1]."=>".$m[2];wLog($c);
-    $col[$m[1]]=$m[2];
+    $col[$m[1]]=mb_convert_encoding($m[2],"UTF-8","auto");
+   }
+
+  //suumo用に対策(data-srcを適用する）
+   if(preg_match("/suumo\.jp/",$pageurl)){
+    $col["src"]=$col["data-src"];
    }
 
   //src属性なければスキップ
@@ -787,10 +792,16 @@ function partsImgPathFromSite($pageurl){
      $col["src"]=$purl["scheme"]."://".$purl["host"].$col["src"];
     }
     
+    // 「./」から始まっている
+    elseif(preg_match("/^\.\//",$col["src"])){
+     $c="notice:".$mname." 画像パスが./で始まっている".$col["src"];wLog($c);
+     $col["src"]=dirname($pageurl).preg_replace("/^\./","",$col["src"]);
+    }
+    
     // 「/」から始まっていない
     elseif(preg_match("/^[^\/]/",$col["src"])){
      $c="notice:".$mname." 画像パスが相対パス".$col["src"];wLog($c);
-     $col["src"]=$pageurl.$col["src"];
+     $col["src"]=dirname($pageurl)."/".$col["src"];
     }
    }
   
@@ -821,8 +832,16 @@ function partsImgPathFromSite($pageurl){
   //athome用カスタマイズ(拡張子後のオプションを削除)
    if(preg_match("/athome\.co\.jp/",$col["src"])){
     $c="notice:".$mname."athome用パス変換".$col["src"];wLog($c);
-    $col["src"]=preg_replace("\?.*$/","",$col["src"]);
+    $col["src"]=preg_replace("/\?.*$/","",$col["src"]);
    }
+   
+  //assist-jpn.com用カスタマイズ
+   if(preg_match("/assist-jpn\.com/",$col["src"])){
+    $c="notice:".$mname."assist-jpn用パス変換".$col["src"];wLog($c);
+    $col["src"]=preg_replace("/\&.*$/","",$col["src"]);
+    $c="notice:".$mname."assist-jpn用パス変換終了".$col["src"];wLog($c);
+   }
+  
   //ブラックリスト除外
    if( preg_match($blacklist,$col["src"])){
     $c="notice:".$mname."ブラックリスト該当".$col["src"];wLog($c);
@@ -1332,7 +1351,7 @@ function partsRankTab($data){
 }
 
 //viewNewAndRankで取得したデータを使用してdivを作成
-function partsRankDiv($data){
+function partsRankDiv($data,$loginflg=null){
  try{
   $mname="partsRankDiv(parts.function.php) ";
   $c="start ".$mname;wLog($c);
@@ -1382,6 +1401,10 @@ function partsRankDiv($data){
    $loop="";
    foreach($val as $key1=>$val1){
     $itembox=$match[2];
+    //物件番号
+    $fld000=$val1["fld000"];
+    $itembox=preg_replace("/<!--fld000-->/",$fld000,$itembox);
+    
     //個別ページ
     $path="room.php?fld000=";
     $itembox=preg_replace("/<!--estatepath-->/",$path.$val1["fld000"],$itembox);
@@ -1436,6 +1459,11 @@ function partsRankDiv($data){
     else $underground="";
     $itembox=preg_replace("/<!--underground-->/",$underground,$itembox);
 
+    //ログイン中なら削除ボタン追加
+    if($loginflg){
+     $replace="<button data-fld000=".$val1["fld000"].">非表示</button>";
+     $itembox=preg_replace("/<!--delbutton-->/",$replace,$itembox);
+    }
     $loop.=$itembox;
    }
 

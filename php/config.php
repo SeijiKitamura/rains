@@ -174,6 +174,12 @@ $PAGEARY=array( "index.php"
                                       ,"css2" =>"header.css"
                                       ,"css3" =>""
                                       ,"description"=>"")
+               ,"menu.php"
+                              =>array( "title"=>"データ更新"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"menu.css"
+                                      ,"description"=>"")
               );
 
 $NAVI  =array(
