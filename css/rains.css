@@ -431,19 +431,21 @@ div.bigNavi ul li a{
  border-radius:10px;
 }
 
+
+/*
 div#main{
  border :1px solid #DCDCDC;
  width  :95%;
  margin :1em;
  padding:0.5em;
 }
-
 div#main h2{
  border :1px solid #DCDCDC;
  font-size:2em;
  background:blue;
  color:white;
 }
+*/
 
 div.estatebox{
  border :1px solid #DCDCDC;
@@ -478,12 +480,15 @@ div.detailbox ul{
  list-style:none;
 }
 
+/*
 span.price{
  display:block;
  text-align:right;
  color:red;
  font-size:1.5em;
 }
+*/
+
 span.yen{
  color:red;
 }
@@ -578,7 +583,7 @@ div.recomendItemBoxDown p{
 /*index.php用*/
 
 /*room.php用*/
-div#contents{
+div#contentsroom{
  width     :1000px;
  margin    :0 auto;
  text-align:left;
@@ -683,7 +688,7 @@ div#viewHeadLeft{
  float:right;
 }
 
-div#article{
+div#articleroom{
  width:770px;
  float:left;
 }
@@ -891,9 +896,11 @@ div.likeItem img{
  margin:0 0 5px 0;
 }
 
+/*
 span.price{
  color:#FF6000;
 }
+*/
 
 p.pAddress{
  font-size:0.833em;
