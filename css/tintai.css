@@ -374,3 +374,40 @@ ul.ul_image li img{
  max-height:90%;
  margin:3%;
 }
+
+div#contentsLeft{
+ width:1000px;
+ padding :4px;
+ margin:0 auto;
+}
+
+ul#leftMenu{
+ list-style:none;
+}
+
+ul#leftMenu>li{
+ display      :block;
+ line-height  :2.4;
+ border       :1px solid #DCDCDC;
+ margin       :0 -1px 0 0;
+ text-align   :center;
+ cursor       :pointer;
+ width        :150px;
+ float        :left;
+}
+
+ul.subList{
+ list-style:none;
+ margin    :0 0 0 10px;
+}
+
+ul.subList li{
+ display      :block;
+ line-height  :2.4;
+ border       :1px solid #DCDCDC;
+ margin       :-1px -1px -1px 0px;
+ padding      :0 0 0 10px;
+ text-align   :left;
+ cursor       :pointer;
+}
+

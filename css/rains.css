@@ -1,0 +1,1034 @@
+/*all*/
+
+/*
+ * html5doctor.com Reset Stylesheet
+ * v1.4.1
+ * 2010-03-01
+ * Author: Richard Clark - http://richclarkdesign.com
+ * */
+
+/*全ページ共通*/
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin:0; padding:0; border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent; } body { line-height:1; } article,aside,canvas,details,figcaption,figure, footer,header,hgroup,menu,nav,section,summary { display:block; } nav ul { list-style:none; } blockquote, q { quotes:none; } blockquote:before, blockquote:after, q:before, q:after { content:''; content:none; } a { margin:0; padding:0; border:0; font-size:100%; vertical-align:baseline; background:transparent; } ins { background-color:#ff9; color:#000; text-decoration:none; } mark { background-color:#ff9; color:#000; font-style:italic; font-weight:bold; } del { text-decoration: line-through; } abbr[title], dfn[title] { border-bottom:1px dotted #000; cursor:help; } table { border-collapse:collapse; border-spacing:0; } hr { display:block; height:1px; border:0; border-top:1px solid #cccccc; margin:1em 0; padding:0; } input, select { vertical-align:middle; }
+
+a{
+ text-decoration:none;
+ color:#000000;
+}
+
+div.clr{
+ clear:both;
+}
+
+span.yen{
+ font-size:0.5em;
+}
+
+body{
+ color:black;
+ min-width:1000px;
+ background:#FFF6E5;
+ }
+
+*{
+ font-family: "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","メイリオ","Meiryo","ＭＳ Ｐゴシック","sans-seriff";
+}
+
+button{
+ font-weight          :bold;
+ padding              :5px 10px;
+ border-style         :none;
+ -moz-border-radius   :5px;
+ -webkit-border-radius:5px;
+ border-radius        :5px;
+}
+
+/*all*/
+
+/*header*/
+div#header{
+/* border :1px solid #DCDCDC;*/
+ width  :100%;
+/* height :8em;*/
+/* margin :1em;*/
+/* padding:0.5em;*/
+ border-top:2px solid #FFC400;
+}
+
+div#titleSpace{
+ width :1000px;
+ margin:0 auto;
+}
+
+div#titleSpace h1{
+ font-size :10px;
+ float     :left;
+ width     :820px;
+ text-align:left;
+ color     :#3C3C3C;
+ margin    :0.2em 0 0 0 ;
+}
+
+div#header_inner{
+ width :1000px;
+ margin:0 auto;
+}
+
+div.logoSpace{
+/* border :1px solid #DCDCDC;*/
+ width  :196px;
+ height :2em;
+ margin :0 0 0 0;
+ padding:0em;
+ float  :left;
+}
+
+div.logoSpace img{
+ width:100%;
+}
+
+div.eventSpace{
+/* border :1px solid #DCDCDC;*/
+ width  :360px;
+ height :24px;
+ margin :0 0 0 3em;
+ padding:0.5em;
+ float  :left;
+}
+
+div.eventSpace ul{
+ list-style:none;
+}
+
+div.eventSpace ul li{
+ float:left;
+}
+
+div.eventSpace ul li a{
+ display:block;
+ border:1px solid #DCDCDC;
+ width :120px;
+ padding:4px 0 4px 0;
+ text-align:center;
+ font-size:0.9em;
+}
+
+div.storeInfo{
+/*border :1px solid #DCDCDC;*/
+ width  :360px;
+ margin :0 0 0 0em;
+ padding:0em;
+ float  :left;
+}
+
+div.storeInfo ul{
+ list-style:none;
+}
+
+div.storeInfo ul li{
+ font-size:small;
+}
+
+span.tel{
+ font-size:1.5em;
+ color:red;
+}
+
+div.naviBar{
+/* border :1px solid #DCDCDC;*/
+ width  :1000px;
+ margin :3px auto;
+}
+
+div.naviBar ul{
+ width     :1000px;
+ overflow  :hidden;
+ text-align:center;
+ list-style:none;
+}
+
+div.naviBar ul li{
+ height :29px;
+ float  :left;
+}
+
+div.naviBar ul li a{
+ border-right    :1px solid #DCDCDC;
+ width     :120px;
+ height    :27px;
+ text-align:center;
+ display   :block;
+ padding   :8px 0 0 0 ;
+ font-size :0.8em;
+}
+
+div.naviBar ul li input{
+ margin:0 2px 0 0;
+}
+
+div.naviBar ul li a.nowpage{
+ background:white;
+ color     :black;
+}
+
+div#footer{
+ background:url("../img/bg_footer.jpg") repeat;
+ color:#CECECE;
+ font-size:10px;
+}
+
+div#footerHead{
+ padding:45px 0 15px 0; 
+ height :100%;
+}
+
+div.footerBox{
+ width:960px;
+ margin:0 auto;
+ padding:0 8px 20px 8px;
+ height:100%;
+ border-bottom:1px solid #58554E;
+}
+
+div.footerBox h3{
+ padding-bottom:10px;
+ color:#CCC;
+ font-size:14px;
+}
+
+div.footerBox a{
+ color:#CCC;
+ font-size:12px;
+}
+div#siteHelp{
+ width:435px;
+ float:left;
+ text-align:left;
+ margin:0;
+}
+
+div#siteHelp p{
+ font-size:11px;
+ line-height:1.6em;
+}
+
+div.footerContactItem{
+ width:482px;
+ float:right;
+}
+
+div.footerContactLeft{
+ width:179px;
+ float:left;
+ padding-right:20px;
+}
+
+div.footerContactLeft p{
+ padding-top:11px;
+}
+
+div.footerContactRight{
+ width:241px;
+ float:right;
+}
+
+div#siteAbout{
+ width:358px;
+ float:left;
+ padding-right:15px;
+ margin-right:63px;
+ height:100%;
+}
+
+div#siteAbout p{
+ color:#CCC;
+ font-size:12px;
+ line-height:1.6em;
+}
+
+div#footerLinks{
+ float:left;
+ width:524px;
+}
+
+div.link01,
+div.link02,
+div.link03{
+ float:left;
+}
+
+div.link01,
+div.link02{
+ padding-right:60px;
+}
+
+div#footerLinks div ul li{
+ padding-left :15px;
+ margin-bottom:5px;
+}
+
+div.areaBox{
+ margin-top:5px;
+/* height:50px;*/
+ width:95px;
+ float:left;
+}
+
+div.areaBoxList{
+ width:865px;
+ float:right;
+ margin-top:14px;
+}
+
+
+div.areaBoxList ul{
+ margin-top:2px;
+}
+
+div.areaBoxList ul li{
+ float:left;
+ margin:0 24px 8px 0;
+ width:120px;
+}
+
+div#footerFoot{
+ color:#FFFFFF;
+ background:url("../img/bg_footer.jpg") repeat;
+}
+
+div#copyright{
+ width:960px;
+ margin:0 auto;
+ text-align:left;
+ font-size:1.2em;
+}
+
+div#copyright p{
+ text-align:center;
+ padding:30px;
+}
+
+div#shortNavi{
+ text-align:center;
+ position:fixed;
+ left:0;
+ top:0;
+ width:100%;
+ height:50px;
+ background-color:#FFF6E5;
+ z-index:9999;
+ color:#FFFFFF;
+ font-size:24px;
+ border-bottom:2px solid #FFC400;
+}
+
+div#shortNaviInner{
+ margin:0 auto;
+ text-align:left;
+ width:1000px;
+ height:50px;
+ position:relative;
+}
+
+ul#sh_navi{
+ width:1000px;
+ float:left;
+ margin:0 auto;
+ overflow:hidden;
+ text-align:center;
+}
+
+ul#sh_navi li{
+ float:left;
+ height:30px;
+ display:block;
+ padding:10px 0;
+}
+
+ul#sh_navi li a{
+ display:block;
+ overflow:hidden;
+ width:130px;
+ height:30px;
+ font-size:12px;
+ border-right:1px solid #DCDCDC;
+ padding:10px 0;
+}
+
+ul#sh_navi li a img{
+ width:100%;
+}
+
+div#main_line{
+ width:100%;
+ height:26px;
+ background:url(../img/backline.png) repeat-x top left;
+}
+
+div#main_line p{
+ width     :960px;
+ margin    :0 auto;
+ font-size :12px;
+ color     :white;
+ padding   :8px 0 0 0;
+ text-align:left;
+}
+
+/*header*/
+
+/*index.php用*/
+
+div#topImage{
+/* border :1px solid #DCDCDC;*/
+ width  :100%;
+/* height :8em;*/
+ margin :0 auto;
+ padding:0.5em;
+}
+
+div.imageSpace{
+/*border    :1px solid #DCDCDC;*/
+ width     :100%;
+ max-height:377px;
+ overflow:hidden;
+}
+
+div.imageSpace img{
+ width    :100%;
+}
+
+div.commentSpace{
+/* border    :1px solid #DCDCDC;*/
+ width     :60%;
+ margin    :1em 0 0 0;
+ padding   :1em;
+ float     :left;
+}
+
+div.bigNavi{
+ width  :90%;
+ padding:3em 0;
+}
+
+div.bigNavi ul{
+ list-style:none;
+}
+
+div.bigNavi ul li{
+ float :left;
+ width  :25%;
+}
+
+div.bigNavi ul li a{
+ display   :block;
+ height    :1em;
+ padding   :0.5em 0;
+ font-size :2.5em;
+ text-align:center;
+ background:blue;
+ border    :1px solid white;
+ color     :white;
+ margin    :0 0.1em;
+ border-radius:10px;
+}
+
+div#main{
+ border :1px solid #DCDCDC;
+ width  :95%;
+ margin :1em;
+ padding:0.5em;
+}
+
+div#main h2{
+ border :1px solid #DCDCDC;
+ font-size:2em;
+ background:blue;
+ color:white;
+}
+
+div.estatebox{
+ border :1px solid #DCDCDC;
+ width  :15%;
+ margin :0.5em;
+ padding:0.5em;
+ float  :left;
+ border-radius:10px;
+}
+
+div.imagebox{
+ border :1px solid #DCDCDC;
+ width  :90%;
+ height :10em;
+ padding:0.5em;
+ margin :0 0 0.5em 0;
+ overflow:hidden;
+}
+
+div.imagebox img{
+ width  :90%;
+}
+
+div.detailbox{
+ border :1px solid #DCDCDC;
+ width  :90%;
+ height :5em;
+ padding:0.5em;
+}
+
+div.detailbox ul{
+ list-style:none;
+}
+
+span.price{
+ display:block;
+ text-align:right;
+ color:red;
+ font-size:1.5em;
+}
+span.yen{
+ color:red;
+}
+
+div#contents{
+ width     :1000px;
+ margin    :0 auto;
+ text-align:left;
+}
+
+div#article{
+ background-color:white;
+}
+
+ul#tab_link{
+ width     :760px;
+ list-style:none;
+}
+
+ul#tab_link li{
+ width :128px;
+ float :left;
+}
+
+ul#tab_link li a{
+ display:block;
+ width     :98%;
+ height    :25px;
+ padding   :0.8em 0 0 0;
+ text-align:center;
+ overflow  :hidden;
+ background-color:#F5F5F5;
+ border:2px solid white;
+ font-size:0.9em;
+}
+
+ul#tab_link li a.current{
+ background-color:#FFA500;
+ color:white;
+}
+
+div#article div{
+ margin-left:0.5em;
+}
+
+div.recomendBox{
+ margin-top:2em;
+ height:25px;
+}
+
+div.recomendItemList{
+ margin-top:25px;
+}
+
+div.recomendItemBox{
+ width :220px;
+ height:230px;
+ float :left;
+ margin:0 8px 0 0;
+}
+
+div.recomendItemBoxMiddle{
+ width:220px;
+ height:150px;
+}
+
+div.recomendItemBoxMiddle p{
+ max-width:90%;
+ max-height:90%;
+ overflow :hidden;
+}
+
+div.recomendItemBoxMiddle p img{
+ width:100%;
+}
+
+div.tabSwitchH3 h3{
+ margin:5px 0 3px 0;
+ font-size:12px;
+}
+
+div.tabSwitchH3 h3 a{
+ color:#0075C8;
+}
+
+div.recomendItemBoxDown p{
+ font-size:12px;
+ color:black;
+ margin-left:0.5em;
+}
+
+/*index.php用*/
+
+/*room.php用*/
+div#contents{
+ width     :1000px;
+ margin    :0 auto;
+ text-align:left;
+}
+
+div#contentsHeader{
+ width     :1000px;
+ margin    :0 auto;
+ text-align:left;
+ padding   :0 0 10px 0;
+}
+
+ul#topicPath{
+ float:left;
+ width:1000px;
+ padding:5px 0 0 0 ;
+}
+
+ul#topicPath li{
+ margin:0 0 0 5px;
+ float :left;
+ line-height:2;
+}
+
+div#viewHead{
+ margin:0 0 10px 0;
+}
+
+div#viewHead{
+ margin:0 0 10px 0;
+}
+
+div#viewHeadRight{
+ width:770px;
+ float:left;
+}
+
+div#h1Wrapper{
+ background-color:#1A1A1A;
+ padding:12px 15px;
+ line-height:1.4;
+ font-size:15px;
+ font-weight:bold;
+ margin:0 0 10px 0;
+ color:white;
+}
+
+h2#itemName{ 
+ line-height:1.4;
+ display:block;
+ font-size:26px;
+}
+
+span.itemDisc{
+ line-height: 0.6;
+ font-size: 12px;
+ display: block;
+ width: 600px;
+ padding: 5px 0;
+ font-weight: normal;
+}
+
+div.photoFl{
+ width:240px;
+ float:left;
+}
+p.mb_10{
+ width:100%;
+ height:100%;
+ margin:0 0 10px 0;
+ overflow:hidden;
+}
+
+p.mb_10 img{
+ max-width:100%;
+ height:auto;
+}
+div.tableFr{
+ width:465px;
+ float:right;
+}
+
+div.tableFr table{
+ font-size:12px;
+}
+
+div.tableFr table th{
+ background-color:#EDE4D3;
+ border:1px solid #DCDCDC;
+ padding:8px 3px;
+}
+
+div.tableFr table td{
+ background-color:white;
+ border:1px solid #DCDCDC;
+ padding:5px 3px;
+}
+
+div#viewHeadLeft{
+ width:220px;
+ height:397px;
+ float:right;
+}
+
+div#article{
+ width:770px;
+ float:left;
+}
+
+div#article div.section{
+ margin:0 0 30px 0;
+}
+
+div#roomPhotoAlbum{
+ padding:10px 0;
+ border-top:1px dotted #999;
+ border-bottom:1px dotted #999;
+}
+
+div.bigphoto{
+ float:left;
+ width:480px;
+ height:360px;
+}
+
+div.bigphoto a{
+ display:block;
+ width:100%;
+}
+
+div.bigphoto a img{
+ width:auto;
+ max-height:360px;
+}
+
+div.shortphoto{
+ float:right;
+ width:290px;
+ height:360px;
+ overflow:auto;
+}
+
+div.shortphoto ul li{
+ display:block;
+ float:left;
+ padding:0 0 10px 10px;
+ width:96px;
+ height:74px;
+}
+
+div.shortphoto ul li a{
+ display:block;
+ width:100%;
+ height:100%;
+}
+
+div.shortphoto ul li a img{
+ max-width:100%;
+ max-height:100%;
+}
+
+h3#itemInfo,
+h3#instMap ,
+div#contactItemForm h3
+{
+ background-color:#1A1A1A;
+ padding:7px 7px;
+ line-height:1.4;
+ font-size:15px;
+ font-weight:bold;
+ margin-bottom:10px;
+ color:white;
+}
+
+div#itemDetail{
+ margin-bottom:20px;
+ border-bottom:1px dotted #999;
+}
+
+table.itemTable{
+ margin:0 0 20px 0;
+}
+
+table.itemTable th{
+ font-weight:normal;
+ text-align:left;
+ padding:5px;
+ border:1px solid #DCDCDC;
+ line-height:1.4;
+ color:#000;
+ background-color:#EDE4D3;
+}
+
+table.itemTable td{
+ font-weight:normal;
+ text-align:left;
+ background:white;
+ padding:5px;
+ border:1px solid #DCDCDC;
+ line-height:1.4;
+ color:#000;
+}
+
+div#map-canvas{
+ border-bottom:1px dotted #999;
+ width:750px;
+ height:500px;
+}
+
+div#contactItemForm table{
+ font-size:0.8em;
+}
+
+div#contactItemForm table th{
+ border:1px solid #999999;
+ background-color:#EDE4D3;
+ color:black;
+ padding:0.8em;
+ font-weight:normal;
+}
+
+div#contactItemForm table th span {
+ float:right;
+}
+
+div#contactItemForm table td{
+ border-top   :1px solid #999999;
+ border-right :1px solid #999999;
+ border-bottom:1px solid #999999;
+ background   :white;
+ font-weight  :normal;
+ text-align   :left;
+ padding      :0.8em;
+}
+
+
+div#contactItemForm table td input[type=text]{
+ width:292px;
+ padding:4px;
+ border:1px solid #bbb;
+}
+
+ul.ulradio{
+ list-style:none;
+}
+
+ul.ulradio li{
+ float:left;
+ margin:0 0 0 15px;
+}
+
+ul.ulradio li input{
+ cursor:pointer;
+}
+
+p.tac{
+ margin:1em 0 1em 0;
+ text-align:center;
+}
+
+div#contactItemBox{
+ padding:15px;
+ background-color:white;
+ border:1px solid #FFB11E;
+ margin-bottom:5px;
+ width:740px;
+}
+
+div#contactItemBox h4{
+ border-bottom:1px solid #C5C5C5;
+ font-size:1.4em;
+ padding:0 0 5px 0;
+ margin :0 0 15px 0;
+}
+
+p#contactItemBoxMsg{
+ margin:10px 0 30px 0;
+ color:#666;
+ font-size:10px;
+ line-height:1.6;
+}
+
+div#aside{
+ width:220px;
+ float:right;
+}
+div.moduleHeadItem{
+ padding:5px;
+ color  :#F39800;
+ background:#1A1A1A;
+}
+
+div.moduleHeadItem h4{
+ color:white;
+}
+
+div.moduleBodyItem{
+ padding:10px 0 0 0;
+}
+
+div.likeItem{
+ border-bottom:1px solid dotted #999;
+ margin       :0 0 10px 0;
+ font-size    :12px;
+}
+
+div.likeItem img{
+ width:220px;
+ height:165px;
+ margin:0 0 5px 0;
+}
+
+span.price{
+ color:#FF6000;
+}
+
+p.pAddress{
+ font-size:0.833em;
+}
+
+p.pStation{
+ font-size:0.833em;
+ margin   :0 0 5px 0:
+}
+
+div.loginpart{
+ width:100%;
+ margin:20px 0;
+}
+
+div.buttonpart{
+ width:100%;
+}
+
+ul.ulbutton{
+ list-style:none;
+}
+
+ul.ulbutton li{
+ float:left;
+ margin:0 10px;
+}
+
+ul.ulbutton li button{
+ width:100px;
+}
+
+ul.ulbutton li input[type=file]{
+ display:none;
+}
+
+div.imgpart{
+ width:100%;
+ margin:20px 0;
+}
+
+ul.ul_image{
+ list-style:none;
+}
+
+ul.ul_image li{
+ display:block;
+ width:200px;
+ height:200px;
+ float:left;
+ margin:10px;
+ border:1px solid #DCDCDC;
+ overflow:hidden;
+}
+
+ul.ul_image li img{
+ max-width:90%;
+ max-height:90%;
+ margin:3%;
+}
+
+div#contentsLeft{
+ width:1000px;
+ padding :4px;
+ margin:0 auto;
+}
+
+ul#leftMenu{
+ list-style:none;
+}
+
+ul#leftMenu>li{
+ display      :block;
+ line-height  :2.4;
+ border       :1px solid #DCDCDC;
+ margin       :0 -1px 0 0;
+ text-align   :center;
+ cursor       :pointer;
+ width        :150px;
+ float        :left;
+}
+
+ul.subList{
+ list-style:none;
+ margin    :0 0 0 10px;
+}
+
+ul.subList li{
+ display      :block;
+ line-height  :2.4;
+ border       :1px solid #DCDCDC;
+ margin       :-1px -1px -1px 0px;
+ padding      :0 0 0 10px;
+ text-align   :left;
+ cursor       :pointer;
+}
+
+/*room.php用*/
+
+/*menu.php用*/
+div#contentsLeft{
+ width:1000px;
+ padding :4px;
+ margin:0 auto;
+}
+
+ul#leftMenu{
+ list-style:none;
+}
+
+ul#leftMenu>li{
+ display      :block;
+ line-height  :2.4;
+ border       :1px solid #DCDCDC;
+ margin       :0 -1px 0 0;
+ text-align   :center;
+ cursor       :pointer;
+ width        :150px;
+ float        :left;
+}
+
+ul.subList{
+ list-style:none;
+ margin    :0 0 0 10px;
+}
+
+ul.subList li{
+ display      :block;
+ line-height  :2.4;
+ border       :1px solid #DCDCDC;
+ margin       :-1px -1px -1px 0px;
+ padding      :0 0 0 10px;
+ text-align   :left;
+ cursor       :pointer;
+}
+
+/*menu.php用*/
+

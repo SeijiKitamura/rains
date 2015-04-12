@@ -39,12 +39,12 @@ function htmlHeader($title=null){
   $html=preg_replace("/<!--title-->/",$title,$html);
   
   //CSS
-  $css=".".CSS."/".$PAGEARY[$nowpage]["css1"];
-  $html=preg_replace("/<!--css1-->/",$css,$html);
-  $css=".".CSS."/".$PAGEARY[$nowpage]["css2"];
-  $html=preg_replace("/<!--css2-->/",$css,$html);
-  $css=".".CSS."/".$PAGEARY[$nowpage]["css3"];
-  $html=preg_replace("/<!--css3-->/",$css,$html);
+  //$css=".".CSS."/".$PAGEARY[$nowpage]["css1"];
+  //$html=preg_replace("/<!--css1-->/",$css,$html);
+  //$css=".".CSS."/".$PAGEARY[$nowpage]["css2"];
+  //$html=preg_replace("/<!--css2-->/",$css,$html);
+  //$css=".".CSS."/".$PAGEARY[$nowpage]["css3"];
+  //$html=preg_replace("/<!--css3-->/",$css,$html);
   
   //Description 
   $description=$PAGEARY[$nowpage]["description"];

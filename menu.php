@@ -27,8 +27,6 @@ htmlHeader("メニュー");
    <div class="clr"></div>
     <div id="contentsMiddle">
      <div id="contents">
-      <div id="article">
-      </div><!--div id="article"-->
      </div><!--div id="contents"-->
     </div><!--div id="contentsMiddle"-->
   </div><!--div id="contentsWrap"-->
@@ -45,6 +43,7 @@ $(function(){
  uploadCSV();
  resetHyouji();
  resetHihyouji();
+ showData();
 });
 
 //サブリスト表示
@@ -75,7 +74,7 @@ function uploadCSV(){
 
 //CSVアップロードメソッド
 function csvUpload(elem){
- $("div#article").empty();
+ $("div#contents").empty();
  $.each(elem.files,function(i,file){
   var formData=new FormData();
   formData.append("csvfile",file);
@@ -86,7 +85,7 @@ function csvUpload(elem){
 //    async:false,
     beforeSend:function(){
      $("ul.subList").slideUp();
-     $("div#article").text("データ送信中・・・").slideDown();
+     $("div#contents").text("データ送信中・・・").slideDown();
     },
     data: formData,
     processData: false,
@@ -95,13 +94,13 @@ function csvUpload(elem){
     complete: function(){
     },
     success: function(html) {
-     $("div#article").empty()
+     $("div#contents").empty()
                      .append("更新しました");
      $("input[type=file]").val("").hide();
     },
     error:function(XMLHttpRequest,textStatus,errorThrown){
      console.log(XMLHttpRequest.responseText);
-     $("div#article").text(XMLHttpRequest.responseText);
+     $("div#contents").text(XMLHttpRequest.responseText);
      return false;
     }
   });
@@ -117,21 +116,21 @@ function resetHyouji(){
   $.ajax({
    url: 'php/htmlDelRains.php',
    type: 'get',
-   //async:false,
+   async:false,
    beforeSend:function(){
     $("ul.subList").slideUp();
-    $("div#article").text("表示リストリセット中・・・").slideDown();
+    $("div#contents").text("表示リストリセット中・・・").slideDown();
    },
    dataType: 'html',
    complete: function(){
    },
    success: function(html) {
-    $("div#article").empty()
+    $("div#contents").empty()
                     .append("リセットしました");
    },
    error:function(XMLHttpRequest,textStatus,errorThrown){
     console.log(XMLHttpRequest.responseText);
-    $("div#article").text(XMLHttpRequest.responseText);
+    $("div#contents").text(XMLHttpRequest.responseText);
     return false;
    }
   });
@@ -147,21 +146,21 @@ function resetHihyouji(){
   $.ajax({
    url: 'php/htmlDelBlackList.php',
    type: 'get',
-   //async:false,
+   async:false,
    beforeSend:function(){
     $("ul.subList").slideUp();
-    $("div#article").text("非表示リストリセット中・・・").slideDown();
+    $("div#contents").text("非表示リストリセット中・・・").slideDown();
    },
    dataType: 'html',
    complete: function(){
    },
    success: function(html) {
-    $("div#article").empty()
+    $("div#contents").empty()
                     .append("リセットしました");
    },
    error:function(XMLHttpRequest,textStatus,errorThrown){
     console.log(XMLHttpRequest.responseText);
-    $("div#article").text(XMLHttpRequest.responseText);
+    $("div#contents").text(XMLHttpRequest.responseText);
     return false;
    }
   });
@@ -170,7 +169,30 @@ function resetHihyouji(){
 
 //表示リストメソッド
 function showData(){
-
+ $("li#hyouji").click(function(){
+  $.ajax({
+   url: 'php/htmlGetRankDiv.php',
+   type: 'get',
+   async:false,
+   beforeSend:function(){
+    $("ul.subList").slideUp();
+    $("div#contents").text("表示リスト作成・・・").slideDown();
+   },
+   dataType: 'html',
+   complete: function(){
+   },
+   success: function(html) {
+    html="<div id='article'>"+html+"</div>";
+    $("div#contents").empty()
+                     .append(html);
+   },
+   error:function(XMLHttpRequest,textStatus,errorThrown){
+    console.log(XMLHttpRequest.responseText);
+    $("div#contents").text(XMLHttpRequest.responseText);
+    return false;
+   }
+  });
+ });
 }
  </script>
 </html>
