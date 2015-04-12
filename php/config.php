@@ -977,7 +977,7 @@ function wLog($comment){
   return false;
  }
 
- //echo $c."<br>";
+ if(DEBUG && preg_match("/error:/",$c)) echo $c."<br>";
 
  fwrite($fp,$c);
  fclose($fp);

@@ -17,7 +17,7 @@ function partsRainsList($data){
   $html="";
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -83,7 +83,7 @@ function partsRainsTable($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -103,7 +103,7 @@ function partsRainsTest($sql){
   partsRainsTable($result["data"]);
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -178,7 +178,7 @@ function partsArea($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -198,7 +198,7 @@ function partsNewList($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
   
@@ -232,7 +232,7 @@ function partsFldCount($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -261,7 +261,7 @@ function partsMadoriCount($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -290,7 +290,7 @@ function partsStationCount($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -344,7 +344,7 @@ function partsIndivi($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -426,7 +426,7 @@ function partsPrice($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -502,7 +502,7 @@ function partsRoomType($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -534,7 +534,7 @@ function partsMember($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -563,7 +563,7 @@ function partsNavi($data,$edit=null){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
  
 }
@@ -596,7 +596,7 @@ function partsImage($data,$edit=null){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c); echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c); 
  }
 }
 
@@ -653,7 +653,7 @@ function partsSetImg($post,$fld000){
   }
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -715,7 +715,7 @@ function partsSetImgFromSite($imgurl,$fld000){
   }
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -883,7 +883,7 @@ function partsImgListFromSite($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -905,7 +905,7 @@ function partsImgListDiv($fld000){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -950,7 +950,7 @@ EOF;
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -993,7 +993,7 @@ function partsRankList($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -1029,7 +1029,7 @@ function partsRankListShort($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -1066,7 +1066,7 @@ function partsEntryList($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -1117,7 +1117,7 @@ function partsEntry($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -1151,7 +1151,7 @@ function partsComment($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -1215,7 +1215,7 @@ function partsNowRankList($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -1270,7 +1270,7 @@ function partsEstateList($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -1311,7 +1311,7 @@ function partsEstateImage($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -1346,7 +1346,7 @@ function partsRankTab($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -1473,7 +1473,7 @@ function partsRankDiv($data,$loginflg=null){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 ?>

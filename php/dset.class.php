@@ -126,7 +126,7 @@ class DSET extends DB{
    return $this->r;
   }//try
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -171,7 +171,7 @@ class DSET extends DB{
    }//foreach
   }//try
   catch(Exception $e){
-   $c="error:".$e->getMessage();wLog($c);echo $c;
+   $c="error:".$e->getMessage();wLog($c);
   }
  }
  
@@ -226,7 +226,7 @@ class DSET extends DB{
    }//foreach
   }//try
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
  
@@ -253,7 +253,7 @@ class DSET extends DB{
    return $latlng;
   }//try
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -284,7 +284,7 @@ class DSET extends DB{
    }
   }//try
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
  
@@ -326,7 +326,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
 
  }
@@ -363,7 +363,7 @@ class DSET extends DB{
    return $this->r;
   }//try
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }//catch
  }
 
@@ -472,7 +472,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
  
@@ -500,7 +500,7 @@ class DSET extends DB{
    $c="end:".$mname;wLog($c);
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -582,7 +582,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
  
@@ -616,7 +616,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -674,7 +674,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -698,7 +698,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -788,7 +788,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
 
  }
@@ -820,7 +820,7 @@ class DSET extends DB{
   return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -856,7 +856,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
  
@@ -877,7 +877,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -913,7 +913,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -933,7 +933,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -976,7 +976,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
  public function dsetPriceCount(){
@@ -1017,7 +1017,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
  public function dsetSubFld(){
@@ -1039,7 +1039,7 @@ class DSET extends DB{
    return $data;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -1062,7 +1062,7 @@ class DSET extends DB{
    $c="end ".$mname;wLog($c);
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -1082,7 +1082,7 @@ class DSET extends DB{
    }
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -1102,7 +1102,7 @@ class DSET extends DB{
    return $this->r["data"];
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -1125,7 +1125,7 @@ class DSET extends DB{
    $c="end ".$mname;wLog($c);
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -1145,7 +1145,7 @@ class DSET extends DB{
    }
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -1160,7 +1160,7 @@ class DSET extends DB{
    return $this->getArray();
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -1190,7 +1190,7 @@ class DSET extends DB{
    $c="end ".$mname;wLog($c);
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -1217,7 +1217,7 @@ class DSET extends DB{
    }
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 

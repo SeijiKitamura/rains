@@ -33,7 +33,7 @@ function viewShortData($where=null,$order=null){
   return $db->r;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessage();wLog($c);
  }
 }
 
@@ -85,7 +85,7 @@ function viewRainsData($where=null,$order=null){
   return $db->r;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessage();wLog($c);
  }
 }
 
@@ -109,7 +109,7 @@ function viewDeleteRains($where=null,$order=null){
   return $db->r;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessage();wLog($c); echo $c;
+  $c="error:".$mname.$e->getMessage();wLog($c); 
  }
 }
 
@@ -139,7 +139,7 @@ function viewArea($which=null,$where=null,$order=null){
 
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessage();wLog($c);
  }
 }
 
@@ -156,7 +156,7 @@ function viewDetail($fld000){
   return viewRainsData($where);
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 } 
 
@@ -176,7 +176,7 @@ function viewSetImage($fld000){
   return $db->r;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -188,7 +188,7 @@ function viewSetImageNum($imgid,$imgnum){
   $db->dsetImgNum($imgid,$imgnum);
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -202,7 +202,7 @@ function viewDelImgNum($fld000,$imgid=null){
   $db->dsetDelImg($imgid);
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -246,7 +246,7 @@ function viewBlackList($where=null){
   return $db->r;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -263,7 +263,7 @@ function viewSetBlackList($fld000){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -279,7 +279,7 @@ function viewDelBlackList($fld000=null){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -293,7 +293,7 @@ function viewRank($where=null){
   return $db->dsetRank();
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -310,7 +310,7 @@ function viewNowRank($where=null){
   return $db->dsetRank();
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -328,7 +328,7 @@ function viewSetRank($data){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -345,7 +345,7 @@ function viewDelRank($data){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -362,7 +362,7 @@ function viewEntryList($fld000){
   return $db->dsetEntry();
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -382,7 +382,7 @@ function viewEntry($rank){
   return $db->r["data"];
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -409,7 +409,7 @@ function viewSetEntry($data){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -426,7 +426,7 @@ function viewDelEntry($data){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -443,7 +443,7 @@ function viewBcomment($fld000){
   return $db->dsetBcomment();
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -461,7 +461,7 @@ function viewSetBcomment($data){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -478,7 +478,7 @@ function viewDelBcomment($data){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -497,7 +497,7 @@ function viewNewRains($where=null){
   return viewRainsData($where,$order);
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -524,7 +524,7 @@ function viewNewAndRank(){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -563,7 +563,7 @@ function viewTopData(){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -580,7 +580,7 @@ function viewStationList($where=null){
   return $db->r;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -595,7 +595,7 @@ function viewRentStation(){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -610,7 +610,7 @@ function viewSaleStation(){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -626,7 +626,7 @@ function viewAddressList($where=null){
   return $db->r;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -640,7 +640,7 @@ function viewRentAddress(){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -654,7 +654,7 @@ function viewSaleAddress(){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -669,7 +669,7 @@ function viewMadoriList($where=null){
   return $db->r;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -683,7 +683,7 @@ function viewRentMadoriM(){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -697,7 +697,7 @@ function viewRentMadoriA(){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -711,7 +711,7 @@ function viewSaleMadori(){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -750,7 +750,7 @@ function viewBrother($fld000){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -767,7 +767,7 @@ function viewSearchAddress($address,$where=null){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -782,7 +782,7 @@ function viewSearchAddressM($address){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -797,7 +797,7 @@ function viewSearchAddressA($address){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -812,7 +812,7 @@ function viewSearchAddressS($address){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -830,7 +830,7 @@ function viewSearchStation($station,$where=null){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -845,7 +845,7 @@ function viewSearchStationR($station){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -860,7 +860,7 @@ function viewSearchStationM($station){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -875,7 +875,7 @@ function viewSearchStationA($station){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -890,7 +890,7 @@ function viewSearchStationS($station){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -909,7 +909,7 @@ function viewSearchMadori($heya,$type,$where=null){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -924,7 +924,7 @@ function viewSearchMadoriM($heya,$type){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -939,7 +939,7 @@ function viewSearchMadoriA($heya,$type){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -954,7 +954,7 @@ function viewSearchMadoriS($heya,$type){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -975,7 +975,7 @@ function viewGroupFld($where=null){
   return $db->r;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -991,7 +991,7 @@ function viewGroupFldR($where=null){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -1007,7 +1007,7 @@ function viewGroupFldS($where=null){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 }
 
@@ -1023,7 +1023,7 @@ function viewWalkGroup($where=null){
   return $data;
  }
  catch(Exception $e){
-  $c="error:".$e->getMessage().$mname;wLog($c);echo $c;
+  $c="error:".$e->getMessage().$mname;wLog($c);
  }
 
 }

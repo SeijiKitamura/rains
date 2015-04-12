@@ -14,7 +14,7 @@ require_once("parts.function.php");
 //  $c="end ".$mname;wLog($c);
 // }
 // catch(Exception $e){
-//  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+//  $c="error:".$mname.$e->getMessge();wLog($c);
 // }
 //}
 
@@ -39,12 +39,12 @@ function htmlHeader($title=null){
   $html=preg_replace("/<!--title-->/",$title,$html);
   
   //CSS
-  //$css=".".CSS."/".$PAGEARY[$nowpage]["css1"];
-  //$html=preg_replace("/<!--css1-->/",$css,$html);
-  //$css=".".CSS."/".$PAGEARY[$nowpage]["css2"];
-  //$html=preg_replace("/<!--css2-->/",$css,$html);
-  //$css=".".CSS."/".$PAGEARY[$nowpage]["css3"];
-  //$html=preg_replace("/<!--css3-->/",$css,$html);
+  $css=".".CSS."/".$PAGEARY[$nowpage]["css1"];
+  $html=preg_replace("/<!--css1-->/",$css,$html);
+  $css=".".CSS."/".$PAGEARY[$nowpage]["css2"];
+  $html=preg_replace("/<!--css2-->/",$css,$html);
+  $css=".".CSS."/".$PAGEARY[$nowpage]["css3"];
+  $html=preg_replace("/<!--css3-->/",$css,$html);
   
   //Description 
   $description=$PAGEARY[$nowpage]["description"];
@@ -111,7 +111,7 @@ function htmlHeader($title=null){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -128,7 +128,7 @@ function htmlLogo(){
   return $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -150,7 +150,7 @@ function htmlTopImage(){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -250,7 +250,7 @@ function htmlFooter(){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -581,7 +581,7 @@ function htmlContents($data){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -628,7 +628,7 @@ function htmlStationList($data,$comment=null){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -672,7 +672,7 @@ function htmlAddressList($data,$comment=null){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -715,7 +715,7 @@ function htmlMadoriList($data,$comment=null){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -747,7 +747,7 @@ function htmlKindsListStation($data,$station){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -779,7 +779,7 @@ function htmlMadoriList2($data,$link){
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 ?>
