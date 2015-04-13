@@ -32,11 +32,16 @@ else{
 htmlHeader($title);
 ?>
 
-  <div id="main">
+  <div id="contentsWrap">
+   <div id="contentsMiddle">
+    <div id="contents">
+
 <?php
 htmlContents($data);
 ?>
-  </div>
+    </div><!--div id="contents"-->
+   </div><!--div id="contentsMiddle"-->
+  </div><!--div id="contentsWrap"-->
 
   <div id="footer">
 <?php
@@ -81,7 +86,7 @@ $(function(){
   //非表示
   $("button#delitem").click(function(){delItem();});
   
-  //画像追加(ここから)
+  //画像追加
   $("button#addphoto").click(function(){
     $("input[name=uploadimg]").trigger("click");
   });
