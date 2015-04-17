@@ -724,11 +724,11 @@ function partsImgPathFromSite($pageurl){
  try{
   $c="start ".$mname;wLog($c);
 
-  $blacklist="/www\.townhousing\.co\.jp|suumo\.jp|www\.homes\.co\.jp/";
-
   if(! $purl=parse_url($pageurl)){
    throw new exception("URLが認識できません(".$pageurl.")");
   }
+
+  $c="notice:".$mname." URLセット(".$pageurl.")";wLog($c);
 
   $html=@file_get_contents($pageurl);
   if($html ===FALSE){
@@ -742,6 +742,8 @@ function partsImgPathFromSite($pageurl){
   
   $url=array();
   foreach($match[0] as $key=>$val){
+   $col=array();
+   
    //imgタグを除く
    $data=preg_replace("/^<img|\/?>$/","",$val);
    $c="notice:".$mname."imgタグ除外".$data;wLog($c);
@@ -752,32 +754,45 @@ function partsImgPathFromSite($pageurl){
    
    //空欄ごとに区切る
    $data=preg_split("/[\s]+/",$data);
+   foreach($data as $key1=>$val1){
+    $c="notice:".$mname."空欄区切り key1:".$key1." val1:".$val1;wLog($c);
+   }
    
    //属性と値を配列に格納
-   $col=array();
    foreach($data as $key1=>$val1){
+    $m=array();
+
     if(! $val1){
-     $c="notice:".$mname."値空欄のためスキップ";wLog($c);
+     $c="notice:".$mname."key1:".$key1." 値空欄のためスキップ";wLog($c);
      continue;
     }
-    preg_match("/(.*?)={1}(.*)/",$val1,$m);
+
+    preg_match("/(.*?)=(.*)/",$val1,$m);
     $c="notice:".$mname."配列へ格納".$m[1]."=>".$m[2];wLog($c);
     $col[$m[1]]=mb_convert_encoding($m[2],"UTF-8","auto");
    }
-
-  //suumo用に対策(data-srcを適用する）
-   if(preg_match("/suumo\.jp/",$pageurl)){
-    $col["src"]=$col["data-src"];
+   
+   $flg=1;
+   foreach($col as $key1=>$val1){
+    $c="notice:".$mname."col[".$key1."]=>".$val1;wLog($c);
+    if($key1=="src" && ! $val1){
+     $flg=0;
+    }
    }
-
+   
   //src属性なければスキップ
-   if(!$col["src"]){
-    $c="notice:".$mname." src属性がありません。処理をスキップします(".$val.")";wLog($c);
+   if(! $flg){
+    $c="notice:".$mname." src属性(".$col["src"].")がありません。処理をスキップします(".$val.")";wLog($c);
     continue;
    }
    
   //src属性をバックアップ
    $col["_src"]=$col["src"];
+   
+  //suumo用に対策(data-srcを適用する）
+   if(preg_match("/suumo\.jp/",$pageurl) && $col["data-src"]){
+    $col["src"]=$col["data-src"];
+   }
   
   //画像ファイルパスチェック
    if(! preg_match("/^http/",$col["src"])){
@@ -811,6 +826,12 @@ function partsImgPathFromSite($pageurl){
     $col["src"]=$col["name"];
    }
   
+  //suumo用カスタマイズ(「&amp」を「&」へ)
+   if(preg_match("/img01\.suumo\.com/",$col["src"])){
+    $c="notice:".$mname."suumo用パス変換".$col["src"];wLog($c);
+    $col["src"]=preg_replace("/amp;/","",$col["src"]);
+   }
+   
   //suumo用カスタマイズ(w=452へ)
    if(preg_match("/img01\.suumo\.com/",$col["src"])){
     $c="notice:".$mname."suumo用パス変換".$col["src"];wLog($c);
@@ -830,9 +851,10 @@ function partsImgPathFromSite($pageurl){
    }
    
   //athome用カスタマイズ(拡張子後のオプションを削除)
-   if(preg_match("/athome\.co\.jp/",$col["src"])){
+   if(preg_match("/athome\.co\.jp|athome\.jp/",$col["src"])){
     $c="notice:".$mname."athome用パス変換".$col["src"];wLog($c);
     $col["src"]=preg_replace("/\?.*$/","",$col["src"]);
+    $c="notice:".$mname."athome用パス変換終了".$col["src"];wLog($c);
    }
    
   //assist-jpn.com用カスタマイズ
@@ -842,18 +864,16 @@ function partsImgPathFromSite($pageurl){
     $c="notice:".$mname."assist-jpn用パス変換終了".$col["src"];wLog($c);
    }
   
-  //ブラックリスト除外
-   if( preg_match($blacklist,$col["src"])){
-    $c="notice:".$mname."ブラックリスト該当".$col["src"];wLog($c);
-    continue;
-   }
-
-   $c="notice:".$mname."画像パス登録";wLog($c);
+   $c="notice:".$mname."画像パス登録(".$col["src"].")";wLog($c);
    $url[]=$col;
   }
   
   unset($html);
+  foreach($url as $key=>$val){
+   $c="notice:".$mname."url[".$key."]=>".$val;wLog($c);
+  }
   $c="end:".$mname;wLog($c);
+  print_r($url);
   return $url;
  }
  catch(Exception $e){

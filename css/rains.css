@@ -719,14 +719,14 @@ div.bigphoto a img{
  max-height:360px;
 }
 
-div.shortphoto{
+div#shortphoto{
  float:right;
  width:290px;
  height:360px;
  overflow:auto;
 }
 
-div.shortphoto ul li{
+div#shortphoto ul li{
  display:block;
  float:left;
  padding:0 0 10px 10px;
@@ -734,13 +734,13 @@ div.shortphoto ul li{
  height:74px;
 }
 
-div.shortphoto ul li a{
+div#shortphoto ul li a{
  display:block;
  width:100%;
  height:100%;
 }
 
-div.shortphoto ul li a img{
+div#shortphoto ul li a img{
  max-width:100%;
  max-height:100%;
 }
@@ -1037,5 +1037,12 @@ ul.subList li{
  cursor       :pointer;
 }
 
+img#bigimg{
+ border:2px solid white;
+}
+
+.active img{
+ border:2px solid #333 !important;
+}
 /*menu.php用*/
 

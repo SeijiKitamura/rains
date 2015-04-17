@@ -408,7 +408,9 @@ function htmlContents($data){
      $html=preg_replace("/<!--bigphoto-->/",$replace,$html);
      $replace="";
     }
-    $replace.="<li><a href='#'><img src='".$val1."'></a></li>";
+    $replace.="<li><a href='#' data-image='".$val1."'";
+    $replace.=" data-zoom-image='".$val1."'>";
+    $replace.="<img src='".$val1."' data-zoom-image='".$val1."'></a></li>";
    }
    $html=preg_replace("/<!--loop-->(.*)<!--loopend-->/s",$replace,$html);
    
