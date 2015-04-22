@@ -752,7 +752,8 @@ div#shortphoto ul li a img{
 
 h3#itemInfo,
 h3#instMap ,
-div#contactItemForm h3
+div#contactItemForm h3,
+div.commentpart h3
 {
  background-color:#1A1A1A;
  padding:7px 7px;
@@ -1006,6 +1007,17 @@ ul.subList li{
  cursor       :pointer;
 }
 
+div.commentpart textarea{
+ width:80%;
+}
+
+div#divsetubi{
+ padding: 15px;
+ background-color: white;
+ border: 1px solid #DCDCDC;
+ margin-bottom: 5px;
+ width: 740px;
+}
 /*room.php用*/
 
 /*menu.php用*/

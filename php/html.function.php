@@ -513,6 +513,16 @@ function htmlContents($data){
    if($val["bcomment"]) $replace.=$val["bcomment"];
    $html=preg_replace("/<!--bikou-->/",$replace,$html);
 
+   //その他コメント(textarea用)
+   $replace="";
+   if($val["setubi"]) $replace.=$val["setubi"];
+   $html=preg_replace("/<!--setubi-->/",$replace,$html);
+   
+   //その他コメント(表示用)
+   $replace="";
+   if($val["setubi"]) $replace.=preg_replace("/\n/s","<br/>",$val["setubi"]);
+   $html=preg_replace("/<!--pSetubi-->/",$replace,$html);
+
    break;
   }//foreach($data["data"] as $key=>$val){
 

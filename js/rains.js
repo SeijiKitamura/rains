@@ -756,6 +756,27 @@ function setEntry(rank,fld000,fld001){
  });
 }
 
+//物件コメント登録
+function chgComment(){
+ $("textarea").change(function(){
+  var d={"fld000":$(this).attr("data-fld000"),"fld001":$(this).val()};
+  $.ajax({
+   url:"php/htmlSetBcomment.php",
+   data:d,
+   type:"POST",
+   dataType:"html",
+   success:function(html){
+    console.log(html);
+   },
+   error:function(XMLHttpRequest,textStatus,errorThrown){
+    console.log(XMLHttpRequest.responseText);
+    alert(XMLHttpRequest.responseText);
+    return false;
+   }
+  });
+ });
+} 
+
 //日付チェック
 function chkdate(hiduke){
  var h=hiduke.match(/^(20[0-9]{2})[\/-]?([0-1]?[0-9]{1})[\/-]?([0-3]?[0-9]{1})$/);

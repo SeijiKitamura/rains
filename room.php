@@ -72,10 +72,11 @@ $(function(){
  
  //ログインチェック
  if($("a#a_logout")[0]){
-  //非表示
+  //ログイン中
+  //非表示ボタンイベント
   $("button#delitem").click(function(){delItemRoom();});
   
-  //画像追加
+  //画像追加イベント
   $("button#addphoto").click(function(){
     $("input[name=uploadimg]").trigger("click");
   });
@@ -84,19 +85,22 @@ $(function(){
    uploadImg(this);
   });
   
-  //画像全削除
+  //画像全削除イベント
   $("button#delAll").click(function(){
    var fld000=$("div.loginpart").attr("data-fld000");
    deleteImg(fld000,null);
   });
-  //外部画像
+  //外部画像イベント
   $("button#outsideImage").click(function(){listImgPathFromSite();});
   
-  //画像一覧
+  //画像一覧イベント
   showImage();
+
+  //コメントイベント
+  chgComment();
  }
  else{
-  //ログアウト
+  //ログアウト中
   $("div.loginpart").hide();
  }
 
