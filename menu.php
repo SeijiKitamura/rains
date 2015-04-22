@@ -10,19 +10,14 @@ htmlHeader("メニュー");
   <div id="contentsWrap">
    <div id="contentsLeft">
     <ul id="leftMenu">
-     <li id="update"><div id="divupdate">データ更新</div>
-      <ul class="subList">
-       <li id="csvupload">CSVアップロード<input type="file" multiple="multiple" name="csvdata"></li>
-       <li id="hreset">表示リセット</li>
-       <li id="hhreset">非表示リセット</li>
-       <li id="kanren">関連データ</li>
-      </ul>
-     </li>
-     <li id="hyouji">表示リスト</li>
-     <li id="hihyouji">非表示リスト</li>
+     <li id="csvupload">CSVアップロード</li>
+     <li id="hreset">表示リセット</li>
+     <li id="hhreset">非表示リセット</li>
+     <li id="kanren">関連データ</li>
      <li id="rank">ランキング</li>
-     <li id="entry">エントリー</li>
     </ul>
+    <input type="file" multiple="multiple" name="csvdata" style="display:none">
+    <input type="file" multiple="multiple" name="flddata" style="display:none;">
    </div><!--div id="contentsLeft"-->
    <div class="clr"></div>
     <div id="contentsMiddle">
@@ -38,12 +33,14 @@ htmlHeader("メニュー");
  </div><!--div id="body"-->
  <script>
 $(function(){
- subListEvent();
+// subListEvent();
  showCSVUp();
  uploadCSV();
  resetHyouji();
  resetHihyouji();
- showData();
+ //showData();
+ showFldData();
+ showRankList();
 });
 
 

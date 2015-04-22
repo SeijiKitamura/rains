@@ -35,7 +35,7 @@ class DSET extends DB{
    $this->order="case when t.fld000='物件番号' then 0 else 1 end,t.fld000";
   }
 
-  if(! $this->select) $this->select="t.*,t1.fld000 as blacklist,t2.fld001 as setubi,t2.fld002 as bcomment";
+  if(! $this->select) $this->select="t.*,t1.fld000 as blacklist,t2.fld001 as setubi,t2.fld002 as bcomment,t3.rank,t3.fld001 as entry";
   $this->from =TABLE_PREFIX.RAINS." as t ";
   $this->from.=" left outer join ";
   $this->from.=TABLE_PREFIX.BLACKLIST." as t1 on ";
@@ -43,6 +43,9 @@ class DSET extends DB{
   $this->from.=" left outer join ";
   $this->from.=TABLE_PREFIX.BCOMMENT." as t2 on ";
   $this->from.=" t.fld000=t2.fld000 ";
+  $this->from.=" left outer join ";
+  $this->from.=TABLE_PREFIX.ENTRY." as t3 on ";
+  $this->from.=" t.fld000=t3.fld000 ";
 
   $this->r=array();
   $this->r["data"]=$this->getArray();

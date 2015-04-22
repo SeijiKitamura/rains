@@ -400,7 +400,8 @@ function viewSetEntry($data){
   else{
    $ary=array( "col"=>$data,
               "from"=>TABLE_PREFIX.ENTRY,
-              "where"=>"fld000='".$data["fld000"]."' and rank=".$data["rank"]
+              //"where"=>"fld000='".$data["fld000"]."' and rank=".$data["rank"]
+              "where"=>"fld000='".$data["fld000"]."'"
              );
   }
   $db=new DSET();
@@ -418,11 +419,30 @@ function viewDelEntry($data){
   $mname="viewDelEntry(view.function.php)";
   $c="start ".$mname;wLog($c);
   $ary=array("from"=>TABLE_PREFIX.ENTRY,
-             "where"=>"id=".$data["id"]
+             //"where"=>"id=".$data["id"]
+             "where"=>"fld000='".$data["fld000"]."'"
             );
   $db=new DSET();
   $db->r["data"][]=$ary;
   $db->dsetDelEntry();
+  $c="end ".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);
+ }
+}
+
+function viewSetEntry2($data){
+ try{
+  $mname="viewSetEntry2(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $ary=array( "col"=>$data,
+             "from"=>TABLE_PREFIX.ENTRY,
+             "where"=>"fld000='".$data["fld000"]."'"
+            );
+  $db=new DSET();
+  $db->r["data"][]=$ary;
+  $db->dsetUpEntry();
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){

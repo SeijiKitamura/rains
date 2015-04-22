@@ -974,6 +974,20 @@ EOF;
  }
 }
 
+function partsRankEntry2(){
+ try{
+  $mname="partsRankEntry2(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  //スケルトンファイル読み込み
+  $skeletonpath=dirname(__FILE__)."/..".SKELETON."/entrytable.html";
+  $html=file_get_contents($skeletonpath);
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);
+ }
+}
+
 function partsRankList($data){
  try{
   $mname="partsRankList(parts.function.php) ";
@@ -1009,6 +1023,42 @@ function partsRankList($data){
    $html.="</li>";
   }
   $html.="</ul></div>";
+
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);
+ }
+}
+
+function partsRankListTable($data){
+ try{
+  $mname="partsRankList(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+
+  //スケルトンファイル読み込み
+  $skeletonpath=dirname(__FILE__)."/..".SKELETON."/ranklist.html";
+  $html=file_get_contents($skeletonpath);
+
+  //loopからloopendまで抜き取り($loop[0]）
+  preg_match("/<!--loop-->.*<!--loopend-->/s",$html,$loop);
+
+  //loop範囲を一旦削除
+  $html=preg_replace("/<!--loop-->.*<!--loopend-->/s","",$html);
+
+  foreach($data as $key=>$val){
+   $tr=$loop[0];
+   $tr=preg_replace("/<!--rank-->/",$val["rank"],$tr);
+   $tr=preg_replace("/<!--rankname-->/",$val["rankname"],$tr);
+   $tr=preg_replace("/<!--rcomment-->/",$val["rcomment"],$tr);
+   $tr=preg_replace("/<!--startday-->/",$val["startday"],$tr);
+   $tr=preg_replace("/<!--endday-->/",$val["endday"],$tr);
+   if($val["flg"]==1) $hyouji="する";
+   else               $hyouji="しない";
+   $tr=preg_replace("/<!--hyouji-->/",$hyouji,$tr);
+   $tr=$tr."<!--foreach-->";
+   $html=preg_replace("/<!--foreach-->/",$tr,$html);
+  }
 
   echo $html;
  }
@@ -1379,6 +1429,9 @@ function partsRankDiv($data,$loginflg=null){
    $c="物件データがありません";wLog($c);
    return false;
   }
+  //ランキングゲット
+  $rank=viewNowRank();
+  
   //スケルトンファイル読み込み
   $skeletonpath=dirname(__FILE__)."/..".SKELETON."/recomendbox.html";
   $skeleton=file_get_contents($skeletonpath);
@@ -1484,6 +1537,22 @@ function partsRankDiv($data,$loginflg=null){
      $replace="<button data-fld000=".$val1["fld000"].">非表示</button>";
      $itembox=preg_replace("/<!--delbutton-->/",$replace,$itembox);
     }
+
+    //ログイン中ならランキング追加
+    if($loginflg){
+     if(isset($rank) && count($rank)){
+      $replace="<select class='selectRank' data-fld000=".$val1["fld000"].">";
+      $replace.="<option value=0>ランク外</option>";
+      foreach($rank as $rkey=>$rval){
+       $replace.="<option value=".$rval["rank"];
+       if($val1["rank"]==$rval["rank"]) $replace.=" selected ";
+       $replace.=">".$rval["rankname"]."</option>";
+      }
+      $replace.="</select>";
+      $replace.="<input name='entry'value=".$val1["entry"].">";
+      $itembox=preg_replace("/<!--rank-->/",$replace,$itembox);
+     }
+    }
     $loop.=$itembox;
    }
 
@@ -1491,6 +1560,9 @@ function partsRankDiv($data,$loginflg=null){
    $html.=$s;
   }//foreach
   echo $html;
+  echo "<pre>";
+  print_r($data);
+  echo "</pre>";
  }
  catch(Exception $e){
   $c="error:".$mname.$e->getMessge();wLog($c);

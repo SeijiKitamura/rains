@@ -4,7 +4,8 @@ $mname="htmlRankList.php";
 $c="start:".$mname;wLog($c);
 
 $data=viewRank();
-partsRankList($data);
-partsRankEntry();
+//partsRankList($data);
+partsRankListTable($data);
+partsRankEntry2();
 $c="end:".$mname;wLog($c);
 ?>

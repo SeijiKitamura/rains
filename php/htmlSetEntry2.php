@@ -1,10 +1,10 @@
 <?php
 require_once("parts.function.php");
-$mname="htmlSetEntry.php";
+$mname="htmlSetEntry2.php";
 $c="start:".$mname;wLog($c);
 
-if(!preg_match("/^[0-9]+$/",$_GET["id"])){
- $c="error:".$mname." ID数字以外";wLog($c);
+if(!preg_match("/^[0-9]+$/",$_GET["rank"])){
+ $c="error:".$mname."ランク番号数字以外";wLog($c);
  echo $c;
  throw new exception($c);
 }
@@ -21,10 +21,11 @@ if(!preg_match("/^[0-9]+$/",$_GET["fld001"])){
  throw new exception($c);
 }
 
-viewSetEntry($_GET);
+viewSetEntry2($_GET);
 
 $c="end:".$mname;wLog($c);
 
 echo "success";
 
 ?>
+

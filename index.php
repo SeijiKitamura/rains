@@ -53,6 +53,10 @@ $(function(){
  
  //非表示ボタン
  $("button").click(function(){ delItem($(this));});
+
+ //ランク登録
+ chgRank();
+ chgEntry();
 }); 
 
  </script>

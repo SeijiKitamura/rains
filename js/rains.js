@@ -303,9 +303,12 @@ function subListEvent(){
 
 //CSVボタン表示
 function showCSVUp(){
- $("input[name=csvdata]").hide();
  $("li#csvupload").click(function(){
-  $("input[name=csvdata]").show();
+  $("input[name=csvdata]").trigger("click");
+  return false;
+  //$("input[type=file").hide();
+  //$("input[name=csvdata]").show();
+  //return false;
  });
 }
 
@@ -328,7 +331,6 @@ function csvUpload(elem){
     type: 'post',
 //    async:false,
     beforeSend:function(){
-     $("ul.subList").slideUp();
      $("div#contents").text("データ送信中・・・").slideDown();
     },
     data: formData,
@@ -354,6 +356,7 @@ function csvUpload(elem){
 //表示リセット
 function resetHyouji(){
  $("li#hreset").click(function(){
+  $("input[type=file").hide();
   if(!confirm("表示リストをリセットしますか?")) return false;
   console.log("リセット");
 
@@ -385,6 +388,7 @@ function resetHyouji(){
 //非表示リセット
 function resetHihyouji(){
  $("li#hhreset").click(function(){
+  $("input[type=file]").hide();
   if(!confirm("非表示リストをリセットしますか?")) return false;
   console.log("リセット");
   $.ajax({
@@ -531,7 +535,7 @@ function chgImg(){
  });
 }
 
-//画像拡大
+//画像拡大(未使用）
 function zoomImg(){
  $("img#bigimg").elevateZoom({
    gallery:"shortphoto",
@@ -540,3 +544,232 @@ function zoomImg(){
    galleryActiveClass:"active"
                  });
 }
+
+//関連データファイルダイアログ
+function showFldData(){
+ $("li#kanren").click(function(){
+  $("input[name=flddata]").click();
+  setFldData();
+ });
+}
+
+//関連データ登録
+function setFldData(){
+ $("input[name=flddata]").change(function(){
+  $.each(this.files,function(i,file){
+   var formData=new FormData();
+   formData.append("csvfile",file);
+   //ファイル送信
+   $.ajax({
+    url: 'php/csvuploadfield.php',
+    type: 'post',
+//  async:false,
+    beforeSend:function(){
+     $("div#contents").text("データ送信中・・・").slideDown();
+    },
+    data: formData,
+    processData: false,
+    contentType: false,
+    dataType: 'html',
+    complete: function(){
+    },
+    success: function(html) {
+     $("div#contents").empty()
+                     .append("更新しました");
+     $("input[type=file]").val("");
+    },
+    error:function(XMLHttpRequest,textStatus,errorThrown){
+     console.log(XMLHttpRequest.responseText);
+     $("div.msgdiv").text(XMLHttpRequest.responseText);
+     return false;
+    }
+   });
+  });
+ });
+}
+
+//ランキング表示
+function showRankList(){
+ $("li#rank").click(function(){
+  $("input[type=file]").hide();
+  $.ajax({
+   url:"php/htmlRankList.php",
+   type:"get",
+   dataType:"html",
+   success:function(html){
+    $("div#contents").empty().append(html);
+    showEntry();
+    setRank();
+   },
+   error:function(XMLHttpRequest,textStatus,errorThrown){
+    console.log(XMLHttpRequest.responseText);
+    $("div.msgdiv").text(XMLHttpRequest.responseText);
+    return false;
+   }
+  });
+ });
+}
+
+//エントリー表示
+function showEntry(){
+ $("div.ranklist table tr td").click(function(){
+  $(this).parent().children().each(function(e){
+   if(e==0){
+    $("input[name=rank]").val($(this).text());
+   }
+   if(e==1){
+    $("input[name=rankname]").val($(this).text());
+   }
+   if(e==2){
+    $("input[name=rcomment]").val($(this).text());
+   }
+   if(e==3){
+    $("input[name=startday]").val($(this).text());
+   }
+   if(e==4){
+    $("input[name=endday]").val($(this).text());
+   }
+  });
+ });
+}
+
+//ランク登録
+function setRank(){
+ $("a.a_rankentry").click(function(){
+  var d={};
+  var sdate;
+  var edate;
+  var chkflg;
+  chkflg=1;
+  
+  //ランク値チェック
+  d["rank"]=$("input[name=rank]").val();
+  if(! d["rank"].match(/^[0-9]+$/)){
+   consle.log("ランク数字以外");
+   chkflg=0;
+  }
+
+  //タイトル空欄チェック
+  d["rankname"]=$("input[name=rankname]").val();
+  if(! d["rankname"].match(/^.+$/)){
+   console.log("タイトル空欄");
+   chkflg=0;
+  }
+
+  d["rcomment"]=$("input[name=rcomment]").val();
+  
+  //開始日チェック
+  d["startday"]=$("input[name=startday]").val();
+  if(! chkdate(d["startday"])){
+   chkflg=0;
+  }
+  
+  //終了日チェック
+  d["endday"]=$("input[name=endday]").val();
+  if(! chkdate(d["endday"])){
+   chkflg=0;
+  }
+
+  //日付比較
+  var sday=Date.parse(d["startday"]);
+  var eday=Date.parse(d["endday"]);
+
+  if(sday>eday){
+   console.log("開始日、終了日比較エラー");
+   chkflg=0;
+  }
+
+  d["flg"]=$("select[name=flg]").val();
+
+  if(! chkflg){
+   alert("入力エラーがあります");
+   return false;
+  }
+  console.log(d);
+
+  if(! confirm("登録しますか?")) return false;
+  $.ajax({
+   url:"php/htmlSetRank.php",
+   data:d,
+   dataType:"html",
+   success:function(html){
+    console.log(html);
+    alert("登録しました");
+    $("li#rank").trigger("click");
+   },
+   error:function(XMLHttpRequest,textStatus,errorThrown){
+    console.log(XMLHttpRequest.responseText);
+    $("div.msgdiv").text(XMLHttpRequest.responseText);
+    return false;
+   }
+  });
+ });
+}
+
+//ランク変更
+function chgRank(){
+ $("select.selectRank").change(function(){
+  var rank=$(this).val();
+  var fld000=$(this).attr("data-fld000");
+  var fld001=$(this).next().val();
+  setEntry(rank,fld000,fld001);
+ });
+}
+
+//エントリー変更
+function chgEntry(){
+ $("input[name=entry]").change(function(){
+  var rank=$(this).prev().val();
+  var fld000=$(this).prev().attr("data-fld000");
+  var fld001=$(this).val();
+
+  if(rank==0) return false;
+  setEntry(rank,fld000,fld001);
+ });
+}
+
+//物件ランク登録・削除
+function setEntry(rank,fld000,fld001){
+ if (! fld001) fld001=0;
+
+ if(rank==0){
+  var php="php/htmlDelEntry.php";
+ }
+ else{
+  var php="php/htmlSetEntry2.php";
+ }
+
+ var d={"rank":rank,"fld000":fld000,"fld001":fld001};
+ console.log(d);
+ $.ajax({
+  url:php,
+  data:d,
+  dataType:"html",
+  success:function(html){
+   console.log(html);
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   alert(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+//日付チェック
+function chkdate(hiduke){
+ var h=hiduke.match(/^(20[0-9]{2})[\/-]?([0-1]?[0-9]{1})[\/-]?([0-3]?[0-9]{1})$/);
+ if(!h){
+  console.log("日付不正");
+  return false;
+ }
+ else{
+  var newdate=new Date(h[1],h[2]-1,h[3]);
+  if(newdate.getFullYear()!=h[1]||newdate.getMonth()+1!=h[2]||newdate.getDate()!=h[3]){
+  console.log("日付不正");
+  return false;
+  }
+ }
+ return true;
+}
+
