@@ -583,6 +583,7 @@ function partsImage($data,$edit=null){
     $imgpath=".".IMG."/".$val1["fld000"]."/".$val1["fld002"];
     $html.="<li data-fld000='".$val["fld000"]."' data-imgid='".$val1["id"]."'>";
     if($edit){
+     $html.="<input type='checkbox' data-imgid='".$val1["id"]."'>";
      $html.="<input type='text' value='".$val1["fld001"]."' data-fld000='".$val1["fld000"]."' data-imgid='".$val1["id"]."'>";
      $html.="<input type='button' value='削除' data-fld000='".$val1["fld000"]."' data-imgid='".$val1["id"]."'>";
     }
@@ -735,6 +736,7 @@ function partsImgPathFromSite($pageurl){
    $c="error:".$mname." ページが取得できません(".$pageurl.")";wLog($c);
    throw new exception ($c);
   }
+  $c=$html;wLog($c);
   
   //まずはimgタグだけ抜き出す
   $pattern="/<img.*?>/s";
@@ -873,7 +875,6 @@ function partsImgPathFromSite($pageurl){
    $c="notice:".$mname."url[".$key."]=>".$val;wLog($c);
   }
   $c="end:".$mname;wLog($c);
-  print_r($url);
   return $url;
  }
  catch(Exception $e){
@@ -1560,9 +1561,6 @@ function partsRankDiv($data,$loginflg=null){
    $html.=$s;
   }//foreach
   echo $html;
-  echo "<pre>";
-  print_r($data);
-  echo "</pre>";
  }
  catch(Exception $e){
   $c="error:".$mname.$e->getMessge();wLog($c);

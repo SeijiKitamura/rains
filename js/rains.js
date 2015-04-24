@@ -195,6 +195,7 @@ function showImage(){
    
    //削除ボタンイベント
    $("div.imgpart ul.ul_image li input[type=button]").on("click",function(){
+    if(! confirm("この画像を削除しますか?")) return false;
     var fld000=$(this).attr("data-fld000");
     var imgid=$(this).attr("data-imgid");
     deleteImg(fld000,imgid);
@@ -231,12 +232,12 @@ function changeImgNum(fld000,imgid,imgnum){
 //画像削除
 //room.php
 function deleteImg(fld000,imgid){
- if(imgid){
-  if(! confirm("この画像を削除しますか?")) return false;
- }
- else{
-  if(! confirm("全画像を削除しますか?")) return false;
- }
+// if(imgid){
+//  if(! confirm("この画像を削除しますか?")) return false;
+// }
+// else{
+//  if(! confirm("全画像を削除しますか?")) return false;
+// }
 
  var d={"fld000":fld000,"imgid":imgid};
  $.ajax({
@@ -520,6 +521,36 @@ function delAllImg(){
 function outImg(){
  $("button#outsideImage").click(function(){
   listImgPathFromSite();
+ });
+}
+
+//チェックを残す
+function checkIn(){
+ $("button#checkin").click(function(){
+  if(! confirm("チェックを残しますか?")) return false;
+  $("div.imgpart ul li input[type=checkbox]").each(function(e){
+   if($(this).is(":checked")){
+   }
+   else{
+    var fld000=$(this).parent().attr("data-fld000");
+    var imgid=$(this).attr("data-imgid");
+    deleteImg(fld000,imgid);
+   }
+  });
+ });
+}
+
+//チェックを削除
+function checkOut(){
+ $("button#checkout").click(function(){
+  if(! confirm("チェックを削除しますか?")) return false;
+  $("div.imgpart ul li input[type=checkbox]:checked").each(function(e){
+   if($(this).val()){
+    var fld000=$(this).parent().attr("data-fld000");
+    var imgid=$(this).attr("data-imgid");
+    deleteImg(fld000,imgid);
+   }
+  });
  });
 }
 

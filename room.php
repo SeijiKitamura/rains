@@ -86,18 +86,24 @@ $(function(){
   });
   
   //画像全削除イベント
-  $("button#delAll").click(function(){
-   var fld000=$("div.loginpart").attr("data-fld000");
-   deleteImg(fld000,null);
-  });
+  delAllImg();
+
   //外部画像イベント
   $("button#outsideImage").click(function(){listImgPathFromSite();});
+  
+  //チェック残すイベント
+  checkIn();
+
+  //チェック削除イベント
+  checkOut();
   
   //画像一覧イベント
   showImage();
 
   //コメントイベント
   chgComment();
+
+  
  }
  else{
   //ログアウト中
