@@ -586,6 +586,11 @@ div.recomendItemBoxDown p{
 input[name=entry]{
  width:40px;
 }
+
+select.selectRank{
+ width:77px;
+ overflow:hidden;
+}
 /*index.php用*/
 
 /*room.php用*/
