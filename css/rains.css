@@ -1139,3 +1139,218 @@ a.a_rankdel{
 }
 /*menu.php用*/
 
+
+/*yanusi.php用*/
+div#reason_part{
+ width:700px;
+ margin:0 auto;
+ padding-top:100px;
+}
+
+div#reason_part h1{
+ color    :red;
+ font-size:35px;
+ text-align:center;
+}
+
+div#reason_part h2{
+ font-size:20px;
+}
+div#reason_part p{
+ margin:1em 0;
+ line-height:1.6;
+}
+div#reason_part p.part1{
+ padding-top:2em;
+}
+
+/*idとclassで同名あり*/
+div.contactItemBox{
+ width :100%;
+ height:150px;
+ margin:10px auto ;
+ border:1px solid #FF8C00;
+ background:#FFFFFF;
+}
+div.contactItemBox h4{
+ font-size  :24px;
+ font-weight:normal;
+ text-align :center;
+ height     :44px;
+ padding-top:10px;
+ color      :#FFFFFF;
+ background :#FF8C00;
+}
+
+div.promisepart{
+ float:left;
+ height:350px;
+ width:220px;
+ margin:10px 6px;
+ border-right:1px solid #696969;
+}
+
+div.promisepart h3{
+ font-size:18px;
+}
+
+ul.costlist{
+ list-style:none;
+ margin:1em 0;
+}
+
+div.costBox{
+ text-align:left;
+ width:100%;
+ height:300px;
+ margin:0 auto 30px auto;
+ border:1px solid #FF8C00;
+ background-color:#FFFFFF;
+ padding:1em;
+}
+
+div.costLeft{
+ width:350px;
+ height:90%;
+ float:left;
+}
+
+div.costLeft h3{
+ font-size:30px;
+ color:#FF8C00;
+}
+
+div.costLeft h3 span{
+ font-size:0.5em;
+}
+
+div.costRight{
+ width:350px;
+ height:90%;
+ float:left;
+}
+
+div.costRight h3{
+ font-size:18px;
+ color:#FF8C00;
+}
+ul.costlist li{
+ width     :100px;
+ height    :47px;
+ border    :1px solid #FF8C00;
+ text-align:center;
+ display   :inline-block;
+ margin    :10px 10px 0px 0px;
+ padding   :11px 0px 0px 0px;
+ font-size :14px;
+ font-weight:bold;
+ float     :left;
+ line-height:1.4em;
+}
+
+div.checkBox{
+ width :100%;
+ height:350px;
+ background-color:#FFFFFF;
+ padding:0;
+ border :1px solid #FF8C00;
+ margin :0 0 1em 0;
+}
+
+div.checkBox h4{
+ font-size  :24px;
+ font-weight:normal;
+ text-align :center;
+ height     :44px;
+ padding-top:10px;
+ color      :#FFFFFF;
+ background :#FF8C00;
+}
+
+dl.checkList dt{
+ font-size:18px;
+ margin:1em 0 1em 1em;
+}
+
+dl.checkList dd{
+ margin:0 0 0 2em;
+}
+
+div.questionBox{
+ background-color:#FFFFFF;
+ padding:20px;
+}
+
+dl.questionList dt{
+ margin:0 0 0 1em;
+ font-size:18px;
+}
+
+dl.questionList dd{
+ margin:0 0 1em 3em;
+
+}
+/*yanusi.php用*/
+
+
+/*annai.php用*/
+div#divannai{
+ width:700px;
+ margin:0 auto;
+ padding-top:50px;
+}
+
+div#divannai h2{
+ background-color: #1a1a1a;
+ padding: 7px;
+ line-height: 1.4;
+ font-size: 15px;
+ font-weight: bold;
+ margin-bottom: 10px;
+ color: #fff;
+}
+
+div#stores{
+ background-color: #fff;
+ padding: 12px;
+ margin-bottom: 20px;
+}
+
+div.store_wrap{
+ border: 1px solid #e5e5e5;
+ padding: 8px;
+ width: 100%;
+ background-color: #f5f5f5;
+}
+
+div#stores h3{
+ padding:8px;
+ color  :#FFF;
+ background-color:#00008B;
+}
+
+div.store_wrap p{
+ width :50%;
+ margin:10px 0 0 0 ;
+ float:left;
+}
+div.store_wrap p img{
+ width:100%;
+}
+
+div.store_wrap table{
+ width :45%;
+ margin:10px 0 0 10px ;
+ float:left;
+}
+
+div.store_wrap table tr td{
+ font-weight:normal;
+ text-align:left;
+ background:white;
+ padding:5px;
+ border:1px solid #DCDCDC;
+ line-height:1.4;
+ color:#000;
+}
+/*annai.php用*/

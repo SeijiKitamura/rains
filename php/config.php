@@ -185,6 +185,7 @@ $PAGEARY=array( "index.php"
 $NAVI  =array(
                 "q_and_a.php"           =>"Q&A"
                ,"yanusi.php"            =>"オーナー様"
+               ,"annai.php"            =>"会社概要"
               );
 
 $MININAVI=array(
