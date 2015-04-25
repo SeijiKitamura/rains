@@ -28,5 +28,11 @@ define("PRESIDENT"  ,"代表取締役");
 define("EIGYOJIKAN" ,"営業時間");
 define("TEIKYUBI"   ,"定休日");
 define("LICENSE"    ,"免許番号");
+define("JIGYO"      ,"事業内容");
+define("ENKAKU"     ,"沿革");
  
+//---------------------------------------------------//
+// GoogleMap
+//---------------------------------------------------//
+define("GMAP",'');//店舗MAP
 ?>

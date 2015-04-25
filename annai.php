@@ -51,26 +51,19 @@ htmlHeader("会社概要");
 
         <tr>        
          <td>事業内容</td>
-         <td>不動産の売買・賃貸・仲介業務<br> 生命保険・損害保険募集代理店 <br>ファイナンシャルコンサルティング<br>冠婚葬祭の企画・運営・斡旋業務 </td>
+         <td><?php echo JIGYO;?></td>
         </tr>
         
         <tr>
          <td>沿革</td>
-         <td></td>
-        </tr>
-        <tr>
-         <td>ご案内</td>
-         <td>弊社は東急池上線 石川台駅から歩いて2分の立地でございます。<br>
-             五反田方面からお越しのお客様は、改札を出て右へお進み頂き、一つ目の十字路を右にまっすぐです。<br>
-             蒲田方面からお越しのお客様は、改札を左へ出ていただき、線路沿いの道路（坂）を下って、一つ目の十字路を左へお進み頂き、ドラックストアのある十字路を右で当店が見えます。
-         </td>
+         <td><?php echo ENKAKU;?></td>
         </tr>
        </tbody>
       </table>
       
       <h2>アクセスマップ</h2>
       <div class="storemap">
-<iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.co.jp/maps?f=q&amp;source=s_q&amp;hl=ja&amp;geocode=&amp;q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%A4%A7%E7%94%B0%E5%8C%BA%E6%9D%B1%E9%9B%AA%E8%B0%B72-11-3&amp;aq=&amp;sll=36.5626,136.362305&amp;sspn=57.64762,79.013672&amp;brcurrent=3,0x6018f549a132a4bd:0xc9ddc2808ab18d8,0,0x6018f549a5ed8139:0x4cc989f0196651d8&amp;ie=UTF8&amp;hq=&amp;hnear=%E3%80%92145-0065+%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%A4%A7%E7%94%B0%E5%8C%BA%E6%9D%B1%E9%9B%AA%E8%B0%B7%EF%BC%92%E4%B8%81%E7%9B%AE%EF%BC%91%EF%BC%91%E2%88%92%EF%BC%93&amp;t=m&amp;z=14&amp;ll=35.59601,139.684441&amp;output=embed"></iframe><br /><small><a href="https://www.google.co.jp/maps?f=q&amp;source=embed&amp;hl=ja&amp;geocode=&amp;q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%A4%A7%E7%94%B0%E5%8C%BA%E6%9D%B1%E9%9B%AA%E8%B0%B72-11-3&amp;aq=&amp;sll=36.5626,136.362305&amp;sspn=57.64762,79.013672&amp;brcurrent=3,0x6018f549a132a4bd:0xc9ddc2808ab18d8,0,0x6018f549a5ed8139:0x4cc989f0196651d8&amp;ie=UTF8&amp;hq=&amp;hnear=%E3%80%92145-0065+%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%A4%A7%E7%94%B0%E5%8C%BA%E6%9D%B1%E9%9B%AA%E8%B0%B7%EF%BC%92%E4%B8%81%E7%9B%AE%EF%BC%91%EF%BC%91%E2%88%92%EF%BC%93&amp;t=m&amp;z=14&amp;ll=35.59601,139.684441" style="color:#0000FF;text-align:left">大きな地図で見る</a></small>
+       <?php echo GMAP;?>
       </div><!--div class="storemap"-->
       <div class="">
       </div><!--div class=""-->
