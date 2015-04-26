@@ -38,9 +38,6 @@ htmlHeader($title);
 
 <?php
 htmlContents($data);
-echo "<pre>";
-print_r($data);
-echo "</pre>";
 ?>
     </div><!--div id="contents"-->
    </div><!--div id="contentsMiddle"-->

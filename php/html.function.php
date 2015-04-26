@@ -561,6 +561,36 @@ function htmlContents($data){
    if($val["setubi"]) $replace.=preg_replace("/\n/s","<br/>",$val["setubi"]);
    $html=preg_replace("/<!--pSetubi-->/",$replace,$html);
 
+   //取扱会社名
+   $replace="";
+   if($val["fld004"]) $replace.=$val["fld004"];
+   $html=preg_replace("/<!--fld004-->/",$replace,$html);
+
+   //代表電話番号
+   $replace="";
+   if($val["fld005"]) $replace.=$val["fld005"];
+   $html=preg_replace("/<!--fld005-->/",$replace,$html);
+
+   //電話番号
+   $replace="";
+   if($val["fld006"]) $replace.=$val["fld006"];
+   $html=preg_replace("/<!--fld006-->/",$replace,$html);
+
+   //担当者名
+   $replace="";
+   if($val["fld007"]) $replace.=$val["fld007"];
+   $html=preg_replace("/<!--fld007-->/",$replace,$html);
+   
+   //問合せ番号
+   $replace="";
+   if($val["fld008"]) $replace.=$val["fld008"];
+   $html=preg_replace("/<!--fld008-->/",$replace,$html);
+
+   //Eメール
+   $replace="";
+   if($val["fld009"]) $replace.=$val["fld009"];
+   $html=preg_replace("/<!--fld009-->/",$replace,$html);
+   
    break;
   }//foreach($data["data"] as $key=>$val){
 
