@@ -1509,10 +1509,18 @@ function partsRankDiv($data,$loginflg=null){
     }
 
     //物件名
-    if($val1["fld021"]) $estatename=$val1["fld021"];
-    else $estatename=$val1["fld018"];
+    if($val1["fld021"]) $estatename=$val1["fld021"].$val1["fld022"]; else $estatename=$val1["fld018"].$val1["fld019"];
     $itembox=preg_replace("/<!--estatename-->/",$estatename,$itembox);
-
+    
+    //広さ
+    $replace="";
+    $replace=$val1["fld068"].$val1["fld088"]."m&sup2";
+    $itembox=preg_replace("/<!--estatemenseki-->/",$replace,$itembox);
+    //間取り
+    $replace="";
+    $replace=$val1["fld180"].$val1["_fld179"];
+    $itembox=preg_replace("/<!--estatemadori-->/",$replace,$itembox);
+    
     //住所
     $estateaddress=$val1["fld018"].$val1["fld019"].$val1["fld020"];
     $itembox=preg_replace("/<!--estateaddress-->/",$estateaddress,$itembox);
