@@ -262,10 +262,17 @@ function htmlContents($data){
   $nowpage=basename($_SERVER["PHP_SELF"]);
 
   //スケルトン読み込み
-  $path=realpath("./").SKELETON."/contents.html";
-  $html=file_get_contents($path);
 
   foreach($data["data"] as $key=>$val){
+   //売買物件、賃貸物件判定
+   if($val["fld001"]=="01"){
+    $path=realpath("./").SKELETON."/contents.html";
+   }
+   elseif($val["fld001"]=="03"){
+    $path=realpath("./").SKELETON."/contents2.html";
+   }
+   $html=file_get_contents($path);
+   
    //物件名確定
    $replace="";
    if($val["fld021"]) $replace.=$val["fld021"]." ";
@@ -311,11 +318,13 @@ function htmlContents($data){
    //面積を表示
    $replace="";
    if($val["fld068"]) $replace.=$val["fld068"]."m&sup2;";
+   elseif($val["fld088"]) $replace.=$val["fld088"]."m&sup2;";
    $html=preg_replace("/<!--menseki-->/",$replace,$html);
+
    
    //敷金を表示
    $replace="";
-   if($val["fld078"]) $replace.=($val["fld078"]*1)."ヶ";
+   if($val["fld078"]) $replace.=($val["fld078"]*1)."ヶ月";
    if($val["fld077"] && ! $val["fld078"]) $replace.=$val["fld077"]."円";
    $html=preg_replace("/<!--sikikin-->/",$replace,$html);
 
@@ -474,14 +483,17 @@ function htmlContents($data){
    $html=preg_replace("/<!--genkyo-->/",$replace,$html);
 
    //契約形態
-   $replace="";
-   if($val["fld130"]) $replace.=$val["_fld130"];
-   $html=preg_replace("/<!--keiyaku-->/",$replace,$html);
+//   $replace="";
+//   if($val["fld130"]) $replace.=$val["_fld130"];
+//   $html=preg_replace("/<!--keiyaku-->/",$replace,$html);
 
 
    //契約期間
    $replace="";
-   if($val["fld083"]) $replace.=$val["_fld083"]."年間";
+   if($val["fld083"]){
+    $replace.=substr($val["fld083"],0,2)*1;
+    $replace.="年間";
+   }
    $html=preg_replace("/<!--kikan-->/",$replace,$html);
 
    //入居日
@@ -491,7 +503,7 @@ function htmlContents($data){
 
    //保険
    $replace="";
-   if($val["fld151"]) $replace.=$val["fld151"];
+   if($val["fld151"]) $replace.=$val["fld151"]."円";
    $html=preg_replace("/<!--hoken-->/",$replace,$html);
 
    //管理
@@ -507,6 +519,32 @@ function htmlContents($data){
    $replace="";
    if($val["fld212"]) $replace.="駐車場あり";
    $html=preg_replace("/<!--tyusyajyo-->/",$replace,$html);
+
+   //土地関連
+   $replace="";
+   if($val["fld121"]) $replace.=$val["_fld121"];
+   if($val["fld102"]) $replace.=" 借地料".$val["fld102"]."円";
+   if($val["fld103"]) $replace.=" 借地期間(".$val["fld103"].") ";
+   if($val["fld104"]) $replace.=" 借地期限(".$val["fld104"].") ";
+   if($val["fld114"]) $replace.=$val["_fld114"];
+   if($val["fld115"]) $replace.=" ".$val["_fld115"];
+   if($val["fld116"]) $replace.=" ".$val["_fld116"];
+   if($val["fld118"]) $replace.=" 建ぺい率".$val["fld118"]."%";
+   if($val["fld119"]) $replace.=" 容積率".$val["fld119"]."%";
+   if($val["fld157"]) $replace.=" ".$val["_fld157"];
+   if($val["fld158"]){
+    $replace.=" (".$val["_fld158"]."";
+    if($val["fld161"]) $replace.=$val["_fld161"];
+    if($val["fld162"]) $replace.=$val["fld162"]."m";
+    $replace.=")";
+   }
+   if($val["fld163"]){
+    $replace.=" (".$val["_fld163"]."";
+    if($val["fld166"]) $replace.=$val["_fld166"];
+    if($val["fld167"]) $replace.=$val["fld167"]."m";
+    $replace.=")";
+   }
+   $html=preg_replace("/<!--uritikoumoku-->/",$replace,$html);
 
    //備考
    $replace="";

@@ -1,4 +1,4 @@
-<!--売買用ひな形-->
+<!--賃貸用ひな形-->
   <div id="contentsroom">
    <div id="contentsHeader">
     <ul id="topicPath">
@@ -39,16 +39,22 @@
             </colgroup>
             <tbody>
              <tr>
-              <th>価格</th>
+              <th>賃料</th>
               <td><p><strong class="price"><!--price--></strong></p></td>
               <th>専有面積</th>
               <td><span><!--menseki--></span></td>
              </tr>
              <tr>
-              <th>管理費等</th>
-              <td><span><!--kanrihi--></span></td>
+              <th>敷金/礼金</th>
+              <td><span><!--sikikin-->/<!--reikin--></span></td>
               <th>更新料</th>
               <td><!--kousin--></td>
+             </tr>
+             <tr>
+              <th>保険料</th>
+              <td><!--hoken--></td>
+              <th>その他費用等</th>
+              <td><span><!--sonota--><!--kanrihi--></span></td>
              </tr>
              <tr>
               <th>建物構造</th>
@@ -142,32 +148,38 @@
            <th>物件名</th>
            <td><!--bname--></td>
            <th>交通</th>
-           <td>
-            <span id="endpoint" data-lat="<!--endlat-->" data-lng="<!--endlng-->">
-            <!--koutu-->
-            </span>
-           </td>
+          <td>
+           <span id="endpoint" data-lat="<!--endlat-->" data-lng="<!--endlng-->">
+           <!--koutu-->
+           </span>
+          </td>
           </tr>
           <tr>
            <th>所在地</th>
            <td colspan="3">
             <span id="startpoint" data-lat="<!--startlat-->" data-lng="<!--startlng-->">
-             <!--address-->
+            <!--address-->
             </span>
            </td>
           </tr>
 
           <tr>
-           <th>価格</th>
+           <th>賃料</th>
            <td><p><strong class="price"><!--price--></strong></p></td>
            <th>専有面積</th>
            <td><span><!--menseki--></span></td>
           </tr>
           <tr>
-           <th>管理費等</th>
-           <td><span><!--kanrihi--></span></td>
+           <th>敷金/礼金</th>
+           <td><span><!--sikikin-->/<!--reikin--></span></td>
            <th>更新料</th>
            <td><!--kousin--></td>
+          </tr>
+          <tr>
+           <th>保険料</th>
+           <td><!--hoken--></td>
+           <th>その他費用等</th>
+           <td><span><!--sonota--><!--kanrihi--></span></td>
           </tr>
 
           <tr>
@@ -204,14 +216,13 @@
            <td colspan="3"><!--kanri--></td>
           </tr>
           <tr>
-           <th>土地関連</th>
-           <td colspan="3"><!--uritikoumoku--></td>
+           <th>契約期間</th>
+           <td colspan="3"><!--kikan--></td>
           </tr>
           <tr>
            <th>備考</th>
            <td colspan="3"><!--bikou--></td>
           </tr>
-
          </tbody>
         </table>
 
@@ -274,4 +285,5 @@
     </div><!--div id="contentsInner"-->
    </div><!--div id="contentsHeader"-->
   </div><!--div id="contents"-->
+
 

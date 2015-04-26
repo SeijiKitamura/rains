@@ -1440,6 +1440,7 @@ function partsRankDiv($data,$loginflg=null){
   //ループ部分抽出($match[2]にhtml格納)
   preg_match("/(<!--loop-->)(.*)(<!--loopend-->)/s",$skeleton,$match);
 
+  $bunrui="";
   $html="";
   foreach($data as $key=>$val){
    $s=$skeleton;
@@ -1471,10 +1472,22 @@ function partsRankDiv($data,$loginflg=null){
     }
    }
    $s=preg_replace("/<!--rcomment-->/",$rcomment,$s);
-
+   
    $loop="";
    foreach($val as $key1=>$val1){
     $itembox=$match[2];
+    
+    //分類表示
+    if($rankname=="売買物件" || $rankname=="賃貸物件"){
+// echo "rankname ".$rankname." bunrui".$bunrui." val1".$val1["_fld003"]."<br>";
+     if($bunrui!==$val1["_fld003"]){
+      $replace ="<div class='clr'></div>";
+      $replace.="<h3>".$val1["_fld003"]."</h3>";
+      $itembox=preg_replace("/<!--bunrui-->/",$replace,$itembox);
+      $bunrui=$val1["_fld003"];
+     }
+    }
+
     //物件番号
     $fld000=$val1["fld000"];
     $itembox=preg_replace("/<!--fld000-->/",$fld000,$itembox);

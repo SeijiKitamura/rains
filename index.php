@@ -17,16 +17,9 @@ else{
  $loginflg=0;
 }
 
-
-//タブ表示用
-//$data=viewNewAndRank();
-//partsRankTab($data);
-//partsRankDiv($data);
-
 //一覧表示
 $data=viewTopData();
 partsRankDiv($data,$loginflg);
-
 ?>
       </div><!--div id="article"-->
      </div><!--div id="contents"-->

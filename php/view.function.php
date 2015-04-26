@@ -1045,6 +1045,21 @@ function viewWalkGroup($where=null){
  catch(Exception $e){
   $c="error:".$e->getMessage().$mname;wLog($c);
  }
+}
 
+//売買物件一覧を返す
+function viewSaleList($where=null){
+ try{
+  $mname="viewSaleList(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $db=new DSET();
+  $db->where="t.fld001='01' and t1.fld000 is null";
+  if($where) $db->where.=" and ".$where;
+  $d=viewRainsData($where,$order);
+  return $d["data"];
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);
+ }
 }
 ?>
