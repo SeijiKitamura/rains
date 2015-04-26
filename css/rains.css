@@ -140,26 +140,45 @@ div.naviBar{
  margin :3px auto;
 }
 
-div.naviBar ul{
+div.naviBar>ul{
  width     :1000px;
  overflow  :hidden;
  text-align:center;
  list-style:none;
 }
 
-div.naviBar ul li{
- height :29px;
+div.naviBar>ul>li{
  float  :left;
-}
-
-div.naviBar ul li a{
  border-right    :1px solid #DCDCDC;
  width     :120px;
- height    :27px;
  text-align:center;
  display   :block;
  padding   :8px 0 0 0 ;
  font-size :0.8em;
+}
+
+div.naviBar>ul>li>ul{
+ list-style:none;
+ position:absolute;
+ width:100px;
+ display:none;
+}
+
+div.naviBar>ul>li>ul>li{
+ text-align:left;
+}
+
+div.naviBar>ul>li>ul>li>a{
+ display:block;
+ width:90%;
+ height:1em;
+ padding:10px;
+ overflow:hidden;
+ background-color:#FFF;
+}
+
+div.naviBar>ul>li>ul>li>a:hover{
+ color:#0075C8;
 }
 
 div.naviBar ul li input{

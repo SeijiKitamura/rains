@@ -1052,10 +1052,10 @@ function viewSaleList($where=null){
  try{
   $mname="viewSaleList(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $db=new DSET();
-  $db->where="t.fld001='01' and t1.fld000 is null";
-  if($where) $db->where.=" and ".$where;
-  $d=viewRainsData($where,$order);
+
+  $w=" t.fld001='01' and t1.fld000 is null";
+  if($where) $w.=" and ".$where;
+  $d=viewShortData($w,null);
   return $d["data"];
  }
  catch(Exception $e){

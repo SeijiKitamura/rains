@@ -47,6 +47,14 @@ function navi(){
    $("div#shortNavi").slideUp();
   }
  });
+
+ $("div.naviBar>ul>li").hover(function(){
+  console.log($(this));
+  $(this).find("ul").slideDown("slow");
+ },function(){
+  console.log($(this));
+  $(this).find("ul").slideUp("slow");
+ });
 }
 
 //非表示登録

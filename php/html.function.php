@@ -85,7 +85,28 @@ function htmlHeader($title=null){
   $html=preg_replace("/<!--eventBar-->/",$eventbar,$html);
   
   //ナビゲーション
+  $naviary=viewGroupFld();
   $navibar="";
+  $fld001="";
+  foreach($naviary["data"] as $key=>$val){
+   if($fld001!=$val["fld001"]){
+    if($key){
+     $navibar.="</ul></li>";
+    }
+    $navibar.="<li>".$val["_fld001"];
+    $navibar.="<ul>";
+    $fld001=$val["fld001"];
+   }
+   $navibar.="<li>";
+   $navibar.="<a href='roomlist.php?type=";
+   $navibar.=$val["fld001"]."_".$val["fld002"]."_".$val["fld003"]."'>";
+   $navibar.=$val["_fld003"];
+   $navibar.="</a>";
+   $navibar.="</li>";
+  }
+  $navibar.="</ul>";
+
+
   foreach($NAVI as $key=>$val){
    $navibar.="<li><a href='".$key."'";
    $navibar.=">".$val."</a></li>";
@@ -93,12 +114,12 @@ function htmlHeader($title=null){
 
   session_start();
   if(isset($_SESSION["USERID"]) || $_SESSION["USERID"] || $_SESSION["USERID"]==md5(USERID)){
-   $navibar.="<form id='loginForm' name='loginForm' action='login.php' method='POST'>";
    $navibar.="<li>";
+   $navibar.="<form id='loginForm' name='loginForm' action='login.php' method='POST'>";
    $navibar.="<input type='hidden' id='logout' name='logout' value='ログアウト'>";
    $navibar.="<a id='a_logout' href='#' onclick='document.forms.loginForm.submit();return false;'>ログアウト</a>";
-   $navibar.="</li>";
    $navibar.="</form>";
+   $navibar.="</li>";
   }
   
   //検索バー追加(未対応)
@@ -236,9 +257,31 @@ function htmlFooter(){
   $replace="COPYRIGHT ".CORPNAME." ALL RIGHTS RESERVED";
   $html=preg_replace("/<!--copyright-->/",$replace,$html);
 
-  //画面追従型ナビゲーション
+  //画面追従型ナビゲーション(ここをHeaderと同じように表現する）
+  //ここから
+  
+//  $naviary=viewGroupFld();
+//  $fld001="";
   $navibar="";
   $navibar.="<li><a href='index.php'><img src='".LOGO."'></a></li>";
+//  foreach($naviary["data"] as $key=>$val){
+//   if($fld001!=$val["fld001"]){
+//    if($key){
+//     $navibar.="</ul></li>";
+//    }
+//    $navibar.="<li>".$val["_fld001"];
+//    $navibar.="<ul>";
+//    $fld001=$val["fld001"];
+//   }
+//   $navibar.="<li>";
+//   $navibar.="<a href='roomlist.php?type=";
+//   $navibar.=$val["fld001"]."_".$val["fld002"]."_".$val["fld003"]."'>";
+//   $navibar.=$val["_fld003"];
+//   $navibar.="</a>";
+//   $navibar.="</li>";
+//  }
+//  $navibar.="</ul>";
+
   foreach($NAVI as $key=>$val){
    $navibar.="<li><a href='".$key."'";
    $navibar.=">".$val."</a></li>";
