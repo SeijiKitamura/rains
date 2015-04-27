@@ -111,7 +111,7 @@ $(function(){
  }
 
  //画像拡大
- $("img#bigimg").elevateZoom({scrollZoom:true});
+ //$("img#bigimg").elevateZoom({scrollZoom:true});
 
  chgImg();
 // //画像変更

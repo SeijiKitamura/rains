@@ -118,6 +118,11 @@ $(function(){
   $("input[name=uploadimg]").on("change",function(){
    uploadImg(this);
   });
+
+  //ランク登録
+  chgRank();
+  chgEntry();
+
  }
 });
  </script>

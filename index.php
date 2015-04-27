@@ -20,9 +20,6 @@ else{
 //一覧表示
 $data=viewTopData();
 partsRankDiv($data,$loginflg);
-echo "<pre>";
-print_r($data);
-echo "</pre>";
 ?>
       </div><!--div id="article"-->
      </div><!--div id="contents"-->

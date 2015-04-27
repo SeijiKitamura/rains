@@ -27,6 +27,12 @@ function viewShortData($where=null,$order=null){
   //Rainsサブデータを反映
   $db->dsetRainsFld();
   
+  //画像リストをセット
+  $db->dsetGetImgList();
+  
+  //画像パスをセット
+  $db->dsetImgPathWithEncode();
+  
   //物件種別カウント
   $db->dsetFldCount();
   $c="end ".$mname;wLog($c);
@@ -508,13 +514,14 @@ function viewNewRains($where=null){
  try{
   $mname="viewNewRains(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $order="t.fld011 desc";
+  $order="t.fld011 desc offset 0 limit ".RANKLIMIT;
   $w="t1.fld000 is null ";
   if($where) $where=$w." and ".$where;
   else $where=$w;
 
   $c="end ".$mname;wLog($c);
-  return viewRainsData($where,$order);
+  //return viewRainsData($where,$order);
+  return viewShortData($where,$order);
  }
  catch(Exception $e){
   $c="error:".$e->getMessage().$mname;wLog($c);
@@ -569,16 +576,18 @@ function viewTopData(){
   }
 
   //売買物件
-  $where="t.fld001='01' and t1.fld000 is null";
-  $order="t.fld001,t.fld002,t.fld003,t.fld017,t.fld018,t.fld019,t.fld020,t.fld054";
-  $d=viewRainsData($where,$order);
-  $data["baibai"]=$d["data"];
+//  $where="t.fld001='01' and t1.fld000 is null";
+//  $order="t.fld001,t.fld002,t.fld003,t.fld017,t.fld018,t.fld019,t.fld020,t.fld054";
+//  $d=viewRainsData($where,$order);
+//  $d=viewShortData($where,$order);
+//  $data["baibai"]=$d["data"];
 
   //賃貸物件
-  $where="t.fld001='03' and t1.fld000 is null";
-  $order="t.fld001,t.fld002,t.fld003,t.fld017,t.fld018,t.fld019,t.fld020,t.fld054";
-  $d=viewRainsData($where,$order);
-  $data["tintai"]=$d["data"];
+//  $where="t.fld001='03' and t1.fld000 is null";
+//  $order="t.fld001,t.fld002,t.fld003,t.fld017,t.fld018,t.fld019,t.fld020,t.fld054";
+//  $d=viewRainsData($where,$order);
+//  $d=viewShortData($where,$order);
+//  $data["tintai"]=$d["data"];
   $c="end ".$mname;wLog($c);
   return $data;
  }
