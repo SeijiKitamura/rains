@@ -84,9 +84,6 @@ if($flg){
  }
  partsRankDiv($d,$loginflg);
 }
-echo "<pre>";
-print_r($d);
-echo "</pre>";
 ?>
       </div><!--div id="article"-->
      </div><!--div id="contents"-->

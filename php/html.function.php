@@ -229,30 +229,32 @@ function htmlFooter(){
   }
   $html=preg_replace("/<!--link03-->/",$navibar,$html);
 
-  //住所検索(<!--addresslist-->
-  $navibar="";
-  $data=viewRentAddress();
-  foreach($data["data"] as $key=>$val){
-//   $navibar.="<li><a href='#'>".$val["fld019"]."(".$val["count"].")"."</a></li>";
+  //売買物件
+  $naviary=viewGroupFld();
+  $replace="";
+  foreach($naviary["data"] as $key=>$val){
+   if($val["fld001"]=="01"){
+    $replace.="<li><a href='roomlist.php?type=";
+    $replace.=$val["fld001"]."_".$val["fld002"]."_".$val["fld003"];
+    $replace.="'>".$val["_fld003"];
+    $replace.="</a></li>";
+   }
   }
-  $html=preg_replace("/<!--addresslist-->/",$navibar,$html);
+  $html=preg_replace("/<!--baibailist-->/",$replace,$html);
 
-  //間取り一覧(賃貸マンション)
-  $navibar="";
-  $data=viewRentMadoriM();
-  foreach($data["data"] as $key=>$val){
-//   $navibar.="<li><a href='#'>".$val["fld180"].$val["_fld179"]."(".$val["cnt"].")"."</a></li>";
+  //賃貸物件
+  $replace="";
+  foreach($naviary["data"] as $key=>$val){
+   if($val["fld001"]=="03"){
+    $replace.="<li><a href='roomlist.php?type=";
+    $replace.=$val["fld001"]."_".$val["fld002"]."_".$val["fld003"];
+    $replace.="'>".$val["_fld003"];
+    $replace.="</a></li>";
+   }
   }
-  $html=preg_replace("/<!--madorilistM-->/",$navibar,$html);
+  $html=preg_replace("/<!--tintailist-->/",$replace,$html);
+
   
-  //間取り一覧(賃貸アパート)
-  $navibar="";
-  $data=viewRentMadoriA();
-  foreach($data["data"] as $key=>$val){
-//   $navibar.="<li><a href='#'>".$val["fld180"].$val["_fld179"]."(".$val["cnt"].")"."</a></li>";
-  }
-  $html=preg_replace("/<!--madorilistA-->/",$navibar,$html);
-
   //コピーライト
   $replace="COPYRIGHT ".CORPNAME." ALL RIGHTS RESERVED";
   $html=preg_replace("/<!--copyright-->/",$replace,$html);
