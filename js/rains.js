@@ -639,6 +639,7 @@ function showRankList(){
     $("div#contents").empty().append(html);
     showEntry();
     setRank();
+    delRank();
    },
    error:function(XMLHttpRequest,textStatus,errorThrown){
     console.log(XMLHttpRequest.responseText);
@@ -669,6 +670,45 @@ function showEntry(){
     $("input[name=endday]").val($(this).text());
    }
   });
+ });
+}
+
+//ランク削除
+function delRank(){
+ $("a.a_rankdel").click(function(){
+  var d={};
+  var chkflg;
+  chkflg=1;
+  
+  //ランク値チェック
+  d["rank"]=$("input[name=rank]").val();
+  if(! d["rank"].match(/^[0-9]+$/)){
+   consle.log("ランク数字以外");
+   chkflg=0;
+  }
+
+  if(! chkflg){
+   alert("入力エラーがあります");
+   return false;
+  }
+
+  if(! confirm("削除しますか?")) return false;
+  $.ajax({
+   url:"php/htmlDelRank.php",
+   data:d,
+   dataType:"html",
+   success:function(html){
+    console.log(html);
+    alert("削除しました");
+    $("li#rank").trigger("click");
+   },
+   error:function(XMLHttpRequest,textStatus,errorThrown){
+    console.log(XMLHttpRequest.responseText);
+    $("div.msgdiv").text(XMLHttpRequest.responseText);
+    return false;
+   }
+  });
+
  });
 }
 
