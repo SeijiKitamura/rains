@@ -364,6 +364,7 @@ function viewEntryList($fld000){
   }
   $db=new DSET();
   $db->where="t.fld000='".$fld000."'";
+  $db->where.=" and t3.fld000 is null";
   $c="end ".$mname;wLog($c);
   return $db->dsetEntry();
  }
@@ -380,7 +381,8 @@ function viewEntry($rank){
    throw new exception("ランク番号入力エラー(".$rank.")");
   }
   $db=new DSET();
-  $db->where="t.rank=".$rank;
+  $db->where ="t.rank=".$rank;
+  $db->where.=" and t3.fld000 is null";
   $db->dsetEntry();
   $db->dsetRainsFld();
   $db->dsetGetImgList();

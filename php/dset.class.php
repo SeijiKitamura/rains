@@ -1099,6 +1099,8 @@ class DSET extends DB{
    $this->from.=" t.rank=t1.rank";
    $this->from.=" inner join ".TABLE_PREFIX.RAINS." as t2 on";
    $this->from.=" t.fld000=t2.fld000";
+   $this->from.=" left outer join ".TABLE_PREFIX.BLACKLIST." as t3 on";
+   $this->from.=" t.fld000=t3.fld000";
    $this->order="t.rank,t.fld001,t.fld000";
    $c="end ".$mname;wLog($c);
    $this->r["data"]=$this->getArray();
