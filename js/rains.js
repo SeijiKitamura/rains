@@ -574,6 +574,22 @@ function chgImg(){
  });
 }
 
+//画像スライド
+function slideImg(){
+ $("div#roomPhotoAlbum").sliderPro({
+//  width:600,
+//  thumbnailWidth:200,
+//  thumbnailHeight:160,
+//  aspectRatio:1,
+  thumbnailArrows:true,
+  autoHeight:true,
+  slideDistance:0,
+  arrows:true,
+  autoplay:false,
+  buttons:false
+ });
+}
+
 //画像拡大(未使用）
 function zoomImg(){
  $("img#bigimg").elevateZoom({

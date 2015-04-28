@@ -469,18 +469,15 @@ div#article div.section{
 }
 
 div.bigphoto{
- float:left;
- width:100%;
+ display:none;
 }
 
 div.bigphoto a{
- display:block;
- width:100%;
- margin:0 0 0 20px;
+ display:none;
 }
 
 div.bigphoto a img{
- width:100%;
+ display:none;
 }
 
 div#shortphoto{

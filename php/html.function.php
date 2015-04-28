@@ -450,23 +450,19 @@ function htmlContents($data){
    //画像が0枚の場合、表示しない
    if(! count($val["imgfilepath"])){
     $replace="";
-    $html=preg_replace("/<!--bigphoto-->/",$replace,$html);
-    $html=preg_replace("/<!--loop-->.*<!--loopend-->/s",$replace,$html);
+    $html=preg_replace("/<!--loopbig-->.*<!--loopbigend-->/s",$replace,$html);
+    $html=preg_replace("/<!--loopshort-->.*<!--loopshortend-->/s",$replace,$html);
    }
 
    //画像が1枚以上の場合、表示する
+   $bigphoto="";
+   $shortphoto="";
    foreach($val["imgfilepath"] as $key1=>$val1){
-    if(!$key1){
-     $replace="";
-     $replace=$val1;
-     $html=preg_replace("/<!--bigphoto-->/",$replace,$html);
-     $replace="";
-    }
-    $replace.="<li><a href='#' data-image='".$val1."'";
-    $replace.=" data-zoom-image='".$val1."'>";
-    $replace.="<img src='".$val1."' data-zoom-image='".$val1."'></a></li>";
+    $bigphoto.="<img class='sp-slide' src='".$val1."'>";
+    $shortphoto.="<img class='sp-thumbnail' src='".$val1."'>";
    }
-   $html=preg_replace("/<!--loop-->(.*)<!--loopend-->/s",$replace,$html);
+   $html=preg_replace("/<!--loopbig-->(.*)<!--loopbigend-->/s",$bigphoto,$html);
+   $html=preg_replace("/<!--loopshort-->(.*)<!--loopshortend-->/s",$shortphoto,$html);
    
    //物件種別を表示
    $replace="";

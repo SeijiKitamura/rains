@@ -52,10 +52,6 @@ htmlFooter();
 
  <script>
 $(function(){
- //画像がなければ非表示
- if(! $("div.bigphoto a img").attr("src")){
-  $("div#roomPhotoAlbum").hide();
- }
 
  //位置情報がなければ非表示
  if(! $("span#startpoint").attr("data-lat")|| !$("span#startpoint").attr("data-lng")){
@@ -113,8 +109,22 @@ $(function(){
  //画像拡大
  //$("img#bigimg").elevateZoom({scrollZoom:true});
 
- chgImg();
-// //画像変更
+ //画像スライド
+ slideImg();
+// $(window).on("resize load",function(){
+//  console.log($(window).width());
+//  var win_width=$(window).width();
+//  if(win_width<640){
+//   console.log("スマホ");
+//   slideImg();
+//  }
+//  else{
+//   console.log("PC");
+//  // chgImg();
+//  }
+// });
+
+ //画像変更
 // $("div.shortphoto ul li a").click(function(){
 //  var moto=$(this).find("img").attr("src");
 //  $("img#bigimg").attr("src",moto);
