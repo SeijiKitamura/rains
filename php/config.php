@@ -193,6 +193,7 @@ $MININAVI=array(
 //                ,"yanusi.php" =>"オーナー様"
                );
 
+//未使用
 $INFO=array    (
                  "conpany.php"=>"会社概要"
                 ,"storeinfo.php"=>"店舗情報"
@@ -202,9 +203,11 @@ $INFO=array    (
                );
 
 $SITECONTENTS=array(
-                     "q_and_a.php"=>"Q&A"
+                     "index.php"=>"ホーム"
+                    ,"q_and_a.php"=>"Q&A"
                     ,"yanusi.php"=>"オーナー様"
-                    ,"newitem.php"=>"最新情報"
+                    ,"annnai.php"=>"会社概要"
+                    ,"privacy.php"=>"プライバシーポリシー"
                    );
 //未使用
 $BIGNAVI=array( "tintai.php"  =>"賃貸"

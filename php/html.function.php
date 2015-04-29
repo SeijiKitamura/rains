@@ -213,22 +213,6 @@ function htmlFooter(){
   }
   $html=preg_replace("/<!--link01-->/",$navibar,$html);
   
-  //ナビゲーション
-  $navibar="";
-  foreach($NAVI as $key=>$val){
-   $navibar.="<li><a href='".$key."'";
-   $navibar.=">".$val."</a></li>";
-  }
-  $html=preg_replace("/<!--link02-->/",$navibar,$html);
-
-  //インフォメーション($INFO)
-  $navibar="";
-  foreach($INFO as $key=>$val){
-   $navibar.="<li><a href='".$key."'";
-   $navibar.=">".$val."</a></li>";
-  }
-  $html=preg_replace("/<!--link03-->/",$navibar,$html);
-
   //売買物件
   $naviary=viewGroupFld();
   $replace="";
