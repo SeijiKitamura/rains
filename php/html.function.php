@@ -93,7 +93,7 @@ function htmlHeader($title=null){
     if($key){
      $navibar.="</ul></li>";
     }
-    $navibar.="<li>".$val["_fld001"];
+    $navibar.="<li><a href='#'>".$val["_fld001"]."</a>";
     $navibar.="<ul>";
     $fld001=$val["fld001"];
    }
@@ -104,7 +104,7 @@ function htmlHeader($title=null){
    $navibar.="</a>";
    $navibar.="</li>";
   }
-  $navibar.="</ul>";
+  $navibar.="</ul></li>";
 
 
   foreach($NAVI as $key=>$val){

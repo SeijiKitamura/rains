@@ -36,6 +36,8 @@ function calcRoute() {
 //全ページ
 function navi(){
  var topnavi=$("div.naviBar").offset()["top"];
+ 
+ //画面追従
  $(window).scroll(function(){
   if($(window).scrollTop()>topnavi){
    console.log("臨界点突破");
@@ -48,6 +50,16 @@ function navi(){
   }
  });
 
+ $(window).on("load resize",function(){
+  if($(window).width()>480){
+   $("div.naviBar").show();
+  }
+  else{
+   $("div.naviBar").hide();
+  }
+ });
+ 
+ //PC用ナビ
  $("div.naviBar>ul>li").hover(function(){
   console.log($(this));
   $(this).find("ul").slideDown("slow");
@@ -55,6 +67,9 @@ function navi(){
   console.log($(this));
   $(this).find("ul").slideUp("slow");
  });
+
+ //スマホ用ナビ
+ $("nav").meanmenu({meanDisplay:"none"});
 }
 
 //非表示登録
