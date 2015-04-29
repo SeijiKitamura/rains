@@ -52,4 +52,9 @@ htmlHeader("ログイン");
    
   </div><!-- div id="wrap" -->
  </body>
+ <script>
+$(function(){
+ navi();
+});
+ </script>
 </html>
