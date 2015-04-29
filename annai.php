@@ -118,6 +118,11 @@ htmlFooter();
    </div><!-- div id="footer" -->
   </div><!-- div id="wrap" -->
  </body>
+ <script>
+$(function(){
+ navi();
+});
+ </script>
 </html>
 
 

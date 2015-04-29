@@ -39,7 +39,6 @@ htmlFooter();
  <script>
 $(function(){
  navi();
-
 });
  </script>
 </html>
