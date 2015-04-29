@@ -934,3 +934,9 @@ div#privacy ul li{
 
 /*privacy.php用*/
 
+/*login.php*/
+form#loginForm ul{
+ list-style:none;
+}
+/*login.php*/
+

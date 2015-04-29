@@ -32,10 +32,12 @@ htmlHeader("ログイン");
       <div id="article">
        <div><?php echo $msg; ?></div>
        <form id="loginForm" name="loginForm" action="login.php" method="POST">
-        <label for="userid">  ユーザー名<input id="userid" name="userid" type="text">
-        <label for="password">パスワード<input id="password" name="password" type="password">
-        <input type="submit" id="login"  name="login"  value="ログイン">
-        <input type="submit" id="logout" name="logout" value="ログアウト">
+        <ul>
+         <li><label for="userid">  ユーザー名<input id="userid" name="userid" type="text"></li>
+         <li><label for="password">パスワード<input id="password" name="password" type="password"></li>
+         <li><input type="submit" id="login"  name="login"  value="ログイン">
+             <input type="submit" id="logout" name="logout" value="ログアウト"></li>
+        </ul>
        </form>
       </div><!--div id="article"-->
      </div><!--div id="contents"-->
