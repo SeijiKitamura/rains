@@ -60,14 +60,8 @@ function navi(){
  });
  
  //PC用ナビ
- $("div.naviBar>ul>li").hover(function(){
-  console.log($(this));
-  $(this).find("ul").slideDown("slow");
- },function(){
-  console.log($(this));
-  $(this).find("ul").slideUp("slow");
- });
-
+ $("div.naviBar>ul>li").test();
+ 
  //スマホ用ナビ
  $("nav").meanmenu({meanDisplay:"none"});
 }
@@ -904,3 +898,28 @@ function chkdate(hiduke){
  return true;
 }
 
+//自作プラグイン
+(function($){
+ $.fn.test=function(options){
+  var defaults={upspeed:"slow",
+                downspeed:"slow"
+               };
+  var setting=$.extend(defaults,options);
+  return this.each(function(i,elem){
+   $(elem).click(function(event){
+
+    //aタグクリック時のイベントバブリングをキャンセル
+    $(this).find("a").click(function(e){
+     e.stopPropagation();
+    });
+
+    if($(elem).find("ul").is(":visible")){
+     $(elem).find("ul").slideUp(setting.upspeed);
+    }
+    else{
+     $(elem).find("ul").slideDown(setting.downspeed);
+    }
+   });
+  });
+ };
+})(jQuery);
