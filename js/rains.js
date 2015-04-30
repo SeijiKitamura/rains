@@ -906,20 +906,8 @@ function chkdate(hiduke){
                };
   var setting=$.extend(defaults,options);
   return this.each(function(i,elem){
-   $(elem).click(function(event){
+   $(elem).on({"click"     :function(){$(elem).find("ul").slideDown(setting.downspeed);},
+               "mouseleave":function(){$(elem).find("ul").slideUp(setting.upspeed);}});
+         });
+ }})(jQuery);
 
-    //aタグクリック時のイベントバブリングをキャンセル
-    $(this).find("a").click(function(e){
-     e.stopPropagation();
-    });
-
-    if($(elem).find("ul").is(":visible")){
-     $(elem).find("ul").slideUp(setting.upspeed);
-    }
-    else{
-     $(elem).find("ul").slideDown(setting.downspeed);
-    }
-   });
-  });
- };
-})(jQuery);
