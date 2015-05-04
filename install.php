@@ -22,9 +22,17 @@ try{
 // $db=new DB();
 // $db->CreateTable();
 //
-// $csv=impLoadCsv(realpath(".")."/rainsfld.csv");
-// $sql=impCsv2SQL(FLD,$csv);
-// $db->updatearray($sql);
+ $csvpath=realpath(".")."/data/rainsfld.csv";
+ $csv=impLoadCsv($csvpath);
+ echo "<pre>";
+ print_r($csv);
+ echo "</pre>";
+ return;
+ $sql=impCsv2SQL(FLD,$csv);
+ echo "<pre>";
+ print_r($sql);
+ echo "</pre>";
+ //$db->updatearray($sql);
 }
 catch(Exception $e){
  echo "err:".$e->getMessage();
