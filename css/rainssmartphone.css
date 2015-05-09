@@ -1,0 +1,942 @@
+/*all*/
+
+/*
+ * html5doctor.com Reset Stylesheet
+ * v1.4.1
+ * 2010-03-01
+ * Author: Richard Clark - http://richclarkdesign.com
+ * */
+
+/*全ページ共通*/
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin:0; padding:0; border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent; } body { line-height:1; } article,aside,canvas,details,figcaption,figure, footer,header,hgroup,menu,nav,section,summary { display:block; } nav ul { list-style:none; } blockquote, q { quotes:none; } blockquote:before, blockquote:after, q:before, q:after { content:''; content:none; } a { margin:0; padding:0; border:0; font-size:100%; vertical-align:baseline; background:transparent; } ins { background-color:#ff9; color:#000; text-decoration:none; } mark { background-color:#ff9; color:#000; font-style:italic; font-weight:bold; } del { text-decoration: line-through; } abbr[title], dfn[title] { border-bottom:1px dotted #000; cursor:help; } table { border-collapse:collapse; border-spacing:0; } hr { display:block; height:1px; border:0; border-top:1px solid #cccccc; margin:1em 0; padding:0; } input, select { vertical-align:middle; }
+
+a{
+ text-decoration:none;
+ color:#000000;
+}
+
+div.clr{
+ clear:both;
+}
+
+span.yen{
+ font-size:0.5em;
+}
+
+body{
+ color:black;
+ width:100%;
+ background:#FFF6E5;
+ }
+
+*{
+ font-family: "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","メイリオ","Meiryo","ＭＳ Ｐゴシック","sans-seriff";
+}
+
+button{
+ font-weight          :bold;
+ margin               :5px;
+ padding              :5px 10px;
+ border-style         :none;
+ -moz-border-radius   :5px;
+ -webkit-border-radius:5px;
+ border-radius        :5px;
+ background-color     :#DCDCDC;
+}
+
+/*all*/
+
+/*header*/
+
+div#header{
+ width  :100%;
+ border-top:2px solid #FFC400;
+}
+
+div#titleSpace{
+ width :100%;
+ margin:0;
+}
+
+div#titleSpace h1{
+ font-size :18px;
+ float     :left;
+ width     :90%;
+ text-align:left;
+ color     :#3C3C3C;
+ margin    :0.2em 0 0 0 ;
+}
+
+div#header_inner{
+ width :100%;
+ margin:0 ;
+}
+
+div.logoSpace{
+ width  :100%;
+ height :2em;
+ margin :0 0 0 0;
+ padding:0em;
+ float  :left;
+}
+
+div.storeInfo img{
+ width:0;
+ height:0;
+}
+
+div.naviBar{
+/* border :1px solid #DCDCDC;*/
+ width  :100%;
+ margin :3px auto;
+}
+
+div.naviBar>ul{
+ width     :100%;
+ overflow  :hidden;
+ text-align:center;
+ list-style:none;
+}
+
+div.naviBar>ul>li{
+ float  :left;
+ border-right    :1px solid #DCDCDC;
+ width     :30%;
+ text-align:center;
+ display   :block;
+ padding   :8px 0 0 0 ;
+ font-size :0.8em;
+}
+
+div.naviBar>ul>li>ul{
+ list-style:none;
+ position:absolute;
+ width:100%;
+ display:none;
+}
+
+div.naviBar>ul>li>ul>li{
+ text-align:left;
+}
+
+div.naviBar>ul>li>ul>li>a{
+ display:block;
+ width:90%;
+ height:1em;
+ padding:10px;
+ overflow:hidden;
+ background-color:#FFF;
+}
+
+div.imageSpace img{
+ width:0;
+ height:0;
+}
+
+div#main_line{
+ width:100%;
+ background:url(../img/backline.png) repeat top left;
+}
+
+div#main_line p{
+ margin    :0 auto;
+ font-size :12px;
+ color     :white;
+ padding   :8px 0 0 0;
+ text-align:left;
+}
+
+/*header*/
+
+
+/*footer*/
+div#footer{
+ background:url("../img/bg_footer.jpg") repeat;
+ color:#CECECE;
+ font-size:10px;
+}
+
+
+div#footerHead{
+ padding:45px 0 15px 0; 
+ height :100%;
+}
+
+div.footerBox{
+ width:90%;
+ margin:0 auto;
+ padding:0 8px 20px 8px;
+ border-bottom:1px solid #58554E;
+}
+
+div.footerBox ul {
+ width:100%;
+ list-style:none;
+}
+
+div.footerBox ul li{
+ width:100%;
+ height:2em;
+}
+
+div.footerBox ul li a{
+ display:block;
+ width:100%;
+ color:#CCC;
+ font-size:15px;
+ margin:5px 0px 5px 20px;
+}
+
+div.footerBox h3{
+ padding-bottom:10px;
+ color:#CCC;
+ font-size:14px;
+}
+
+
+div.kindBox{
+ width:100%;
+}
+
+div#siteHelp{
+ width:100%;
+ text-align:left;
+ margin:0;
+}
+
+div#siteHelp p{
+ font-size:11px;
+ line-height:1.6em;
+}
+
+div.footerContactItem{
+ width:100%;
+ margin:10px 0 0 0 ;
+}
+
+div.footerContactLeft{
+ width:100%;
+ padding-right:20px;
+}
+
+div.footerContactLeft p{
+ padding-top:11px;
+ float:left;
+}
+
+div.footerContactRight{
+}
+
+div#siteAbout{
+ width:100%;
+ height:100%;
+}
+
+div#siteAbout p{
+ color:#CCC;
+ font-size:12px;
+ line-height:1.6em;
+}
+
+div#footerLinks{
+ width:100%;
+}
+
+div#footerLinks div ul {
+ width:100%;
+ list-style:none;
+}
+
+div#footerLinks div ul li{
+ width:100%;
+ padding-left :15px;
+ margin-bottom:5px;
+ height:2em;
+}
+
+div.areaBox{
+ margin-top:5px;
+/* height:50px;*/
+ width:95px;
+ float:left;
+}
+
+div.areaBoxList{
+ width:865px;
+ float:right;
+ margin-top:14px;
+}
+
+
+div.areaBoxList ul{
+ margin-top:2px;
+}
+
+div.areaBoxList ul li{
+ float:left;
+ margin:0 24px 8px 0;
+ width:120px;
+}
+
+div#footerFoot{
+ color:#FFFFFF;
+ background:url("../img/bg_footer.jpg") repeat;
+}
+
+div#copyright{
+ width:100%;
+ margin:0 auto;
+ text-align:left;
+ font-size:1.2em;
+}
+
+div#copyright p{
+ text-align:center;
+ padding:30px;
+}
+
+div#shortNavi{
+ text-align:center;
+ position:fixed;
+ left:0;
+ top:0;
+ width:100%;
+ height:50px;
+ background-color:#FFF6E5;
+ z-index:9999;
+ color:#FFFFFF;
+ font-size:24px;
+ border-bottom:2px solid #FFC400;
+}
+
+div#shortNaviInner{
+ margin:0 auto;
+ text-align:left;
+ width:1000px;
+ height:50px;
+ position:relative;
+}
+
+ul#sh_navi{
+ width:1000px;
+ float:left;
+ margin:0 auto;
+ overflow:hidden;
+ text-align:center;
+}
+
+ul#sh_navi li{
+ float:left;
+ height:30px;
+ display:block;
+ padding:10px 0;
+}
+
+ul#sh_navi li a{
+ display:block;
+ overflow:hidden;
+ width:130px;
+ height:30px;
+ font-size:12px;
+ border-right:1px solid #DCDCDC;
+ padding:10px 0;
+}
+
+ul#sh_navi li a img{
+ width:100%;
+}
+/*footer*/
+
+/*index.php*/
+div#article{
+ width:90%;
+ margin:auto;
+}
+
+div#article img{
+ width:100%;
+}
+
+div.recomendItemList{
+ margin:30px 0;
+}
+
+h2.swichBox{
+ background:#000;
+ color:#FFF;
+ font-size:20px;
+ line-height:1.5em;
+ padding:0 0 0 5px;
+}
+
+div.tabComment{
+ margin:5px;
+}
+/*index.php*/
+
+/*room.php用*/
+div#contentsroom{
+ width     :100%;
+ margin    :0 auto;
+ text-align:left;
+}
+
+div#contentsHeader{
+ width     :100%;
+ margin    :0 auto;
+ text-align:left;
+ padding   :0 0 10px 0;
+}
+
+div#viewHead{
+ margin:0 0 10px 0;
+}
+
+div#h1Wrapper{
+ background-color:#1A1A1A;
+ padding:12px 15px;
+ line-height:1.4;
+ font-size:15px;
+ font-weight:bold;
+ margin:0 0 10px 0;
+ color:white;
+}
+
+h2#itemName{ 
+ line-height:1.4;
+ display:block;
+ font-size:26px;
+}
+
+span.itemDisc{
+ line-height: 0.6;
+ font-size: 12px;
+ display: block;
+ width: 600px;
+ padding: 5px 0;
+ font-weight: normal;
+}
+
+div.photoFl{
+ width:90%;
+ margin:10px auto;
+}
+
+p.mb_10{
+ width:100%;
+ overflow:hidden;
+}
+
+p.mb_10 img{
+ width:90%;
+ height:auto;
+}
+
+div.tableFr{
+ width:90%;
+ margin:0 auto;
+}
+
+div.tableFr table{
+ font-size:12px;
+}
+
+div.tableFr table th{
+ background-color:#EDE4D3;
+ border:1px solid #DCDCDC;
+ padding:8px 3px;
+}
+
+div.tableFr table td{
+ background-color:white;
+ border:1px solid #DCDCDC;
+ padding:5px 3px;
+ font-size:12px;
+}
+
+div#roomPhotoAlbum{
+ padding:10px 0;
+ border-top:1px dotted #999;
+ border-bottom:1px dotted #999;
+}
+
+div#articleroom{
+ width:90%;
+}
+
+div#article div.section{
+ margin:0 0 30px 0;
+}
+
+div.bigphoto{
+ display:none;
+}
+
+div.bigphoto a{
+ display:none;
+}
+
+div.bigphoto a img{
+ display:none;
+}
+
+div#shortphoto{
+ width:90%;
+}
+
+div#shortphoto ul li{
+ display:block;
+ padding:0 0 10px 10px;
+ width:100%;
+}
+
+div#shortphoto ul li a{
+ display:block;
+ width:100%;
+}
+
+div#shortphoto ul li a img{
+ width:100%;
+ height:auto;
+}
+
+h3#itemInfo,
+h3#instMap ,
+div#contactItemForm h3,
+div.commentpart h3,
+div.torihikisaki h3
+{
+ background-color:#1A1A1A;
+ padding:7px 7px;
+ line-height:1.4;
+ font-size:15px;
+ font-weight:bold;
+ margin:5px 0 10px 10px;
+ color:white;
+}
+
+div#itemDetail{
+ margin-bottom:20px;
+ border-bottom:1px dotted #999;
+}
+
+table.itemTable{
+ margin:10px 0 20px 10px;
+}
+
+table.itemTable th{
+ font-weight:normal;
+ text-align:left;
+ padding:5px;
+ border:1px solid #DCDCDC;
+ line-height:1.4;
+ color:#000;
+ background-color:#EDE4D3;
+}
+
+table.itemTable td{
+ font-weight:normal;
+ text-align:left;
+ background:white;
+ padding:5px;
+ border:1px solid #DCDCDC;
+ line-height:1.4;
+ color:#000;
+}
+
+div#map-canvas{
+ border-bottom:1px dotted #999;
+ width:95%;
+ height:300px;
+ margin:0 0 10px 10px;
+}
+
+div#aside{
+ display:none;
+}
+
+div#contactItemBox{
+ padding:15px;
+ background-color:white;
+ border:1px solid #FFB11E;
+ width:80%;
+ margin:0 0 0 10px;
+}
+
+div#contactItemBox h4{
+ border-bottom:1px solid #C5C5C5;
+ font-size:1.4em;
+ padding:0 0 5px 0;
+ margin :0 0 15px 0;
+}
+
+div#contactItemBox h4{
+ border-bottom:1px solid #C5C5C5;
+ font-size:1.4em;
+ padding:0 0 5px 0;
+ margin :0 0 15px 0;
+}
+
+
+p#contactItemBoxMsg{
+ width:90%;
+ margin:0 10px 5px 10px;
+ color:#666;
+ font-size:10px;
+ line-height:1.6;
+}
+
+div.loginpart{
+ width:100%;
+ margin:20px 0;
+}
+
+div.buttonpart{
+ width:100%;
+}
+
+ul.ulbutton{
+ list-style:none;
+}
+
+ul.ulbutton li{
+ margin:0 10px;
+}
+
+ul.ulbutton li input[type=file]{
+ /*display:none;*/
+ width:0px;
+ height:0px;
+ overflow:hidden;
+}
+
+div.imgpart{
+ width:90%;
+ margin:20px 0 0 10px;
+}
+
+ul.ul_image{
+ list-style:none;
+}
+
+ul.ul_image li{
+ display:block;
+ width:100%;
+ margin:10px;
+ border:1px solid #DCDCDC;
+}
+
+ul.ul_image li img{
+ width:100%;
+ height:auto;
+ margin:3%;
+}
+
+div.commentpart textarea{
+ width:90%;
+ margin:0 0 0 10px;
+}
+
+div#divsetubi{
+ padding: 15px;
+ background-color: white;
+ border: 1px solid #DCDCDC;
+ margin-bottom: 5px;
+ width: 90%;
+}
+/*room.php用*/
+
+/*menu.php用*/
+div#contentsLeft{
+ width:90%;
+ padding :4px;
+ margin:0 0 0 10px;
+}
+
+ul#leftMenu{
+ list-style:none;
+}
+
+ul#leftMenu>li{
+ display      :block;
+ line-height  :2.4;
+ border       :1px solid #DCDCDC;
+ margin       :0 -1px 0 0;
+ text-align   :center;
+ cursor       :pointer;
+ width        :150px;
+ float        :left;
+}
+
+ul.subList{
+ list-style:none;
+ margin    :0 0 0 10px;
+}
+
+ul.subList li{
+ display      :block;
+ line-height  :2.4;
+ border       :1px solid #DCDCDC;
+ margin       :-1px -1px -1px 0px;
+ padding      :0 0 0 10px;
+ text-align   :left;
+ cursor       :pointer;
+}
+
+img#bigimg{
+ border:2px solid white;
+}
+
+.active img{
+ border:2px solid #333 !important;
+}
+
+div.ranklist{
+ width:90%;
+ margin:20px 0 0 10px;
+}
+
+div.divrankentry{
+ width:100%;
+ margin:20px 0 0 0;
+}
+
+div.ranklist table
+{
+ width:100%;
+}
+
+div.ranklist table th,
+div.divrankentry table th
+{
+ background-color:#EDE4D3;
+ border:1px solid #DCDCDC;
+ padding:8px 3px;
+ text-align:center;
+}
+
+a.a_rankentry,
+a.a_rankdel{
+ float: left;
+ display: block;
+ border: 1px solid #DCDCDC;
+ width: 100px;
+ height: 0.8em;
+ padding: 0.4em;
+ font-size: 0.8em;
+ text-align: center;
+ color: #008B8B;
+ border-radius: 5px;
+ -webkit-border-radius: 5px;
+ -moz-border-radius: 5px;
+ margin: 0.5em;
+}
+
+/*yanusi.php用*/
+div#reason_part{
+ width:90%;
+ margin:0 0 0 30px;
+ padding-top:100px;
+}
+
+div#reason_part h1{
+ color    :red;
+ font-size:35px;
+ text-align:left;
+}
+
+div#reason_part h2{
+ font-size:20px;
+}
+
+div#reason_part p{
+ margin:1em 0;
+ line-height:1.6;
+}
+
+div#reason_part p.part1{
+ padding-top:2em;
+}
+
+/*idとclassで同名あり*/
+div.contactItemBox{
+ width :100%;
+ margin:10px auto ;
+ border:1px solid #FF8C00;
+ background:#FFFFFF;
+}
+div.contactItemBox h4{
+ font-size  :24px;
+ font-weight:normal;
+ text-align :left;
+ padding-top:10px;
+ color      :#FFFFFF;
+ background :#FF8C00;
+}
+
+div.promisepart{
+ margin:10px 6px;
+}
+
+div.promisepart h3{
+ font-size:18px;
+}
+
+ul.costlist{
+ list-style:none;
+ margin:1em 0;
+}
+
+div.costBox{
+ text-align:left;
+ margin:0 auto 30px auto;
+ border:1px solid #FF8C00;
+ background-color:#FFFFFF;
+ padding:1em;
+}
+
+div.costRight h3{
+ font-size:18px;
+ color:#FF8C00;
+}
+
+div.checkBox{
+ width :100%;
+ background-color:#FFFFFF;
+ padding:0;
+ border :1px solid #FF8C00;
+ margin :0 0 1em 0;
+}
+
+div.checkBox h4{
+ font-size  :24px;
+ font-weight:normal;
+ text-align :center;
+ padding-top:10px;
+ color      :#FFFFFF;
+ background :#FF8C00;
+}
+
+dl.checkList dt{
+ font-size:18px;
+ margin:1em 0 1em 1em;
+}
+
+dl.checkList dd{
+ margin:0 0 0 2em;
+}
+
+div.questionBox{
+ background-color:#FFFFFF;
+ padding:20px;
+}
+
+dl.questionList dt{
+ margin:0 0 0 1em;
+ font-size:18px;
+}
+
+dl.questionList dd{
+ margin:0 0 1em 2em;
+
+}
+/*yanusi.php用*/
+
+/*annai.php用*/
+div#divannai{
+ width:90%;
+ margin:0 0 0 20px;
+ padding-top:50px;
+}
+
+div#divannai h2{
+ background-color: #1a1a1a;
+ padding: 7px;
+ line-height: 1.4;
+ font-size: 15px;
+ font-weight: bold;
+ margin-bottom: 10px;
+ color: #fff;
+}
+
+div#stores{
+ background-color: #fff;
+ padding: 12px;
+ margin-bottom: 20px;
+}
+
+div.store_wrap{
+ border: 1px solid #e5e5e5;
+ padding: 8px;
+ width: 100%;
+ background-color: #f5f5f5;
+}
+
+div#stores h3{
+ padding:8px;
+ color  :#FFF;
+ background-color:#00008B;
+}
+
+div.store_wrap p{
+ width :50%;
+ margin:10px 0 0 0 ;
+}
+div.store_wrap p img{
+ width:100%;
+}
+
+div.store_wrap table{
+ width :100%;
+ margin:10px 0 0 0px ;
+ float:left;
+}
+
+div.store_wrap table tr td{
+ font-weight:normal;
+ text-align:left;
+ background:white;
+ padding:5px;
+ border:1px solid #DCDCDC;
+ line-height:1.4;
+ color:#000;
+}
+/*annai.php用*/
+
+/*privacy.php用*/
+div#privacy {
+ width:90%;
+ margin:0 0 0 10px;
+ padding-top:20px;
+}
+
+div#privacy h2{
+ background-color: #1a1a1a;
+ padding: 7px;
+ line-height: 1.4;
+ font-size: 15px;
+ font-weight: bold;
+ margin-bottom: 10px;
+ color: #fff;
+}
+
+div#privacy p{
+ font-size    :0.8em;
+ margin-bottom:1em;
+}
+
+div#privacy ul {
+ list-style:none;
+}
+div#privacy ul li{
+ font-size    :0.8em;
+}
+
+/*privacy.php用*/
+
+/*login.php*/
+form#loginForm ul{
+ list-style:none;
+}
+/*login.php*/
+

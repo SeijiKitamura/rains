@@ -6,16 +6,6 @@ require_once("server.conf.php");
 define("DEBUG",true);
 //---------------------------------------------------//
 
-
-//---------------------------------------------------//
-// 会社情報
-//---------------------------------------------------//
-define("MAILADDRESS","xxxxxx@xxxxxxxxxxx.xxx");
-define("CORPNAME","会社名");
-define("CATCHWORD","コメント");
-define("CORPTEL","00-0000-0000");
-define("CORPFAX","00-0000-0000");
-
 //---------------------------------------------------//
 // DBEngin 選択
 //---------------------------------------------------//
@@ -25,12 +15,12 @@ define("DBENGIN","postgres");
 //---------------------------------------------------//
 // ディレクトリ名定数
 //---------------------------------------------------//
- define("IMG"    ,"/img"     ); //777
- define("JS"     ,"/js"      ); //705
- define("CSS"    ,"/css"     ); //705 
- define("DATA"   ,"/data"    ); //700 
- define("LOG"    ,"/log"     ); //700 
-
+ define("IMG"     ,"/img"     ); //777
+ define("JS"      ,"/js"      ); //705
+ define("CSS"     ,"/css"     ); //705 
+ define("DATA"    ,"/data"    ); //700 
+ define("LOG"     ,"/log"     ); //700 
+ define("SKELETON","/skeleton"); //700 
 
 //---------------------------------------------------//
 // ファイル定数
@@ -38,7 +28,7 @@ define("DBENGIN","postgres");
  define("LOGO"    ,".".IMG."/logo.gif"   );
  define("FAV"     ,".".IMG."/favicon.ico");
  define("JQNAME"  ,".".JS."/jquery.js"   );
-
+define("TOPIMAGE" ,".".IMG."/topimage.jpg");
 
 //---------------------------------------------------//
 // テーブル名定数
@@ -73,6 +63,158 @@ define("BCOMMENT","bcomment");
 // パラメーター系
 //---------------------------------------------------//
 define("NEWLIST","-3days") ;
+define("RANKLIMIT",5);
+define("BROTHERLIMIT",4);
+define("SITEHELP","周辺のマンション、アパート、一軒家、駐車場などのおすすめ情報をご案内中。詳細事項はもちろん、建物・室内の写真も掲載しております。");
+
+define("SITEABOUT","地域周辺の・賃貸・売買・不動産を探すなら".CORPNAME."。お客様にご満足いただけるように確かな情報をお届けすることを心がけております。アパート・マンションを探すならぜひ".CORPNAME."にお任せください。");
+//---------------------------------------------------//
+// ページ情報
+//---------------------------------------------------//
+
+$PAGEARY=array( "index.php"
+                              =>array( "title"=>"ホーム"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"index.css"
+                                      ,"description"=>CORPNAME."は".CORPADDRESS."にある不動産屋です。この街の不動産なら当店にお任せ。おすすめ物件はもちろん当店独自のランキングも掲載中です。賃貸アパート、賃貸マンション、一軒家などなんでもご相談ください。")
+               ,"room.php"  
+                              =>array( "title"=>"賃貸"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"tintai.css"
+                                      ,"description"=>"")
+               ,"baibai.php"  
+                              =>array( "title"=>"売買"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"tintai.css"
+                                      ,"description"=>"")
+               ,"jigyou.php"  
+                              =>array( "title"=>"事業用"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"tintai.css"
+                                      ,"description"=>"")
+               ,"q_and_a.php" 
+                              =>array( "title"=>"Q&A"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>""
+                                      ,"description"=>"")
+               ,"yanusi.php" 
+                              =>array( "title"=>"家主様"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"yanusi.css"
+                                      ,"description"=>"")
+               ,"annai.php"  
+                              =>array( "title"=>"会社案内"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>""
+                                      ,"description"=>"")
+               ,"toiawase.php"
+                              =>array( "title"=>"お問い合せ"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>""
+                                      ,"description"=>"")
+               ,"estate.php"
+                              =>array( "title"=>""
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"estate.css"
+                                      ,"description"=>"")
+               ,"conpany.php"
+                              =>array( "title"=>"会社概要"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>".css"
+                                      ,"description"=>"")
+               ,"storeinfo.php"
+                              =>array( "title"=>"店舗情報"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>".css"
+                                      ,"description"=>"")
+               ,"privacy.php"
+                              =>array( "title"=>"プライバシーポリシー"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"privacy.css"
+                                      ,"description"=>"")
+               ,"sitemap.php"
+                              =>array( "title"=>"サイトマップ"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>".css"
+                                      ,"description"=>"")
+               ,"newitem.php"
+                              =>array( "title"=>"最新情報"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>".css"
+                                      ,"description"=>"")
+               ,"search.php"
+                              =>array( "title"=>"物件検索"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"search.css"
+                                      ,"description"=>"")
+               ,"list.php"
+                              =>array( "title"=>"物件一覧"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"list.css"
+                                      ,"description"=>"")
+               ,"login.php"
+                              =>array( "title"=>"ログイン"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>""
+                                      ,"description"=>"")
+               ,"menu.php"
+                              =>array( "title"=>"データ更新"
+                                      ,"css1" =>"all.css"
+                                      ,"css2" =>"header.css"
+                                      ,"css3" =>"menu.css"
+                                      ,"description"=>"")
+              );
+
+$NAVI  =array(
+                "q_and_a.php"           =>"Q&A"
+               ,"yanusi.php"            =>"オーナー様"
+               ,"annai.php"            =>"会社概要"
+              );
+
+$MININAVI=array(
+//                "q_and_a.php" =>"Q&A"
+//                ,"yanusi.php" =>"オーナー様"
+               );
+
+//未使用
+$INFO=array    (
+                 "conpany.php"=>"会社概要"
+                ,"storeinfo.php"=>"店舗情報"
+                ,"privacy.php"=>"プライバシーポリシー"
+                ,"sitemap.php"=>"サイトマップ"
+                ,"toiawase.php"=>"お問い合せ"
+               );
+
+$SITECONTENTS=array(
+                     "index.php"=>"ホーム"
+                    ,"q_and_a.php"=>"Q&A"
+                    ,"yanusi.php"=>"オーナー様"
+                    ,"annnai.php"=>"会社概要"
+                    ,"privacy.php"=>"プライバシーポリシー"
+                   );
+//未使用
+$BIGNAVI=array( "tintai.php"  =>"賃貸"
+               ,"baibai.php"  =>"売買"
+               ,"jigyou.php"  =>"事業用"
+              );
+
 //------------------------------------------------------------//
 // テーブル情報(テーブル作成時に「id」列などが自動で付加される
 // indexに数字をセットするとテーブル作成時にCreate Indexが実行される
@@ -839,7 +981,7 @@ function wLog($comment){
   return false;
  }
 
- //echo $c."<br>";
+ if(DEBUG && preg_match("/error:/",$c)) echo $c."<br>";
 
  fwrite($fp,$c);
  fclose($fp);

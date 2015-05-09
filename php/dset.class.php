@@ -35,7 +35,7 @@ class DSET extends DB{
    $this->order="case when t.fld000='物件番号' then 0 else 1 end,t.fld000";
   }
 
-  if(! $this->select) $this->select="t.*,t1.fld000 as blacklist,t2.fld001 as setubi,t2.fld002 as bcomment";
+  if(! $this->select) $this->select="t.*,t1.fld000 as blacklist,t2.fld001 as setubi,t2.fld002 as bcomment,t3.rank,t3.fld001 as entry";
   $this->from =TABLE_PREFIX.RAINS." as t ";
   $this->from.=" left outer join ";
   $this->from.=TABLE_PREFIX.BLACKLIST." as t1 on ";
@@ -43,6 +43,9 @@ class DSET extends DB{
   $this->from.=" left outer join ";
   $this->from.=TABLE_PREFIX.BCOMMENT." as t2 on ";
   $this->from.=" t.fld000=t2.fld000 ";
+  $this->from.=" left outer join ";
+  $this->from.=TABLE_PREFIX.ENTRY." as t3 on ";
+  $this->from.=" t.fld000=t3.fld000 ";
 
   $this->r=array();
   $this->r["data"]=$this->getArray();
@@ -66,7 +69,7 @@ class DSET extends DB{
    }
 
    foreach($this->r["data"] as $key=>$val){
-    if(! preg_match("/^[0-9]+$/",$val["fld000"])) continue;
+    //if(! preg_match("/^[0-9]+$/",$val["fld000"])) continue;
 
     foreach($this->flds as $key1=>$val1){
      if($val1["fldname"]=="fld001"){
@@ -110,14 +113,15 @@ class DSET extends DB{
       // $this->r["data"][$key][$val1["fldname"]]=$val1["bname"]; 
       $this->r["data"][$key]["_".$val1["fldname"]]=$val1["bname"]; 
 
-      $c="notice:".$mname."物件番号".$val["fld000"]."に_".$val1["fldname"]."列を「".$val1["bname"]."」に追加しました。";wLog($c);
+      $c="notice:".$mname."物件番号".$val["fld000"]."に_".$val1["fldname"]."列を「".$val1["bname"]."」に追加しました。aaa";wLog($c);
+      continue;
      }
 
      if(! $val1["fld001"] && !$val1["fld002"] && $val[$val1["fldname"]]==$val1["bnum"]){
 
       $this->r["data"][$key]["_".$val1["fldname"]]=$val1["bname"];
 
-      $c="notice:".$mname."物件番号".$val["fld000"]."に_".$val1["fldname"]."列を「".$val1["bname"]."」に追加しました。";wLog($c);
+      $c="notice:".$mname."物件番号".$val["fld000"]."に_".$val1["fldname"]."列を「".$val1["bname"]."」に追加しました。bbb";wLog($c);
      }
     }
    }
@@ -125,7 +129,7 @@ class DSET extends DB{
    return $this->r;
   }//try
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -170,7 +174,7 @@ class DSET extends DB{
    }//foreach
   }//try
   catch(Exception $e){
-   $c="error:".$e->getMessage();wLog($c);echo $c;
+   $c="error:".$e->getMessage();wLog($c);
   }
  }
  
@@ -225,7 +229,7 @@ class DSET extends DB{
    }//foreach
   }//try
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
  
@@ -252,7 +256,7 @@ class DSET extends DB{
    return $latlng;
   }//try
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -283,7 +287,7 @@ class DSET extends DB{
    }
   }//try
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
  
@@ -325,7 +329,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
 
  }
@@ -362,7 +366,7 @@ class DSET extends DB{
    return $this->r;
   }//try
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }//catch
  }
 
@@ -471,7 +475,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
  
@@ -499,7 +503,7 @@ class DSET extends DB{
    $c="end:".$mname;wLog($c);
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -581,7 +585,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
  
@@ -615,7 +619,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -673,7 +677,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -697,7 +701,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -708,7 +712,7 @@ class DSET extends DB{
   $mname="dsetAreaCount(DSET class)";
   $c="start ".$mname;wLog($c);
   $this->r=array();
-  $this->select="t.fld017,t.fld018,t.fld019,t1.fld000,count(t.fld000)";
+  $this->select="t.fld017,t.fld018,t.fld019,t1.fld000,count(t.fld000) as cnt";
   $this->from=TABLE_PREFIX.RAINS." as t ";
   $this->from.=" left outer join ".TABLE_PREFIX.BLACKLIST." as t1 on ";
   $this->from.=" t.fld000=t1.fld000 ";
@@ -716,6 +720,33 @@ class DSET extends DB{
   if(! $this->order){
    $this->order=$this->group;
   }
+  $this->r["data"]=$this->getArray();
+  $c="end ".$mname;wLog($c);
+  return $this->r;
+ }
+
+ //DBからエリア集計をする
+ //where句は予めセットしておく
+ //order句は特に指定がなければfld017,fld018,fld019の昇順となる
+ //正規表現がマニュアルと違う。マニュアル通りなら
+ //regexp_replace(t.fld019,'(^.*)([０-９]+)(.*$)','\\1')
+ public function dsetAreaCount2(){
+  $mname="dsetAreaCount2(DSET class)";
+  $c="start ".$mname;wLog($c);
+  $this->select ="t.fld017,t.fld018";
+  //$this->select.=",regexp_replace(t.fld019,'([０-９]+)(.*)','\\1') as fld019";
+  $this->select.=",regexp_replace(t.fld019,'([０-９]+)(.*)','') as fld019";
+  $this->select.=",count(t.fld000) as cnt";
+  $this->from =TABLE_PREFIX.RAINS." as t";
+  $this->from.=" left outer join ".TABLE_PREFIX.BLACKLIST." as t1 on";
+  $this->from.=" t.fld000=t1.fld000 ";
+  $this->group ="t.fld017,t.fld018";
+  //$this->group.=",regexp_replace(t.fld019,'([０-９]+)(.*)','\\1')";
+  $this->group.=",regexp_replace(t.fld019,'([０-９]+)(.*)','')";
+  if(! $this->order){
+   $this->order=$this->group;
+  }
+  $this->r=array();
   $this->r["data"]=$this->getArray();
   $c="end ".$mname;wLog($c);
   return $this->r;
@@ -760,7 +791,7 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
 
  }
@@ -792,7 +823,7 @@ class DSET extends DB{
   return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -828,7 +859,28 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
+  }
+ }
+ 
+//間取りごとにカウント
+//where句は予めセットしておく
+ public function dsetMadoriCount2(){
+  try{
+   $mname="dsetMadoriCount2(DSET class)";
+   $c="start ".$mname;wLog($c);
+   $this->select="t.fld001,t.fld002,t.fld003,t.fld179,t.fld180,count(t.fld179) as cnt";
+   $this->group ="t.fld001,t.fld002,t.fld003,t.fld180,t.fld179";
+   $this->order =$this->group;
+   if($this->where) $this->where.=" and ";
+   $this->where.=" t1.fld000 is null";
+   $this->dsetRains();
+   $this->dsetRainsFld();
+   $c="end ".$mname;wLog($c);
+   return $this->r;
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -864,10 +916,113 @@ class DSET extends DB{
    return $this->r;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
+ public function dsetStationCount2(){
+  try{
+   $mname="dsetStationCount2(DSET class)";
+   $c="start ".$mname;wLog($c);
+   $this->select="t.fld025,t.fld026,count(t.fld025) as cnt";
+   $this->from =TABLE_PREFIX.RAINS." as t";
+   $this->from.=" left outer join ";
+   $this->from.=TABLE_PREFIX.BLACKLIST." as t1 on";
+   $this->from.=" t.fld000=t1.fld000";
+   $this->group="t.fld025,t.fld026";
+   $this->order="t.fld025,t.fld026";
+   $this->r["station"]=$this->getArray();
+   $c="end ".$mname;wLog($c);
+   return $this->r;
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);
+  }
+ }
+
+ //徒歩を５分ごとに分類（徒歩空欄は２１分に分類される）
+ public function dsetWalkCount(){
+  try{
+   $mname="dsetWalkCount(DSET class)";
+   $c="start ".$mname;wLog($c);
+   $this->select =" case ";
+   $this->select.="  when t.fld027 is null or t.fld027='' then 21";  
+   $this->select.="  when cast(t.fld027 as integer)<5 then 5 ";
+   $this->select.="  when cast(t.fld027 as integer)>=5  and cast(t.fld027 as integer)<10 then 10"; 
+   $this->select.="  when cast(t.fld027 as integer)>=10 and cast(t.fld027 as integer)<15 then 15";  
+   $this->select.="  when cast(t.fld027 as integer)>=15 and cast(t.fld027 as integer)<20 then 20";  
+   $this->select.="  else 21";
+   $this->select.=" end as walk";
+   $this->select.=",count(t.fld000) as cnt";
+   $this->from =TABLE_PREFIX.RAINS." as t";
+   $this->from.=" left outer join ";
+   $this->from.=TABLE_PREFIX.BLACKLIST." as t1 on";
+   $this->from.=" t.fld000=t1.fld000";
+   $this->group =" case ";
+   $this->group.="  when t.fld027 is null or t.fld027='' then 21";  
+   $this->group.="  when cast(t.fld027 as integer)<5 then 5 ";
+   $this->group.="  when cast(t.fld027 as integer)>=5  and cast(t.fld027 as integer)<10 then 10"; 
+   $this->group.="  when cast(t.fld027 as integer)>=10 and cast(t.fld027 as integer)<15 then 15";  
+   $this->group.="  when cast(t.fld027 as integer)>=15 and cast(t.fld027 as integer)<20 then 20";  
+   $this->group.="  else 21";
+   $this->group.=" end";
+   $this->order =" case ";
+   $this->order.="  when t.fld027 is null or t.fld027='' then 21";  
+   $this->order.="  when cast(t.fld027 as integer)<5 then 5 ";
+   $this->order.="  when cast(t.fld027 as integer)>=5  and cast(t.fld027 as integer)<10 then 10"; 
+   $this->order.="  when cast(t.fld027 as integer)>=10 and cast(t.fld027 as integer)<15 then 15";  
+   $this->order.="  when cast(t.fld027 as integer)>=15 and cast(t.fld027 as integer)<20 then 20";  
+   $this->order.="  else 21";
+   $this->order.=" end";
+   $this->r["walk"]=$this->getArray();
+   $c="end ".$mname;wLog($c);
+   return $this->r;
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);
+  }
+ }
+ public function dsetPriceCount(){
+  try{
+   $mname="dsetPriceCount(DSET class)";
+   $c="start ".$mname;wLog($c);
+   $this->select =" case ";
+   $this->select.="  when cast(t.fld054 as integer)<50000 then 50000 ";
+   $this->select.="  when cast(t.fld054 as integer)>=50000  and cast(t.fld054 as integer)<100000 then 100000"; 
+   $this->select.="  when cast(t.fld054 as integer)>=100000 and cast(t.fld054 as integer)<150000 then 150000";  
+   $this->select.="  when cast(t.fld054 as integer)>=150000 and cast(t.fld054 as integer)<200000 then 200000";  
+   $this->select.="  else 200001";
+   $this->select.=" end as price";
+   $this->select.=",count(t.fld000) as cnt";
+   $this->from =TABLE_PREFIX.RAINS." as t";
+   $this->from.=" left outer join ";
+   $this->from.=TABLE_PREFIX.BLACKLIST." as t1 on";
+   $this->from.=" t.fld000=t1.fld000";
+
+   $this->group =" case ";
+   $this->group.="  when cast(t.fld054 as integer)<50000 then 50000 ";
+   $this->group.="  when cast(t.fld054 as integer)>=50000  and cast(t.fld054 as integer)<100000 then 100000"; 
+   $this->group.="  when cast(t.fld054 as integer)>=100000 and cast(t.fld054 as integer)<150000 then 150000";  
+   $this->group.="  when cast(t.fld054 as integer)>=150000 and cast(t.fld054 as integer)<200000 then 200000";  
+   $this->group.="  else 200001";
+   $this->group.=" end";
+
+   $this->order =" case ";
+   $this->order.="  when cast(t.fld054 as integer)<50000 then 50000 ";
+   $this->order.="  when cast(t.fld054 as integer)>=50000  and cast(t.fld054 as integer)<100000 then 100000"; 
+   $this->order.="  when cast(t.fld054 as integer)>=100000 and cast(t.fld054 as integer)<150000 then 150000";  
+   $this->order.="  when cast(t.fld054 as integer)>=150000 and cast(t.fld054 as integer)<200000 then 200000";  
+   $this->order.="  else 200001";
+   $this->order.=" end";
+
+   $this->r["price"]=$this->getArray();
+   $c="end ".$mname;wLog($c);
+   return $this->r;
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);
+  }
+ }
  public function dsetSubFld(){
   $this->select="*";
   $this->from=TABLE_PREFIX.FLD;
@@ -887,7 +1042,7 @@ class DSET extends DB{
    return $data;
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -910,7 +1065,7 @@ class DSET extends DB{
    $c="end ".$mname;wLog($c);
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -930,7 +1085,7 @@ class DSET extends DB{
    }
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -944,12 +1099,15 @@ class DSET extends DB{
    $this->from.=" t.rank=t1.rank";
    $this->from.=" inner join ".TABLE_PREFIX.RAINS." as t2 on";
    $this->from.=" t.fld000=t2.fld000";
+   $this->from.=" left outer join ".TABLE_PREFIX.BLACKLIST." as t3 on";
+   $this->from.=" t.fld000=t3.fld000";
    $this->order="t.rank,t.fld001,t.fld000";
    $c="end ".$mname;wLog($c);
-   return $this->getArray();
+   $this->r["data"]=$this->getArray();
+   return $this->r["data"];
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -972,7 +1130,7 @@ class DSET extends DB{
    $c="end ".$mname;wLog($c);
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -992,7 +1150,7 @@ class DSET extends DB{
    }
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -1007,7 +1165,7 @@ class DSET extends DB{
    return $this->getArray();
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -1037,7 +1195,7 @@ class DSET extends DB{
    $c="end ".$mname;wLog($c);
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 
@@ -1064,7 +1222,7 @@ class DSET extends DB{
    }
   }
   catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
 

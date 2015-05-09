@@ -1,5 +1,11 @@
 <?php
 //---------------------------------------------------//
+// ログイン情報
+//---------------------------------------------------//
+define("USERID"  ,"");
+define("PASSWORD","");
+
+//---------------------------------------------------//
 // DB 接続系定数
 //---------------------------------------------------//
  define("DBHOST"        ,"localhost");
@@ -7,10 +13,26 @@
  define("DBUSER"        ,"dbuser"   );
  define("DBPASS"        ,"dbpass"   );
  define("TABLE_PREFIX"  ,"hp_"      );
+
+//---------------------------------------------------//
+// 会社情報
+//---------------------------------------------------//
+define("MAILADDRESS","xxxxxx@xxxxxxxxxxx.xxx");
+define("CORPNAME","会社名");
+define("CORPADDRESS","会社住所");
+//define("CATCHWORD","コメント");
+define("CORPTEL","00-0000-0000");
+define("CORPFAX","00-0000-0000");
+define("PRIVACYMAN" ,"情報責任者"); 
+define("PRESIDENT"  ,"代表取締役");
+define("EIGYOJIKAN" ,"営業時間");
+define("TEIKYUBI"   ,"定休日");
+define("LICENSE"    ,"免許番号");
+define("JIGYO"      ,"事業内容");
+define("ENKAKU"     ,"沿革");
  
 //---------------------------------------------------//
-//GoogleMap API関連
+// GoogleMap
 //---------------------------------------------------//
-$GOOGLEURL="http://maps.googleapis.com/maps/api/js?sensor=false&key=";
-$APIKEY="Google API Key";
+define("GMAP",'');//店舗MAP
 ?>

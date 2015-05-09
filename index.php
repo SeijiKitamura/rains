@@ -1,35 +1,56 @@
+<?php require_once("php/html.function.php");?>
 <?php
-require_once("php/parts.class.php");
+htmlHeader(CATCHWORD);
+htmlTopImage();
 ?>
+   <div id="contentsWrap">
+    <div id="contentsMiddle">
+     <div id="contents">
+      <div id="article">
 <?php
-$db=new PARTS();
-//Headerをゲット
-$db->getHeader();
-echo $db->rainsdata["header"];
+//ログインチェック
+session_start();
+if(isset($_SESSION["USERID"]) || $_SESSION["USERID"] || $_SESSION["USERID"]==md5(USERID)){
+ $loginflg=1;
+}
+else{
+ $loginflg=0;
+}
+
+//一覧表示
+$data=viewTopData();
+partsRankDiv($data,$loginflg);
 ?>
-  <div id="topbanner">
-   <div class="divimg">
-    <img src="img/00053.JPG">
-   </div>
-   <p id="overimg">ご希望の不動産全力でお探しいたします。</p>
-   <p id="comment1">物件をお探しのお客様はこちらからどうぞ↓</p>
-   <ul class="ulbignavi">
-    <li><a href="#">賃 貸</a></li>
-    <li><a href="#">売 買</a></li>
-    <li><a href="#">事業用</a></li>
-   </ul>
-   <div class="clr"></div>
-   <hr>
-  </div>
-  <div class="clr"></div>
-  <div class="newtintai">
+      </div><!--div id="article"-->
+     </div><!--div id="contents"-->
+    </div><!--div id="contentsMiddle"-->
+   </div><!--div id="contentsWrap"-->
+   
+   <div id="rightside">
+   </div><!-- div id="rightside" -->
+
+   <div id="footer">
 <?php
-$db->smallparts();
+htmlFooter()
 ?>
-  </div>
-  <ul>
-   <li><a href="list.php">一覧(お客様用)</a></li>
-   <li><a href="uploadrains.php">データ更新</a></li>
-  </ul>
+   </div><!-- div id="footer" -->
+   
+  </div><!-- div id="wrap" -->
  </body>
+
+ <script>
+$(function(){
+ 
+ //ナビゲーション追従
+ navi();
+ 
+ //非表示ボタン
+ $("button").click(function(){ delItem($(this));});
+
+ //ランク登録
+ chgRank();
+ chgEntry();
+}); 
+
+ </script>
 </html>

@@ -1,0 +1,197 @@
+div#topImage{
+/* border :1px solid #DCDCDC;*/
+ width  :100%;
+/* height :8em;*/
+ margin :0 auto;
+ padding:0.5em;
+}
+
+div.imageSpace{
+/*border    :1px solid #DCDCDC;*/
+ width     :100%;
+ max-height:377px;
+ overflow:hidden;
+}
+
+div.imageSpace img{
+ width    :100%;
+}
+
+div.commentSpace{
+/* border    :1px solid #DCDCDC;*/
+ width     :60%;
+ margin    :1em 0 0 0;
+ padding   :1em;
+ float     :left;
+}
+
+div.bigNavi{
+ width  :90%;
+ padding:3em 0;
+}
+
+div.bigNavi ul{
+ list-style:none;
+}
+
+div.bigNavi ul li{
+ float :left;
+ width  :25%;
+}
+
+div.bigNavi ul li a{
+ display   :block;
+ height    :1em;
+ padding   :0.5em 0;
+ font-size :2.5em;
+ text-align:center;
+ background:blue;
+ border    :1px solid white;
+ color     :white;
+ margin    :0 0.1em;
+ border-radius:10px;
+}
+
+div#main{
+ border :1px solid #DCDCDC;
+ width  :95%;
+ margin :1em;
+ padding:0.5em;
+}
+
+div#main h2{
+ border :1px solid #DCDCDC;
+ font-size:2em;
+ background:blue;
+ color:white;
+}
+
+div.estatebox{
+ border :1px solid #DCDCDC;
+ width  :15%;
+ margin :0.5em;
+ padding:0.5em;
+ float  :left;
+ border-radius:10px;
+}
+
+div.imagebox{
+ border :1px solid #DCDCDC;
+ width  :90%;
+ height :10em;
+ padding:0.5em;
+ margin :0 0 0.5em 0;
+ overflow:hidden;
+}
+
+div.imagebox img{
+ width  :90%;
+}
+
+div.detailbox{
+ border :1px solid #DCDCDC;
+ width  :90%;
+ height :5em;
+ padding:0.5em;
+}
+
+div.detailbox ul{
+ list-style:none;
+}
+
+span.price{
+ display:block;
+ text-align:right;
+ color:red;
+ font-size:1.5em;
+}
+span.yen{
+ color:red;
+}
+
+div#contents{
+ width     :1000px;
+ margin    :0 auto;
+ text-align:left;
+}
+
+div#article{
+ background-color:white;
+}
+
+ul#tab_link{
+ width     :760px;
+ list-style:none;
+}
+
+ul#tab_link li{
+ width :128px;
+ float :left;
+}
+
+ul#tab_link li a{
+ display:block;
+ width     :98%;
+ height    :25px;
+ padding   :0.8em 0 0 0;
+ text-align:center;
+ overflow  :hidden;
+ background-color:#F5F5F5;
+ border:2px solid white;
+ font-size:0.9em;
+}
+
+ul#tab_link li a.current{
+ background-color:#FFA500;
+ color:white;
+}
+
+div#article div{
+ margin-left:0.5em;
+}
+
+div.recomendBox{
+ margin-top:2em;
+ height:25px;
+}
+
+div.recomendItemList{
+ margin-top:25px;
+}
+
+div.recomendItemBox{
+ width :220px;
+ height:230px;
+ float :left;
+ margin:0 8px 0 0;
+}
+
+div.recomendItemBoxMiddle{
+ width:220px;
+ height:150px;
+}
+
+div.recomendItemBoxMiddle p{
+ max-width:90%;
+ max-height:90%;
+ overflow :hidden;
+}
+
+div.recomendItemBoxMiddle p img{
+ width:100%;
+}
+
+div.tabSwitchH3 h3{
+ margin:5px 0 3px 0;
+ font-size:12px;
+}
+
+div.tabSwitchH3 h3 a{
+ color:#0075C8;
+}
+
+div.recomendItemBoxDown p{
+ font-size:12px;
+ color:black;
+ margin-left:0.5em;
+}

@@ -17,7 +17,7 @@ function partsRainsList($data){
   $html="";
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -83,7 +83,7 @@ function partsRainsTable($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -103,7 +103,7 @@ function partsRainsTest($sql){
   partsRainsTable($result["data"]);
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -178,7 +178,7 @@ function partsArea($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -198,7 +198,7 @@ function partsNewList($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
   
@@ -222,7 +222,7 @@ function partsFldCount($data){
     $fld002=mb_split("_",$key1);
     foreach($val1 as $key2=>$val2){
      $fld003=mb_split("_",$key2);
-     $html.="<li class='fld003' data-fld001='".$fld001[0]."' data-fld002='".$fld002[0]."' data-fld003='".$fld003[0]."'>".$fld003[1]."(".$val2.")</li>";
+     $html.="<li class='fld003' data-fld001='".$fld001[0]."' data-fld002='".$fld002[0]."' data-fld003='".$fld003[0]."'><a href='#'>".$fld003[1]."(".$val2.")</a></li>";
     }
    }
    $html.="</ul></li>";
@@ -232,7 +232,7 @@ function partsFldCount($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -261,7 +261,7 @@ function partsMadoriCount($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -290,7 +290,7 @@ function partsStationCount($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -344,7 +344,7 @@ function partsIndivi($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -403,20 +403,20 @@ function partsPrice($data){
    $html.="<dt>その他</dt>";
    $html.="<dd>";
    if($val["fld071"] || $val["fld072"] ||$val["fld073"]){
-    $html.=" 権利金:";
+    $html.=": 権利金:";
     if($val["fld071"]) $html.=number_format($val["fld071"])."円";
     if($val["fld072"]) $html.="(消費税".number_format($val["fld072"])."円)";
     if($val["fld073"]) $html.=$val["fld071"]."ヶ月";
    }
-   if($val["fld123"]) $html.=" 造作譲渡金:".number_format($val["fld123"])."円";
-   if($val["fld124"]) $html.=" 定借権利金:".number_format($val["fld124"])."円";
-   if($val["fld125"]) $html.=" 定借保証金:".number_format($val["fld125"])."円";
-   if($val["fld126"]) $html.=" 定借敷金:".number_format($val["fld126"])."円";
-   if($val["fld139"]) $html.=" 修繕積立金:".number_format($val["fld139"])."円";
-   if($val["fld140"]) $html.=" 共益費:".number_format($val["fld140"])."円";
-   if($val["fld141"]) $html.=" 共益費(消費税):".number_format($val["fld141"])."円";
-   if($val["fld142"]) $html.=" 雑費:".number_format($val["fld142"])."円";
-   if($val["fld143"]) $html.=" 雑費(消費税):".number_format($val["fld143"])."円";
+   if($val["fld123"]) $html.=": 造作譲渡金:".number_format($val["fld123"])."円";
+   if($val["fld124"]) $html.=": 定借権利金:".number_format($val["fld124"])."円";
+   if($val["fld125"]) $html.=": 定借保証金:".number_format($val["fld125"])."円";
+   if($val["fld126"]) $html.=": 定借敷金:".number_format($val["fld126"])."円";
+   if($val["fld139"]) $html.=": 修繕積立金:".number_format($val["fld139"])."円";
+   if($val["fld140"]) $html.=": 共益費:".number_format($val["fld140"])."円";
+   if($val["fld141"]) $html.=": 共益費(消費税):".number_format($val["fld141"])."円";
+   if($val["fld142"]) $html.=": 雑費:".number_format($val["fld142"])."円";
+   if($val["fld143"]) $html.=": 雑費(消費税):".number_format($val["fld143"])."円";
 
    $html.="</dd>";
    $html.="</dl>";
@@ -426,7 +426,7 @@ function partsPrice($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -502,7 +502,7 @@ function partsRoomType($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -534,7 +534,7 @@ function partsMember($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -563,7 +563,7 @@ function partsNavi($data,$edit=null){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
  
 }
@@ -583,6 +583,7 @@ function partsImage($data,$edit=null){
     $imgpath=".".IMG."/".$val1["fld000"]."/".$val1["fld002"];
     $html.="<li data-fld000='".$val["fld000"]."' data-imgid='".$val1["id"]."'>";
     if($edit){
+     $html.="<input type='checkbox' data-imgid='".$val1["id"]."'>";
      $html.="<input type='text' value='".$val1["fld001"]."' data-fld000='".$val1["fld000"]."' data-imgid='".$val1["id"]."'>";
      $html.="<input type='button' value='削除' data-fld000='".$val1["fld000"]."' data-imgid='".$val1["id"]."'>";
     }
@@ -596,7 +597,7 @@ function partsImage($data,$edit=null){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c); echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c); 
  }
 }
 
@@ -653,7 +654,7 @@ function partsSetImg($post,$fld000){
   }
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -715,7 +716,7 @@ function partsSetImgFromSite($imgurl,$fld000){
   }
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -724,17 +725,18 @@ function partsImgPathFromSite($pageurl){
  try{
   $c="start ".$mname;wLog($c);
 
-  $blacklist="/www\.townhousing\.co\.jp|suumo\.jp|www\.homes\.co\.jp/";
-
   if(! $purl=parse_url($pageurl)){
    throw new exception("URLが認識できません(".$pageurl.")");
   }
+
+  $c="notice:".$mname." URLセット(".$pageurl.")";wLog($c);
 
   $html=@file_get_contents($pageurl);
   if($html ===FALSE){
    $c="error:".$mname." ページが取得できません(".$pageurl.")";wLog($c);
    throw new exception ($c);
   }
+  $c=$html;wLog($c);
   
   //まずはimgタグだけ抜き出す
   $pattern="/<img.*?>/s";
@@ -742,6 +744,8 @@ function partsImgPathFromSite($pageurl){
   
   $url=array();
   foreach($match[0] as $key=>$val){
+   $col=array();
+   
    //imgタグを除く
    $data=preg_replace("/^<img|\/?>$/","",$val);
    $c="notice:".$mname."imgタグ除外".$data;wLog($c);
@@ -752,27 +756,45 @@ function partsImgPathFromSite($pageurl){
    
    //空欄ごとに区切る
    $data=preg_split("/[\s]+/",$data);
-   
-  //属性と値を配列に格納
-   $col=array();
    foreach($data as $key1=>$val1){
+    $c="notice:".$mname."空欄区切り key1:".$key1." val1:".$val1;wLog($c);
+   }
+   
+   //属性と値を配列に格納
+   foreach($data as $key1=>$val1){
+    $m=array();
+
     if(! $val1){
-     $c="notice:".$mname."値空欄のためスキップ";wLog($c);
+     $c="notice:".$mname."key1:".$key1." 値空欄のためスキップ";wLog($c);
      continue;
     }
-    preg_match("/(.*?)={1}(.*)/",$val1,$m);
-    $c="notice:".$mname."配列へ格納".$m[1]."=>".$m[2];wLog($c);
-    $col[$m[1]]=$m[2];
-   }
 
+    preg_match("/(.*?)=(.*)/",$val1,$m);
+    $c="notice:".$mname."配列へ格納".$m[1]."=>".$m[2];wLog($c);
+    $col[$m[1]]=mb_convert_encoding($m[2],"UTF-8","auto");
+   }
+   
+   $flg=1;
+   foreach($col as $key1=>$val1){
+    $c="notice:".$mname."col[".$key1."]=>".$val1;wLog($c);
+    if($key1=="src" && ! $val1){
+     $flg=0;
+    }
+   }
+   
   //src属性なければスキップ
-   if(!$col["src"]){
-    $c="notice:".$mname." src属性がありません。処理をスキップします(".$val.")";wLog($c);
+   if(! $flg){
+    $c="notice:".$mname." src属性(".$col["src"].")がありません。処理をスキップします(".$val.")";wLog($c);
     continue;
    }
    
   //src属性をバックアップ
    $col["_src"]=$col["src"];
+   
+  //suumo用に対策(data-srcを適用する）
+   if(preg_match("/suumo\.jp/",$pageurl) && $col["data-src"]){
+    $col["src"]=$col["data-src"];
+   }
   
   //画像ファイルパスチェック
    if(! preg_match("/^http/",$col["src"])){
@@ -787,10 +809,16 @@ function partsImgPathFromSite($pageurl){
      $col["src"]=$purl["scheme"]."://".$purl["host"].$col["src"];
     }
     
+    // 「./」から始まっている
+    elseif(preg_match("/^\.\//",$col["src"])){
+     $c="notice:".$mname." 画像パスが./で始まっている".$col["src"];wLog($c);
+     $col["src"]=dirname($pageurl).preg_replace("/^\./","",$col["src"]);
+    }
+    
     // 「/」から始まっていない
     elseif(preg_match("/^[^\/]/",$col["src"])){
      $c="notice:".$mname." 画像パスが相対パス".$col["src"];wLog($c);
-     $col["src"]=$pageurl.$col["src"];
+     $col["src"]=dirname($pageurl)."/".$col["src"];
     }
    }
   
@@ -800,6 +828,12 @@ function partsImgPathFromSite($pageurl){
     $col["src"]=$col["name"];
    }
   
+  //suumo用カスタマイズ(「&amp」を「&」へ)
+   if(preg_match("/img01\.suumo\.com/",$col["src"])){
+    $c="notice:".$mname."suumo用パス変換".$col["src"];wLog($c);
+    $col["src"]=preg_replace("/amp;/","",$col["src"]);
+   }
+   
   //suumo用カスタマイズ(w=452へ)
    if(preg_match("/img01\.suumo\.com/",$col["src"])){
     $c="notice:".$mname."suumo用パス変換".$col["src"];wLog($c);
@@ -819,21 +853,27 @@ function partsImgPathFromSite($pageurl){
    }
    
   //athome用カスタマイズ(拡張子後のオプションを削除)
-   if(preg_match("/athome\.co\.jp/",$col["src"])){
+   if(preg_match("/athome\.co\.jp|athome\.jp/",$col["src"])){
     $c="notice:".$mname."athome用パス変換".$col["src"];wLog($c);
-    $col["src"]=preg_replace("\?.*$/","",$col["src"]);
+    $col["src"]=preg_replace("/\?.*$/","",$col["src"]);
+    $c="notice:".$mname."athome用パス変換終了".$col["src"];wLog($c);
    }
-  //ブラックリスト除外
-   if( preg_match($blacklist,$col["src"])){
-    $c="notice:".$mname."ブラックリスト該当".$col["src"];wLog($c);
-    continue;
+   
+  //assist-jpn.com用カスタマイズ
+   if(preg_match("/assist-jpn\.com/",$col["src"])){
+    $c="notice:".$mname."assist-jpn用パス変換".$col["src"];wLog($c);
+    $col["src"]=preg_replace("/\&.*$/","",$col["src"]);
+    $c="notice:".$mname."assist-jpn用パス変換終了".$col["src"];wLog($c);
    }
-
-   $c="notice:".$mname."画像パス登録";wLog($c);
+  
+   $c="notice:".$mname."画像パス登録(".$col["src"].")";wLog($c);
    $url[]=$col;
   }
   
   unset($html);
+  foreach($url as $key=>$val){
+   $c="notice:".$mname."url[".$key."]=>".$val;wLog($c);
+  }
   $c="end:".$mname;wLog($c);
   return $url;
  }
@@ -864,7 +904,7 @@ function partsImgListFromSite($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -886,7 +926,7 @@ function partsImgListDiv($fld000){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -931,7 +971,21 @@ EOF;
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
+ }
+}
+
+function partsRankEntry2(){
+ try{
+  $mname="partsRankEntry2(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  //スケルトンファイル読み込み
+  $skeletonpath=dirname(__FILE__)."/..".SKELETON."/entrytable.html";
+  $html=file_get_contents($skeletonpath);
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -974,7 +1028,43 @@ function partsRankList($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
+ }
+}
+
+function partsRankListTable($data){
+ try{
+  $mname="partsRankList(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+
+  //スケルトンファイル読み込み
+  $skeletonpath=dirname(__FILE__)."/..".SKELETON."/ranklist.html";
+  $html=file_get_contents($skeletonpath);
+
+  //loopからloopendまで抜き取り($loop[0]）
+  preg_match("/<!--loop-->.*<!--loopend-->/s",$html,$loop);
+
+  //loop範囲を一旦削除
+  $html=preg_replace("/<!--loop-->.*<!--loopend-->/s","",$html);
+
+  foreach($data as $key=>$val){
+   $tr=$loop[0];
+   $tr=preg_replace("/<!--rank-->/",$val["rank"],$tr);
+   $tr=preg_replace("/<!--rankname-->/",$val["rankname"],$tr);
+   $tr=preg_replace("/<!--rcomment-->/",$val["rcomment"],$tr);
+   $tr=preg_replace("/<!--startday-->/",$val["startday"],$tr);
+   $tr=preg_replace("/<!--endday-->/",$val["endday"],$tr);
+   if($val["flg"]==1) $hyouji="する";
+   else               $hyouji="しない";
+   $tr=preg_replace("/<!--hyouji-->/",$hyouji,$tr);
+   $tr=$tr."<!--foreach-->";
+   $html=preg_replace("/<!--foreach-->/",$tr,$html);
+  }
+
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -1010,7 +1100,7 @@ function partsRankListShort($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -1047,7 +1137,7 @@ function partsEntryList($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -1098,7 +1188,7 @@ function partsEntry($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 
@@ -1132,7 +1222,369 @@ function partsComment($data){
   echo $html;
  }
  catch(Exception $e){
-  $c="error:".$mname.$e->getMessge();wLog($c);echo $c;
+  $c="error:".$mname.$e->getMessge();wLog($c);
+ }
+}
+
+function partsNowRankList($data){
+ try{
+  $mname="partsNowRankList(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="物件データがありません";wLog($c);
+   return false;
+  }
+
+  $html="";
+  $rank=0;
+  foreach($data as $key=>$val){
+
+   if($key>RANKLIMIT) break;
+
+   if($rank!==$val["rank"]){
+    $html.="<h2>".$val["rankname"]."</h2>";
+    $html.="<p>".$val["rcomment"]."</p>";
+    $rank=$val["rank"];
+   } 
+   $html.="<div class='estatebox'>";
+   $html.="<div class='imagebox'>";
+   foreach($val["imgfilepath"] as $key1=>$val1){
+    $html.="<img src='".$val1."'>";
+    break;
+   }
+   $html.="</div>";// class='imagebox'>";
+   $html.="<div class='detailbox'>";
+   $html.="<ul>";
+   
+   //価格
+   $html.="<li><span class='price'>".number_format($val["fld054"]);
+   $html.="<span class='yen'>円</span></span></li>";
+   
+   //間取り・広さ
+   $html.="<li>".$val["fld180"].$val["_fld179"];
+   if($val["fld180"]) $html.="(".$val["fld068"]."m&sup2;)";
+   else $html.=$val["fld068"]."m&sup2;";
+   $html.="</li>";
+
+   //物件名
+   $html.="<li>";
+   if($val["fld021"]) $html.=$val["fld021"]; 
+   else $html.=$val["fld019"]; 
+   $html.="</li>";
+
+
+   //最寄駅
+   $html.="<li>".$val["fld026"]."駅 ";
+   $html.="徒歩".$val["fld027"]."分";
+   $html.="</li>";
+
+   $html.="</ul>";
+   $html.="</div>";// class='detailbox'>";
+   $html.="</div>";// class='estatebox'>"
+  }
+  $html.="<div class='clr'></div>";
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);
+ }
+}
+
+function partsEstateList($data){
+ try{
+  $mname="partsNowRankList(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="物件データがありません";wLog($c);
+   return false;
+  }
+
+  $html="";
+  foreach($data as $key=>$val){
+   $html.="<div class='estatebox'>";
+   $html.="<div class='imagebox'>";
+   foreach($val["imgfilepath"] as $key1=>$val1){
+    $html.="<img src='".$val1."'>";
+    break;
+   }
+   $html.="</div>";// class='imagebox'>";
+   $html.="<div class='detailbox'>";
+   $html.="<ul>";
+   
+   //価格
+   $html.="<li><span class='price'>".number_format($val["fld054"]);
+   $html.="<span class='yen'>円</span></span></li>";
+   
+   //間取り・広さ
+   $html.="<li>".$val["fld180"].$val["_fld179"];
+   if($val["fld180"]) $html.="(".$val["fld068"]."m&sup2;)";
+   else $html.=$val["fld068"]."m&sup2;";
+   $html.="</li>";
+
+   //物件名
+   $html.="<li>";
+   if($val["fld021"]) $html.=$val["fld021"]; 
+   else $html.=$val["fld019"]; 
+   $html.="</li>";
+
+
+   //最寄駅
+   $html.="<li>".$val["fld026"]."駅 ";
+   $html.="徒歩".$val["fld027"]."分";
+   $html.="</li>";
+
+   $html.="</ul>";
+   $html.="</div>";// class='detailbox'>";
+   $html.="</div>";// class='estatebox'>"
+  }
+  $html.="<div class='clr'></div>";
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);
+ }
+}
+
+function partsEstateImage($data){
+ try{
+  $mname="partsEstateImage(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="物件データがありません";wLog($c);
+   return false;
+  }
+
+  $html="";
+  $html.="<div class='imageSpace'>";
+  $html.="<div class='bigImage'>";
+  $html.="<ul>";
+  foreach($data as $key=>$val){
+   foreach($val["imgfilepath"] as $key1=>$val1){
+    if($key>1) break;
+    $html.="<li><img src='".$val1."'></li>";
+   }
+   $html.="</ul>";
+   $html.="<div class='clr'></div>";
+   $html.="</div>";//bigImage
+   
+   $html.="<div class='smallImage'>";
+   $html.="<ul>";
+   foreach($val["imgfilepath"] as $key1=>$val1){
+    $html.="<li><img src='".$val1."'></li>";
+   }
+   $html.="</ul>";
+   $html.="<div class='clr'></div>";
+   $html.="</div>";
+   $html.="</div>";//imageSpace
+  }
+  
+  $html.="<div class='clr'></div>";
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);
+ }
+}
+
+//viewNewAndRankで取得したデータを使用してul-liを作成
+function partsRankTab($data){
+ try{
+  $mname="partsRankTab(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="物件データがありません";wLog($c);
+   return false;
+  }
+
+  $html="";
+  $html.="<ul id='tab_link'>";
+  foreach($data as $key=>$val){
+   $html.="<li id='".$key."'>";
+
+   if($key=="new"){
+    $html.="<a href='#' class='current'>新着物件</a>";
+   }
+   else{
+    foreach($val as $key1=>$val1){
+    $html.="<a href='#'>".$val1["rankname"]."</a>";
+     break;
+    }
+   }
+   $html.="</li>";
+  }
+  $html.="</ul>";
+  $html.="<div class='clr'></div>";
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);
+ }
+}
+
+//viewNewAndRankで取得したデータを使用してdivを作成
+function partsRankDiv($data,$loginflg=null){
+ try{
+  $mname="partsRankDiv(parts.function.php) ";
+  $c="start ".$mname;wLog($c);
+  if(! isset($data)||! is_array($data)||! count($data)){
+   $c="物件データがありません";wLog($c);
+   return false;
+  }
+  //ランキングゲット
+  $rank=viewNowRank();
+  
+  //スケルトンファイル読み込み
+  $skeletonpath=dirname(__FILE__)."/..".SKELETON."/recomendbox.html";
+  $skeleton=file_get_contents($skeletonpath);
+  
+  //ループ部分抽出($match[2]にhtml格納)
+  preg_match("/(<!--loop-->)(.*)(<!--loopend-->)/s",$skeleton,$match);
+
+  $bunrui="";
+  $html="";
+  foreach($data as $key=>$val){
+   $s=$skeleton;
+
+   $s=preg_replace("/<!--id-->/",$key,$s);
+
+//   if($key=="new") $display="";
+//   else $display="none;";
+   $s=preg_replace("/<!--display-->/",$display,$s);
+
+   if($key=="new") $rankname="新着物件";
+   elseif($key=="baibai") $rankname="売買物件";
+   elseif($key=="tintai") $rankname="賃貸物件";
+   else{
+    foreach($val as $key1=>$val1){
+     $rankname=$val1["rankname"];
+     break;
+    }
+   }
+   $s=preg_replace("/<!--rankname-->/",$rankname,$s);
+
+   if($key=="new") $rcomment="新着物件のご案内です。";
+   elseif($key=="baibai") $rcomment="売買物件のご案内です。";
+   elseif($key=="tintai") $rcomment="賃貸物件のご案内です。";
+   else{
+    foreach($val as $key1=>$val1){
+     $rcomment=$val1["rcomment"];
+     break;
+    }
+   }
+   $s=preg_replace("/<!--rcomment-->/",$rcomment,$s);
+   
+   $loop="";
+   foreach($val as $key1=>$val1){
+    $itembox=$match[2];
+    
+    //分類表示
+    if($rankname=="売買物件" || $rankname=="賃貸物件"){
+// echo "rankname ".$rankname." bunrui".$bunrui." val1".$val1["_fld003"]."<br>";
+     if($bunrui!==$val1["_fld003"]){
+      $replace ="<div class='clr'></div>";
+      $replace.="<h3>".$val1["_fld003"]."</h3>";
+      $itembox=preg_replace("/<!--bunrui-->/",$replace,$itembox);
+      $bunrui=$val1["_fld003"];
+     }
+    }
+
+    //物件番号
+    $fld000=$val1["fld000"];
+    $itembox=preg_replace("/<!--fld000-->/",$fld000,$itembox);
+    
+    //個別ページ
+    $path="room.php?fld000=";
+    $itembox=preg_replace("/<!--estatepath-->/",$path.$val1["fld000"],$itembox);
+    
+    if(!isset($val1["imgfilepath"]) ||! is_array($val1["imgfilepath"])||! count($val1["imgfilepath"])){
+     //画像なし
+     $img='<img src="<!--imgfilepath-->" alt="<!--imgalt-->" class="lazyload">';
+     $itembox=preg_replace("/".$img."/","",$itembox);
+    }
+
+    //画像あり
+    foreach($val1["imgfilepath"] as $key2=>$val2){
+     $itembox=preg_replace("/<!--imgfilepath-->/",$val2,$itembox);
+     break;
+    }
+
+    //物件名
+    if($val1["fld021"]) $estatename=$val1["fld021"].$val1["fld022"]; else $estatename=$val1["fld018"].$val1["fld019"];
+    $itembox=preg_replace("/<!--estatename-->/",$estatename,$itembox);
+    
+    //広さ
+    $replace="";
+    $replace=$val1["fld068"].$val1["fld088"]."m&sup2";
+    $itembox=preg_replace("/<!--estatemenseki-->/",$replace,$itembox);
+    //間取り
+    $replace="";
+    $replace=$val1["fld180"].$val1["_fld179"];
+    $itembox=preg_replace("/<!--estatemadori-->/",$replace,$itembox);
+    
+    //住所
+    $estateaddress=$val1["fld018"].$val1["fld019"].$val1["fld020"];
+    $itembox=preg_replace("/<!--estateaddress-->/",$estateaddress,$itembox);
+
+    //路線
+    $rail=$val1["fld025"];
+    $itembox=preg_replace("/<!--rail-->/",$rail,$itembox);
+
+    //駅名
+    $station=$val1["fld026"]."駅";
+    $itembox=preg_replace("/<!--station-->/",$station,$itembox);
+
+    //徒歩
+    $toho=$val1["fld027"];
+    $itembox=preg_replace("/<!--toho-->/",$toho,$itembox);
+
+    //建設年月日
+    if($val1["fld225"]){
+     $build=substr($val1["fld225"],0,4)."年".substr($val1["fld225"],5,2)."月";
+    }
+    else $build="";
+    $itembox=preg_replace("/<!--build-->/",$build,$itembox);
+
+    //総階数
+    if($val1["fld222"]) $floors="/".$val1["fld222"]."階建";
+    else $floors="";
+    $itembox=preg_replace("/<!--floors-->/",$floors,$itembox);
+
+    //地下階
+    if($val1["fld223"]) $underground="(地下".$val1["fld223"]."階)";
+    else $underground="";
+    $itembox=preg_replace("/<!--underground-->/",$underground,$itembox);
+
+    //ログイン中なら削除ボタン追加
+    if($loginflg){
+     $replace="<button data-fld000=".$val1["fld000"].">非表示</button>";
+     $itembox=preg_replace("/<!--delbutton-->/",$replace,$itembox);
+    }
+
+    //ログイン中ならランキング追加
+    if($loginflg){
+     if(isset($rank) && count($rank)){
+      $replace="<select class='selectRank' data-fld000=".$val1["fld000"].">";
+      $replace.="<option value=0>ランク外</option>";
+      foreach($rank as $rkey=>$rval){
+       $replace.="<option value=".$rval["rank"];
+       if($val1["rank"]==$rval["rank"]) $replace.=" selected ";
+       $replace.=">".$rval["rankname"]."</option>";
+      }
+      $replace.="</select>";
+      $replace.="<input name='entry'value=".$val1["entry"].">";
+      $itembox=preg_replace("/<!--rank-->/",$replace,$itembox);
+     }
+    }
+    $loop.=$itembox;
+   }
+
+   $s=preg_replace("/<!--loop-->.*<!--loopend-->/s",$loop,$s);
+   $html.=$s;
+  }//foreach
+  echo $html;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessge();wLog($c);
  }
 }
 ?>

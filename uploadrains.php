@@ -547,7 +547,6 @@ function changeImgNum(fld000,imgid,imgnum){
    console.log(XMLHttpRequest.responseText);
   }//error
  });
-
 }
 
 function deleteImg(fld000,imgid){
@@ -568,7 +567,6 @@ function deleteImg(fld000,imgid){
    console.log(XMLHttpRequest.responseText);
   }//error
  });
-
 }
 
 //かなりダサい。もっとスマートなやり方あるはず
