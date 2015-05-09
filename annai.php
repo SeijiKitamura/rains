@@ -71,7 +71,7 @@ htmlHeader("会社概要");
 
       <div id="stores">
        <div class="store_wrap">
-        <h3>ライフパートナー</h3>
+       <h3><?php echo CORPNAME;?></h3>
         <p><img src="img/store.jpg"></p>
         <table>
          <colgroup span="1" style="width:100px;">
