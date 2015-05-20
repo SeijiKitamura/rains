@@ -1158,6 +1158,7 @@ div#reason_part{
  width:700px;
  margin:0 auto;
  padding-top:100px;
+ background-color:#FFF;
 }
 
 div#reason_part h1{
@@ -1399,3 +1400,26 @@ div#privacy ul li{
 }
 
 /*privacy.php用*/
+
+/*q_and_a.php用*/
+div#reason_part ul{
+ list-style:none;
+}
+
+div#reason_part dl dt{
+ margin:1em 0;
+}
+
+div#reason_part dl dd{
+ margin:1em 0;
+ line-height:2;
+}
+
+div.questionBox{
+ width:700px;
+ margin:0 auto;
+ padding-top:100px;
+ background-color:#FFF;
+}
+
+/*q_and_a.php用*/
