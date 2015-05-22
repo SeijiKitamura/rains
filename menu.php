@@ -33,6 +33,7 @@ htmlHeader("メニュー");
  </div><!--div id="body"-->
  <script>
 $(function(){
+ navi();
 // subListEvent();
  showCSVUp();
  uploadCSV();

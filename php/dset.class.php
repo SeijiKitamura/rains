@@ -84,7 +84,7 @@ class DSET extends DB{
 
      if($val1["fldname"]=="fld002"){
       if($val["fld001"]==$val1["fld001"] &&
-         $val["fld002"]==$val1["fld002"])
+         $val["fld002"]==$val1["bnum"])
       { 
        $this->r["data"][$key]["_fld002"]=$val1["bname"];
 

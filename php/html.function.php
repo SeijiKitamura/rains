@@ -217,7 +217,7 @@ function htmlFooter(){
   $naviary=viewGroupFld();
   $replace="";
   foreach($naviary["data"] as $key=>$val){
-   if($val["fld001"]=="01"){
+   if($val["fld001"]=="1"){
     $replace.="<li><a href='roomlist.php?type=";
     $replace.=$val["fld001"]."_".$val["fld002"]."_".$val["fld003"];
     $replace.="'>".$val["_fld003"];
@@ -229,7 +229,7 @@ function htmlFooter(){
   //賃貸物件
   $replace="";
   foreach($naviary["data"] as $key=>$val){
-   if($val["fld001"]=="03"){
+   if($val["fld001"]=="3"){
     $replace.="<li><a href='roomlist.php?type=";
     $replace.=$val["fld001"]."_".$val["fld002"]."_".$val["fld003"];
     $replace.="'>".$val["_fld003"];
@@ -294,10 +294,10 @@ function htmlContents($data){
 
   foreach($data["data"] as $key=>$val){
    //売買物件、賃貸物件判定
-   if($val["fld001"]=="01"){
+   if($val["fld001"]=="1"){
     $path=realpath("./").SKELETON."/contents.html";
    }
-   elseif($val["fld001"]=="03"){
+   elseif($val["fld001"]=="3"){
     $path=realpath("./").SKELETON."/contents2.html";
    }
    $html=file_get_contents($path);

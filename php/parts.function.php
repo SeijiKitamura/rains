@@ -360,8 +360,8 @@ function partsPrice($data){
   $html="";
   foreach($data as $key=>$val){
    $html.="<dl class='dl_price' data-fld000='".$val["fld000"]."'>";
-   if    ($val["fld001"]=="01") $html.="<dt>価格</dt>";
-   elseif($val["fld001"]=="03") $html.="<dt>賃料</dt>";
+   if    ($val["fld001"]=="1") $html.="<dt>価格</dt>";
+   elseif($val["fld001"]=="3") $html.="<dt>賃料</dt>";
    $html.="<dd>:".number_format($val["fld054"])."円";
    if($val["fld055"])$html.="(消費税".number_format($val["fld055"])."円)";
    $html.="</dd>";

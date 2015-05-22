@@ -141,7 +141,7 @@ function impCsv2SQL($tablename,$csv){
    foreach($row as $n=>$val){
     if(! $colnum[$n]) continue;
     $c=$mname."データ更新列".$colnum[$n]."に".$val."をセット";wLog($c);
-    if(preg_match("/^[0-9]+$/",$val){
+    if(preg_match("/^[0-9]+$/",$val)){
      $col[$colnum[$n]]=(int)$val;
     }
     else{

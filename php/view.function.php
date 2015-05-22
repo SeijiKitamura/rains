@@ -620,7 +620,7 @@ function viewRentStation(){
  try{
   $mname="viewRentStation(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='03'";
+  $where="t.fld001='3'";
   $data=viewStationList($where);
   $c="end ".$mname;wLog($c);
   return $data;
@@ -635,7 +635,7 @@ function viewSaleStation(){
  try{
   $mname="viewSaleStation(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='01'";
+  $where="t.fld001='1'";
   $data=viewStationList($where);
   $c="end ".$mname;wLog($c);
   return $data;
@@ -666,7 +666,7 @@ function viewRentAddress(){
  try{
   $mname="viewRentAddress(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='03'";
+  $where="t.fld001='3'";
   $data=viewAddressList($where);
   return $data;
  }
@@ -680,7 +680,7 @@ function viewSaleAddress(){
  try{
   $mname="viewSaleAddress(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='01'";
+  $where="t.fld001='1'";
   $data=viewAddressList($where);
   return $data;
  }
@@ -709,7 +709,7 @@ function viewRentMadoriM(){
  try{
   $mname="viewRentMadoriM(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='03' and t.fld002='03' and t.fld003='01'";
+  $where="t.fld001='3' and t.fld002='03' and t.fld003='01'";
   $data=viewMadoriList($where);
   return $data;
  }
@@ -723,7 +723,7 @@ function viewRentMadoriA(){
  try{
   $mname="viewRentMadoriA(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='03' and t.fld002='03' and t.fld003='02'";
+  $where="t.fld001='3' and t.fld002='03' and t.fld003='02'";
   $data=viewMadoriList($where);
   return $data;
  }
@@ -737,7 +737,7 @@ function viewSaleMadori(){
  try{
   $mname="viewSaleMadori(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='01'";
+  $where="t.fld001='1'";
   $data=viewMadoriList($where);
   return $data;
  }
@@ -807,7 +807,7 @@ function viewSearchAddressM($address){
  try{
   $mname="viewSearchAddressM(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='03' and t.fld002='03' and t.fld003='01'";
+  $where="t.fld001='3' and t.fld002='3' and t.fld003='1'";
   $data=viewSearchAddress($address,$where);
   $c="end ".$mname;wLog($c);
   return $data;
@@ -822,7 +822,7 @@ function viewSearchAddressA($address){
  try{
   $mname="viewSearchAddressA(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='03' and t.fld002='03' and t.fld003='02'";
+  $where="t.fld001='3' and t.fld002='3' and t.fld003='2'";
   $data=viewSearchAddress($address,$where);
   $c="end ".$mname;wLog($c);
   return $data;
@@ -837,7 +837,7 @@ function viewSearchAddressS($address){
  try{
   $mname="viewSearchAddressA(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='01'";
+  $where="t.fld001='1'";
   $data=viewSearchAddress($address,$where);
   $c="end ".$mname;wLog($c);
   return $data;
@@ -870,7 +870,7 @@ function viewSearchStationR($station){
  try{
   $mname="viewSearchStationR(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='03' and t.fld002='03'";
+  $where="t.fld001='3' and t.fld002='3'";
   $data=viewSearchStation($station,$where);
   $c="end ".$mname;wLog($c);
   return $data;
@@ -885,7 +885,7 @@ function viewSearchStationM($station){
  try{
   $mname="viewSearchStationM(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='03' and t.fld002='03' and t.fld003='01'";
+  $where="t.fld001='3' and t.fld002='3' and t.fld003='1'";
   $data=viewSearchStation($station,$where);
   $c="end ".$mname;wLog($c);
   return $data;
@@ -900,7 +900,7 @@ function viewSearchStationA($station){
  try{
   $mname="viewSearchStationA(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='03' and t.fld002='03' and t.fld003='02'";
+  $where="t.fld001='3' and t.fld002='3' and t.fld003='2'";
   $data=viewSearchStation($station,$where);
   $c="end ".$mname;wLog($c);
   return $data;
@@ -915,7 +915,7 @@ function viewSearchStationS($station){
  try{
   $mname="viewSearchStationS(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='01'";
+  $where="t.fld001='1'";
   $data=viewSearchStation($station,$where);
   $c="end ".$mname;wLog($c);
   return $data;
@@ -949,7 +949,7 @@ function viewSearchMadoriM($heya,$type){
  try{
   $mname="viewSearchMadoriM(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='03' and t.fld002='03' and t.fld003='01'";
+  $where="t.fld001='3' and t.fld002='3' and t.fld003='1'";
   $data=viewSearchMadori($heya,$type,$where);
   $c="end ".$mname;wLog($c);
   return $data;
@@ -964,7 +964,7 @@ function viewSearchMadoriA($heya,$type){
  try{
   $mname="viewSearchMadoriA(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='03' and t.fld002='03' and t.fld003='02'";
+  $where="t.fld001='3' and t.fld002='3' and t.fld003='2'";
   $data=viewSearchMadori($heya,$type,$where);
   $c="end ".$mname;wLog($c);
   return $data;
@@ -979,7 +979,7 @@ function viewSearchMadoriS($heya,$type){
  try{
   $mname="viewSearchMadoriS(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $where="t.fld001='01'";
+  $where="t.fld001='1'";
   $data=viewSearchMadori($heya,$type,$where);
   $c="end ".$mname;wLog($c);
   return $data;
@@ -1015,7 +1015,7 @@ function viewGroupFldR($where=null){
  try{
   $mname="viewGroupFldR(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $w="t.fld001='03' ";
+  $w="t.fld001='3' ";
   if($where) $w.=" and ".$where;
   $data=viewGroupFld($w);
   $c="end ".$mname;wLog($c);
@@ -1031,7 +1031,7 @@ function viewGroupFldS($where=null){
  try{
   $mname="viewGroupFldS(view.function.php)";
   $c="start ".$mname;wLog($c);
-  $w="t.fld001='01' ";
+  $w="t.fld001='1' ";
   if($where) $w.=" and ".$where;
   $data=viewGroupFld($w);
   $c="end ".$mname;wLog($c);
@@ -1064,7 +1064,7 @@ function viewSaleList($where=null){
   $mname="viewSaleList(view.function.php)";
   $c="start ".$mname;wLog($c);
 
-  $w=" t.fld001='01' and t1.fld000 is null";
+  $w=" t.fld001='1' and t1.fld000 is null";
   if($where) $w.=" and ".$where;
   $d=viewShortData($w,null);
   return $d["data"];
