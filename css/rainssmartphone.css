@@ -940,3 +940,34 @@ form#loginForm ul{
 }
 /*login.php*/
 
+/*q_and_a.php*/
+div.reason_box{
+ width:90%;
+}
+
+div.reason_box h2{
+ color:white;
+ background-color:black;
+ line-height:1.4;
+ padding-left:5px;
+ margin:0 0 10px 0;
+}
+
+div.reason_box p{
+ background-color:white;
+ padding:5px;
+}
+
+div.reason_box dl dt{
+
+}
+
+div.reason_imgBox{
+ margin:10px 0;
+ text-align:center;
+}
+div.reason_imgBox img{
+ width:100%;
+}
+
+/*q_and_a.php*/
