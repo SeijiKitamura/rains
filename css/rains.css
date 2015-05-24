@@ -1402,24 +1402,55 @@ div#privacy ul li{
 /*privacy.php用*/
 
 /*q_and_a.php用*/
-div#reason_part ul{
- list-style:none;
+div.reason_box{
+ width:100%;
+ margin:10px auto;
+ border:1px solid #000000;
 }
 
-div#reason_part dl dt{
- margin:1em 0;
+div.reason_box h2{
+ background-color:#000000;
+ color:#FFFFFF;
+ line-height:1.5;
+ padding-left:10px;
 }
 
-div#reason_part dl dd{
- margin:1em 0;
- line-height:2;
+div.reason_box p{
+ padding:10px;
 }
 
-div.questionBox{
- width:700px;
- margin:0 auto;
- padding-top:100px;
- background-color:#FFF;
+div.reason_img{
+ margin:10px;
+ border:1px solid #000000;
+}
+
+div.reason_imgBox{
+ width:310px;
+ height:260px;
+ float:left;
+ margin:20px 10px;
+ border:1px solid #000000;
+ text-align:center;
+}
+
+div.reason_imgBox img{
+ width:100%;
+ max-height:auto;
+}
+div.reason_box dl{
+ margin-top:10px;
+}
+
+div.reason_box dl dt,
+div.reason_box dl dd{
+ padding-left:10px;
+}
+
+div.reason_box dl dt{
+ font-weight:bold;
+}
+div.reason_box dl dd{
+ margin-bottom:10px;
 }
 
 /*q_and_a.php用*/
