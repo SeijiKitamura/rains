@@ -80,6 +80,9 @@ div.logoSpace{
  float  :left;
 }
 
+div.logoSpace img{
+ width:50%;
+}
 div.storeInfo img{
  width:0;
  height:0;
