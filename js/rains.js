@@ -114,7 +114,6 @@ function hideItem(elem){
 //room.php
 function uploadImg(elem){
  $.each(elem.files,function(i,file){
-  console.log(elem);
   var fld000=$(elem).attr("data-fld000");
   var formData=new FormData();
   formData.append("allupimg",file);
@@ -131,6 +130,7 @@ function uploadImg(elem){
     complete: function(){},
     success: function(html) {
      //showImage(fld000);
+     console.log(html);
      showImage();
     },
     error:function(XMLHttpRequest,textStatus,errorThrown){

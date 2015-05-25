@@ -652,6 +652,7 @@ function partsSetImg($post,$fld000){
   if(! move_uploaded_file($moto,$filename)){
    throw new exception("ファイルコピーに失敗しました。");
   }
+  $c="end:".$mname." 画像を保存しました";wLog($c);
  }
  catch(Exception $e){
   $c="error:".$mname.$e->getMessge();wLog($c);
