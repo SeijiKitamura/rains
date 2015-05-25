@@ -622,35 +622,36 @@ function partsSetImg($post,$fld000){
   
   //物件番号数字チェック
   if(!preg_match("/^[0-9]+$/",$fld000)){
-   throw new exception ("物件番号が数字以外です。(".$fld000.")");
+   throw new exception ("物件番号が数字以外です。(".$fld000.")");wLog($c);
   }
 
   //物件番号DB存在チェック
   if(! viewDetail($fld000)){
-   throw new exception ("物件未登録です。(".$fld000.")");
+   throw new exception ("物件未登録です。(".$fld000.")");wLog($c);
   }
 
   //画像ディレクトリセット
   $imgdir=realpath("../").IMG."/".$fld000;
+  $c="notice:".$mname." 画像ディレクトリをセット(".$imgdir.")";wLog($c);
   
   //ディレクトリ存在チェック
   if(!file_exists($imgdir)){
    if(! mkdir($imgdir)){
-    throw new exception("フォルダ作成に失敗しました。(".$fld000.")");
+    throw new exception("フォルダ作成に失敗しました。(".$fld000.")");wLog($c);
    }
   }
 
   //画像ファイルチェック
   $moto=$_FILES["allupimg"]["tmp_name"];
   if(!exif_imagetype($moto)){
-   throw new exception("画像ファイルではありません");
+   throw new exception("画像ファイルではありません");wLog($c);
   }
 
   //指定ディレクトリにファイルコピー
   $filename=mb_convert_encoding($post["allupimg"]["name"],"UTF-8","auto");
   $filename=$imgdir."/".$filename;
   if(! move_uploaded_file($moto,$filename)){
-   throw new exception("ファイルコピーに失敗しました。");
+   throw new exception("ファイルコピーに失敗しました。");wLog($c);
   }
   $c="end:".$mname." 画像を保存しました";wLog($c);
  }
