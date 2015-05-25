@@ -356,7 +356,12 @@ class DSET extends DB{
     $this->r["data"][$key]["imgfilepath"]=array();
 
     foreach($val["imgfile"] as $key1=>$val1){
-     $imgpath=".".IMG."/".$val["fld000"]."/".urlencode($val1["fld002"]);
+     if(preg_match("/^http/",$val1["fld002"])){
+      $imgpath=$val1["fld002"];
+     }
+     else{
+      $imgpath=".".IMG."/".$val["fld000"]."/".urlencode($val1["fld002"]);
+     }
      $c="notice:".$mname."画像パス変換".$val1["fld002"]."=>".$imgpath;wLog($c);
      $this->r["data"][$key]["imgfilepath"][$key1]=$imgpath;
     }

@@ -350,6 +350,11 @@ function htmlContents($data){
    elseif($val["fld088"]) $replace.=$val["fld088"]."m&sup2;";
    $html=preg_replace("/<!--menseki-->/",$replace,$html);
 
+   //面積を表示(検索用に平方メートルを抜く)
+   $replace="";
+   if($val["fld068"]) $replace.=$val["fld068"];
+   elseif($val["fld088"]) $replace.=$val["fld088"];
+   $html=preg_replace("/<!--menseki2-->/",$replace,$html);
    
    //敷金を表示
    $replace="";

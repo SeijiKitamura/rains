@@ -580,7 +580,12 @@ function partsImage($data,$edit=null){
   foreach($data as $key=>$val){
    $html.="<ul class='ul_image' data-fld000='".$val["fld000"]."'>";
    foreach($val["imgfile"] as $key1=>$val1){
-    $imgpath=".".IMG."/".$val1["fld000"]."/".$val1["fld002"];
+    if(preg_match("/^http/",$val1["fld002"])){
+     $imgpath=$val1["fld002"];
+    }
+    else{
+     $imgpath=".".IMG."/".$val1["fld000"]."/".$val1["fld002"];
+    }
     $html.="<li data-fld000='".$val["fld000"]."' data-imgid='".$val1["id"]."'>";
     if($edit){
      $html.="<input type='checkbox' data-imgid='".$val1["id"]."'>";
@@ -738,7 +743,8 @@ function partsImgPathFromSite($pageurl){
    $c="error:".$mname." ページが取得できません(".$pageurl.")";wLog($c);
    throw new exception ($c);
   }
-  $c=$html;wLog($c);
+  $c=$html;
+  //wLog($c);
   
   //まずはimgタグだけ抜き出す
   $pattern="/<img.*?>/s";
@@ -850,7 +856,13 @@ function partsImgPathFromSite($pageurl){
    
   //homes用カスタマイズ(サイズ指定部分を削除)
    if(preg_match("/image\.homes\.co\.jp/",$col["src"])){
-    $c="notice:".$mname."homes用パス変換".$col["src"];wLog($c);
+    $c="notice:".$mname."homes.co.jp用パス変換".$col["src"];wLog($c);
+    $col["src"]=preg_replace("/&amp;.*$/","",$col["src"]);
+   }
+   
+  //homes用カスタマイズ(サイズ指定部分を削除)
+   if(preg_match("/homes\.jp/",$col["src"])){
+    $c="notice:".$mname."homes.jp用パス変換".$col["src"];wLog($c);
     $col["src"]=preg_replace("/&amp;.*$/","",$col["src"]);
    }
    
@@ -874,7 +886,7 @@ function partsImgPathFromSite($pageurl){
   
   unset($html);
   foreach($url as $key=>$val){
-   $c="notice:".$mname."url[".$key."]=>".$val;wLog($c);
+   $c="notice:".$mname."url[".$key."]=>".$val["src"];wLog($c);
   }
   $c="end:".$mname;wLog($c);
   return $url;

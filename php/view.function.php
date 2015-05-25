@@ -186,6 +186,36 @@ function viewSetImage($fld000){
  }
 }
 
+function viewSetImage2($fld000,$aryurl){
+ try{
+  $mname="viewSetImage(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  if(! preg_match("/^[0-9]+$/",$fld000)){
+   throw new exception("物件番号を確認してください(".$fld000.")");
+  }
+
+  if(! is_array($aryurl) ||! isset($aryurl) || ! count($aryurl)){
+   throw new exception("URL配列を確認してください)");
+  }
+
+  $sql=array();
+  foreach($aryurl as $key=>$val){
+   $sql[]=array("col"=>array("fld000"=>$fld000,
+                             "fld002"=>$val["src"]),
+                "from"=>TABLE_PREFIX.IMGLIST,
+                "where"=>array("fld000="=>$fld000)
+               );
+  }
+
+  $db=new DB();
+  $db->updatearray($sql);
+  return $sql;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);
+ }
+}
+
 function viewSetImageNum($imgid,$imgnum){
  try{
   $mname="viewSetImageNum(view.function.php)";
