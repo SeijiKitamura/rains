@@ -546,12 +546,16 @@ function checkIn(){
  $("button#checkin").click(function(){
   if(! confirm("チェックを残しますか?")) return false;
   $("div.imgpart ul li input[type=checkbox]").each(function(e){
+   var fld000=$(this).parent().attr("data-fld000");
+   var imgid=$(this).attr("data-imgid");
+
    if($(this).is(":checked")){
+    console.log("checked:"+fld000+" "+imgid);
    }
    else{
-    var fld000=$(this).parent().attr("data-fld000");
-    var imgid=$(this).attr("data-imgid");
+    console.log("delete:"+fld000+" "+imgid);
     deleteImg(fld000,imgid);
+    $(this).parent().hide();
    }
   });
  });

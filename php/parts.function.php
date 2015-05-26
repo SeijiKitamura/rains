@@ -593,7 +593,7 @@ function partsImage($data,$edit=null){
      $html.="<input type='button' value='削除' data-fld000='".$val1["fld000"]."' data-imgid='".$val1["id"]."'>";
     }
     //$html.="<div class='imgdiv'>";
-    $html.="<img src='".$imgpath."' alt='".$val1["fld003"]."'>";
+    $html.="<img src='".$imgpath."' alt='".$val1["fld003"]."' data-fld000='".$val1["fld000"]."' data-imgid='".$val1["id"]."'>";
     //$html.="</div>";
     $html.="</li>";
    }
