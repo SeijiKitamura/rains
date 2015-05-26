@@ -392,15 +392,14 @@ class DSET extends DB{
     $c="notice".$mname."画像ディレクトリ".$imgpath."をセット";wLog($c);
 
     if(! file_exists($imgpath)){
-     $c="notice:".$mname."物件番号".$val["fld000"]."の画像ディレクトリ".$imgpath."がありませんのでDBデータを削除します";wLog($c);
+     $c="notice:".$mname."物件番号".$val["fld000"]."の画像ディレクトリ".$imgpath."はありません";wLog($c);
 
-     $this->from=TABLE_PREFIX.IMGLIST;
-     $this->where="fld000='".$val["fld000"]."'";
-     $this->delete();
-     $c="notice:".$mname."物件番号".$val["fld000"]."のimgfileを初期化";wLog($c);
-
-     $this->r["data"][$key]["imgfile"]=array();
-     continue;
+//     $this->from=TABLE_PREFIX.IMGLIST;
+//     $this->where="fld000='".$val["fld000"]."'";
+//     $this->delete();
+//     $c="notice:".$mname."物件番号".$val["fld000"]."のimgfileを初期化";wLog($c);
+//
+//     $this->r["data"][$key]["imgfile"]=array();
     }
     //画像リスト存在チェック
     if(! isset($val["imgfile"])||! is_array($val["imgfile"]) ||!count($val["imgfile"])){
@@ -409,6 +408,12 @@ class DSET extends DB{
 
     //DBデータを検索対象として画像ファイルをチェック
     foreach($val["imgfile"] as $key1=>$val1){
+     //fld002が「http」で始まる場合はスキップ
+     if(preg_match("/^http/",$val1["fld002"])){
+      $e="notice:".$mname."画像パスが「http」で始まるので処理をスキップ(".$val1["fld002"].")";wLog($e);
+      continue;
+     }
+
      $flg=0;
      if(! $handle=opendir($imgpath)){
       $e="notice:".$mname."画像ディレクトリ".$imgpath."が開けません";wLog($e);
@@ -425,7 +430,7 @@ class DSET extends DB{
       }//if
      }//while
 
-     if(!$flg){
+     if(!$flg && !preg_match("/^http/",$val1["fld002"])){
       //画像リスト有り、ファイルなしはDB削除
       $c="notice:".$mname."DB画像リストあり、画像ファイルなしのためDBリストを削除します。ファイル名".$val1["fld002"];wLog($c);
 
@@ -529,62 +534,59 @@ class DSET extends DB{
    }
    
    foreach($this->r["data"] as $key=>$val){
-    $c="notice:".$mname."物件番号".$val["fld000"]."の画像削除を開始します。";wLog($c);
-
-    $imgpath=realpath("..").IMG."/".$val["fld000"];
-    if(! file_exists($imgpath)){
-     $c="notice:".$mname."物件番号".$val["fld000"]."の画像ディレクトリがありません。".$imgpath;wLog($c);
-     contine;
-    }
-
-    $c="notice:".$mname."削除対象ディレクトリセット:".$imgpath;wLog($c);
-
+    //画像削除
     if($imgid){
-     $c="notice:".$mname."削除画像番号".$imgid."をセット。";wLog($c);
-     
-     //画像指定削除
-     if(!isset($val["imgfile"])||!is_array($val["imgfile"])||!count($val["imgfile"])){
-      $c="notice:".$mname."物件番号".$val["fld000"]."の画像リストがありません。処理を飛ばします。";wLog($c);
-      continue;
-     }//if(!isset
-
+     $imgfile="";
      foreach($val["imgfile"] as $key1=>$val1){
       if($val1["id"]==$imgid){
-       $imgfile=$imgpath."/".$val1["fld002"];
-       $c="notice:".$mname."指定画像削除開始(画像番号".$imgid.")".$imgfile;wLog($c);
-       if(! unlink($imgfile)){
-        $c="notice:dsetDelImg(DSET class)指定画像削除失敗(画像番号".$imgid.")".$imgfile;wLog($c);
-       }//if(! unlink
-       $c="notice:".$mname."指定画像削除成功(画像番号".$imgid.")".$imgfile;wLog($c);
+       $imgfile=$val1["fld002"];
        break;
-      }//if($val1["id"]
-     }//foreach($val["imgfile"]
+      }
+     }
+     if($imgfile && !preg_match("/^http/",$imgfile)){
+      $imgpath=".".IMG."/".$val["fld000"]."/".$imgfile;
+      if(unlink($imgpath)){
+       $c="notice:".$mname."画像番号".$imgid."の画像削除を開始しました。";wLog($c);
+      }
+      else{
+       $c="notice:".$mname."画像番号".$imgid."の画像削除に失敗しました。";wLog($c);
+      }
+     }
+    }//if($imgid){
+    else{
+     //ディレクトリ内画像一括削除
+     $imgpath=".".IMG."/".$val["fld000"];
+     if($dir=opendir($imgpath)){
+      while(($file=readdir($dir))!==false){
+       if($file!="." && $file!=".."){
+        if(unlink($imgpath."/".$file)){
+         $c="notice:".$mname.$imgpath."/".$file."を削除しました。";wLog($c);
+        }//if(unlink($imgpath."/".$file)){
+        else{
+         $c="notice:".$mname.$imgpath."/".$file."の削除に失敗しました。";wLog($c);
+        }//else{
+       }//if($file!="." && $file!=".."){
+      }//while(($file=readdir($dir))!==false){
+      close($dir);
+     }//if($dir=opendir($imgpath)){
+    }//else{
+    
+    //DB削除
+    if($imgid){
+     $c="notice:".$mname."画像番号".$imgid."の画像削除を開始します。";wLog($c);
+     $this->from=TABLE_PREFIX.IMGLIST;
+     $this->where="id=".$imgid;
+     $this->delete();
     }//if($imgid
     else{
      $c="notice:".$mname."ディレクトリ内画像全削除:".$imgpath;wLog($c);
-     //画像ディレクトリ内すべて削除
-     if($handle=opendir($imgpath)){
-      while(false!==($file=readdir($handle))){
-       $c="notice:".$mname."ディレクトリ内ファイルゲット".$imgpath."/".$file;wLog($c);
-       if($file=="." ||$file=="..") continue;
-       $c="notice:".$mname."削除開始".$imgpath."/".$file;wLog($c);
-       //ファイル削除(該当ファイルを配列へ格納）
-       if(! unlink($imgpath."/".$file)){
-        $c="notice:".$mname."削除失敗".$imgpath."/".$file;wLog($c);
-        continue;
-       }
-       $c="notice:".$mname."削除成功".$imgpath."/".$file;wLog($c);
-      }
-     }
-     else{
-      $c="notice:".$mname."ディレクトリが開けません。".$imgpath;wLog($c);
-     }
+     $this->from=TABLE_PREFIX.IMGLIST;
+     $this->where="fld000='".$val["fld000"]."'";
+     $this->delete();
     }//else
-   }//foreach($this->r["data"]
 
-   
-   //画像リスト再登録、再取得(DBリストあり、画像ファイルなしはこれで削除される）
-   $this->dsetUpImgList();
+    break;
+   }//foreach($this->r["data"]
 
    $c="end:".$mname;wLog($c);
    return $this->r;

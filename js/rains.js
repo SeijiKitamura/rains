@@ -130,7 +130,6 @@ function uploadImg(elem){
     complete: function(){},
     success: function(html) {
      //showImage(fld000);
-     console.log(html);
      showImage();
     },
     error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -187,7 +186,6 @@ function showImage(){
   dataType: 'html',
   complete: function(){},
   success: function(html) {
-   console.log(html);
    //画像追加
    $("div.imgpart").empty()
                    .append(html);
@@ -238,7 +236,7 @@ function changeImgNum(fld000,imgid,imgnum){
   complete: function(){},
   success: function(html) {
    //showImage(fld000);
-   showImage();
+   //showImage();
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);
@@ -529,6 +527,7 @@ function chgInput(){
 //画像全削除
 function delAllImg(){
  $("button#delAll").click(function(){
+  if(!confirm("画像を全部削除しますか?")) return false;
   var fld000=$("div.loginpart").attr("data-fld000");
   deleteImg(fld000,null);
  });
@@ -572,6 +571,13 @@ function checkOut(){
     deleteImg(fld000,imgid);
    }
   });
+ });
+}
+
+//画像並べ替え
+function imgSort(){
+ $("button#imgsort").click(function(){
+  showImage();
  });
 }
 

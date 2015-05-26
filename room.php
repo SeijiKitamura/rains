@@ -93,6 +93,9 @@ $(function(){
   //チェック削除イベント
   checkOut();
   
+  //画像並べ替え
+  imgSort();
+  
   //画像一覧イベント
   showImage();
 

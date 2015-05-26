@@ -203,7 +203,9 @@ function viewSetImage2($fld000,$aryurl){
    $sql[]=array("col"=>array("fld000"=>$fld000,
                              "fld002"=>$val["src"]),
                 "from"=>TABLE_PREFIX.IMGLIST,
-                "where"=>array("fld000"=>$fld000)
+                "where"=>array("fld000"=>$fld000,
+                               "fld002"=>$val["src"]
+                              )
                );
   }
 

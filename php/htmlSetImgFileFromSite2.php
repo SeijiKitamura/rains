@@ -13,7 +13,6 @@ if(! preg_match("/^[0-9]+$/",$_GET["fld000"])){
 }
 
 $url=partsImgPathFromSite($_GET["imgurl"]);
-print_r($url);
 
 if(! is_array($url) && ! isset($url) && ! count($url)){
  $c="error:".$mname."URL配列がありません";wLog($c);
