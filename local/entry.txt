@@ -1,0 +1,9 @@
+select
+rank,
+fld000,
+fld001,
+ecomment
+from hp_entry
+order by
+rank,
+fld001
