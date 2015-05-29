@@ -1,0 +1,10 @@
+select
+rank,
+rankname,
+rcomment,
+startday,
+endday,
+flg
+from hp_rank
+order by
+rank
