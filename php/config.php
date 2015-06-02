@@ -201,7 +201,7 @@ $SITECONTENTS=array(
                      "index.php"=>"ホーム"
                     ,"q_and_a.php"=>"Q&A"
                     ,"yanusi.php"=>"オーナー様"
-                    ,"annnai.php"=>"会社概要"
+                    ,"annai.php"=>"会社概要"
                     ,"privacy.php"=>"プライバシーポリシー"
                    );
 //未使用
