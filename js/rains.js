@@ -891,6 +891,46 @@ function chgComment(){
  });
 } 
 
+//Webアップロード
+function showWebUpload(){
+ $.ajax({
+  url:"php/htmlGetLocalMode.php",
+  type:"GET",
+  dataType:"html",
+  success:function(html){
+   if(html.match(/^err:/)) return false;
+   console.log("LocalMode有効中");
+   $("ul#leftMenu").append($("<li id='webupload'>Webアップロード</li>"));
+
+   $("li#webupload").click(function(){
+    if(!confirm("Webアップロードしますか?")) return false;
+    WebUpload();
+   });
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   alert(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function WebUpload(){
+ $.ajax({
+  url:"php/htmlSetWebUpload.php",
+  type:"GET",
+  dataType:"html",
+  success:function(html){
+   console.log(html);
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   alert(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
 //日付チェック
 function chkdate(hiduke){
  var h=hiduke.match(/^(20[0-9]{2})[\/-]?([0-1]?[0-9]{1})[\/-]?([0-3]?[0-9]{1})$/);

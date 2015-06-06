@@ -1,5 +1,6 @@
 *.csv
 *.log
+*.txt
 server.conf.php
 test.php
 !rainsfld.csv
