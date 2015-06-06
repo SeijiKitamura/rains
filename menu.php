@@ -42,6 +42,7 @@ $(function(){
  //showData();
  showFldData();
  showRankList();
+ showWebUpload();
 });
 
 
