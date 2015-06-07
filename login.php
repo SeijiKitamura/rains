@@ -6,7 +6,7 @@ if(isset($_POST["login"])){
  if($_POST["userid"]===USERID && $_POST["password"]===PASSWORD){
   $_SESSION["USERID"]=md5($_POST["userid"]);
   $msg="";
-  if($_POST["nextpage"]){
+  if($_POST["nextpage"] && ! LOCALMODE){
    header("Location:".$_POST["nextpage"]);
   }
   else{

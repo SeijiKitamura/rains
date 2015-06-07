@@ -921,7 +921,32 @@ function WebUpload(){
   type:"GET",
   dataType:"html",
   success:function(html){
-   console.log(html);
+   $("div#contents").empty
+                    .append(html);
+   if(html.match(/^err/)){
+    return false;
+   }
+   webRidirect();
+  },
+  error:function(XMLHttpRequest,textStatus,errorThrown){
+   console.log(XMLHttpRequest.responseText);
+   alert(XMLHttpRequest.responseText);
+   return false;
+  }
+ });
+}
+
+function webRidirect(){
+ $.ajax({
+  url:"php/htmlGetRidirect.php",
+  type:"GET",
+  dataType:"html",
+  success:function(html){
+   $("div#contents").empty
+                    .append(html);
+   if(html.match(/^err/)){
+    return false;
+   }
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);

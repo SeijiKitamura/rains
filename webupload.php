@@ -10,8 +10,12 @@ htmlHeader("Webアップロード画面");
   <div id="contentsWrap">
    <div id="contentsLeft">
 <?php
-$csvfile=array(RAINS,FLD,IMGLIST,RANK,ENTRY,BCOMMENT);
+if(LOCALMODE){
+ echo "err:ローカルモードが有効のため処理を中止します";
+ return false;
+}
 
+$csvfile=array(RAINS,FLD,IMGLIST,RANK,ENTRY,BCOMMENT);
 foreach($csvfile as $key=>$val){
  $datafile="data/".$val.".csv";
  impCsv2DBUTF($val,$datafile);

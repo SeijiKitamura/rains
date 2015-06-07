@@ -1,5 +1,12 @@
 <?php
 require_once("parts.function.php");
+
+//LOCALMODE判定
+if(! LOCALMODE){
+ echo "err:ローカルードが有効ではありません";
+ return false;
+}
+
 chdir("../data");
 
 $db=new DB();
@@ -144,5 +151,5 @@ fclose($handle);
 
 chdir("../local");
 $a=`/bin/sh export.sh`;
-echo $a;
+echo "アップロードしました";
 ?>
