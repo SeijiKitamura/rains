@@ -921,7 +921,8 @@ function WebUpload(){
   type:"GET",
   dataType:"html",
   success:function(html){
-   $("div#contents").empty
+   console.log(html);
+   $("div#contents").empty()
                     .append(html);
    if(html.match(/^err/)){
     return false;
@@ -942,11 +943,13 @@ function webRidirect(){
   type:"GET",
   dataType:"html",
   success:function(html){
-   $("div#contents").empty
+   //ここを見直す PHP上でリダイレクトしてもJavascriptでは意味がない
+   $("div#contents").empty()
                     .append(html);
    if(html.match(/^err/)){
     return false;
    }
+   document.location = html;
   },
   error:function(XMLHttpRequest,textStatus,errorThrown){
    console.log(XMLHttpRequest.responseText);
