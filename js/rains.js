@@ -129,7 +129,7 @@ function uploadImg(elem){
     dataType: 'html',
     complete: function(){},
     success: function(html) {
-     //showImage(fld000);
+     console.log(html);
      showImage();
     },
     error:function(XMLHttpRequest,textStatus,errorThrown){
