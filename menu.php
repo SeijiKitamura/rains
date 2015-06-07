@@ -18,12 +18,13 @@ htmlHeader("メニュー");
     </ul>
     <input type="file" multiple="multiple" name="csvdata" style="display:none">
     <input type="file" multiple="multiple" name="flddata" style="display:none;">
-   </div><!--div id="contentsLeft"-->
-   <div class="clr"></div>
+    </div><!--div id="contentsLeft"-->
+    <div class="clr"></div>
     <div id="contentsMiddle">
      <div id="contents">
      </div><!--div id="contents"-->
     </div><!--div id="contentsMiddle"-->
+   </div><!--div id="contentsLeft"-->
   </div><!--div id="contentsWrap"-->
 
 <?php

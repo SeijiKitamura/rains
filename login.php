@@ -6,7 +6,12 @@ if(isset($_POST["login"])){
  if($_POST["userid"]===USERID && $_POST["password"]===PASSWORD){
   $_SESSION["USERID"]=md5($_POST["userid"]);
   $msg="";
-  header("Location:menu.php");
+  if($_POST["nextpage"]){
+   header("Location:".$_POST["nextpage"]);
+  }
+  else{
+   header("Location:menu.php");
+  }
  }
  else{
   session_destroy();
@@ -37,6 +42,7 @@ htmlHeader("ログイン");
          <li><label for="password">パスワード<input id="password" name="password" type="password"></li>
          <li><input type="submit" id="login"  name="login"  value="ログイン">
              <input type="submit" id="logout" name="logout" value="ログアウト"></li>
+             <li><input id="nextpage" name="nextpage" type="hidden" value="<?php echo $_GET["nextpage"]; ?>"></li>
         </ul>
        </form>
       </div><!--div id="article"-->

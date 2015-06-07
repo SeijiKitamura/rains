@@ -8,6 +8,63 @@
 ----------------------------------------------------- */
 require_once("db.class.php");
 
+//CSVファイルをDBへ登録（UTF-8ファイル限定)
+//(impCsv2AryUTFとimpCsv2SQLのコンボ)
+function impCsv2DBUTF($tablename,$filename){
+ $mname="impCsv2DBUTF(import.function.php)";
+ try{
+  $csv=impCsv2AryUTF($filename);
+  $sql=impCsv2SQL($tablename,$csv);
+  $db=new DB();
+  $db->from=TABLE_PREFIX.$tablename;
+  $db->where="id>0";
+  $db->delete();
+  $db->updatearray($sql);
+  echo "UPDATEしました";
+ }
+ catch(Exception $e){
+  wLog("error:".$mname.$e->getMessage());
+  echo "err:".$e->getMessage();
+ }
+}
+
+//CSVファイルを配列へ格納(UTF-8ファイル限定)
+function impCsv2AryUTF($filename){
+ $mname="impCsv2AryUTF(import.function.php)";
+ try{
+  //ファイル存在チェック
+  if(! file_exists($filename)){
+   throw new exception("ファイルがありません:".$filename);
+  }
+
+  //ファイル読み込み
+  $fp=fopen($filename,"rb"); 
+  
+  //ファイルを行単位で配列へ格納
+  while($row=fgetcsv($fp)){
+   //空行はスキップｗ!
+   if($row===array(null)){
+    $c=$mname."空行のため、処理をスキップ";wLog($c);
+    continue;
+   }
+   $csv[]=$row;
+  }
+  
+  //読み込み終了後エンドポイントになっていなければエラー
+  if(!feof($fp)){
+   $c=$mname."読み込み終了後エンドポイントになっていない";wLog($c);
+   throw new Exception("CSV変換エラー");
+  }
+  fclose($fp);
+  $c="end:".$mname;wLog($c);
+  return $csv;
+ }
+ catch(Exception $e){
+  wLog("error:".$mname.$e->getMessage());
+  echo "err:".$e->getMessage();
+ }
+}
+
 //POSTされたファイルを配列へ格納する
 function impCsv2Ary($postfile){
  $mname="impCsv2Ary(import.function.php) ";
