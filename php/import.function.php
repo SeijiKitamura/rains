@@ -142,7 +142,7 @@ function impCsv2SQL($tablename,$csv){
     if(! $colnum[$n]) continue;
     $c=$mname."データ更新列".$colnum[$n]."に".$val."をセット";wLog($c);
     if(preg_match("/^[0-9]+$/",$val)){
-     $col[$colnum[$n]]=(int)$val;
+     $col[$colnum[$n]]=(float)$val;
     }
     else{
      $col[$colnum[$n]]=$val;
@@ -234,6 +234,10 @@ function impCsv2DB($postfile,$tablename){
 
   //CSVをSQL用配列に変換
   $sql=impCsv2SQL($tablename,$csv);
+
+  echo "<pre>";
+  print_r($sql);
+  echo "</pre>";
 
   //DB登録
   $db=new DB();
