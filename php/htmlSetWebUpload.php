@@ -143,7 +143,9 @@ foreach($db->ary as $key=>$val){
  $csvrow="";
  foreach($val as $key1=>$val1){
   if($csvrow) $csvrow.=",";
-  $csvrow.=$val1;
+  //改行コードを置換
+  $v=str_replace(array("\r\n","\n","\r"),"__BR__",$val1);
+  $csvrow.=$v;
  }
  fwrite($handle,$csvrow."\n");
 }

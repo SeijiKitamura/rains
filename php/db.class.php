@@ -162,6 +162,7 @@ class DB{
      $i=0;
      foreach($this->updatecol as $key=>$val){
       if($i>0) $this->sql.=",";
+      $val=str_replace("__BR__","\n",$val);
       $this->sql.=$this->pdo->quote($val);
       $i++;
      }
@@ -175,6 +176,7 @@ class DB{
      $i=0;
      foreach($this->updatecol as $key=>$val){
       if($i>0) $this->sql.=",";
+      $val=str_replace("__BR__","\n",$val);
       $this->sql.=$key."=".$this->pdo->quote($val);
       $i++;
      }
