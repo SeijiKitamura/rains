@@ -59,6 +59,7 @@ for filepath in ${IMGDIR}/*; do
  if [ -d $filepath ] ; then
   echo "cd ${FTPPATH}">>$FTPTXT
   echo "mkdir ${filepath##*/}">>$FTPTXT
+  echo "quote site chmod 707 ${filepath##*/}">>$FTPTXT
   echo "cd ${filepath##*/}">>$FTPTXT
   echo "lcd ${filepath}">>$FTPTXT
   echo "mput *.*">>$FTPTXT
