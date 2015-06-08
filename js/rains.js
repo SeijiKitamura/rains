@@ -263,6 +263,7 @@ function deleteImg(fld000,imgid){
   dataType: 'html',
   complete: function(){},
   success: function(html) {
+   console.log(html);
    //showImage(fld000);
    showImage();
   },

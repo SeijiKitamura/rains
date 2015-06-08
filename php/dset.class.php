@@ -522,7 +522,7 @@ class DSET extends DB{
   try{
    $mname="dsetDelImg(dset.class.php) ";
    $c="start:".$mname;wLog($c);
-   
+
    //物件データチェック
    if(!isset($this->r["data"]) ||! is_array($this->r["data"]) || !count($this->r["data"])){
     throw new exception("物件データがありません。");
@@ -532,6 +532,8 @@ class DSET extends DB{
    if($imgid && !preg_match("/^[0-9]+$/",$imgid)){
     throw new exception("画像番号が不正です。(".$imgid.")");
    }
+
+   echo realpath("../");
    
    foreach($this->r["data"] as $key=>$val){
     //画像削除
@@ -544,18 +546,20 @@ class DSET extends DB{
       }
      }
      if($imgfile && !preg_match("/^http/",$imgfile)){
-      $imgpath=".".IMG."/".$val["fld000"]."/".$imgfile;
+      $imgpath=realpath("../").IMG."/".$val["fld000"]."/".$imgfile;
+      $c="notice:".$mname."画像ファイルパス ".$imgpath." をセット";wLog($c);
+
       if(unlink($imgpath)){
-       $c="notice:".$mname."画像番号".$imgid."の画像削除を開始しました。";wLog($c);
+       $c="notice:".$mname."画像".$imgpath."の画像削除しました。";wLog($c);
       }
       else{
-       $c="notice:".$mname."画像番号".$imgid."の画像削除に失敗しました。";wLog($c);
+       $c="error:".$mname."画像".$imgpath."の画像削除に失敗しました。";wLog($c);
       }
      }
     }//if($imgid){
     else{
      //ディレクトリ内画像一括削除
-     $imgpath=".".IMG."/".$val["fld000"];
+     $imgpath=realpath("../").IMG."/".$val["fld000"];
      if($dir=opendir($imgpath)){
       while(($file=readdir($dir))!==false){
        if($file!="." && $file!=".."){
@@ -567,19 +571,19 @@ class DSET extends DB{
         }//else{
        }//if($file!="." && $file!=".."){
       }//while(($file=readdir($dir))!==false){
-      close($dir);
+      closedir($dir);
      }//if($dir=opendir($imgpath)){
     }//else{
     
     //DB削除
     if($imgid){
-     $c="notice:".$mname."画像番号".$imgid."の画像削除を開始します。";wLog($c);
+     $c="notice:".$mname."画像番号".$imgid."のDB削除を開始します。";wLog($c);
      $this->from=TABLE_PREFIX.IMGLIST;
      $this->where="id=".$imgid;
      $this->delete();
     }//if($imgid
     else{
-     $c="notice:".$mname."ディレクトリ内画像全削除:".$imgpath;wLog($c);
+     $c="notice:".$mname." 物件番号".$val["fld000"]." のDB画像データ全削除";wLog($c);
      $this->from=TABLE_PREFIX.IMGLIST;
      $this->where="fld000='".$val["fld000"]."'";
      $this->delete();
