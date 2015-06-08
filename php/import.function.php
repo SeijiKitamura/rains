@@ -11,6 +11,8 @@ require_once("db.class.php");
 //CSVファイルをDBへ登録（UTF-8ファイル限定)
 //(impCsv2AryUTFとimpCsv2SQLのコンボ)
 function impCsv2DBUTF($tablename,$filename){
+ global $TABLES;
+
  $mname="impCsv2DBUTF(import.function.php)";
  try{
   $csv=impCsv2AryUTF($filename);
@@ -175,7 +177,12 @@ function impCsv2SQL($tablename,$csv){
   }
   
 //CSV列をコンバート
-  $colnum=impCvrtTable($csv);
+  if($tabalename==RAINS){
+   $colnum=impCvrtTable($csv);
+  }
+  else{
+   $colnum=impCvrtTable2($tablename);
+  }
 
 //where句対象列を配列にセット
   foreach($colnum as $key=>$val){
@@ -254,16 +261,28 @@ function impCvrtTable($csv){
    $c=$mname."列数197なので列名にBAIBAIを使用";wLog($c);
    $ary=$BAIBAI;
   }
-  
-//Rainsフィールドデータ
-  elseif(count($csv[0])==5){
-   $c=$mname."列数5なので列名にFLDを使用";wLog($c);
-   foreach($TABLES[FLD] as $colname=>$val){
-    $ary[]=$colname;
-   }
-  }
   else{
    throw new exception("CSV列数が定義されていません。");
+  }
+  $c="end ".$mname;wLog($c);
+  return $ary;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessage();wLog($c);
+  echo $c;
+ }
+}
+
+//-------------------------------------------------//
+// CSVをRainsテーブルにあうようにコンバート(テーブル名がわかっている場合に使用)
+//-------------------------------------------------//
+function impCvrtTable2($tablename){
+ global $TABLES;
+ $mname="impCvrtTable2(import.function.php)";
+ try{
+  $c="start ".$mname;wLog($c);
+  foreach($TABLES[$tablename] as $colname=>$val){
+   $ary[]=$colname;
   }
   $c="end ".$mname;wLog($c);
   return $ary;
