@@ -485,7 +485,7 @@ $TABLES=array(
  ,IMGLIST=>array(
   	"fld000" =>array("type"=>" varchar",	"null"=>" not null",	"default"=>"''",	"local"=>"物件番号",	"index"=>"1")
   ,"fld001" =>array("type"=>" int"    , "null"=>" not null",	"default"=>"99",	"local"=>"表示順",	"index"=>"0")
-  ,"fld002" =>array("type"=>" varchar",	"null"=>" not null",	"default"=>"''",	"local"=>"ファイル名",	"index"=>"0")
+  ,"fld002" =>array("type"=>" varchar",	"null"=>" not null",	"default"=>"''",	"local"=>"ファイル名",	"index"=>"2")
   ,"fld003" =>array("type"=>" varchar",	"null"=>" not null",	"default"=>"''",	"local"=>"コメント",	"index"=>"0")
  )//IMGLIST
  ,FLD=>array(
