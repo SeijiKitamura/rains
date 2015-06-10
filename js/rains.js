@@ -40,9 +40,6 @@ function navi(){
  //画面追従
  $(window).scroll(function(){
   if($(window).scrollTop()>topnavi){
-   console.log("臨界点突破");
-   console.log($(window).scrollTop());
-   console.log(topnavi);
    $("div#shortNavi").slideDown();
   }
   else{
