@@ -15,6 +15,7 @@ define("DBENGIN","postgres");
  define("CSS"     ,"/css"     ); //705 
  define("DATA"    ,"/data"    ); //700 
  define("LOG"     ,"/log"     ); //700 
+ define("PHP"     ,"/php"     ); //700 
  define("SKELETON","/skeleton"); //700 
 
 //---------------------------------------------------//
