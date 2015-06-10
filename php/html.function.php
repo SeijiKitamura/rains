@@ -118,6 +118,9 @@ function htmlHeader($title=null){
   session_start();
   if(isset($_SESSION["USERID"]) || $_SESSION["USERID"] || $_SESSION["USERID"]==md5(USERID)){
    $navibar.="<li>";
+   $navibar.="<a href='menu.php'>管理画面</a>";
+   $navibar.="</li>";
+   $navibar.="<li>";
    $navibar.="<form id='loginForm' name='loginForm' action='login.php' method='POST'>";
    $navibar.="<input type='hidden' id='logout' name='logout' value='ログアウト'>";
    $navibar.="<a id='a_logout' href='#' onclick='document.forms.loginForm.submit();return false;'>ログアウト</a>";
