@@ -1237,6 +1237,58 @@ class DSET extends DB{
   }
  }
 
+ //Google用サイトマップ作成メソッド
+ public function dsetSiteMap(){
+  global $SITECONTENTS;
+  try{
+   $mname="dsetSiteMap(DSET class)";
+   $c="start ".$mname;wLog($c);
+   $sitemap=realpath("../")."/".LOG."/sitemap.txt";
+
+   if(! $fp=fopen($sitemap,"w")){
+    throw new exception($sitemap."が開けません");
+   }
+
+   //ディレクトリパスをセット
+   $fpath="http://".$_SERVER["SERVER_NAME"].dirname($_SERVER["REQUEST_URI"])."/";
+
+   //静的ページ書き込み
+   foreach($SITECONTENTS as $key=>$val){
+    fwrite($fp,$fpath.$key."\n");
+   }
+   
+   //カテゴリ別ページ書き込み
+   $this->select="t.fld001,t.fld002,t.fld003";
+   $this->from =TABLE_PREFIX.RAINS." as t left outer join ";
+   $this->from.=TABLE_PREFIX.BLACKLIST." as t1 on ";
+   $this->from.=" t.fld000=t1.fld000 ";
+   $this->where=" t1.fld000 is null";
+   $this->group="t.fld001,t.fld002,t.fld003";
+   $this->order="t.fld001,t.fld002,t.fld003";
+   $this->getArray();
+   foreach($this->ary as $key=>$val){
+    fwrite($fp,$fpath."roomlist.php?type=".$val["fld001"]."_".$val["fld002"]."_".$val["fld003"]."\n");
+   }
+   
+   //物件個別ページ書き込み
+   $this->select="t.fld000";
+   $this->from =TABLE_PREFIX.RAINS." as t left outer join ";
+   $this->from.=TABLE_PREFIX.BLACKLIST." as t1 on ";
+   $this->from.=" t.fld000=t1.fld000 ";
+   $this->where=" t1.fld000 is null";
+   $this->order="t.fld001,t.fld002,t.fld003,t.fld000";
+   $this->getArray();
+   foreach($this->ary as $key=>$val){
+    fwrite($fp,$fpath."room.php?fld000=".$val["fld000"]."\n");
+   }
+   fclose($fp);
+   $c="end:".$mname;wLog($c);
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);
+  }
+ }
+
 }
 
 ?>
