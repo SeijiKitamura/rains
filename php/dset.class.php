@@ -1249,8 +1249,12 @@ class DSET extends DB{
     throw new exception($sitemap."が開けません");
    }
 
-   //ディレクトリパスをセット
-   $fpath="http://".$_SERVER["SERVER_NAME"].dirname($_SERVER["REQUEST_URI"])."/";
+   //ディレクトリパスをセット(ここを見直し)
+   $dname=dirname($_SERVER["REQUEST_URI"]);
+   $c="notice:".$mname." 現在ディレクトリ".$dname;wLog($c);
+   $dname=str_replace(PHP,"",$dname);
+   $c="notice:".$mname." 修正ディレクトリ".$dname;wLog($c);
+   $fpath="http://".$_SERVER["SERVER_NAME"].$dname."/";
 
    //静的ページ書き込み
    foreach($SITECONTENTS as $key=>$val){
