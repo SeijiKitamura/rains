@@ -298,6 +298,10 @@ function viewSetBlackList($fld000){
   $db=new DSET();
   $db->r=$data;
   $db->dsetUpBlackList();
+
+  //サイトマップ作成
+  $db->dsetSiteMap();
+
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
@@ -314,6 +318,9 @@ function viewDelBlackList($fld000=null){
   $db=new DSET();
   $db->r=$data;
   $db->dsetDelBlackList();
+  
+  //サイトマップ作成
+  $db->dsetSiteMap();
   $c="end ".$mname;wLog($c);
  }
  catch(Exception $e){
