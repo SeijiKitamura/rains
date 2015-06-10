@@ -47,4 +47,5 @@ define("ENKAKU"     ,"沿革");
 // GoogleMap
 //---------------------------------------------------//
 define("GMAP",'');//店舗MAP
+define("GOOGLEWEBMASTER","");//Googleウェブマスターキー
 ?>

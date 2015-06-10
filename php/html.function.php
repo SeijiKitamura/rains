@@ -34,6 +34,9 @@ function htmlHeader($title=null){
   $path=realpath("./").SKELETON."/header.html";
   $html=file_get_contents($path);
 
+  //Googleクローラー
+  $html=preg_replace("/<!--GOOGLEWEBMASTER-->/",GOOGLEWEBMASTER,$html);
+  
   //タイトル
   $title.="|".CORPNAME;
   $html=preg_replace("/<!--title-->/",$title,$html);
