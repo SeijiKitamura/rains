@@ -1368,6 +1368,24 @@ div.store_wrap table tr td{
  line-height:1.4;
  color:#000;
 }
+
+div.links_wrap{
+ border: 1px solid #e5e5e5;
+ padding: 8px;
+ width: 100%;
+ background-color: #f5f5f5;
+}
+
+div.links_wrap p{
+ width :48%;
+ margin:10px 5px 0 0 ;
+ float:left;
+ text-align:center;
+}
+
+div.links_wrap p img{
+ width:100%;
+}
 /*annai.php用*/
 
 /*privacy.php用*/

@@ -106,7 +106,15 @@ htmlHeader("会社概要");
        </div><!--div class="store_wrap"-->
       </div><!--div id="stores"-->
       
-      <h2>関連事業</h2>
+      <h2>リンク</h2>
+      <div id="links">
+       <div class="links_wrap">
+        <p><a href=""><img src=""></a></p>
+        <p><a href=""><img src=""></a></p>
+        <div class="clr"></div>
+       </div><!--div class="links_wrap"-->
+      </div><!--div id="links"-->
+
      </div><!--div id="divannai"-->
     </div><!--div id="contents_inner"-->
    </div><!--div id="contents_wrap"-->
