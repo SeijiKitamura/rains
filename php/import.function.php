@@ -177,7 +177,7 @@ function impCsv2SQL($tablename,$csv){
   }
   
 //CSV列をコンバート
-  if($tabalename==RAINS){
+  if($tablename==RAINS){
    $colnum=impCvrtTable($csv);
   }
   else{
@@ -311,14 +311,13 @@ function impCsv2DB($postfile,$tablename){
   //CSVをSQL用配列に変換
   $sql=impCsv2SQL($tablename,$csv);
 
-  echo "<pre>";
-  print_r($sql);
-  echo "</pre>";
+  //echo "<pre>";
+  //print_r($sql);
+  //echo "</pre>";
 
   //DB登録
   $db=new DB();
   $db->updatearray($sql);
-
   $c="end ".$mname;wLog($c);
   return $sql;
  }
