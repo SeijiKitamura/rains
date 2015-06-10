@@ -75,10 +75,10 @@ if($flg){
  //物件データを分解
  $d=array();
  foreach($data["data"] as $key=>$val){
-  if($val["fld001"]=="01"){
+  if($val["fld001"]=="1"){
    $d["baibai"][]=$val;
   }
-  elseif($val["fld001"]=="03"){
+  elseif($val["fld001"]=="3"){
    $d["tintai"][]=$val;
   }
  }
