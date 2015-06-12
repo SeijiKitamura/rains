@@ -52,6 +52,53 @@ function viewBrother($fld000){
 }
 
 //----------------------------------------------------//
+// ブラックリストを返す
+//----------------------------------------------------//
+function viewBlackList($where=null){
+ try{
+  $mname="viewBlackList(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  $db=new DSET();
+  if($where) $db->where=$where;
+
+  $db->dsetBlackList();
+  
+  //Rainsサブデータを反映
+  $db->dsetRainsFld();
+ 
+  //位置データをセット(物件データが複数の場合、最初の1件目だけ）
+  $db->dsetGetLatLng();
+  
+  //画像リストをセット
+  $db->dsetGetImgList();
+  
+  //画像パスをセット
+  $db->dsetImgPathWithEncode();
+
+  //ブラックリスト判定
+//  $db->dsetBlackList();
+
+  //データカウント
+  $db->dsetDataCount();
+  
+  //物件種別カウント
+  $db->dsetFldCount();
+
+  //間取りカウント
+  $db->dsetMadoriCount();
+
+  //最寄駅カウント
+  $db->dsetStationCount();
+  
+  $c="end ".$mname;wLog($c);
+  return $db->r;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);
+ }
+}
+
+//----------------------------------------------------//
 // ブラックリストを削除
 //----------------------------------------------------//
 function viewDelBlackList($fld000=null){
