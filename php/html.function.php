@@ -17,9 +17,12 @@ require_once("parts.function.php");
 //  $c="error:".$mname.$e->getMessge();wLog($c);
 // }
 //}
-
 //-------------------------------------------------------//
 
+
+//-------------------------------------------------------//
+//  ページヘッダーを表示
+//-------------------------------------------------------//
 function htmlHeader($title=null){
  global $PAGEARY;
  global $NAVI;
@@ -142,7 +145,9 @@ function htmlHeader($title=null){
  }
 }
 
+//-------------------------------------------------------//
 //ロゴを返す（表示はしない）
+//-------------------------------------------------------//
 function htmlLogo(){
  try{
   $mname="htmlLogo(html.function.php) ";
@@ -159,6 +164,9 @@ function htmlLogo(){
  }
 }
 
+//-------------------------------------------------------//
+// トップイメージを表示
+//-------------------------------------------------------//
 function htmlTopImage(){
  global $BIGNAVI;
  try{
@@ -181,6 +189,9 @@ function htmlTopImage(){
  }
 }
 
+//-------------------------------------------------------//
+// フッターを表示
+//-------------------------------------------------------//
 function htmlFooter(){
  global $NAVI;
  global $SITECONTENTS;
@@ -289,6 +300,9 @@ function htmlFooter(){
  }
 }
 
+//-------------------------------------------------------//
+// 個別ページを表示
+//-------------------------------------------------------//
 function htmlContents($data){
  try{
   $mname="htmlHeader(html.function.php) ";
@@ -701,6 +715,9 @@ function htmlContents($data){
  }
 }
 
+//-------------------------------------------------------//
+// 個別ページを表示
+//-------------------------------------------------------//
 function htmlStationList($data,$comment=null){
  try{
   $mname="htmlStationList(html.function.php) ";
