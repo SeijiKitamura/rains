@@ -3,71 +3,16 @@
  ファイル名:import.function.php
  接頭語    :imp
  主な動作  :各種データをDBにセットする
- 返り値    :true/false
+ 返り値    :
  エラー    :メッセージを表示
 ----------------------------------------------------- */
 require_once("db.class.php");
 
-//CSVファイルをDBへ登録（UTF-8ファイル限定)
-//(impCsv2AryUTFとimpCsv2SQLのコンボ)
-function impCsv2DBUTF($tablename,$filename){
- global $TABLES;
 
- $mname="impCsv2DBUTF(import.function.php)";
- try{
-  $csv=impCsv2AryUTF($filename);
-  $sql=impCsv2SQL($tablename,$csv);
-  $db=new DB();
-  $db->from=TABLE_PREFIX.$tablename;
-  $db->where="id>0";
-  $db->delete();
-  $db->updatearray($sql);
-  echo "UPDATEしました";
- }
- catch(Exception $e){
-  wLog("error:".$mname.$e->getMessage());
-  echo "err:".$e->getMessage();
- }
-}
-
-//CSVファイルを配列へ格納(UTF-8ファイル限定)
-function impCsv2AryUTF($filename){
- $mname="impCsv2AryUTF(import.function.php)";
- try{
-  //ファイル存在チェック
-  if(! file_exists($filename)){
-   throw new exception("ファイルがありません:".$filename);
-  }
-
-  //ファイル読み込み
-  $fp=fopen($filename,"rb"); 
-  
-  //ファイルを行単位で配列へ格納
-  while($row=fgetcsv($fp)){
-   //空行はスキップｗ!
-   if($row===array(null)){
-    $c=$mname."空行のため、処理をスキップ";wLog($c);
-    continue;
-   }
-   $csv[]=$row;
-  }
-  
-  //読み込み終了後エンドポイントになっていなければエラー
-  if(!feof($fp)){
-   $c=$mname."読み込み終了後エンドポイントになっていない";wLog($c);
-   throw new Exception("CSV変換エラー");
-  }
-  fclose($fp);
-  $c="end:".$mname;wLog($c);
-  return $csv;
- }
- catch(Exception $e){
-  wLog("error:".$mname.$e->getMessage());
-  echo "err:".$e->getMessage();
- }
-}
-
-//POSTされたファイルを配列へ格納する
+//------------------------------------------//
+//POSTされたCSVファイルをUTF-8へ変換
+//1行ずつ配列へ格納して返す
+//------------------------------------------//
 function impCsv2Ary($postfile){
  $mname="impCsv2Ary(import.function.php) ";
  try{
@@ -126,30 +71,39 @@ function impCsv2Ary($postfile){
  }
 }
 
-//-------------------------------------------------//
-// 配列をチェック(最初の行に列名が入っている前提)
-//-------------------------------------------------//
-function impChkCsv($csv){
- $mname="impChkCsv(import.function.php) ";
+//------------------------------------------//
+//CSVファイルを1行ずつ配列へ格納して返す
+//(UTF-8ファイル限定)
+//------------------------------------------//
+function impCsv2AryUTF($filename){
+ $mname="impCsv2AryUTF(import.function.php)";
  try{
-  $c="start ".$mname;wLog($c);
-  if(! is_array($csv))  throw new Exception("データ形式エラー");
-  $errflg=1;
-  foreach($csvarray as $key=>$val){
-   //最初のデータは飛ばす
-   if(! $key)continue;
+  //ファイル存在チェック
+  if(! file_exists($filename)){
+   throw new exception("ファイルがありません:".$filename);
+  }
 
-   //物件番号が数字チェック
-   if(! preg_match("/^[0-9]+$/",$val[0])){
-    $c="error:".$mname."物件番号が不正です。".$val[0];wLog($c);
-    $errflg=0;
+  //ファイル読み込み
+  $fp=fopen($filename,"rb"); 
+  
+  //ファイルを行単位で配列へ格納
+  while($row=fgetcsv($fp)){
+   //空行はスキップｗ!
+   if($row===array(null)){
+    $c=$mname."空行のため、処理をスキップ";wLog($c);
+    continue;
    }
+   $csv[]=$row;
   }
-  if(! $errflg){
-   return false;
+  
+  //読み込み終了後エンドポイントになっていなければエラー
+  if(!feof($fp)){
+   $c=$mname."読み込み終了後エンドポイントになっていない";wLog($c);
+   throw new Exception("CSV変換エラー");
   }
-  $c="end ".$mname;wLog($c);
-  return true;
+  fclose($fp);
+  $c="end:".$mname;wLog($c);
+  return $csv;
  }
  catch(Exception $e){
   wLog("error:".$mname.$e->getMessage());
@@ -158,7 +112,67 @@ function impChkCsv($csv){
 }
 
 //-------------------------------------------------//
-// 配列をDBへ登録
+// CSVファイルをDBに登録
+// （impCsv2AryとimpCsv2SQLのコンボ)
+//-------------------------------------------------//
+function impCsv2DB($postfile,$tablename){
+ $mname="impCsv2DB";
+ try{
+  $c="start ".$mname;wLog($c);
+  //CSVを配列へ
+  $csv=impCsv2Ary($postfile);
+  
+  //CSV値チェック
+  if($tablename!==FLD && ! impChkCsv($csv)){
+   throw new exception("CSVにエラーがあります");
+  }
+
+  //CSVをSQL用配列に変換
+  $sql=impCsv2SQL($tablename,$csv);
+
+  //echo "<pre>";
+  //print_r($sql);
+  //echo "</pre>";
+
+  //DB登録
+  $db=new DB();
+  $db->updatearray($sql);
+  $c="end ".$mname;wLog($c);
+  return $sql;
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessage();wLog($c);
+  echo $c;
+ }
+}
+
+
+//------------------------------------------//
+//CSVファイルをDBに登録（UTF-8ファイル限定)
+//(impCsv2AryUTFとimpCsv2SQLのコンボ)
+//------------------------------------------//
+function impCsv2DBUTF($tablename,$filename){
+ global $TABLES;
+
+ $mname="impCsv2DBUTF(import.function.php)";
+ try{
+  $csv=impCsv2AryUTF($filename);
+  $sql=impCsv2SQL($tablename,$csv);
+  $db=new DB();
+  $db->from=TABLE_PREFIX.$tablename;
+  $db->where="id>0";
+  $db->delete();
+  $db->updatearray($sql);
+  echo "UPDATEしました";
+ }
+ catch(Exception $e){
+  wLog("error:".$mname.$e->getMessage());
+  echo "err:".$e->getMessage();
+ }
+}
+
+//-------------------------------------------------//
+// CSV配列をSQL配列へ変換して返す
 //-------------------------------------------------//
 function impCsv2SQL($tablename,$csv){
  global $TABLES;
@@ -234,7 +248,7 @@ function impCsv2SQL($tablename,$csv){
 }
 
 //-------------------------------------------------//
-// CSVをRainsテーブルにあうようにコンバート
+// CSVをRainsテーブル用にコンバート
 //-------------------------------------------------//
 function impCvrtTable($csv){
  global $TABLES;
@@ -274,7 +288,8 @@ function impCvrtTable($csv){
 }
 
 //-------------------------------------------------//
-// CSVをRainsテーブルにあうようにコンバート(テーブル名がわかっている場合に使用)
+// CSVをRainsテーブル用にコンバート
+// (テーブル名がわかっている場合に使用)
 //-------------------------------------------------//
 function impCvrtTable2($tablename){
  global $TABLES;
@@ -294,221 +309,35 @@ function impCvrtTable2($tablename){
 }
 
 //-------------------------------------------------//
-// CSVファイルをDBに登録する（ラッパー)
+// 配列をチェック(最初の行に列名が入っている前提)
 //-------------------------------------------------//
-function impCsv2DB($postfile,$tablename){
- $mname="impCsv2DB";
+function impChkCsv($csv){
+ $mname="impChkCsv(import.function.php) ";
  try{
   $c="start ".$mname;wLog($c);
-  //CSVを配列へ
-  $csv=impCsv2Ary($postfile);
-  
-  //CSV値チェック
-  if($tablename!==FLD && ! impChkCsv($csv)){
-   throw new exception("CSVにエラーがあります");
-  }
+  if(! is_array($csv))  throw new Exception("データ形式エラー");
+  $errflg=1;
+  foreach($csvarray as $key=>$val){
+   //最初のデータは飛ばす
+   if(! $key)continue;
 
-  //CSVをSQL用配列に変換
-  $sql=impCsv2SQL($tablename,$csv);
-
-  //echo "<pre>";
-  //print_r($sql);
-  //echo "</pre>";
-
-  //DB登録
-  $db=new DB();
-  $db->updatearray($sql);
-  $c="end ".$mname;wLog($c);
-  return $sql;
- }
- catch(Exception $e){
-  $c="error:".$mname.$e->getMessage();wLog($c);
-  echo $c;
- }
-}
-
-//-------------------------------------------------//
-// 画像ファイルを所定フォルダへ格納
-//-------------------------------------------------//
-//POSTされたファイルをimg/物件番号フォルダへ保存。
-//ファイル名もUTF-8にコンバートする。
-function impImg2Dir($files,$post){
- $mname="impImg2Dir(import.function.php) ";
- try{
-  $c="start ".$mname;wLog($c);
-  //アップロードチェック
-  foreach($files["allupimg"]["error"] as $key=>$val){
-   if($val){
-    throw new exception("ファイルアップロードに失敗しました。(".$val.")");
+   //物件番号が数字チェック
+   if(! preg_match("/^[0-9]+$/",$val[0])){
+    $c="error:".$mname."物件番号が不正です。".$val[0];wLog($c);
+    $errflg=0;
    }
   }
-
-  //物件番号数字チェック
-  $fld000=$post["fld000"];
-  if(!preg_match("/^[0-9]+$/",$fld000)){
-   throw new exception ("物件番号が数字以外です。(".$fld000.")");
+  if(! $errflg){
+   return false;
   }
-  $c=$mname."物件番号をセット".$fld000;wLog($c);
-  
-  //物件番号DB存在チェック
-  $db=new RAINS();
-  $db->where="fld000='".$fld000."'";
-  $result=$db->getRains();
-  if(!count($result["data"])){
-   throw new exception ("物件番号が未登録です。(".$fld000.")");
-  }
-  $c=$mname."物件番号存在".$fld000;wLog($c);
-  
-  //画像ディレクトリセット
-  $imgdir=realpath("../").IMG."/".$fld000;
-  
-  //ディレクトリ存在チェック
-  if(!file_exists($imgdir)){
-   if(! mkdir($imgdir)){
-    throw new exception("フォルダ作成に失敗しました。(".$bnumber.")");
-   }
-  }
-  $c=$mname."画像ディレクトリセット".$imgdir;wLog($c);
-
-  foreach($files["name"] as $key=>$val){
-   $moto=$files["tmp_name"][$key];
-   $c=$mname."一時ファイル名ゲット".$moto;wLog($c);
-   
-   //ファイル拡張子チェック
-   if(!exif_imagetype($moto)){
-    throw new exception("画像ファイルではありません");
-   }
-
-   $filename=mb_convert_encoding($val,"UTF-8","auto");
-   $filename=$imgdir."/".$filename;
-
-   if(! move_uploaded_file($moto,$filename)){
-    throw new exception("ファイルコピーに失敗しました。");
-   }
-   $c=$mname."画像を保存しました".$filename;wLog($c);
-  }//foreach
-
   $c="end ".$mname;wLog($c);
   return true;
- }//try
- catch(Exception $e){
-  $c="error:".$mname.$e->getMessage();wLog($c);
-  echo $c;
- }
-}
-
-function csv2HTMLTable($csvarray){
- try{
-  $html.="<table>";
-  $html.="<thead>";
-  $html.="<tr>";
-  $html.="<th>物件番号</th>";
-  $html.="<th>物件名</th>";
-  $html.="<th>賃料</th>";
-  $html.="<th>住所</th>";
-  $html.="</tr>";
-  $html.="</thead>";
-  $html.="<tbody>";
-  foreach($csvarray as $key=>$val){
-   if(!$key)continue;
-   $html.="<tr>";
-   $html.="<td>";
-   if(! preg_match("/^[0-9]+$/",$val[0])){
-    $html.="<span style='background-color:red'>";
-   }
-   $html.=$val[0];
-   if(! preg_match("/^[0-9]+$/",$val[0])){
-    $html.="</span>";
-   }
-   $html.="</td>";
-   $html.="<td>".$val[21].$val[22]."</td>";
-   $html.="<td>".$val[54]."</td>";
-   $html.="<td>".$val[17].$val[18].$val[19].$val[20].$val[21]."</td>";
-   $html.="</tr>";
-  }
-  $html.="</tbody>";
-  $html.="</table>";
-  return $html;
-
  }
  catch(Exception $e){
-  echo "err:".$e->getMessage();
-  throw $e;
- }
-}
-
-//-------------------------------------------------//
-// 削除予定：CSVファイルを配列にして返す
-//-------------------------------------------------//
-function getCSV($filename){
- global $TABLES;
- global $CSVCOL;
- setlocale(LC_ALL,"ja_JP.UTF-8");
-
- try{
-  $FILEPATH=dirname($_SERVER["SCRIPT_FILENAME"]).DATA."/".$filename.".csv";
-
-//CSVファイル存在チェック
-  if(! file_exists($FILEPATH)){
-   throw new exception($filename.".csvがありません。");
-  }
-
-//CSVファイル読み込み
-  $data=file_get_contents($FILEPATH); 
-
-//文字コード変換
-  $data=mb_convert_encoding($data,"UTF-8","sjis-win");
-  
-//一時ファイルに書き込み
-  $temp=tmpfile();
-  fwrite($temp,$data);
-  rewind($temp);
-  
-//カンマ区切りして配列へ格納
-  $csv=array();
-  while(($data=fgetcsv($temp,0,",")) !==FALSE){
-   $csv[]=$data;
-  }
-  fclose($temp);
-
-//CSV読み込み順に配列へ格納
-  return $csv;
- }
- catch(Exception $e){
+  wLog("error:".$mname.$e->getMessage());
   echo "err:".$e->getMessage();
  }
 }
 
-function exportData($tablename){
- try{
-  $db=new DB();
-  $db->select="*";
-  $db->from=TABLE_PREFIX.$tablename;
-  $db->order="id";
-  $data=$db->getArray();
-  if(! isset($data)||! is_array($data) || ! count($data)){
-   throw new exception("データがありません");
-  }
 
-  $filename=dirname(__FILE__)."/..".LOG."/".$tablename.".csv";
-  unlink($filename);
-  foreach($data as $key=>$val){
-   $row="";
-   foreach($val as $key1=>$val1){
-    if($key1=="id") continue;
-    if($key1==IDATE) continue;
-    if($key1==CDATE) continue;
-    if($row) $row.=",";
-    $row.=$val1;
-   }
-   $row.="\n";
-   file_put_contents($filename,$row,FILE_APPEND | LOCK_EX);
-  }
-  echo $filename."にファイルを保存しました";
-  return $filename;
- }
- catch(Exception $e){
-  echo "err:".$e->getMessage();
- }
-}
 ?>
