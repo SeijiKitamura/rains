@@ -49,4 +49,22 @@ function exportCSV($tablename){
   echo $c;
  }
 }
+
+function exportCSVAll(){
+ global $TABLES;
+ $mname="exportCSV(export.function.php)";
+
+ try{
+  $c="start:".$mname;wLog($c);
+  foreach($TABLES as $key=>$val){
+   echo $key."<br>";
+   exportCSV($key);
+  }
+  $c="end:".$mname;wLog($c);
+ }
+ catch(Exception $e){
+  $c="error:".$mname.$e->getMessage();wLog($c);
+  echo $c;
+ }
+}
 ?>
