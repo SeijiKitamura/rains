@@ -16,8 +16,9 @@ htmlHeader("メニュー");
      <li id="kanren">関連データ</li>
      <li id="rank">ランキング</li>
      <li id="allreset">初期化</li>
+     <li id="exportCSV">エクスポート</li>
     </ul>
-    <input type="file" multiple="multiple" name="csvdata" style="display:none">
+    <input type="file" multiple="multiple" name="csvdata" style="display:none;">
     <input type="file" multiple="multiple" name="flddata" style="display:none;">
     </div><!--div id="contentsLeft"-->
     <div class="clr"></div>
@@ -46,6 +47,7 @@ $(function(){
  showRankList();
  showWebUpload();
  resetAll();
+ exportCSV();
 });
 
 

@@ -429,6 +429,7 @@ function resetHihyouji(){
  });
 }
 
+//初期化
 function resetAll(){
  $("li#allreset").click(function(){
   console.log("start:resetAll");
@@ -456,6 +457,37 @@ function resetAll(){
   });
 
   console.log("end:resetAll");
+ });
+}
+
+//エクスポート
+function exportCSV(){
+ $("li#exportCSV").click(function(){
+  console.log("start:exportCSV");
+  if(!confirm("エクスポートしますか?")) return false;
+  $.ajax({
+   url: 'php/htmlExport.php',
+   type: 'get',
+   async:false,
+   beforeSend:function(){
+    $("ul.subList").slideUp();
+    $("div#contents").text("エクスポート中・・・").slideDown();
+   },
+   complete: function(){
+   },
+   success: function(html) {
+    console.log(html);
+    $("div#contents").empty()
+                    .append(html);
+   },
+   error:function(XMLHttpRequest,textStatus,errorThrown){
+    console.log(XMLHttpRequest.responseText);
+    $("div#contents").text(XMLHttpRequest.responseText);
+    return false;
+   }
+  });
+
+  console.log("end:exportCSV");
  });
 }
 
