@@ -340,40 +340,6 @@ class DB{
   $this->pdo->rollBack();
  }//rollback
  
- // -------------------------------------------- //
- // 説明:SQL実行(削除予定)
- // -------------------------------------------- //
- public function __QUERY($sql=null){
-  try{
-   $mname="__QUERY(db.class.php) ";
-   $c="start:".$mname;wLog($c);
-   //SQLセット
-   if($sql) $this->sql=$sql;
-   if(! $this->sql) throw new exception("SQLがセットされていません");
-   if(! DEBUG) throw new exception("現在のモードでは使用できません");
-   try{
-    //SQL実行
-    $c="notice:".$mname.$this->sql;wLog($c);
-    $this->pdo->exec($this->sql);
-
-    //SQLリセット
-    $this->SQLRESET();
-
-    //正常終了
-    $c="end:".$mname;wLog($c);
-   }
-   catch(PDOException $e){
-    $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
-   }//catch
-  }//try
-  catch(Exception $e){
-   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
-  }
- }//public function __QUERY(){
-
- // -------------------------------------------- //
- //ここまで（削除予定)
- // -------------------------------------------- //
 
  public function updatearray($data){
   try{
@@ -465,6 +431,69 @@ class DB{
    echo $c;wLog($c);
   }
  }//public function 
+  
+ public function export($tablename){
+  try{
+   $mname="export(db.class.php) ";
+   $c="start:".$mname;wLog($c);
+
+   //SQL生成
+   foreach($GLOBALS["TABLES"][$tablename] as $key=>$val){
+    //SELECT句セット
+    if($this->select) $this->select.=",";
+    $this->select.=$key;
+
+    //ORDER句セット
+    if($val["index"]){
+     if($this->order) $this->order.=",";
+     $this->order.=$key;
+    }
+   }
+   $this->from=TABLE_PREFIX.$tablename;
+   $this->getArray();
+   
+   $c="end:".$mname;wLog($c);
+   return $this->ary;
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  }
+ }//public function export($tablename){
+ 
+ // -------------------------------------------- //
+ // 説明:SQL実行(削除予定)
+ // -------------------------------------------- //
+ public function __QUERY($sql=null){
+  try{
+   $mname="__QUERY(db.class.php) ";
+   $c="start:".$mname;wLog($c);
+   //SQLセット
+   if($sql) $this->sql=$sql;
+   if(! $this->sql) throw new exception("SQLがセットされていません");
+   if(! DEBUG) throw new exception("現在のモードでは使用できません");
+   try{
+    //SQL実行
+    $c="notice:".$mname.$this->sql;wLog($c);
+    $this->pdo->exec($this->sql);
+
+    //SQLリセット
+    $this->SQLRESET();
+
+    //正常終了
+    $c="end:".$mname;wLog($c);
+   }
+   catch(PDOException $e){
+    $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+   }//catch
+  }//try
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);echo $c;
+  }
+ }//public function __QUERY(){
+
+ // -------------------------------------------- //
+ //ここまで（削除予定)
+ // -------------------------------------------- //
 
 } //class DB
 ?>
