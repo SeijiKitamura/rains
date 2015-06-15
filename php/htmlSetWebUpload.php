@@ -7,10 +7,7 @@ if(! LOCALMODE){
  return false;
 }
 
-$fileary=array(RAINS,FLD,IMGLIST,RANK,ENTRY,BCOMMENT);
-foreach($fileary as $key=>$val){
- exportCSV($val);
-}
+exportCSVAll();
 
 chdir("../local");
 $a=`/bin/sh export.sh`;
