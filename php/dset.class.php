@@ -946,6 +946,152 @@ class DSET extends DB{
    $c="error:".$mname.$e->getMessage();wLog($c);
   }
  }
+ 
+//----------------------------------------------------//
+// 画像リスト登録
+//----------------------------------------------------//
+ public function dsetUpImgList(){
+  try{
+   $mname="dsetUpImgList(dset.class.php) ";
+   $c="start:".$mname;wLog($c);
+   
+   //物件データチェック
+   if(!is_array($this->r["data"]) ||!isset($this->r["data"])|| count($this->r["data"])==0){
+    throw new exception("物件データがありません");
+   }
+
+   foreach($this->r["data"] as $key=>$val){
+    //ディレクトリ存在チェック
+    $imgpath=realpath("..").IMG."/".$val["fld000"];
+    $c="notice".$mname."画像ディレクトリ".$imgpath."をセット";wLog($c);
+
+    if(! file_exists($imgpath)){
+     $c="notice:".$mname."物件番号".$val["fld000"]."の画像ディレクトリ".$imgpath."はありません";wLog($c);
+
+//     $this->from=TABLE_PREFIX.IMGLIST;
+//     $this->where="fld000='".$val["fld000"]."'";
+//     $this->delete();
+//     $c="notice:".$mname."物件番号".$val["fld000"]."のimgfileを初期化";wLog($c);
+//
+//     $this->r["data"][$key]["imgfile"]=array();
+    }
+    //画像リスト存在チェック
+    if(! isset($val["imgfile"])||! is_array($val["imgfile"]) ||!count($val["imgfile"])){
+     $c="notice:".$mname."物件番号".$val["fld000"]."の画像リストがありません(imglistテーブル未登録)";wLog($c);
+    }//if(isset($val
+
+    //DBデータを検索対象として画像ファイルをチェック
+    foreach($val["imgfile"] as $key1=>$val1){
+     //fld002が「http」で始まる場合はスキップ
+     if(preg_match("/^http/",$val1["fld002"])){
+      $e="notice:".$mname."画像パスが「http」で始まるので処理をスキップ(".$val1["fld002"].")";wLog($e);
+      continue;
+     }
+
+     $flg=0;
+     if(! $handle=opendir($imgpath)){
+      $e="notice:".$mname."画像ディレクトリ".$imgpath."が開けません";wLog($e);
+      continue;
+     }//if
+
+     while(false!==($file=readdir($handle))){
+      if($file=="." || $file=="..")continue;
+      if($file==$val1["fld002"]){
+       //画像リスト有り、ファイルありは何もしない
+       $c="notice:".$mname."DB画像リストと画像ファイル一致！画像ファイル名".$val1["fld002"];wLog($c);
+       $flg=1;
+       break;
+      }//if
+     }//while
+
+     if(!$flg && !preg_match("/^http/",$val1["fld002"])){
+      //画像リスト有り、ファイルなしはDB削除
+      $c="notice:".$mname."DB画像リストあり、画像ファイルなしのためDBリストを削除します。ファイル名".$val1["fld002"];wLog($c);
+
+      $this->from=TABLE_PREFIX.IMGLIST;
+      $this->where =" fld000='".$val["fld000"]."'";
+      $this->where.=" and fld002='".$val1["fld002"]."'";
+      $this->delete();
+     }
+    }//foreach($val["imgfile"
+    closedir($handle);
+    
+    //画像ファイルを検索対象としてDBデータをチェック
+    if(! $handle=opendir($imgpath)){
+     $e="notice:".$mname."画像ディレクトリ".$imgpath."が開けません";wLog($e);
+     continue;
+    }//if($handle
+
+    while(false!==($file=readdir($handle))){
+     $flg=0;
+     if($file=="." || $file=="..")continue;
+     if(isset($val["imgfile"])||is_array($val["imgfile"])){
+      foreach($val["imgfile"] as $key1=>$val1){
+       if($file==$val1["fld002"]){
+        $c="notice:".$mname."DB画像リストと画像ファイル一致！画像ファイル名".$val1["fld002"];wLog($c);
+        $flg=1;
+        break;
+       }
+      }//foreach
+     }//if(isset
+
+     if(!$flg){
+      //画像リストなし、ファイルありは登録
+      $c="notice:".$mname."DB画像リストなし、画像ファイルあり。DBに登録します。ファイル名".$file;wLog($c);
+
+      $this->updatecol=array( "fld000"=>$val["fld000"]
+                             ,"fld002"=>mb_convert_encoding($file,"UTF-8","AUTO")
+                            );
+      $this->from=TABLE_PREFIX.IMGLIST;
+      $this->where =" fld000='".$val["fld000"]."'";
+      $this->where.=" and fld002='".mb_convert_encoding($file,"UTF-8","AUTO")."'";
+      $this->update();
+     }
+    }//while(false
+    closedir($handle);
+
+   }//foreach
+
+   //画像リスト再取得
+   $this->dsetGetImgList();
+
+   $c="end:".$mname;wLog($c);
+   return $this->r;
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);
+  }
+ }
+ 
+//----------------------------------------------------//
+// 画像並び順セット
+//----------------------------------------------------//
+ public function dsetImgNum($imgid,$imgnum){
+  try{
+   $mname="dsetImgNum(dset.class.php) ";
+   $c="start:".$mname;wLog($c);
+   
+   //画像番号チェック
+   if(!preg_match("/^[0-9]+$/",$imgid)){
+    throw new exception("画像番号が不正です。(".$imgid.")");
+   }
+   
+   //画像番号チェック
+   if(!preg_match("/^[0-9]+$/",$imgnum)){
+    throw new exception("画像表示番号が不正です。(".$imgnum.")");
+   }
+
+   $this->updatecol=array("fld001"=>$imgnum);
+   $this->from=TABLE_PREFIX.IMGLIST;
+   $this->where="id=".$imgid;
+   $this->update();
+   
+   $c="end:".$mname;wLog($c);
+  }
+  catch(Exception $e){
+   $c="error:".$mname.$e->getMessage();wLog($c);
+  }
+ }
 
 } 
 ?>
