@@ -305,7 +305,7 @@ function htmlFooter(){
 //-------------------------------------------------------//
 function htmlContents($data){
  try{
-  $mname="htmlHeader(html.function.php) ";
+  $mname="htmlContents(html.function.php) ";
   $c="start ".$mname;wLog($c);
   //現在ページ取得
   $nowpage=basename($_SERVER["PHP_SELF"]);
