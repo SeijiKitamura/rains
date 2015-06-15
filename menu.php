@@ -15,6 +15,7 @@ htmlHeader("メニュー");
      <li id="hhreset">非表示リセット</li>
      <li id="kanren">関連データ</li>
      <li id="rank">ランキング</li>
+     <li id="allreset">初期化</li>
     </ul>
     <input type="file" multiple="multiple" name="csvdata" style="display:none">
     <input type="file" multiple="multiple" name="flddata" style="display:none;">
@@ -44,6 +45,7 @@ $(function(){
  showFldData();
  showRankList();
  showWebUpload();
+ resetAll();
 });
 
 

@@ -429,6 +429,36 @@ function resetHihyouji(){
  });
 }
 
+function resetAll(){
+ $("li#allreset").click(function(){
+  console.log("start:resetAll");
+  if(!confirm("初期化しますか?")) return false;
+  $.ajax({
+   url: 'php/htmlInstall.php',
+   type: 'get',
+   async:false,
+   beforeSend:function(){
+    $("ul.subList").slideUp();
+    $("div#contents").text("初期化中・・・").slideDown();
+   },
+   complete: function(){
+   },
+   success: function(html) {
+    console.log(html);
+    $("div#contents").empty()
+                    .append(html);
+   },
+   error:function(XMLHttpRequest,textStatus,errorThrown){
+    console.log(XMLHttpRequest.responseText);
+    $("div#contents").text(XMLHttpRequest.responseText);
+    return false;
+   }
+  });
+
+  console.log("end:resetAll");
+ });
+}
+
 //表示リストメソッド
 function showData(){
  $("li#hyouji").click(function(){

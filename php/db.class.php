@@ -246,13 +246,13 @@ class DB{
  }//public function delete(){
  
  // -------------------------------------------- //
- // 説明:テーブル作成(DEBUGが有効なら動作)
+ // 説明:テーブル作成
  // -------------------------------------------- //
  public function CreateTable($t=null){
   try{
    $mname="CreateTable(db.class.php) ";
    $c="start:".$mname;wLog($c);
-   if(! DEBUG) throw new exception("現在のモードでは使用できません");
+   //if(! DEBUG) throw new exception("現在のモードでは使用できません");
 
    //nullの場合はすべてのテーブルを作成
    if(! $t) $table=$GLOBALS["TABLES"]; 
