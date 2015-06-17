@@ -1,6 +1,10 @@
 <?php
 require_once("import.function.php");
+require_once("export.function.php");
 require_once("parts.function.php");
+
+//既存データバックアップ
+exportCSVAll();
 
 //関連データ削除
 $db=new DB();

@@ -3,8 +3,7 @@ require_once("db.class.php");
 
 function exportCSV($tablename){
  $mname="exportCSV(export.function.php)";
-
- try{
+try{
   $c="start:".$mname;wLog($c);
 
   //データディレクトリゲット
@@ -57,9 +56,15 @@ function exportCSVAll(){
  try{
   $c="start:".$mname;wLog($c);
   foreach($TABLES as $key=>$val){
-   echo $key."<br>";
    exportCSV($key);
   }
+  $localpath=dirname(__FILE__)."/../local";
+  $localpath=realpath($localpath);
+  echo $localpath;
+  chdir($localpath);
+  echo getcwd();
+  $a=`/bin/sh ./backup.sh`;
+  echo $a;
   $c="end:".$mname;wLog($c);
  }
  catch(Exception $e){

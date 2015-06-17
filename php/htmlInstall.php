@@ -1,6 +1,7 @@
 <?php
 require_once("html.function.php");
 require_once("import.function.php");
+require_once("export.function.php");
 session_start();
 if(! isset($_SESSION["USERID"]) || $_SESSION["USERID"]==null || $_SESSION["USERID"]!==md5(USERID)){
  echo "ログインしてください";
@@ -16,6 +17,9 @@ try{
  //関連データファイル存在チェック
  $filename=realpath("../").DATA."/".FLD.".csv";
  echo $filename;
+
+ //既存データバックアップ
+ exportCSVAll();
  
  //DBテーブル作成
  $db=new DB();

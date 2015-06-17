@@ -1,6 +1,10 @@
 <?php
 require_once("import.function.php");
+require_once("export.function.php");
 require_once("parts.function.php");
+
+//既存データバックアップ
+exportCSVAll();
 
 //CSVを配列へ変換しDBへ登録
 $data=impCsv2DB($_FILES,RAINS);
