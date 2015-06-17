@@ -1,6 +1,7 @@
 *.csv
 *.log
 *.txt
+*.tar.gz
 server.conf.php
 test.php
 !rainsfld.csv
