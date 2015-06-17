@@ -149,6 +149,24 @@ class DSET extends DB{
   $c="end:".$mname;wLog($c);
   return $this->r;
  }
+
+//----------------------------------------------------//
+//非表示リストを抽出
+//----------------------------------------------------//
+ public function dsetBlackList(){
+  $mname="dsetBlackList(DSET class)";
+  $c="start ".$mname;wLog($c);
+
+  $this->select="t.*";
+  $this->from=TABLE_PREFIX.BLACKLIST." as t";
+  $this->order="t.fld000";
+  $this->r=array();
+  $this->r["data"]=$this->getArray();
+
+  $c="end ".$mname;wLog($c);
+  return $this->r;
+ }
+
  
 //----------------------------------------------------//
 //登録済レコード数をカウント
