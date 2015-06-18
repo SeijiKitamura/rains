@@ -7,7 +7,8 @@ require_once("parts.function.php");
 exportCSVAll();
 
 //CSVを配列へ変換しDBへ登録
-$data=impCsv2DB($_FILES,RAINS);
+$data=impPost2DB(RAINS);
+
 
 //サイトマップ作成
 $db=new DSET();

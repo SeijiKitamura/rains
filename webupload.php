@@ -1,6 +1,7 @@
 <?php
 require_once("php/html.function.php");
 require_once("php/import.function.php");
+require_once("php/export.function.php");
 session_start();
 if(! isset($_SESSION["USERID"]) || $_SESSION["USERID"]==null || $_SESSION["USERID"]!==md5(USERID)){
  header("Location:login.php?nextpage=webupload.php");
@@ -15,10 +16,13 @@ if(LOCALMODE){
  return false;
 }
 
+//既存データバックアップ
+exportCSVAll();
+
 $csvfile=array(RAINS,FLD,IMGLIST,RANK,ENTRY,BCOMMENT);
 foreach($csvfile as $key=>$val){
  $datafile="data/".$val.".csv";
- impCsv2DBUTF($val,$datafile);
+ impFile2DB($val,$datafile);
 }
 ?>
    </div><!--div id="contentsLeft"-->

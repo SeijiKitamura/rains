@@ -13,6 +13,6 @@ $db->where="id>0";
 $db->delete();
 
 //CSVを配列へ変換しDBへ登録
-$data=impCsv2DB($_FILES,FLD);
+$data=impPost2DB(FLD);
 ?>
 
