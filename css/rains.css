@@ -138,7 +138,7 @@ span.tel{
 div.naviBar{
 /* border :1px solid #DCDCDC;*/
  width  :1000px;
- margin :3px auto;
+ margin :15px auto;
 }
 
 div.naviBar>ul{
@@ -151,17 +151,17 @@ div.naviBar>ul{
 div.naviBar>ul>li{
  float  :left;
  border-right    :1px solid #DCDCDC;
- width     :120px;
+ width     :150px;
  text-align:center;
  display   :block;
- padding   :8px 0 0 0 ;
- font-size :0.8em;
+ padding   :4px 0 0 0 ;
+ font-size :1.0em;
 }
 
 div.naviBar>ul>li>ul{
  list-style:none;
  position:absolute;
- width:100px;
+ width:150px;
  display:none;
 }
 
