@@ -615,4 +615,39 @@ function viewTopData(){
  }
 }
 
+//----------------------------------------------------//
+// 売買と賃貸のデータを返す
+//----------------------------------------------------//
+function viewAllData(){
+ try{
+  $mname="viewAllData(view.function.php)";
+  $c="start ".$mname;wLog($c);
+  //種別グループをセット
+  $group=viewGroupFld();
+
+  $data=array();
+  $fld001="";
+  foreach($group["data"] as $key=>$val){
+   if($fld001==$val["fld001"]) continue;
+   
+   //データゲット
+   $where="t.fld001='".$val["fld001"]."'";
+   $rains=viewShortData($where);
+
+   if($val["fld001"]=="1"){
+    $data["baibai"]=$rains["data"];
+   }
+   if($val["fld001"]=="3"){
+    $data["tintai"]=$rains["data"];
+   }
+   $fld001=$val["fld001"];
+  }
+
+  return $data;
+ }
+ catch(Exception $e){
+  $c="error:".$e->getMessage().$mname;wLog($c);
+ }
+
+}
 ?>
