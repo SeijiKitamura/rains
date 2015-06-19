@@ -17,8 +17,12 @@ else{
  $loginflg=0;
 }
 
+//新着とランキング表示
+//$data=viewTopData();
+//partsRankDiv($data,$loginflg);
+
 //一覧表示
-$data=viewTopData();
+$data=viewAllData();
 partsRankDiv($data,$loginflg);
 ?>
       </div><!--div id="article"-->
