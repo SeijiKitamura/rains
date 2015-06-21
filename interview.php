@@ -1,6 +1,6 @@
 <?php
 require_once("php/html.function.php");
-htmlHeader("会社概要");
+htmlHeader("インタビュー");
 ?>
    <div id="contents_wrap">
     <div id="contents_inner">
