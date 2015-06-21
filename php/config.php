@@ -68,114 +68,17 @@ define("SITEABOUT","地域周辺の・賃貸・売買・不動産を探すなら
 // ページ情報
 //---------------------------------------------------//
 
-$PAGEARY=array( "index.php"
-                              =>array( "title"=>"ホーム"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>"index.css"
-                                      ,"description"=>CORPNAME."は".CORPADDRESS."にある不動産屋です。この街の不動産なら当店にお任せ。おすすめ物件はもちろん当店独自のランキングも掲載中です。賃貸アパート、賃貸マンション、一軒家などなんでもご相談ください。")
-               ,"room.php"  
-                              =>array( "title"=>"賃貸"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>"tintai.css"
-                                      ,"description"=>"")
-               ,"baibai.php"  
-                              =>array( "title"=>"売買"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>"tintai.css"
-                                      ,"description"=>"")
-               ,"jigyou.php"  
-                              =>array( "title"=>"事業用"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>"tintai.css"
-                                      ,"description"=>"")
-               ,"q_and_a.php" 
-                              =>array( "title"=>"Q&A"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>""
-                                      ,"description"=>"")
-               ,"yanusi.php" 
-                              =>array( "title"=>"家主様"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>"yanusi.css"
-                                      ,"description"=>"")
-               ,"annai.php"  
-                              =>array( "title"=>"会社案内"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>""
-                                      ,"description"=>"")
-               ,"toiawase.php"
-                              =>array( "title"=>"お問い合せ"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>""
-                                      ,"description"=>"")
-               ,"estate.php"
-                              =>array( "title"=>""
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>"estate.css"
-                                      ,"description"=>"")
-               ,"conpany.php"
-                              =>array( "title"=>"会社概要"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>".css"
-                                      ,"description"=>"")
-               ,"storeinfo.php"
-                              =>array( "title"=>"店舗情報"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>".css"
-                                      ,"description"=>"")
-               ,"privacy.php"
-                              =>array( "title"=>"プライバシーポリシー"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>"privacy.css"
-                                      ,"description"=>"")
-               ,"sitemap.php"
-                              =>array( "title"=>"サイトマップ"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>".css"
-                                      ,"description"=>"")
-               ,"newitem.php"
-                              =>array( "title"=>"最新情報"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>".css"
-                                      ,"description"=>"")
-               ,"search.php"
-                              =>array( "title"=>"物件検索"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>"search.css"
-                                      ,"description"=>"")
-               ,"list.php"
-                              =>array( "title"=>"物件一覧"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>"list.css"
-                                      ,"description"=>"")
-               ,"login.php"
-                              =>array( "title"=>"ログイン"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>""
-                                      ,"description"=>"")
-               ,"menu.php"
-                              =>array( "title"=>"データ更新"
-                                      ,"css1" =>"all.css"
-                                      ,"css2" =>"header.css"
-                                      ,"css3" =>"menu.css"
-                                      ,"description"=>"")
+$PAGEARY=array( 
+                "annai.php"    =>array("description"=>"")
+               ,"index.php"    =>array("description"=>CORPNAME."は".CORPADDRESS."にある不動産屋です。この街の不動産なら当店にお任せ。おすすめ物件はもちろん当店独自のランキングも掲載中です。賃貸アパート、賃貸マンション、一軒家などなんでもご相談ください。")
+               ,"interview.php"=>array("description"=>"弊社従業員のインタビューをご紹介中！".CORPNAME."について熱く語っています")
+               ,"login.php"    =>array("description"=>"こちらはホームページ管理者用のログイン画面となっております。")
+               ,"menu.php"     =>array("description"=>"ご希望の処理メニューを選んでクリックしてください")
+               ,"privacy.php"  =>array("description"=>"弊社のプライバシーポリシーをご案内しております")
+               ,"q_and_a.php"  =>array("description"=>"弊社周辺地域についてのご案内や賃貸のQ&Aをご消化しております")
+               ,"room.php"     =>array("description"=>"")
+               ,"roomlist.php" =>array("description"=>"現在のお部屋一覧です。")
+               ,"yanusi.php"   =>array("description"=>CORPNAME."では大家様を募集中です。お持ちの物件の管理もぜひお任せください")
               );
 
 $NAVI  =array(
@@ -185,17 +88,10 @@ $NAVI  =array(
               );
 
 $MININAVI=array(
-//                "q_and_a.php" =>"Q&A"
-//                ,"yanusi.php" =>"オーナー様"
                );
 
 //未使用
 $INFO=array    (
-                 "conpany.php"=>"会社概要"
-                ,"storeinfo.php"=>"店舗情報"
-                ,"privacy.php"=>"プライバシーポリシー"
-                ,"sitemap.php"=>"サイトマップ"
-                ,"toiawase.php"=>"お問い合せ"
                );
 
 $SITECONTENTS=array(
@@ -203,12 +99,11 @@ $SITECONTENTS=array(
                     ,"q_and_a.php"=>"Q&A"
                     ,"yanusi.php"=>"オーナー様"
                     ,"annai.php"=>"会社概要"
+                    ,"interview.php"=>CORPNAME."とは？"
                     ,"privacy.php"=>"プライバシーポリシー"
                    );
 //未使用
-$BIGNAVI=array( "tintai.php"  =>"賃貸"
-               ,"baibai.php"  =>"売買"
-               ,"jigyou.php"  =>"事業用"
+$BIGNAVI=array(
               );
 
 //------------------------------------------------------------//
