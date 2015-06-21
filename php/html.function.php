@@ -44,14 +44,6 @@ function htmlHeader($title=null){
   $title.="|".CORPNAME;
   $html=preg_replace("/<!--title-->/",$title,$html);
   
-  //CSS
-  $css=".".CSS."/".$PAGEARY[$nowpage]["css1"];
-  $html=preg_replace("/<!--css1-->/",$css,$html);
-  $css=".".CSS."/".$PAGEARY[$nowpage]["css2"];
-  $html=preg_replace("/<!--css2-->/",$css,$html);
-  $css=".".CSS."/".$PAGEARY[$nowpage]["css3"];
-  $html=preg_replace("/<!--css3-->/",$css,$html);
-  
   //Description 
   $description=$PAGEARY[$nowpage]["description"];
   $html=preg_replace("/<!--description-->/",$description,$html);
@@ -168,7 +160,6 @@ function htmlLogo(){
 // トップイメージを表示
 //-------------------------------------------------------//
 function htmlTopImage(){
- global $BIGNAVI;
  try{
   $mname="htmlTopImage(html.function.php) ";
   $c="start ".$mname;wLog($c);
@@ -195,7 +186,6 @@ function htmlTopImage(){
 function htmlFooter(){
  global $NAVI;
  global $SITECONTENTS;
- global $INFO;
  try{
   $mname="htmlFooter(html.function.php) ";
   $c="start ".$mname;wLog($c);
