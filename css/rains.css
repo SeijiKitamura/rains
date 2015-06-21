@@ -1472,3 +1472,28 @@ div.reason_box dl dd{
 }
 
 /*q_and_a.php用*/
+
+/*interview.php用*/
+div#divintvw{
+ width:1000px;
+ margin:10px auto;
+ background-color:#FFFFFF;
+}
+
+div.intvwpart{
+ margin:30px auto;
+}
+div.LdivIntvwimg{
+ float:left;
+}
+
+div.RdivIntvwimg{
+ float:right;
+}
+
+div.inner-part p{
+ line-height:1.8;
+}
+
+/*interview.php用*/
+
