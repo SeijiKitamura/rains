@@ -993,3 +993,71 @@ div.reason_imgBox img{
 }
 
 /*q_and_a.php*/
+
+/*interview.php*/
+div#divintvw{
+ width:90%;
+ margin:10px auto;
+ background-color:#FFFFFF;
+}
+
+div.intvwTopImage{
+ width:100%;
+}
+
+div.intvwTopImage img{
+ width:100%;
+}
+
+div.intvwpart{
+ margin:30px 10px;
+ padding:5px;
+ /*border:1px solid #DCDCDC;*/
+}
+
+div.Ldivintvwimg{
+}
+
+div.Rdivintvwimg{
+}
+
+div.Ldivintvwimg img,
+div.Rdivintvwimg img 
+{
+ width:100%;
+}
+
+div.Linner-part,
+div.Rinner-part{
+ width:100%;
+ padding:0 5px;
+}
+
+div.Linner-part{
+ float:left;
+}
+
+div.Rinner-part{
+ float:right;
+}
+
+div.Linner-part h3,
+div.Rinner-part h3{
+ margin :0 0 10px 0;
+ padding:0 0 0 10px;
+ background-color:#87C67D;
+ color:white;
+ line-height:2;
+ -moz-border-radius   :15px;
+ -webkit-border-radius:15px;
+ border-radius        :15px;
+}
+
+div.Linner-part p,
+div.Rinner-part p{
+ padding:0 10px;
+ line-height:1.8;
+}
+
+
+/*interview.php*/
