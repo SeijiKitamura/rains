@@ -69,7 +69,7 @@ define("SITEABOUT","地域周辺の・賃貸・売買・不動産を探すなら
 //---------------------------------------------------//
 
 $PAGEARY=array( 
-                "annai.php"    =>array("description"=>"")
+                "annai.php"    =>array("description"=>"会社概要です。")
                ,"index.php"    =>array("description"=>CORPNAME."は".CORPADDRESS."にある不動産屋です。この街の不動産なら当店にお任せ。おすすめ物件はもちろん当店独自のランキングも掲載中です。賃貸アパート、賃貸マンション、一軒家などなんでもご相談ください。")
                ,"interview.php"=>array("description"=>"弊社従業員のインタビューをご紹介中！".CORPNAME."について熱く語っています")
                ,"login.php"    =>array("description"=>"こちらはホームページ管理者用のログイン画面となっております。")
@@ -77,7 +77,7 @@ $PAGEARY=array(
                ,"privacy.php"  =>array("description"=>"弊社のプライバシーポリシーをご案内しております")
                ,"q_and_a.php"  =>array("description"=>"弊社周辺地域についてのご案内や賃貸のQ&Aをご消化しております")
                ,"room.php"     =>array("description"=>"")
-               ,"roomlist.php" =>array("description"=>"現在のお部屋一覧です。")
+               ,"roomlist.php" =>array("description"=>"")
                ,"yanusi.php"   =>array("description"=>CORPNAME."では大家様を募集中です。お持ちの物件の管理もぜひお任せください")
               );
 
