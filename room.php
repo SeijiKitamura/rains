@@ -48,8 +48,6 @@ else{
 
 }
 htmlHeader($title,$description);
-
-echo "<pre>";print_r($data);echo "</pre>";
 ?>
 
   <div id="contentsWrap">
