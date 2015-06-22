@@ -23,7 +23,7 @@ require_once("parts.function.php");
 //-------------------------------------------------------//
 //  ページヘッダーを表示
 //-------------------------------------------------------//
-function htmlHeader($title=null){
+function htmlHeader($title,$description=null){
  global $PAGEARY;
  global $NAVI;
  global $MININAVI;
@@ -45,7 +45,7 @@ function htmlHeader($title=null){
   $html=preg_replace("/<!--title-->/",$title,$html);
   
   //Description 
-  $description=$PAGEARY[$nowpage]["description"];
+  $description.=$PAGEARY[$nowpage]["description"];
   $html=preg_replace("/<!--description-->/",$description,$html);
   
   //キャッチワード
