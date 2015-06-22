@@ -18,6 +18,7 @@ if($flg==1){
 
 //タイトルセット
 $title="";
+$description="";
 if($flg==0){
  $title="お探しの物件は現在ご紹介できません";
 }
@@ -27,9 +28,28 @@ else{
   if($val["fld022"]) $title.=$val["fld022"]."号室";
   if(!$title) $title=$val["fld019"];
  }
+
  $data["brother"]=viewBrother($_GET["fld000"]);
+
+ $description.=" ";
+ $description.=$val["_fld001"]." ".$val["_fld002"]." ".$val["_fld003"]." ";
+ if($val["fld021"]) $description.=$val["fld021"]." ";
+ if($val["fld022"]) $description.=$val["fld022"]."号室 ";
+ $description.=$val["fld018"].$val["fld019"].$val["fld020"]." ";
+ if($val["fld026"]) $description.=$val["fld026"]."駅 ";
+ if($val["fld027"]) $description.="徒歩".$val["fld027"]."分 ";
+ if($val["fld180"]) $description.=$val["fld180"].$val["_fld179"]." ";
+ if($val["fld068"]) $description.=$val["fld068"]."m&sup2; ";
+ elseif($val["fld088"]) $description.=$val["fld088"]."m&sup2; ";
+ if($val["fld078"]) $description.="敷金".($val["fld078"]*1)."ヶ月 ";
+ if($val["fld077"] && ! $val["fld078"]) $description.="敷金".$val["fld077"]."円 ";
+ if($val["fld076"]) $description.="礼金".($val["fld076"]*1)."ヶ月";
+ if($val["fld074"] && ! $val["fld076"]) $description.="礼金".$val["fld074"]."円";
+
 }
-htmlHeader($title);
+htmlHeader($title,$description);
+
+echo "<pre>";print_r($data);echo "</pre>";
 ?>
 
   <div id="contentsWrap">
