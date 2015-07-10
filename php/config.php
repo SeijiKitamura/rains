@@ -84,7 +84,8 @@ $PAGEARY=array(
 $NAVI  =array(
                 "q_and_a.php"           =>"Q&A"
                ,"yanusi.php"            =>"オーナー様"
-               ,"annai.php"            =>"会社概要"
+               ,"annai.php"             =>"会社概要"
+               ,"download.php"          =>"ダウンロード"
               );
 
 $MININAVI=array(
@@ -99,6 +100,7 @@ $SITECONTENTS=array(
                     ,"q_and_a.php"=>"Q&A"
                     ,"yanusi.php"=>"オーナー様"
                     ,"annai.php"=>"会社概要"
+                    ,"download.php"          =>"ダウンロード"
                     ,"interview.php"=>CORPNAME."とは？"
                     ,"privacy.php"=>"プライバシーポリシー"
                    );
