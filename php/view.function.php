@@ -631,7 +631,8 @@ function viewAllData(){
    if($fld001==$val["fld001"]) continue;
    
    //データゲット
-   $where="t.fld001='".$val["fld001"]."'";
+   $where ="t.fld001='".$val["fld001"]."'";
+   $where.=" and t1.fld000 is null";
    $rains=viewShortData($where);
 
    if($val["fld001"]=="1"){
