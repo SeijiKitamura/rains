@@ -1,8 +1,8 @@
 <?php
 require_once("php/html.function.php");
 //タイトルセット
-$title="ダウンロード";
-$description="解約通知書のダウンロードはこちらのページです";
+$title="お客様サポート";
+$description="入退去に必要な書類はこちらからダウンロード可能です";
 htmlHeader($title,$description);
 ?>
 
@@ -10,7 +10,7 @@ htmlHeader($title,$description);
    <div id="contents_inner">
     <div id="reason_part">
      <div class="reason_box">
-      <h2>ダウンロード</h2>
+      <h2>入退去に必要な書類</h2>
       <p>
         <a href="img/kaiyaku.pdf" target="_blank">解約通知書(pdf)</a>
       </p>
