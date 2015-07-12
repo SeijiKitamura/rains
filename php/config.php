@@ -85,7 +85,7 @@ $NAVI  =array(
                 "q_and_a.php"           =>"Q&A"
                ,"yanusi.php"            =>"オーナー様"
                ,"annai.php"             =>"会社概要"
-               ,"download.php"          =>"ダウンロード"
+               ,"download.php"          =>"お客様サポート"
               );
 
 $MININAVI=array(
@@ -100,7 +100,7 @@ $SITECONTENTS=array(
                     ,"q_and_a.php"=>"Q&A"
                     ,"yanusi.php"=>"オーナー様"
                     ,"annai.php"=>"会社概要"
-                    ,"download.php"          =>"ダウンロード"
+                    ,"download.php"          =>"お客様サポート"
                     ,"interview.php"=>CORPNAME."とは？"
                     ,"privacy.php"=>"プライバシーポリシー"
                    );
