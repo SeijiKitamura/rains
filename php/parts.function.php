@@ -237,7 +237,7 @@ function partsRankDiv($data,$loginflg=null){
    return false;
   }
   //ランキングゲット
-  $rank=viewNowRank();
+  //$rank=viewNowRank();
   
   //スケルトンファイル読み込み
   $skeletonpath=dirname(__FILE__)."/..".SKELETON."/recomendbox.html";
