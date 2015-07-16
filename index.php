@@ -23,6 +23,7 @@ else{
 
 //一覧表示
 $data=viewAllData();
+krsort($data);
 partsRankDiv($data,$loginflg);
 ?>
       </div><!--div id="article"-->
