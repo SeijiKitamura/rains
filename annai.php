@@ -35,6 +35,11 @@ htmlHeader("会社概要");
         </tr>
 
         <tr>
+         <td>メールアドレス</td>
+         <td><?php echo MAILADDRESS;?></td>
+        </tr>
+
+        <tr>
          <td>営業時間</td>
          <td><?php echo EIGYOJIKAN;?></td>
         </tr>
