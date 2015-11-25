@@ -5,3 +5,4 @@
 server.conf.php
 test.php
 !rainsfld.csv
+*.xml
