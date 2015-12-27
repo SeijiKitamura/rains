@@ -502,14 +502,10 @@ div.detailbox ul{
  list-style:none;
 }
 
-/*
 span.price{
- display:block;
- text-align:right;
  color:red;
  font-size:1.5em;
 }
-*/
 
 span.yen{
  color:red;
@@ -1471,6 +1467,58 @@ div.reason_box dl dd{
  margin-bottom:10px;
 }
 
+div.questionBox2{
+ margin-bottom:20px;
+ border-left  :1px solid #FF8C00;
+ border-right :1px solid #FF8C00;
+ border-bottom:1px solid #FF8C00;
+}
+
+div.questionBox2 h3{
+ background-color:#FF8C00;
+ color:#FFFFFF;
+ line-height:2;
+ padding-left:10px;
+}
+
+div.questionBox2 p{
+ padding:5px;
+ line-height:1.8;
+}
+
+div.questionBox dt{
+ background-color:#FF8C00;
+ color:#FFFFFF;
+ line-height:2;
+ padding-left:10px;
+ font-weight:bold;
+}
+
+div.questionBox dd{
+ border-left  :1px solid #FF8C00;
+ border-right :1px solid #FF8C00;
+ border-bottom:1px solid #FF8C00;
+ padding:10px;
+ line-height:1.8;
+ margin-bottom:2em;
+}
+
+div.imgbox{
+ width:90%;
+ margin:10px;
+}
+
+div.divimg{
+ width:45%;
+ height:250px;
+ margin:3px;
+ float:left;
+}
+
+div.divimg img{
+ max-width:100%;
+ max-height:100%;
+}
 /*q_and_a.php用*/
 
 /*interview.php用*/
