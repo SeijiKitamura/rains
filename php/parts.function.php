@@ -318,6 +318,11 @@ function partsRankDiv($data,$loginflg=null){
     if($val1["fld021"]) $estatename=$val1["fld021"].$val1["fld022"]; else $estatename=$val1["fld018"].$val1["fld019"];
     $itembox=preg_replace("/<!--estatename-->/",$estatename,$itembox);
     
+    //価格
+    $replace="";
+    $replace=number_format($val1["fld054"]);
+    $itembox=preg_replace("/<!--price-->/",$replace,$itembox);
+    
     //広さ
     $replace="";
     $replace=$val1["fld068"].$val1["fld088"]."m&sup2";
